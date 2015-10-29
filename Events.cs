@@ -15,7 +15,7 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public static void AddEvent( DateTime date, string subject)
+        public static void AddEvent(DateTime date, string subject)
         {
             Event newEvent = new Event();
             newEvent.Subject = subject;
@@ -30,18 +30,19 @@ namespace Calendar
                 Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
                 return;
             }
-            System.IO.StreamReader file = new System.IO.StreamReader(calendarFile);
+            StreamReader file = new StreamReader(calendarFile);
 
-            string[] lines = System.IO.File.ReadAllLines(calendarFile);
+            string[] lines = File.ReadAllLines(calendarFile);
             foreach (string line in lines)
             {
                 int separatorPosition = line.IndexOf("\t");
                 Event item = new Event();
                 item.Date = Convert.ToDateTime(line.Substring(0, separatorPosition));
                 item.Subject = line.Substring(separatorPosition + 1);
-               
+
                 calendar.Add(item);
             }
+            file.Close();
         }
 
         public static void DisplayCalendar()
@@ -54,17 +55,14 @@ namespace Calendar
 
         public static void SaveEvents()
         {
-            //StreamWriter file = new StreamWriter(calendarFile);
-            System.IO.StreamWriter file = new System.IO.StreamWriter(calendarFile);
-
+            StreamWriter file = new StreamWriter(calendarFile);
             for (int i = 0; i < calendar.Count; i++)
             {
-                file.Write(calendar[i].Date);
-                file.Write("\t" + calendar[i].Subject);
+                file.Write(calendar[i].Date + "\t" + calendar[i].Subject);
                 file.Write(file.NewLine);
             }
             file.Close();
-            Console.WriteLine("\tFile saved. {0} events saved", calendar.Count);
+            Console.WriteLine("\tFile saved. Calendar contains {0} events. ", calendar.Count);
         }
     }
 }

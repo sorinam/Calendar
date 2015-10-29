@@ -33,9 +33,9 @@ namespace Calendar
                     {
                         if (args.Length == 3)
                         {
-                            Events.LoadCalendar();
                             string date = args[1];
                             string subject = args[2];
+                            Events.LoadCalendar();
                             Events.AddEvent(Convert.ToDateTime(date), subject);
                             Events.SaveEvents();
                         }
