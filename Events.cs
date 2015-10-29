@@ -15,7 +15,7 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public static void AddEvent(string subject, DateTime date)
+        public static void AddEvent( DateTime date, string subject)
         {
             Event newEvent = new Event();
             newEvent.Subject = subject;
@@ -30,19 +30,18 @@ namespace Calendar
                 Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
                 return;
             }
-            string line;
-            int counter = 0;
             System.IO.StreamReader file = new System.IO.StreamReader(calendarFile);
-            while ((line = file.ReadLine()) != null)
+
+            string[] lines = System.IO.File.ReadAllLines(calendarFile);
+            foreach (string line in lines)
             {
-                int separatorPosition = line.IndexOf(">");
+                int separatorPosition = line.IndexOf("\t");
                 Event item = new Event();
-                item.Subject = line.Substring(0, separatorPosition);
-                item.Date = Convert.ToDateTime(line.Substring(separatorPosition + 1));
+                item.Date = Convert.ToDateTime(line.Substring(0, separatorPosition));
+                item.Subject = line.Substring(separatorPosition + 1);
+               
                 calendar.Add(item);
-                counter++;
-            }
-            file.Close();
+             }
         }
 
         public static void DisplayCalendar()
@@ -61,12 +60,12 @@ namespace Calendar
             for (int i = 0; i < calendar.Count; i++)
             {
                 file.Write(calendar[i].Date);
-                file.Write(">" + calendar[i].Subject);
+                file.Write("\t" + calendar[i].Subject);
                 file.Write(file.NewLine);
             }
 
             file.Close();
-            Console.WriteLine("\tFile saved. {0} notes saved", calendar.Count);
+            Console.WriteLine("\tFile saved. {0} events saved", calendar.Count);
         }
     }
 }

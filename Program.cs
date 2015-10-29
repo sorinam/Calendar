@@ -12,8 +12,7 @@ namespace Calendar
             }
             else
             {
-                string firstArg = args[0];
-                if (firstArg == "/?")
+                if (args[0] == "/?")
                 {
                     Console.WriteLine("\n\tPossible commands:");
                     Console.WriteLine("\t /add <Event's date> <Event's Subject>\t add new event in calendar");
@@ -21,23 +20,23 @@ namespace Calendar
                 }
                 else
                 {
-                    SwitchCommands(args, firstArg);
+                    SwitchCommands(args);
                 }
             }
         }
 
-        private static void SwitchCommands(string[] args, string firstArg)
+        static void SwitchCommands(string[] args)
         {
-            switch (firstArg)
+            switch (args[0])
             {
                 case "/add":
                     {
                         if (args.Length == 3)
                         {
                             Events.LoadCalendar();
-                            string subject = args[1];
-                            string date = args[2];
-                            Events.AddEvent(subject, Convert.ToDateTime(date));
+                            string date = args[1];
+                            string subject = args[2];
+                            Events.AddEvent(Convert.ToDateTime(date), subject);
                             Events.SaveEvents();
                         }
                         else
