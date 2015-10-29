@@ -54,16 +54,17 @@ namespace Calendar
 
         public static void SaveEvents()
         {
-            StreamWriter file = new StreamWriter(calendarFile);
+            //StreamWriter file = new StreamWriter(calendarFile);
+            System.IO.StreamWriter file = new System.IO.StreamWriter(calendarFile);
+
             for (int i = 0; i < calendar.Count; i++)
             {
                 file.Write(calendar[i].Date);
                 file.Write("\t" + calendar[i].Subject);
                 file.Write(file.NewLine);
             }
-
             file.Close();
-            Console.WriteLine("\tFile saved. {0} notes saved", calendar.Count);
+            Console.WriteLine("\tFile saved. {0} events saved", calendar.Count);
         }
     }
 }
