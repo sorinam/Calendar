@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "Calendar.csproj", "{3422714D-ABC5-4C97-91B2-0B65A9D04ECF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarTests", "..\CalendarTests\CalendarTests.csproj", "{3C27E400-BEFA-4B64-A7D6-4E3DEAB039F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3422714D-ABC5-4C97-91B2-0B65A9D04ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3422714D-ABC5-4C97-91B2-0B65A9D04ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3422714D-ABC5-4C97-91B2-0B65A9D04ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3422714D-ABC5-4C97-91B2-0B65A9D04ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C27E400-BEFA-4B64-A7D6-4E3DEAB039F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C27E400-BEFA-4B64-A7D6-4E3DEAB039F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C27E400-BEFA-4B64-A7D6-4E3DEAB039F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C27E400-BEFA-4B64-A7D6-4E3DEAB039F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
