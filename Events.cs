@@ -41,7 +41,7 @@ namespace Calendar
                 item.Subject = line.Substring(separatorPosition + 1);
                
                 calendar.Add(item);
-             }
+            }
         }
 
         public static void DisplayCalendar()
@@ -54,9 +54,7 @@ namespace Calendar
 
         public static void SaveEvents()
         {
-            Console.WriteLine("\n\tSaving file...");
             StreamWriter file = new StreamWriter(calendarFile);
-
             for (int i = 0; i < calendar.Count; i++)
             {
                 file.Write(calendar[i].Date);
@@ -65,7 +63,7 @@ namespace Calendar
             }
 
             file.Close();
-            Console.WriteLine("\tFile saved. {0} events saved", calendar.Count);
+            Console.WriteLine("\tFile saved. {0} notes saved", calendar.Count);
         }
     }
 }
