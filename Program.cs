@@ -15,9 +15,11 @@ namespace Calendar
                 if (args[0] == "/?")
                 {
                     Console.WriteLine("\n\tPossible commands:\n");
-                    Console.WriteLine(" /add \t <Event's date> <Event's Subject>\t  ");
+                    Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
                     Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
-                    Console.WriteLine("\n\n /list \t list events from calendar");
+                    Console.WriteLine("\n\n /list all \t list all events from calendar");
+                    Console.WriteLine("       past \t list past events from calendar");
+                    Console.WriteLine("       future \t list future events from calendar");
                 }
                 else
                 {
@@ -33,15 +35,16 @@ namespace Calendar
             {
                 case "/add":
                     {
-                        if (args.Length == 3)
+                        if (args.Length == 4)
                         {
                             string date = args[1];
                             string subject = args[2];
+                            string description = args[3];
                             DateTime dateTime;
                             if (DateTime.TryParse(date, out dateTime))
                             {
                                 newEvent.LoadCalendar();
-                                newEvent.AddEvent(date, subject);
+                                newEvent.AddEvent(date, subject,description);
                                 newEvent.SaveEvents();
                             }
                             else

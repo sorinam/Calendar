@@ -15,9 +15,9 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public void AddEvent(string date, string subject)
+        public void AddEvent(string date, string subject,string description)
         {
-            Event newEvent = new Event(date + "\t" + subject);
+            Event newEvent = new Event(date + "\t" + subject+ "\t" + description);
             if (newEvent.Subject != null)
             {
                 calendar.Add(newEvent);
@@ -47,7 +47,7 @@ namespace Calendar
             for (int i = 0; i < calendar.Count; i++)
             {
                 var date = calendar[i].Date;
-                Console.Write("Date: {0} Event:{1}", date.Date.ToShortDateString(), calendar[i].Subject);
+                Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject,calendar[i].Description);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Calendar
             StreamWriter file = new StreamWriter(calendarFile);
             for (int i = 0; i < calendar.Count; i++)
             {
-                file.Write(calendar[i].Date + "\t" + calendar[i].Subject);
+                file.Write(calendar[i].Date + "\t" + calendar[i].Subject+ "\t" + calendar[i].Description);
                 file.Write(file.NewLine);
             }
             file.Close();

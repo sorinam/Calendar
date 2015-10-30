@@ -4,13 +4,20 @@ namespace Calendar
 {
     public class Event
     {
-        private string subject;
         private DateTime date;
+        private string subject;
+        private string description;
 
         public string Subject
         {
             set { subject = value; }
             get { return subject; }
+        }
+
+        public string Description
+        {
+            set { description = value; }
+            get { return description; }
         }
 
         public DateTime Date
@@ -21,12 +28,14 @@ namespace Calendar
 
         public Event(string line)
         {
-            int separatorPosition = line.IndexOf("\t");
+            int firstSeparatorPosition = line.IndexOf("\t");
+            int secondSeparatorPosition = line.LastIndexOf("\t");
             DateTime convertedDate;
-            if (DateTime.TryParse(line.Substring(0, separatorPosition), out convertedDate))
+            if (DateTime.TryParse(line.Substring(0, firstSeparatorPosition), out convertedDate))
             {
                 date = convertedDate;
-                subject = line.Substring(separatorPosition + 1);
+                subject = line.Substring(firstSeparatorPosition + 1,secondSeparatorPosition-firstSeparatorPosition-1);
+                description = line.Substring(secondSeparatorPosition + 1);
             }
         }
     }

@@ -14,8 +14,9 @@ namespace UnitTestCalendar
         {
             string date = "2015/15/20";
             string subject = "My birthday";
+            string description = "It will be a wonderfull day...";
             Events newEvent = new Events();
-            newEvent.AddEvent(date, subject);
+            newEvent.AddEvent(date, subject,description);
             newEvent.Calendar.ShouldBeEmpty();
         }
 
@@ -24,30 +25,47 @@ namespace UnitTestCalendar
         {
             string date = "2015/11/20";
             string subject = "My birthday";
+            string description = "It will be a wonderfull day...";
             Events newEvent = new Events();
-            newEvent.AddEvent(date, subject);
+            newEvent.AddEvent(date, subject, description);
 
             newEvent.Calendar[0].Date.ShouldEqual(Convert.ToDateTime(date));
             newEvent.Calendar[0].Subject.ShouldEqual(subject);
+            newEvent.Calendar[0].Description.ShouldEqual(description);
         }
 
         [TestMethod]
-        public void ApplicationShouldDisplayEvent()
+        public void ApplicationShouldDisplayOneEvent()
         {
             string date = "2015/12/25";
             string subject = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
             Events newEvent = new Events();
             newEvent.Calendar.ShouldBeEmpty();
-            newEvent.AddEvent(date, subject);
+            newEvent.AddEvent(date, subject,description);
 
-            string expectedConsole = "Date: " + Convert.ToDateTime(date).ToShortDateString() + " Event:" + subject+"\n";
+            string expectedConsole = "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject+" \tDescription:"+description ;
 
-            var consoleOut= new StringWriter();
+            var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
             newEvent.DisplayCalendar();
-            expectedConsole.ShouldContain(consoleOut.ToString());
+            consoleOut.ToString().ShouldContain(expectedConsole);
+        }
+
+        [TestMethod]
+        public void ApplicationShouldNotDisplayEventForEmptyCalendar()
+        {
+            Events newEvent = new Events();
+            newEvent.Calendar.ShouldBeEmpty();
+
+            string expectedConsole = "";
+
+            var consoleOut = new StringWriter();
+            Console.SetOut(consoleOut);
+            newEvent.DisplayCalendar();
+            consoleOut.ToString().ShouldContain(expectedConsole);
             
-            }
         }
     }
+}
 
