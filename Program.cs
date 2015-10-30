@@ -28,6 +28,7 @@ namespace Calendar
 
         static void SwitchCommands(string[] args)
         {
+            Events newEvent = new Events();
             switch (args[0])
             {
                 case "/add":
@@ -39,9 +40,9 @@ namespace Calendar
                             DateTime dateTime;
                             if (DateTime.TryParse(date, out dateTime))
                             {
-                                Events.LoadCalendar();
-                                Events.AddEvent(date, subject);
-                                Events.SaveEvents();
+                                newEvent.LoadCalendar();
+                                newEvent.AddEvent(date, subject);
+                                newEvent.SaveEvents();
                             }
                             else
                             {
@@ -56,8 +57,8 @@ namespace Calendar
                     }
                 case "/list":
                     {
-                        Events.LoadCalendar();
-                        Events.DisplayCalendar();
+                        newEvent.LoadCalendar();
+                        newEvent.DisplayCalendar();
                         break;
                     }
                 default:
@@ -68,7 +69,7 @@ namespace Calendar
             }
         }
 
-        public static void InvalidCommand()
+        static void InvalidCommand()
         {
             Console.WriteLine("\n\t Invalid command. Use calendar.exe /? for more details.");
         }

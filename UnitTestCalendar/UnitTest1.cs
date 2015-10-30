@@ -14,9 +14,9 @@ namespace UnitTestCalendar
         {
             string date = "2015/15/20";
             string subject = "My birthday";
-
-            Events.AddEvent(date, subject);
-            Events.Calendar.ShouldBeEmpty();
+            Events newEvent = new Events();
+            newEvent.AddEvent(date, subject);
+            newEvent.Calendar.ShouldBeEmpty();
         }
 
         [TestMethod]
@@ -24,11 +24,11 @@ namespace UnitTestCalendar
         {
             string date = "2015/11/20";
             string subject = "My birthday";
+            Events newEvent = new Events();
+            newEvent.AddEvent(date, subject);
 
-            Events.AddEvent(date, subject);
-         
-            Events.Calendar[0].Date.ShouldEqual(Convert.ToDateTime(date));
-            Events.Calendar[0].Subject.ShouldEqual(subject);
+            newEvent.Calendar[0].Date.ShouldEqual(Convert.ToDateTime(date));
+            newEvent.Calendar[0].Subject.ShouldEqual(subject);
         }
 
         [TestMethod]
@@ -36,15 +36,15 @@ namespace UnitTestCalendar
         {
             string date = "2015/12/25";
             string subject = "Christmas Day!";
-
-            Events.Calendar.ShouldBeEmpty();
-            Events.AddEvent(date, subject);
+            Events newEvent = new Events();
+            newEvent.Calendar.ShouldBeEmpty();
+            newEvent.AddEvent(date, subject);
 
             string expectedConsole = "Date: " + Convert.ToDateTime(date).ToShortDateString() + " Event:" + subject+"\n";
 
             var consoleOut= new StringWriter();
             Console.SetOut(consoleOut);
-            Events.DisplayCalendar();
+            newEvent.DisplayCalendar();
             expectedConsole.ShouldContain(consoleOut.ToString());
             
             }

@@ -4,18 +4,18 @@ using System.IO;
 
 namespace Calendar
 {
-    public static class Events
+    public class Events
     {
         private static string calendarFile = @"Calendar.txt";
-        static List<Event> calendar = new List<Event>();
+        public List<Event> calendar = new List<Event>();
 
-        public static List<Event> Calendar
+        public List<Event> Calendar
         {
             set { calendar = value; }
             get { return calendar; }
         }
 
-        public static void AddEvent(string date, string subject)
+        public void AddEvent(string date, string subject)
         {
             Event newEvent = new Event(date + "\t" + subject);
             if (newEvent.Subject != null)
@@ -24,7 +24,7 @@ namespace Calendar
             }
         }
 
-        public static void LoadCalendar()
+        public void LoadCalendar()
         {
             if (!File.Exists(calendarFile))
             {
@@ -42,16 +42,16 @@ namespace Calendar
             file.Close();
         }
 
-        public static void DisplayCalendar()
+        public void DisplayCalendar()
         {
             for (int i = 0; i < calendar.Count; i++)
             {
-                var date = Calendar[i].Date;
+                var date = calendar[i].Date;
                 Console.Write("Date: {0} Event:{1}", date.Date.ToShortDateString(), calendar[i].Subject);
             }
         }
 
-        public static void SaveEvents()
+        public void SaveEvents()
         {
             StreamWriter file = new StreamWriter(calendarFile);
             for (int i = 0; i < calendar.Count; i++)
