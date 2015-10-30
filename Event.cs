@@ -2,7 +2,7 @@
 
 namespace Calendar
 {
-    public class Event
+    public class Event : IComparable<Event>
     {
         private DateTime date;
         private string subject;
@@ -37,6 +37,11 @@ namespace Calendar
                 subject = line.Substring(firstSeparatorPosition + 1,secondSeparatorPosition-firstSeparatorPosition-1);
                 description = line.Substring(secondSeparatorPosition + 1);
             }
+        }
+
+        public int CompareTo(Event other)
+        {
+            return this.Date.CompareTo(other.Date);
         }
     }
 }

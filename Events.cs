@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Calendar
 {
-    public class Events
+    public class Events 
     {
         private static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
@@ -45,14 +45,17 @@ namespace Calendar
 
         public void DisplayAllEvents()
         {
+            calendar.Sort();
             for (int i = 0; i < calendar.Count; i++)
             {
                 var date = calendar[i].Date;
                 Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
             }
         }
+        
         public void DisplayFutureEvents()
-        {                     
+        {
+            calendar.Sort();
             DateTime thisDay = DateTime.Today;
             for (int i = 0; i < calendar.Count; i++)
             {
@@ -66,6 +69,7 @@ namespace Calendar
         }
         public void DisplayPastEvents()
         {
+            calendar.Sort();
             DateTime thisDay = DateTime.Today;
             for (int i = 0; i < calendar.Count; i++)
             {
@@ -77,7 +81,7 @@ namespace Calendar
             }
 
         }
-
+      
         public void SaveEvents()
         {
             StreamWriter file = new StreamWriter(calendarFile);

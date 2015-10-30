@@ -66,19 +66,7 @@ namespace UnitTestCalendar
             consoleOut.ToString().ShouldContain(expectedConsole);
             
         }
-        [TestMethod]
-        public void DateTimeAddEvent()
-        {
-            string date = "2015/10/20";
-            string subject = "My birthday";
-            string description = "It will be a wonderfull day...";
-            Events newEvent = new Events();
-            newEvent.AddEvent(date, subject, description);
-
-            newEvent.Calendar[0].Date.ShouldEqual(Convert.ToDateTime(date));
-            int result = DateTime.Compare(DateTime.Today, newEvent.Calendar[0].Date);
-            Assert.AreEqual(0, result);
-        }
+        
     }
 }
 
