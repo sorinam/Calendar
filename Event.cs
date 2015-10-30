@@ -18,5 +18,12 @@ namespace Calendar
             set { date = value; }
             get { return date; }
         }
+
+        public Event(string line)
+        {
+            int separatorPosition = line.IndexOf("\t");
+            date = Convert.ToDateTime(line.Substring(0, separatorPosition));
+            subject = line.Substring(separatorPosition + 1);
+        }
     }
 }

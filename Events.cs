@@ -17,9 +17,7 @@ namespace Calendar
 
         public static void AddEvent(DateTime date, string subject)
         {
-            Event newEvent = new Event();
-            newEvent.Subject = subject;
-            newEvent.Date = date;
+            Event newEvent = new Event(date +"\t"+ subject);
             calendar.Add(newEvent);
         }
 
@@ -35,11 +33,7 @@ namespace Calendar
             string[] lines = File.ReadAllLines(calendarFile);
             foreach (string line in lines)
             {
-                int separatorPosition = line.IndexOf("\t");
-                Event item = new Event();
-                item.Date = Convert.ToDateTime(line.Substring(0, separatorPosition));
-                item.Subject = line.Substring(separatorPosition + 1);
-
+                Event item = new Event(line);
                 calendar.Add(item);
             }
             file.Close();
@@ -49,7 +43,8 @@ namespace Calendar
         {
             for (int i = 0; i < calendar.Count; i++)
             {
-                Console.WriteLine("\t Date: {0},  Event: {1}", calendar[i].Date, calendar[i].Subject);
+                var date = Calendar[i].Date;
+                Console.WriteLine("\t Date: {0}\t Event: {1}", date.Date.ToShortDateString(), calendar[i].Subject);
             }
         }
 

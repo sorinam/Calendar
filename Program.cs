@@ -14,9 +14,10 @@ namespace Calendar
             {
                 if (args[0] == "/?")
                 {
-                    Console.WriteLine("\n\tPossible commands:");
-                    Console.WriteLine("\t /add <Event's date> <Event's Subject>\t add new event in calendar");
-                    Console.WriteLine("\t /list \t\t\t\t\t list events from calendar");
+                    Console.WriteLine("\n\tPossible commands:\n");
+                    Console.WriteLine(" /add \t <Event's date> <Event's Subject>\t  ");
+                    Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
+                    Console.WriteLine("\n\n /list \t list events from calendar");
                 }
                 else
                 {
@@ -35,9 +36,17 @@ namespace Calendar
                         {
                             string date = args[1];
                             string subject = args[2];
-                            Events.LoadCalendar();
-                            Events.AddEvent(Convert.ToDateTime(date), subject);
-                            Events.SaveEvents();
+                            DateTime dateTime;
+                            if (DateTime.TryParse(date, out dateTime))
+                            {
+                                Events.LoadCalendar();
+                                Events.AddEvent(Convert.ToDateTime(date), subject);
+                                Events.SaveEvents();
+                            }
+                            else
+                            {
+                                Console.WriteLine("\n\t Invalid Date/Time format !");
+                            }
                         }
                         else
                         {
