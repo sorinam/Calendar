@@ -4,10 +4,10 @@ using System.IO;
 
 namespace Calendar
 {
-    public class Events
+    public static class Events
     {
         private static string calendarFile = @"Calendar.txt";
-        private static List<Event> calendar = new List<Event>();
+        static List<Event> calendar = new List<Event>();
 
         public static List<Event> Calendar
         {
@@ -15,10 +15,13 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public static void AddEvent(DateTime date, string subject)
+        public static void AddEvent(string date, string subject)
         {
-            Event newEvent = new Event(date +"\t"+ subject);
-            calendar.Add(newEvent);
+            Event newEvent = new Event(date + "\t" + subject);
+            if (newEvent.Subject != null)
+            {
+                calendar.Add(newEvent);
+            }
         }
 
         public static void LoadCalendar()
@@ -44,7 +47,7 @@ namespace Calendar
             for (int i = 0; i < calendar.Count; i++)
             {
                 var date = Calendar[i].Date;
-                Console.WriteLine("\t Date: {0}\t Event: {1}", date.Date.ToShortDateString(), calendar[i].Subject);
+                Console.Write("Date: {0} Event:{1}", date.Date.ToShortDateString(), calendar[i].Subject);
             }
         }
 

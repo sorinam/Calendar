@@ -40,7 +40,7 @@ namespace Calendar
                             if (DateTime.TryParse(date, out dateTime))
                             {
                                 Events.LoadCalendar();
-                                Events.AddEvent(Convert.ToDateTime(date), subject);
+                                Events.AddEvent(date, subject);
                                 Events.SaveEvents();
                             }
                             else

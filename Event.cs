@@ -22,8 +22,12 @@ namespace Calendar
         public Event(string line)
         {
             int separatorPosition = line.IndexOf("\t");
-            date = Convert.ToDateTime(line.Substring(0, separatorPosition));
-            subject = line.Substring(separatorPosition + 1);
+            DateTime convertedDate;
+            if (DateTime.TryParse(line.Substring(0, separatorPosition), out convertedDate))
+            {
+                date = convertedDate;
+                subject = line.Substring(separatorPosition + 1);
+            }
         }
     }
 }
