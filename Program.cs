@@ -44,7 +44,7 @@ namespace Calendar
                             if (DateTime.TryParse(date, out dateTime))
                             {
                                 newEvent.LoadCalendar();
-                                newEvent.AddEvent(date, subject,description);
+                                newEvent.AddEvent(date, subject, description);
                                 newEvent.SaveEvents();
                             }
                             else
@@ -60,13 +60,36 @@ namespace Calendar
                     }
                 case "/list":
                     {
-                        newEvent.LoadCalendar();
-                        newEvent.DisplayCalendar();
+                        SelectListOption(args, newEvent);
                         break;
                     }
                 default:
                     {
                         InvalidCommand();
+                        break;
+                    }
+            }
+        }
+
+        private static void SelectListOption(string[] args, Events newEvent)
+        {
+            newEvent.LoadCalendar();
+            switch (args[1])
+            {
+                case "past":
+                    {
+                        newEvent.DisplayPastEvents();
+                        break;
+                    }
+                case "future":
+                    {
+                        newEvent.DisplayFutureEvents();
+                        break;
+                    }
+                case "all":
+                default:
+                    {
+                        newEvent.DisplayAllEvents();
                         break;
                     }
             }

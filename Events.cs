@@ -8,6 +8,7 @@ namespace Calendar
     {
         private static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
+        private List<Event> filteredCalendar = new List<Event>();
 
         public List<Event> Calendar
         {
@@ -15,9 +16,9 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public void AddEvent(string date, string subject,string description)
+        public void AddEvent(string date, string subject, string description)
         {
-            Event newEvent = new Event(date + "\t" + subject+ "\t" + description);
+            Event newEvent = new Event(date + "\t" + subject + "\t" + description);
             if (newEvent.Subject != null)
             {
                 calendar.Add(newEvent);
@@ -42,13 +43,39 @@ namespace Calendar
             file.Close();
         }
 
-        public void DisplayCalendar()
+        public void DisplayAllEvents()
         {
             for (int i = 0; i < calendar.Count; i++)
             {
                 var date = calendar[i].Date;
-                Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject,calendar[i].Description);
+                Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
             }
+        }
+        public void DisplayFutureEvents()
+        {                     
+            DateTime thisDay = DateTime.Today;
+            for (int i = 0; i < calendar.Count; i++)
+            {
+                var date = calendar[i].Date;
+                if (DateTime.Compare(date, thisDay) >= 0)
+                {
+                    Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
+                }
+            }
+            
+        }
+        public void DisplayPastEvents()
+        {
+            DateTime thisDay = DateTime.Today;
+            for (int i = 0; i < calendar.Count; i++)
+            {
+                var date = calendar[i].Date;
+                if (DateTime.Compare(date, thisDay) <0)
+                {
+                    Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
+                }
+            }
+
         }
 
         public void SaveEvents()
@@ -56,7 +83,7 @@ namespace Calendar
             StreamWriter file = new StreamWriter(calendarFile);
             for (int i = 0; i < calendar.Count; i++)
             {
-                file.Write(calendar[i].Date + "\t" + calendar[i].Subject+ "\t" + calendar[i].Description);
+                file.Write(calendar[i].Date + "\t" + calendar[i].Subject + "\t" + calendar[i].Description);
                 file.Write(file.NewLine);
             }
             file.Close();
