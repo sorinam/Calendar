@@ -8,8 +8,7 @@ namespace Calendar
     {
         private static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
-        private List<Event> filteredCalendar = new List<Event>();
-
+     
         public List<Event> Calendar
         {
             set { calendar = value; }
@@ -49,8 +48,9 @@ namespace Calendar
             for (int i = 0; i < calendar.Count; i++)
             {
                 var date = calendar[i].Date;
-                Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
-            }
+                Console.Write("Date:{0}\tEvent:{1} \t\tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
+                Console.Write("\n");
+             }
         }
         
         public void DisplayFutureEvents()
@@ -67,6 +67,7 @@ namespace Calendar
             }
             
         }
+
         public void DisplayPastEvents()
         {
             calendar.Sort();
