@@ -8,7 +8,9 @@ namespace Calendar
     {
         private static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
-        
+        List<Event> pastEvents = new List<Event>();
+        List<Event> futureEvents = new List<Event>();
+
         public List<Event> Calendar
         {
             set { calendar = value; }
@@ -44,38 +46,56 @@ namespace Calendar
 
         public void DisplayEvents(string option)
         {
-            calendar.Sort();
-            DateTime thisDay = DateTime.Today;
-            for (int i = 0; i < calendar.Count; i++)
-            {
                 switch (option)
                 {
                     case "future":
                         {
-                            if (DateTime.Compare(calendar[i].Date, thisDay) >= 0)
-                                DisplayToConsole(i);
+                        ExtractFutureEvents();
+                        DisplayToConsole(futureEvents);
                             break;
                         }
                     case "past":
                         {
-                            if (DateTime.Compare(calendar[i].Date, thisDay) < 0)
-                                DisplayToConsole(i);
-                            break;
+                        ExtractPastEvents();
+                        DisplayToConsole(pastEvents);
+                        break;
                         }
                     case "all":
                         {
-                            DisplayToConsole(i);
+                            DisplayToConsole(calendar);
                             break;
                         }
                     }
             }
-
+        
+        private void DisplayToConsole(List<Event> listToDisplay)
+        {
+            listToDisplay.Sort();
+            for (int i = 0; i < listToDisplay.Count; i++)
+            {
+                Console.Write("Date:{0} \tEvent:{1} \tDescription:{2}", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject, listToDisplay[i].Description);
+                Console.Write("\n");
+            }
         }
 
-        private void DisplayToConsole(int i)
+        private void ExtractPastEvents()
         {
-            Console.Write("Date:{0} \tEvent:{1} \tDescription:{2}", calendar[i].Date.ToShortDateString(), calendar[i].Subject, calendar[i].Description);
-            Console.Write("\n");
+            DateTime thisDay = DateTime.Today;
+            for (int i=0;i<calendar.Count; i++)
+            {
+                if (DateTime.Compare(calendar[i].Date, thisDay) < 0)
+                    pastEvents.Add(calendar[i]);
+            }
+        }
+
+        private void ExtractFutureEvents()
+        {
+            DateTime thisDay = DateTime.Today;
+            for (int i = 0; i < calendar.Count; i++)
+            {
+                if (DateTime.Compare(calendar[i].Date, thisDay) >= 0)
+                    futureEvents.Add(calendar[i]);
+            }
         }
 
         public void SaveEvents()
