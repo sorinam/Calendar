@@ -46,28 +46,28 @@ namespace Calendar
 
         public void DisplayEvents(string option)
         {
-                switch (option)
-                {
-                    case "future":
-                        {
-                        ExtractFutureEvents();
+            switch (option)
+            {
+                case "future":
+                    {
+                        ExtractEvents();
                         DisplayToConsole(futureEvents);
-                            break;
-                        }
-                    case "past":
-                        {
-                        ExtractPastEvents();
+                        break;
+                    }
+                case "past":
+                    {
+                        ExtractEvents();
                         DisplayToConsole(pastEvents);
                         break;
-                        }
-                    case "all":
-                        {
-                            DisplayToConsole(calendar);
-                            break;
-                        }
+                    }
+                case "all":
+                    {
+                        DisplayToConsole(calendar);
+                        break;
                     }
             }
-        
+        }
+
         private void DisplayToConsole(List<Event> listToDisplay)
         {
             listToDisplay.Sort();
@@ -78,22 +78,13 @@ namespace Calendar
             }
         }
 
-        private void ExtractPastEvents()
+        private void ExtractEvents()
         {
-            DateTime thisDay = DateTime.Today;
-            for (int i=0;i<calendar.Count; i++)
-            {
-                if (DateTime.Compare(calendar[i].Date, thisDay) < 0)
-                    pastEvents.Add(calendar[i]);
-            }
-        }
-
-        private void ExtractFutureEvents()
-        {
-            DateTime thisDay = DateTime.Today;
             for (int i = 0; i < calendar.Count; i++)
             {
-                if (DateTime.Compare(calendar[i].Date, thisDay) >= 0)
+                if (calendar[i].Older() < 0)
+                    pastEvents.Add(calendar[i]);
+                else
                     futureEvents.Add(calendar[i]);
             }
         }
