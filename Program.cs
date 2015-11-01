@@ -35,44 +35,71 @@ namespace Calendar
             {
                 case "/add":
                     {
-                        if (args.Length == 4)
-                        {
-                            string date = args[1];
-                            string subject = args[2];
-                            string description = args[3];
-                            DateTime dateTime;
-                            if (DateTime.TryParse(date, out dateTime))
-                            {
-                                newEvent.LoadCalendar();
-                                newEvent.AddEvent(date, subject,description);
-                                newEvent.SaveEvents();
-                            }
-                            else
-                            {
-                                Console.WriteLine("\n\t Invalid Date/Time format !");
-                            }
-                        }
-                        else
-                        {
-                            InvalidCommand();
-                        }
+                        ProcessingAddArguments(args, newEvent);
                         break;
                     }
                 case "/list":
                     {
-                        newEvent.LoadCalendar();
-                        newEvent.DisplayCalendar();
+                        ProcessingListArguments(args, newEvent);
                         break;
                     }
                 default:
-                    {
-                        InvalidCommand();
+                    {   InvalidCommand();
                         break;
                     }
             }
         }
 
-        static void InvalidCommand()
+        private static void ProcessingListArguments(string[] args, Events newEvent)
+        {
+            if ((args.Length == 2) && (IsValidListParameter(args[1])))
+            {
+                newEvent.LoadCalendar();
+                newEvent.DisplayEvents(args[1]);
+            }
+            else
+            {
+                InvalidCommand();
+            }
+        }
+
+        private static void ProcessingAddArguments(string[] args, Events newEvent)
+        {
+            if (args.Length == 4)
+            {
+                string date = args[1];
+                string subject = args[2];
+                string description = args[3];
+                DateTime dateTime;
+                if (DateTime.TryParse(date, out dateTime))
+                {
+                    newEvent.LoadCalendar();
+                    newEvent.AddEvent(date, subject, description);
+                    newEvent.SaveEvents();
+                }
+                else
+                {
+                    Console.WriteLine("\n\t Invalid Date/Time format !");
+                }
+            }
+            else
+            {
+                InvalidCommand();
+            }
+        }
+
+        private static bool IsValidListParameter(string listOption)
+        {
+            string[] listParameters = { "all", "past", "future" };
+            for (int i = 0; i < listParameters.Length; i++)
+            {
+                if (listParameters[i] == listOption)
+                { return true; }
+            }
+            return false;
+        }
+
+        public static void InvalidCommand()
         {
             Console.WriteLine("\n\t Invalid command. Use calendar.exe /? for more details.");
         }

@@ -8,6 +8,8 @@ namespace Calendar
     {
         private static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
+        List<Event> pastEvents = new List<Event>();
+        List<Event> futureEvents = new List<Event>();
 
         public List<Event> Calendar
         {
@@ -15,9 +17,9 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public void AddEvent(string date, string subject,string description)
+        public void AddEvent(string date, string subject, string description)
         {
-            Event newEvent = new Event(date + "\t" + subject+ "\t" + description);
+            Event newEvent = new Event(date + "\t" + subject + "\t" + description);
             if (newEvent.Subject != null)
             {
                 calendar.Add(newEvent);
@@ -42,12 +44,48 @@ namespace Calendar
             file.Close();
         }
 
-        public void DisplayCalendar()
+        public void DisplayEvents(string option)
+        {
+            switch (option)
+            {
+                case "future":
+                    {
+                        ExtractEventsFromCalendar();
+                        DisplayToConsole(futureEvents);
+                        break;
+                    }
+                case "past":
+                    {
+                        ExtractEventsFromCalendar();
+                        DisplayToConsole(pastEvents);
+                        break;
+                    }
+                case "all":
+                    {
+                        DisplayToConsole(calendar);
+                        break;
+                    }
+            }
+        }
+
+        private void DisplayToConsole(List<Event> listToDisplay)
+        {
+            listToDisplay.Sort();
+            for (int i = 0; i < listToDisplay.Count; i++)
+            {
+                Console.Write("Date:{0} \tEvent:{1} \tDescription:{2}", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject, listToDisplay[i].Description);
+                Console.Write("\n");
+            }
+        }
+
+        private void ExtractEventsFromCalendar()
         {
             for (int i = 0; i < calendar.Count; i++)
             {
-                var date = calendar[i].Date;
-                Console.WriteLine("Date:{0} \tEvent:{1} \tDescription:{2}", date.Date.ToShortDateString(), calendar[i].Subject,calendar[i].Description);
+                if (calendar[i].Older() < 0)
+                    pastEvents.Add(calendar[i]);
+                else
+                    futureEvents.Add(calendar[i]);
             }
         }
 
@@ -56,7 +94,7 @@ namespace Calendar
             StreamWriter file = new StreamWriter(calendarFile);
             for (int i = 0; i < calendar.Count; i++)
             {
-                file.Write(calendar[i].Date + "\t" + calendar[i].Subject+ "\t" + calendar[i].Description);
+                file.Write(calendar[i].Date + "\t" + calendar[i].Subject + "\t" + calendar[i].Description);
                 file.Write(file.NewLine);
             }
             file.Close();
