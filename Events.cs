@@ -50,13 +50,13 @@ namespace Calendar
             {
                 case "future":
                     {
-                        ExtractEvents();
+                        ExtractEventsFromCalendar();
                         DisplayToConsole(futureEvents);
                         break;
                     }
                 case "past":
                     {
-                        ExtractEvents();
+                        ExtractEventsFromCalendar();
                         DisplayToConsole(pastEvents);
                         break;
                     }
@@ -78,7 +78,7 @@ namespace Calendar
             }
         }
 
-        private void ExtractEvents()
+        private void ExtractEventsFromCalendar()
         {
             for (int i = 0; i < calendar.Count; i++)
             {
