@@ -41,7 +41,6 @@ namespace Calendar
 
         public int CompareTo(Event other)
         {
-            if (other == null) return 1;
             return this.Date.CompareTo(other.Date);
          }
         public int Older()
