@@ -27,7 +27,7 @@ namespace Calendar
         }
 
         public Event(string line)
-        {           
+        {
             string[] words = line.Split('\t');
             if (words.Length == 3)
             {
@@ -38,13 +38,31 @@ namespace Calendar
                     subject = words[1];
                     description = words[2];
                 }
+                else
+                {
+                    throw new FormatException("Bad Date/Time format or conversion not supported!");
+                }
             }
         }
 
+        public Event(string date, string subject, string description)
+        {
+            DateTime convertedDate;
+            if (DateTime.TryParse(date, out convertedDate))
+            {
+                this.date = convertedDate;
+                this.subject = subject;
+                this.description = description;
+            }
+            else
+            {
+                throw new FormatException("Bad Date/Time format or conversion not supported!");
+            }
+        }
         public int CompareTo(Event other)
         {
             return this.Date.CompareTo(other.Date);
-         }
+        }
         public int Older()
         {
             DateTime thisDay = DateTime.Today;

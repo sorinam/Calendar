@@ -11,6 +11,7 @@ namespace UnitTestCalendar
     public class UnitTest1
     {
         [TestMethod]
+        [ExpectedException(typeof(FormatException))]
         public void ApplicationShouldNotAddEvent()
         {
             string date = "2015/15/20";
@@ -18,7 +19,6 @@ namespace UnitTestCalendar
             string description = "It will be a wonderfull day...";
             Events newEvent = new Events();
             newEvent.AddEvent(date, subject, description);
-            newEvent.Calendar.ShouldBeEmpty();
         }
 
         [TestMethod]

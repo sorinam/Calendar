@@ -19,11 +19,8 @@ namespace Calendar
 
         public void AddEvent(string date, string subject, string description)
         {
-            Event newEvent = new Event(date + "\t" + subject + "\t" + description);
-            if (newEvent.Subject != null)
-            {
-                calendar.Add(newEvent);
-            }
+            Event newEvent = new Event(date, subject, description);
+            calendar.Add(newEvent);
         }
 
         public void LoadCalendar()

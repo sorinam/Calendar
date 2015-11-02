@@ -79,7 +79,7 @@ namespace Calendar
                 }
                 else
                 {
-                    Console.WriteLine("\n\t Invalid Date/Time format !");
+                    Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
                 }
             }
             else
