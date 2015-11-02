@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Calendar;
 using Should;
 using System.IO;
+using System.Collections.Generic;
 
 namespace UnitTestCalendar
 {
@@ -16,7 +17,7 @@ namespace UnitTestCalendar
             string subject = "My birthday";
             string description = "It will be a wonderfull day...";
             Events newEvent = new Events();
-            newEvent.AddEvent(date, subject,description);
+            newEvent.AddEvent(date, subject, description);
             newEvent.Calendar.ShouldBeEmpty();
         }
 
@@ -42,15 +43,15 @@ namespace UnitTestCalendar
             string description = "Santa Claus is comming in our house....";
             Events newEvent = new Events();
             newEvent.Calendar.ShouldBeEmpty();
-            newEvent.AddEvent(date, subject,description);
+            newEvent.AddEvent(date, subject, description);
 
-            string expectedConsole = "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject+" \tDescription:"+description ;
+            string expectedConsole = "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject + " \tDescription:" + description;
 
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
             newEvent.DisplayEvents("all");
             consoleOut.ToString().ShouldContain(expectedConsole);
-          }
+        }
 
         [TestMethod]
         public void ApplicationShouldDisplayAllEvents()
@@ -63,17 +64,17 @@ namespace UnitTestCalendar
             newEvent.AddEvent(date, subject, description);
             string date1 = "2015/10/25";
             string subject1 = "Johana's Birtday!";
-            string description1= "Don't forget to call her...";
+            string description1 = "Don't forget to call her...";
             newEvent.AddEvent(date1, subject1, description1);
 
-            string expectedConsole = "Date:" + Convert.ToDateTime(date1).ToShortDateString() + " \tEvent:" + subject1 + " \tDescription:" + description1 + "\n"+
+            string expectedConsole = "Date:" + Convert.ToDateTime(date1).ToShortDateString() + " \tEvent:" + subject1 + " \tDescription:" + description1 + "\n" +
                 "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject + " \tDescription:" + description;
 
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
             newEvent.DisplayEvents("all");
             consoleOut.ToString().ShouldContain(expectedConsole);
-           }
+        }
 
         [TestMethod]
         public void ApplicationShouldDisplayPastEvents()
@@ -90,7 +91,7 @@ namespace UnitTestCalendar
             newEvent.AddEvent(date1, subject1, description1);
 
             string expectedConsole = "Date:" + Convert.ToDateTime(date1).ToShortDateString() + " \tEvent:" + subject1 + " \tDescription:" + description1 + "\n";
-                
+
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
             newEvent.DisplayEvents("past");
@@ -198,9 +199,8 @@ namespace UnitTestCalendar
             Console.SetOut(consoleOut);
             newEvent.DisplayEvents("all");
             consoleOut.ToString().ShouldContain(expectedConsole);
-            
+
         }
-        
     }
 }
 

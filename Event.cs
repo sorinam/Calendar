@@ -27,15 +27,17 @@ namespace Calendar
         }
 
         public Event(string line)
-        {
-            int firstSeparatorPosition = line.IndexOf("\t");
-            int secondSeparatorPosition = line.LastIndexOf("\t");
-            DateTime convertedDate;
-            if (DateTime.TryParse(line.Substring(0, firstSeparatorPosition), out convertedDate))
+        {           
+            string[] words = line.Split('\t');
+            if (words.Length == 3)
             {
-                date = convertedDate;
-                subject = line.Substring(firstSeparatorPosition + 1, secondSeparatorPosition - firstSeparatorPosition - 1);
-                description = line.Substring(secondSeparatorPosition + 1);
+                DateTime convertedDate;
+                if (DateTime.TryParse(words[0], out convertedDate))
+                {
+                    date = convertedDate;
+                    subject = words[1];
+                    description = words[2];
+                }
             }
         }
 
