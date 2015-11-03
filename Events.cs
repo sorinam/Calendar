@@ -37,7 +37,7 @@ namespace Calendar
             {
                 Event item = new Event(line);
                 calendar.Add(item);
-            }
+             }
             file.Close();
         }
 
@@ -70,8 +70,8 @@ namespace Calendar
             listToDisplay.Sort();
             for (int i = 0; i < listToDisplay.Count; i++)
             {
-                Console.Write("Date:{0} \tEvent:{1} ", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject);
-                if(listToDisplay[i].Description!="")  Console.Write("\tDescription:{0}", listToDisplay[i].Description); 
+                Console.Write("Date:{0} \tEvent:{1} ", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject.Replace('\a','\n'));
+                if(listToDisplay[i].Description!="")  Console.Write("\tDescription:{0}", listToDisplay[i].Description.Replace('\a', '\n')); 
                 Console.Write("\n");
             }
         }

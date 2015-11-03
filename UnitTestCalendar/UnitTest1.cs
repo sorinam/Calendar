@@ -103,7 +103,7 @@ namespace UnitTestCalendar
             newEvent.Calendar.ShouldBeEmpty();
             newEvent.AddEvent(date, subject);
 
-            string expectedConsole = "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject ;
+            string expectedConsole = "Date:" + Convert.ToDateTime(date).ToShortDateString() + " \tEvent:" + subject;
 
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);

@@ -72,9 +72,9 @@ namespace Calendar
             if ((args.Length ==3)|| (args.Length ==4))
             {
                 string date = args[1];
-                string subject = args[2];
+                string subject = args[2].Replace('\n','\a');
                 string description="";
-                if (args.Length == 4) { description = args[3]; }
+                if (args.Length == 4) { description = args[3].Replace('\n', '\a'); }
                 DateTime dateTime;
                 if (DateTime.TryParse(date, out dateTime))
                 {
@@ -95,7 +95,7 @@ namespace Calendar
 
         static bool IsValidListParameter(string listOption)
         {
-            string[] listParameters = { "all", "past", "future" };
+            string[] listParameters = { "all","All","ALL","Past","PAST", "past", "Future","FUTURE","future" };
             for (int i = 0; i < listParameters.Length; i++)
             {
                 if (listParameters[i] == listOption)
@@ -106,7 +106,7 @@ namespace Calendar
 
         public static void InvalidCommand()
         {
-            Console.WriteLine("\n\t Invalid command. Use calendar.exe /? for more details.");
+            Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
         }
     }
 }
