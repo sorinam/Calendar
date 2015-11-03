@@ -69,6 +69,7 @@ namespace Calendar
 
         private static void ProcessingAddArguments(string[] args, Events newEvent)
         {
+            IOFiles file = new IOFiles();
             if ((args.Length ==3)|| (args.Length ==4))
             {
                 string date = args[1];
@@ -78,9 +79,9 @@ namespace Calendar
                 DateTime dateTime;
                 if (DateTime.TryParse(date, out dateTime))
                 {
-                    newEvent.LoadCalendar();
+                    file.LoadFile();
                     newEvent.AddEvent(date, subject, description);
-                    newEvent.SaveEvents();
+                    file.SaveToFile(newEvent);
                 }
                 else
                 {

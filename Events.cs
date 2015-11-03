@@ -6,7 +6,6 @@ namespace Calendar
 {
     public class Events
     {
-        static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
         List<Event> pastEvents = new List<Event>();
         List<Event> futureEvents = new List<Event>();
@@ -23,58 +22,60 @@ namespace Calendar
             calendar.Add(newEvent);
         }
         
-        public void LoadCalendar()
-        {
-            if (!File.Exists(calendarFile))
-            {
-                Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
-                return;
-            }
-            StreamReader file = new StreamReader(calendarFile);
+        //public void LoadCalendar()
+        //{
+        //    if (!File.Exists(calendarFile))
+        //    {
+        //        Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
+        //        return;
+        //    }
+        //    StreamReader file = new StreamReader(calendarFile);
 
-            string[] lines = File.ReadAllLines(calendarFile);
-            foreach (string line in lines)
-            {
-                Event item = new Event(line);
-                calendar.Add(item);
-             }
-            file.Close();
-        }
+        //    string[] lines = File.ReadAllLines(calendarFile);
+        //    foreach (string line in lines)
+        //    {
+        //        Event item = new Event(line);
+        //        calendar.Add(item);
+        //     }
+        //    file.Close();
+        //}
 
         public void DisplayEvents(string option)
         {
+            IOFiles files = new IOFiles();
+
             switch (option)
             {
                 case "future":
                     {
                         ExtractEventsFromCalendar();
-                        DisplayToConsole(futureEvents);
+                        files.DisplayToConsole(futureEvents);
                         break;
                     }
                 case "past":
                     {
                         ExtractEventsFromCalendar();
-                        DisplayToConsole(pastEvents);
+                        files.DisplayToConsole(pastEvents);
                         break;
                     }
                 case "all":
                     {
-                        DisplayToConsole(calendar);
+                        files.DisplayToConsole(calendar);
                         break;
                     }
             }
         }
 
-        void DisplayToConsole(List<Event> listToDisplay)
-        {
-            listToDisplay.Sort();
-            for (int i = 0; i < listToDisplay.Count; i++)
-            {
-                Console.Write("Date:{0} \tEvent:{1} ", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject.Replace('\a','\n'));
-                if(listToDisplay[i].Description!="")  Console.Write("\tDescription:{0}", listToDisplay[i].Description.Replace('\a', '\n')); 
-                Console.Write("\n");
-            }
-        }
+        //void DisplayToConsole(List<Event> listToDisplay)
+        //{
+        //    listToDisplay.Sort();
+        //    for (int i = 0; i < listToDisplay.Count; i++)
+        //    {
+        //        Console.Write("Date:{0} \tEvent:{1} ", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject.Replace('\a','\n'));
+        //        if(listToDisplay[i].Description!="")  Console.Write("\tDescription:{0}", listToDisplay[i].Description.Replace('\a', '\n')); 
+        //        Console.Write("\n");
+        //    }
+        //}
 
         void ExtractEventsFromCalendar()
         {
@@ -87,16 +88,16 @@ namespace Calendar
             }
         }
 
-        public void SaveEvents()
-        {
-            StreamWriter file = new StreamWriter(calendarFile);
-            for (int i = 0; i < calendar.Count; i++)
-            {
-                file.Write(calendar[i].Date + "\t" + calendar[i].Subject + "\t" + calendar[i].Description);
-                file.Write(file.NewLine);
-            }
-            file.Close();
-            Console.WriteLine("\tFile saved. Calendar contains {0} events. ", calendar.Count);
-        }
+        //public void SaveEvents()
+        //{
+        //    StreamWriter file = new StreamWriter(calendarFile);
+        //    for (int i = 0; i < calendar.Count; i++)
+        //    {
+        //        file.Write(calendar[i].Date + "\t" + calendar[i].Subject + "\t" + calendar[i].Description);
+        //        file.Write(file.NewLine);
+        //    }
+        //    file.Close();
+        //    Console.WriteLine("\tFile saved. Calendar contains {0} events. ", calendar.Count);
+        //}
     }
 }
