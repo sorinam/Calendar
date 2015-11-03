@@ -6,7 +6,7 @@ namespace Calendar
 {
     public class Events
     {
-        private static string calendarFile = @"Calendar.txt";
+        static string calendarFile = @"Calendar.txt";
         public List<Event> calendar = new List<Event>();
         List<Event> pastEvents = new List<Event>();
         List<Event> futureEvents = new List<Event>();
@@ -17,12 +17,12 @@ namespace Calendar
             get { return calendar; }
         }
 
-        public void AddEvent(string date, string subject, string description)
+        public void AddEvent(string date, string subject, string description="")
         {
             Event newEvent = new Event(date, subject, description);
             calendar.Add(newEvent);
         }
-
+        
         public void LoadCalendar()
         {
             if (!File.Exists(calendarFile))
@@ -65,17 +65,18 @@ namespace Calendar
             }
         }
 
-        private void DisplayToConsole(List<Event> listToDisplay)
+        void DisplayToConsole(List<Event> listToDisplay)
         {
             listToDisplay.Sort();
             for (int i = 0; i < listToDisplay.Count; i++)
             {
-                Console.Write("Date:{0} \tEvent:{1} \tDescription:{2}", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject, listToDisplay[i].Description);
+                Console.Write("Date:{0} \tEvent:{1} ", listToDisplay[i].Date.ToShortDateString(), listToDisplay[i].Subject);
+                if(listToDisplay[i].Description!="")  Console.Write("\tDescription:{0}", listToDisplay[i].Description); 
                 Console.Write("\n");
             }
         }
 
-        private void ExtractEventsFromCalendar()
+        void ExtractEventsFromCalendar()
         {
             for (int i = 0; i < calendar.Count; i++)
             {

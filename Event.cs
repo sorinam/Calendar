@@ -45,7 +45,7 @@ namespace Calendar
             }
         }
 
-        public Event(string date, string subject, string description)
+        public Event(string date, string subject, string description="")
         {
             DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
@@ -59,6 +59,7 @@ namespace Calendar
                 throw new FormatException("Bad Date/Time format or conversion not supported!");
             }
         }
+
         public int CompareTo(Event other)
         {
             return this.Date.CompareTo(other.Date);

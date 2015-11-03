@@ -17,7 +17,7 @@ namespace Calendar
                     Console.WriteLine("\n\tPossible commands:\n");
                     Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
                     Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
-                    Console.WriteLine("\n\n /list all \t list all events from calendar");
+                    Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
                     Console.WriteLine("       past \t list past events from calendar");
                     Console.WriteLine("       future \t list future events from calendar");
                 }
@@ -50,12 +50,16 @@ namespace Calendar
             }
         }
 
-        private static void ProcessingListArguments(string[] args, Events newEvent)
+       static void ProcessingListArguments(string[] args, Events newEvent)
         {
-            if ((args.Length == 2) && (IsValidListParameter(args[1])))
+            if ((args.Length == 1)||((args.Length == 2) && (IsValidListParameter(args[1]))))
             {
+                string parameter;
+                if (args.Length == 1) { parameter = "all"; }
+                else
+                { parameter = args[1]; }
                 newEvent.LoadCalendar();
-                newEvent.DisplayEvents(args[1]);
+                newEvent.DisplayEvents(parameter);
             }
             else
             {
@@ -65,11 +69,12 @@ namespace Calendar
 
         private static void ProcessingAddArguments(string[] args, Events newEvent)
         {
-            if (args.Length == 4)
+            if ((args.Length ==3)|| (args.Length ==4))
             {
                 string date = args[1];
                 string subject = args[2];
-                string description = args[3];
+                string description="";
+                if (args.Length == 4) { description = args[3]; }
                 DateTime dateTime;
                 if (DateTime.TryParse(date, out dateTime))
                 {
@@ -88,7 +93,7 @@ namespace Calendar
             }
         }
 
-        private static bool IsValidListParameter(string listOption)
+        static bool IsValidListParameter(string listOption)
         {
             string[] listParameters = { "all", "past", "future" };
             for (int i = 0; i < listParameters.Length; i++)
