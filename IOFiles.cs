@@ -10,10 +10,11 @@ namespace Calendar
     class IOFiles
     {
         static string calendarFile = @"Calendar.txt";
-
-        public List <Event> LoadFile()
+     
+        public EventsEnum LoadFile()
         {
-            List <Event> listofEvents = new List <Event>(); 
+            //List <Event> listofEvents = new List <Event>(); 
+            EventsEnum listOfEvents = new EventsEnum();
             if (!File.Exists(calendarFile))
             {
                 Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
@@ -25,25 +26,29 @@ namespace Calendar
             foreach (string line in lines)
             {
                 Event item = new Event(line);
-                listofEvents.Add(item);
+                //listofEvents.Add(item);
+                listOfEvents.Add(item);
             }
             file.Close();
-            return listofEvents;
+
+            return listOfEvents;
         }
 
-        public void SaveToFile(List <Event> eventsList)
+        public void SaveToFile(EventsEnum eventsList)
         {
+            int index = 0;
             StreamWriter file = new StreamWriter(calendarFile);
-            for (int i = 0; i < eventsList.Count; i++)
+           foreach (Event ev in eventsList)
             {
-                file.Write(eventsList[i].Date + "\t" + eventsList[i].Subject + "\t" + eventsList[i].Description);
+                file.Write(ev.Date + "\t" + ev.Subject + "\t" + ev.Description);
                 file.Write(file.NewLine);
+                index++;
             }
             file.Close();
-            Console.WriteLine("\tFile saved. Calendar contains {0} events. ", eventsList.Count);
+            Console.WriteLine("\tFile saved. Calendar contains {0} events. ", index);
         }
 
-        public void DisplayToConsole(List<Event> listToDisplay)
+        public void DisplayToConsole(List <Event>  listToDisplay)
         {
             listToDisplay.Sort();
             for (int i = 0; i < listToDisplay.Count; i++)

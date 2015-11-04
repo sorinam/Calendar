@@ -6,6 +6,16 @@ namespace Calendar
     {
         public static void Main(string[] args)
         {
+            //EventsEnum pack = new EventsEnum();
+            //pack.Add(new Event("2015-11-12", "2555545"));
+            //pack.Add(new Event("2015-10-12", "2555545"));
+            //pack.Add(new Event("2015-12-12", "2555545", "fsfsafds"));
+
+
+            //foreach (Event d in pack)
+            //    Console.WriteLine(d.Date + "" + d.Description + "" + d.Subject);
+
+            //Console.ReadKey();
             if (args.Length == 0)
             {
                 Console.WriteLine("\t\n Use calendar.exe /? for more details . ");
@@ -30,7 +40,7 @@ namespace Calendar
 
         static void SwitchCommands(string[] args)
         {
-            Events newEvent = new Events();
+            EventsEnum newEvent = new EventsEnum();
             switch (args[0])
             {
                 case "/add":
@@ -44,21 +54,23 @@ namespace Calendar
                         break;
                     }
                 default:
-                    {   InvalidCommand();
+                    {
+                        InvalidCommand();
                         break;
                     }
             }
         }
 
-       static void ProcessingListArguments(string[] args, Events newEvent)
+        static void ProcessingListArguments(string[] args, EventsEnum newEvent)
         {
-            if ((args.Length == 1)||((args.Length == 2) && (IsValidListParameter(args[1]))))
+            IOFiles files = new IOFiles();
+            if ((args.Length == 1) || ((args.Length == 2) && (IsValidListParameter(args[1]))))
             {
                 string parameter;
                 if (args.Length == 1) { parameter = "all"; }
                 else
                 { parameter = args[1]; }
-                newEvent.LoadCalendar();
+                files.LoadFile();
                 newEvent.DisplayEvents(parameter);
             }
             else
@@ -67,14 +79,14 @@ namespace Calendar
             }
         }
 
-        private static void ProcessingAddArguments(string[] args, Events newEvent)
+        private static void ProcessingAddArguments(string[] args, EventsEnum newEvent)
         {
             IOFiles file = new IOFiles();
-            if ((args.Length ==3)|| (args.Length ==4))
+            if ((args.Length == 3) || (args.Length == 4))
             {
                 string date = args[1];
-                string subject = args[2].Replace('\n','\a');
-                string description="";
+                string subject = args[2].Replace('\n', '\a');
+                string description = "";
                 if (args.Length == 4) { description = args[3].Replace('\n', '\a'); }
                 DateTime dateTime;
                 if (DateTime.TryParse(date, out dateTime))
@@ -96,7 +108,7 @@ namespace Calendar
 
         static bool IsValidListParameter(string listOption)
         {
-            string[] listParameters = { "all","All","ALL","Past","PAST", "past", "Future","FUTURE","future" };
+            string[] listParameters = { "all", "All", "ALL", "Past", "PAST", "past", "Future", "FUTURE", "future" };
             for (int i = 0; i < listParameters.Length; i++)
             {
                 if (listParameters[i] == listOption)

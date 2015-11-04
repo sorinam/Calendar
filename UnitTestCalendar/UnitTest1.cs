@@ -29,7 +29,6 @@ namespace UnitTestCalendar
             string description = "It will be a wonderfull day...";
             Events newEvent = new Events();
             newEvent.AddEvent(date, subject, description);
-
             newEvent.Calendar[0].Date.ShouldEqual(Convert.ToDateTime(date));
             newEvent.Calendar[0].Subject.ShouldEqual(subject);
             newEvent.Calendar[0].Description.ShouldEqual(description);

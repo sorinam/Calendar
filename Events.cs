@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
@@ -6,16 +7,15 @@ namespace Calendar
 {
     public class Events
     {
-        public List<Event> calendar = new List<Event>();
+        List<Event> calendar = new List<Event>();
         List<Event> pastEvents = new List<Event>();
         List<Event> futureEvents = new List<Event>();
 
-        public List<Event> Calendar
+        public List <Event> Calendar
         {
-            set { calendar = value; }
             get { return calendar; }
         }
-
+              
         public void AddEvent(string date, string subject, string description="")
         {
             Event newEvent = new Event(date, subject, description);
