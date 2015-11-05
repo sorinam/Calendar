@@ -48,8 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event.cs" />
+    <Compile Include="EventsOP.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="EventsEnum.cs" />
     <Compile Include="IOFiles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
