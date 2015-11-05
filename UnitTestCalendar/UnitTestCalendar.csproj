@@ -59,7 +59,6 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="UnitTestEventsOP.cs" />
     <Compile Include="UnitTestIOFiles.cs" />
-    <Compile Include="UnitTestEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

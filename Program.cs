@@ -6,20 +6,17 @@ namespace Calendar
     public class Program
     {
         public static void Main(string[] args)
-        {  if (args.Length == 0)
+        {
+            if (args.Length == 0)
             {
                 Console.WriteLine("\t\n Use calendar.exe /? for more details . ");
             }
             else
             {
+
                 if (args[0] == "/?")
                 {
-                    Console.WriteLine("\n\tPossible commands:\n");
-                    Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
-                    Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
-                    Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
-                    Console.WriteLine("       past \t list past events from calendar");
-                    Console.WriteLine("       future \t list future events from calendar");
+                    DisplayHelp();
                 }
                 else
                 {
@@ -28,104 +25,40 @@ namespace Calendar
             }
         }
 
+        private static void DisplayHelp()
+        {
+            Console.WriteLine("\n\tPossible commands:\n");
+            Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
+            Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
+            Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
+            Console.WriteLine("       past \t list past events from calendar");
+            Console.WriteLine("       future \t list future events from calendar");
+        }
+
         static void SwitchCommands(string[] args)
         {
-            Events newEvent = new Events();
-            switch (args[0])
+            UIClass uiObj = new UIClass(args);
+
+            switch (uiObj.FirstArg())
             {
                 case "/add":
                     {
-                        ProcessingAddArguments(args, newEvent);
+                        uiObj.ProcessingAddArguments();
                         break;
                     }
                 case "/list":
                     {
-                        ProcessingListArguments(args, newEvent);
+                        uiObj.ProcessingListArguments();
                         break;
                     }
                 default:
                     {
-                        InvalidCommand();
+                        uiObj.InvalidCommand();
                         break;
                     }
             }
-        }
 
-        static void ProcessingListArguments(string[] args, Events newEvent)
-        {
-            if ((args.Length == 1) || ((args.Length == 2) && (IsValidListParameter(args[1]))))
-            {                
-                DisplayEvents(Parameter(args));
-            }
-            else
-            {
-                InvalidCommand();
-            }
         }
-
-        private static string Parameter(string[] args)
-        {
-            return (args.Length == 1) ? "all" : args[1];
-        }
-
-        private static void DisplayEvents( string parameter)
-        {
-            IOFiles files = new IOFiles();
-            Events eventsListFromFile = files.LoadEventsFromFile();
-
-            if (parameter == "all")
-            {
-                files.DisplayEventsToConsole(eventsListFromFile);
-            }
-            else
-            {
-                EventsOp toDisplay = new EventsOp();
-                Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsListFromFile, parameter);
-                files.DisplayEventsToConsole(eventsToDisplay);
-            }
-        }
-
-        private static void ProcessingAddArguments(string[] args, Events newEvent)
-        {
-            IOFiles file = new IOFiles();
-            if ((args.Length == 3) || (args.Length == 4))
-            {
-                string date = args[1];
-                string subject = args[2].Replace('\n', '\a');
-                string description = "";
-                if (args.Length == 4) { description = args[3].Replace('\n', '\a'); }
-                DateTime dateTime;
-                if (DateTime.TryParse(date, out dateTime))
-                {
-                    Events eventsListFromFile = file.LoadEventsFromFile();
-                    eventsListFromFile.Add(date, subject, description);
-                    file.SaveEventsToFile(eventsListFromFile);
-                }
-                else
-                {
-                    Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
-                }
-            }
-            else
-            {
-                InvalidCommand();
-            }
-        }
-
-        static bool IsValidListParameter(string listOption)
-        {
-            string[] listParameters = { "all", "All", "ALL", "Past", "PAST", "past", "Future", "FUTURE", "future" };
-            for (int i = 0; i < listParameters.Length; i++)
-            {
-                if (listParameters[i] == listOption)
-                { return true; }
-            }
-            return false;
-        }
-
-        public static void InvalidCommand()
-        {
-            Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
-        }
-    }
+   
+}
 }
