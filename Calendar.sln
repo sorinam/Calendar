@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "Calendar.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestCalendar", "UnitTestCalendar\UnitTestCalendar.csproj", "{875633C0-0FE6-4FB1-9F2E-C162A69608A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{A2A459B4-9E32-40B3-9940-C62D166036B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3422714D-ABC5-4C97-91B2-0B65A9D04ECF} = {3422714D-ABC5-4C97-91B2-0B65A9D04ECF}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +26,10 @@ Global
 		{875633C0-0FE6-4FB1-9F2E-C162A69608A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{875633C0-0FE6-4FB1-9F2E-C162A69608A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{875633C0-0FE6-4FB1-9F2E-C162A69608A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A459B4-9E32-40B3-9940-C62D166036B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A459B4-9E32-40B3-9940-C62D166036B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A459B4-9E32-40B3-9940-C62D166036B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A459B4-9E32-40B3-9940-C62D166036B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

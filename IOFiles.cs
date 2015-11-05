@@ -9,7 +9,7 @@ namespace Calendar
 {
     class IOFiles
     {
-        static string calendarFile = @"Calendar.txt";
+        const string calendarFile = @"Calendar.txt";
      
         public EventsEnum LoadFile()
         {

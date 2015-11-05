@@ -257,6 +257,14 @@ namespace UnitTestCalendar
             consoleOut.ToString().ShouldContain(expectedConsole);
 
         }
+        [TestMethod]
+        public void UITEst()
+        {
+            Events newEvent = new Events();
+            newEvent.DisplayEvents("all");
+            
+
+        }
     }
 }
 
