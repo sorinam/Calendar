@@ -51,6 +51,11 @@ namespace Calendar
                         uiObj.ProcessingListArguments();
                         break;
                     }
+                case "/export":
+                    {
+                        uiObj.ProcessingExportArguments();
+                        break;
+                    }
                 default:
                     {
                         uiObj.InvalidCommand();

@@ -11,7 +11,7 @@ namespace Calendar
     {
         private List<Event> eventsList;
         
-        public List<Event> EventsList
+        public IEnumerable<Event> EventsList
         {
             get { return eventsList; }
         }
@@ -30,7 +30,16 @@ namespace Calendar
         {
             eventsList = list ;
         }
-        
+
+        public Events(string[] lines)
+        {
+            foreach (string line in lines)
+            {
+                Event ev = new Event(line);
+                eventsList.Add(ev);
+            };
+        }
+
         public void Add(Event newEvent)
         {
             eventsList.Add(newEvent);

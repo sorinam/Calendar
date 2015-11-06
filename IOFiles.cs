@@ -7,35 +7,59 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    class IOFiles
+   public class IOFiles
     {
-        const string calendarFile = @"Calendar.txt";
+        const string calendarPath = @"Calendar.txt";
 
-        public Events LoadEventsFromFile()
+        //public Events LoadEventsFromFile()
+        //{
+        //    Events listofEvents = new Events();
+
+        //    if (!File.Exists(calendarPath))
+        //    {
+        //        Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
+        //        return listofEvents;
+        //    }
+
+        //    StreamReader file = new StreamReader(calendarPath);
+        //    string[] lines = File.ReadAllLines(calendarPath);
+
+        //    foreach (string line in lines)
+        //    {
+        //        Event item = new Event(line);
+        //        listofEvents.Add(item);
+        //    }
+        //    file.Close();
+
+        //    return listofEvents;
+        //}
+
+        public  Events LoadEventsFromFile()
         {
-            Events listofEvents = new Events();
+            string[] fileContent=LoadEventsFromFileToArray();
+            Events list = new Events(fileContent);
+            return list;
+         }
 
-            if (!File.Exists(calendarFile))
+        string[] LoadEventsFromFileToArray()
+        {
+            string[] lines;
+
+            if (!File.Exists(calendarPath))
             {
                 Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
-                return listofEvents;
+                return null;
             }
 
-            StreamReader file = new StreamReader(calendarFile);
-            string[] lines = File.ReadAllLines(calendarFile);
-            foreach (string line in lines)
-            {
-                Event item = new Event(line);
-                listofEvents.Add(item);
-            }
+            StreamReader file = new StreamReader(calendarPath);
+            lines = File.ReadAllLines(calendarPath);
             file.Close();
-
-            return listofEvents;
+            return lines;
         }
-
+        
         public void SaveEventsToFile(Events eventsList)
         {
-            StreamWriter file = new StreamWriter(calendarFile);
+            StreamWriter file = new StreamWriter(calendarPath);
             foreach (Event eventL in eventsList)
             {
                 file.Write(eventL.Date + "\t" + eventL.Subject + "\t" + eventL.Description);

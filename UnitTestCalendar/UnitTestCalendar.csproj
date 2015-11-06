@@ -56,9 +56,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
-    <Compile Include="UnitTestEventsOP.cs" />
-    <Compile Include="UnitTestIOFiles.cs" />
+    <Compile Include="TestsEvents.cs" />
+    <Compile Include="TestsEventsOP.cs" />
+    <Compile Include="TestsIOFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

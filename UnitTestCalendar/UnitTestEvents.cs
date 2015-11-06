@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Calendar;
-using System.Collections.Generic;
 using Should;
+using System.IO;
+using System.Collections.Generic;
 
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class UnitTest1
+    public class EventsUnitTests
     {
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
@@ -86,8 +87,9 @@ namespace UnitTestCalendar
 
             List<Event> listofEvents = newEvent.EventsList;
             listofEvents.Sort();
-
+                     
             expectedList.ShouldEqual(listofEvents);
         }
-    }
+   }
 }
+
