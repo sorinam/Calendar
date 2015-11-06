@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event.cs" />
-    <Compile Include="EventsOP.cs" />
+    <Compile Include="EventsTools.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="IOFiles.cs" />
     <Compile Include="Program.cs" />

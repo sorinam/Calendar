@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Calendar
 {
-    class UIClass
+   public class UIClass
     {
         private string[] args;
         
@@ -62,55 +63,12 @@ namespace Calendar
         {
             if ((args.Length == 1) || ((args.Length == 2) ))
             {
-                ExportEvents(args[2]);
+               // ExportEvents(args[1],args[2]);
             }
             else
             {
                 InvalidCommand();
             }
-        }
-
-        private void ExportEvents(string path,Events eventsList)
-        {
-
-            path += ".html";
-            Console.WriteLine("\n\tExporting file...");
-            string html = CreateHtmlFile();
-            System.IO.File.WriteAllText(path, html);
-
-            System.Diagnostics.Process.Start(path);
-        }
-
-        public string CreateHtmlFile()
-        {
-            string html;
-            string htmlStart = @"<!DOCTYPE html>
-<html>
-<head>
-<title>Events List</title>
-</head>
- 
-<body>
- 
- <h1> Events list</h1>
-    
-";
-            string htmlEnd = @" 
- </body>
-</html> ";
-
-            html = htmlStart;
-            foreach (Events ev in eventsList)
-            {
-                html += "<p>Date: " + ev.Date + "</p>\n";
-                html += "<p>Subject: " + ev.Subject + "</p>\n";
-               
-                html += "<p>Description: " + Encoding(ev.Description) + "</p>\n";
-                html += "<br/>";
-            }
-            html += htmlEnd;
-
-            return html;
         }
 
         public void InvalidCommand()
@@ -156,7 +114,7 @@ namespace Calendar
             }
             else
             {
-                EventsOp toDisplay = new EventsOp();
+                EventsTools toDisplay = new EventsTools();
                 Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsListFromFile, parameter);
                 files.DisplayEventsToConsole(eventsToDisplay);
             }
@@ -178,7 +136,7 @@ namespace Calendar
             return(value.Replace('\n', '\a'));
         }
 
-        private string EncodingNewLineChar(string value)
+        private string DecodingNewLineChar(string value)
         {
             return (value.Replace('\a', '\n'));
         }
