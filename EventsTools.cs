@@ -81,6 +81,15 @@ namespace Calendar
                 }
             }
         }
+
+        public void AddDataFromConsole(string date, string subject, string description)
+        {
+            IOFiles file = new IOFiles();
+            eventsList = file.LoadEventsFromFile();
+            eventsList.Add(date, subject, description);
+            file.SaveEventsToFile(eventsList);
+        }
+
         private string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));

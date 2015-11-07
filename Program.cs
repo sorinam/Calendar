@@ -38,18 +38,29 @@ namespace Calendar
 
         static void SwitchCommands(string[] args)
         {
-            UIClass uiObj = new UIClass(args);
+            ArgsParser uiObj = new ArgsParser(args);
 
             switch (uiObj.FirstArg())
             {
                 case "/add":
                     {
-                        uiObj.ProcessingAddArguments();
+                        if (uiObj.ProcessingAddArguments())
+                        {   EventsTools evTools = new EventsTools();
+                            string date = args[1]; ;
+                            string subject = CodingNewLineChar(args[2]);
+                            string description = "";
+                            if (args.Length == 4)
+                            {
+                                description = CodingNewLineChar(args[3]);
+                            }
+                            evTools.AddDataFromConsole(date, subject, description);
+                        }
                         break;
                     }
                 case "/list":
                     {
                         uiObj.ProcessingListArguments();
+                       
                         break;
                     }
                 case "/export":
@@ -65,6 +76,18 @@ namespace Calendar
             }
 
         }
-   
-}
+        private void SetEventFields(out string date, out string subject, out string description,string[] args)
+        {
+            date = 
+            subject = 
+            description = "";
+            
+        }
+
+        private static string CodingNewLineChar(string value)
+        {
+            return (value.Replace('\n', '\a'));
+        }
+
+    }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-   public class UIClass
+   public class ArgsParser
     {
         private string[] args;
         
-        public  UIClass(string[] value)
+        public  ArgsParser(string[] value)
         {
             args = value;
         }
@@ -21,29 +21,26 @@ namespace Calendar
             return (IsValidFirstArgs(args[0])) ? args[0].ToLower() : "";
          }
 
-        public void ProcessingAddArguments()
+        public bool ProcessingAddArguments()
         {
-            IOFiles file = new IOFiles();
+            
             if ((args.Length == 3) || (args.Length == 4))
             {
-                string date, subject, description;
-                SetEventFields(out date, out subject, out description);
-
                 DateTime dateTime;
-                if (DateTime.TryParse(date, out dateTime))
+                if (DateTime.TryParse(args[1], out dateTime))
                 {
-                    Events eventsListFromFile = file.LoadEventsFromFile();
-                    eventsListFromFile.Add(date, subject, description);
-                    file.SaveEventsToFile(eventsListFromFile);
+                    return true;                   
                 }
                 else
                 {
                     Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
+                    return false;
                 }
             }
             else
             {
                 InvalidCommand();
+                return false;
             }
         }
 
@@ -120,21 +117,7 @@ namespace Calendar
             }
         }
         
-        private void SetEventFields(out string date, out string subject, out string description)
-        {
-            date = args[1];
-            subject = CodingNewLineChar(args[2]);
-            description = "";
-            if (args.Length == 4)
-            {
-                description = CodingNewLineChar(args[3]);
-            }
-        }
-
-        private string CodingNewLineChar(string value)
-        {
-            return(value.Replace('\n', '\a'));
-        }
+      
 
         private string DecodingNewLineChar(string value)
         {
