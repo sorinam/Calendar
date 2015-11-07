@@ -60,6 +60,12 @@ namespace Calendar
             }
         }
 
+        public string StringParser ()
+        {
+           String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + description;
+            return newString;
+        }
+
         public int CompareTo(Event other)
         {
             return this.Date.CompareTo(other.Date);

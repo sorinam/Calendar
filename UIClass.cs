@@ -63,7 +63,7 @@ namespace Calendar
         {
             if ((args.Length == 1) || ((args.Length == 2) ))
             {
-               // ExportEvents(args[1],args[2]);
+               //ExportEvents(args[1],args[2]);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace Calendar
 
         bool IsValidFirstArgs(string firstArg)
         {
-            string[] validValues = { "/add", "/list" };
+            string[] validValues = { "/add", "/list","/export" };
             return IsValid(firstArg.ToLower(), validValues);
         }
 

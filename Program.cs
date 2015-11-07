@@ -33,6 +33,7 @@ namespace Calendar
             Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
             Console.WriteLine("       past \t list past events from calendar");
             Console.WriteLine("       future \t list future events from calendar");
+            Console.WriteLine("\n\n /export \t export all events from calendar to HTML file; 'all' parameter is optional");
         }
 
         static void SwitchCommands(string[] args)

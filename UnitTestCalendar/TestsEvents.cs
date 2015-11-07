@@ -61,7 +61,6 @@ namespace UnitTestCalendar
             AssertAreEqual(listofEvents, expectedList);
         }
 
-      
         [TestMethod]
         public void ShouldAddEventWithoutDescription()
         {
@@ -95,6 +94,49 @@ namespace UnitTestCalendar
             AssertAreEqual(listofEvents, expectedList);
         }
 
+        [TestMethod]
+        public void ShouldParseEvents()
+        {   Events newEvent = new Events();
+
+            string date = "2015/11/20";
+            string subject = "My birthday";
+            string description = "It will be a nice day...";
+            newEvent.Add(date, subject, description);
+
+            string date1 = "2015/10/20";
+            string subject1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
+            newEvent.Add(date1, subject1, description1);
+
+            var listofEvents = newEvent.EventsList;
+            string[] expectedList = { date+"\t"+ subject +"\t"+ description ,  date1+"\t"+ subject1 +"\t"+ description1 };
+
+            string[] parseEvents = newEvent.ToStringList();
+
+            expectedList.ShouldEqual(parseEvents);
+        }
+
+        [TestMethod]
+        public void ShouldParseEventWithoutDescription()
+        {
+            Events newEvent = new Events();
+
+            string date = "2015/11/20";
+            string subject = "My birthday";
+            string description = "It will be a nice day...";
+            newEvent.Add(date, subject, description);
+
+            string date1 = "2015/10/20";
+            string subject1 = "Johana's Birtday!";
+            newEvent.Add(date1, subject1);
+
+            var listofEvents = newEvent.EventsList;
+            string[] expectedList = { date + "\t" + subject + "\t" + description, date1 + "\t" + subject1+"\t" };
+
+            string[] parseEvents = newEvent.ToStringList();
+
+            expectedList.ShouldEqual(parseEvents);
+        }
         private void AssertAreEqual(IEnumerable<Event> listofEvents, List<Event> expectedList)
         {
             int i = 0;

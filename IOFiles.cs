@@ -4,36 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Calendar
 {
    public class IOFiles
     {
-        const string calendarPath = @"Calendar.txt";
-
-        //public Events LoadEventsFromFile()
-        //{
-        //    Events listofEvents = new Events();
-
-        //    if (!File.Exists(calendarPath))
-        //    {
-        //        Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
-        //        return listofEvents;
-        //    }
-
-        //    StreamReader file = new StreamReader(calendarPath);
-        //    string[] lines = File.ReadAllLines(calendarPath);
-
-        //    foreach (string line in lines)
-        //    {
-        //        Event item = new Event(line);
-        //        listofEvents.Add(item);
-        //    }
-        //    file.Close();
-
-        //    return listofEvents;
-        //}
-
+        const string calendarPath = @"C:\Users\sori\Documents\Calendar\bin\Debug\Calendar.txt";
+         
         public  Events LoadEventsFromFile()
         {
             string[] fileContent=LoadEventsFromFileToArray();
@@ -41,7 +19,7 @@ namespace Calendar
             return list;
          }
 
-        string[] LoadEventsFromFileToArray()
+        public string[] LoadEventsFromFileToArray()
         {
             string[] lines;
 
@@ -50,13 +28,14 @@ namespace Calendar
                 Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
                 return null;
             }
-
-            StreamReader file = new StreamReader(calendarPath);
-            lines = File.ReadAllLines(calendarPath);
-            file.Close();
+            using (FileStream fs = new FileStream(calendarPath, FileMode.Open))
+            {
+                StreamO streamObj = new StreamO(fs);
+                lines = streamObj.GetLinesFromStream();
+            };
             return lines;
-        }
-        
+        }      
+               
         public void SaveEventsToFile(Events eventsList)
         {
             StreamWriter file = new StreamWriter(calendarPath);
@@ -95,4 +74,6 @@ namespace Calendar
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", listToDisplay.Length);
         }
     }
-}
+
+  
+    }

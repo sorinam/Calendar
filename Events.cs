@@ -33,6 +33,7 @@ namespace Calendar
 
         public Events(string[] lines)
         {
+            eventsList = new List<Event>();
             foreach (string line in lines)
             {
                 Event ev = new Event(line);
@@ -49,6 +50,29 @@ namespace Calendar
         {
             Event newEvent = new Event(date, subject, description);
             eventsList.Add(newEvent);
+        }
+
+        public string[] ToStringList()
+        {
+            string[] repo=new string[0];
+            int index = 0;
+            foreach (Event e in eventsList)
+            {
+                index++;
+                Array.Resize(ref repo, index);
+                repo[index - 1] =e. StringParser();
+            };
+            return repo;
+        }
+
+        public string ToOneString()
+        {
+            string stringContent = "";
+           foreach(Event ev in eventsList)
+            {
+                stringContent += ev.StringParser() + "\n";
+            }
+            return stringContent;
         }
 
         public void Sort()

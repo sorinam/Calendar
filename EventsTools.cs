@@ -10,6 +10,16 @@ namespace Calendar
     {
         Events eventsList;
 
+        public EventsTools(List <Event> list)
+        {
+         eventsList=new Events(list);
+        }
+
+        public EventsTools(Events list)
+        {
+            eventsList = list;
+        }
+
         public EventsTools()
         {
             eventsList = new Events();
@@ -41,18 +51,15 @@ namespace Calendar
             return false;
         }
 
-
         private void ExportEvents(string path, Events eventsList)
         {
-
-            path += ".html";
             Console.WriteLine("\n\tExporting file...");
-            CreateHtmlFile(path, eventsList);
-
+            ExportToHTMLFile(path);
         }
 
-        public void CreateHtmlFile(string path, Events eventsList)
+        public void ExportToHTMLFile(string path)
         {
+            if (File.Exists(path)) File.Delete(path);
 
             string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
             string endTags = "\n</body>\n</html> ";
