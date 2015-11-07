@@ -25,7 +25,7 @@ namespace Calendar
             }
         }
 
-        private static void DisplayHelp()
+        static void DisplayHelp()
         {
             Console.WriteLine("\n\tPossible commands:\n");
             Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
@@ -45,7 +45,8 @@ namespace Calendar
                 case "/add":
                     {
                         if (uiObj.ProcessingAddArguments())
-                        {   EventsTools evTools = new EventsTools();
+                        {
+                            EventsTools evTools = new EventsTools();
                             string date = args[1]; ;
                             string subject = CodingNewLineChar(args[2]);
                             string description = "";
@@ -59,8 +60,11 @@ namespace Calendar
                     }
                 case "/list":
                     {
-                        uiObj.ProcessingListArguments();
-                       
+                        if (uiObj.ProcessingListArguments())
+                        {
+                            DisplayEvents(DefaultParameter(args));
+                        }
+
                         break;
                     }
                 case "/export":
@@ -76,15 +80,30 @@ namespace Calendar
             }
 
         }
-        private void SetEventFields(out string date, out string subject, out string description,string[] args)
+
+        static void DisplayEvents(string parameter)
         {
-            date = 
-            subject = 
-            description = "";
-            
+            IOFiles files = new IOFiles();
+            Events eventsList = files.LoadEventsFromFile();
+
+            if (parameter == "all")
+            {
+                files.DisplayEventsToConsole(eventsList);
+            }
+            else
+            {
+                EventsTools toDisplay = new EventsTools();
+                Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsList, parameter);
+                files.DisplayEventsToConsole(eventsToDisplay);
+            }
         }
 
-        private static string CodingNewLineChar(string value)
+        static string DefaultParameter(string[] args)
+        {
+            return (args.Length == 1) ? "all" : args[1].ToLower();
+        }
+
+        static string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));
         }

@@ -44,15 +44,16 @@ namespace Calendar
             }
         }
 
-        public void ProcessingListArguments()
+        public bool ProcessingListArguments()
         {
             if ((args.Length == 1) || ((args.Length == 2) && (IsValidListParameter(args[1]))))
             {
-                DisplayEvents(DefaultParameter(args));
+                return true;
             }
             else
             {
                 InvalidCommand();
+                return false;
             }
         }
 
@@ -95,34 +96,13 @@ namespace Calendar
             return false;
         }
 
-        private string DefaultParameter(string[] args)
-        {
-            return (args.Length == 1) ? "all" : args[1].ToLower();
-        }
-
-        private void DisplayEvents(string parameter)
-        {
-            IOFiles files = new IOFiles();
-            Events eventsListFromFile = files.LoadEventsFromFile();
-
-            if (parameter == "all")
-            {
-                files.DisplayEventsToConsole(eventsListFromFile);
-            }
-            else
-            {
-                EventsTools toDisplay = new EventsTools();
-                Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsListFromFile, parameter);
-                files.DisplayEventsToConsole(eventsToDisplay);
-            }
-        }
-        
       
 
-        private string DecodingNewLineChar(string value)
-        {
-            return (value.Replace('\a', '\n'));
-        }
+     
+        //private string DecodingNewLineChar(string value)
+        //{
+        //    return (value.Replace('\a', '\n'));
+        //}
 
     }
 }
