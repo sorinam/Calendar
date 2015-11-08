@@ -64,12 +64,14 @@ namespace Calendar
                         {
                             DisplayEvents(DefaultParameter(args));
                         }
-
                         break;
                     }
                 case "/export":
-                    {
-                        uiObj.ProcessingExportArguments();
+                    {if( uiObj.ProcessingExportArguments())
+                        {
+                            ExportEvents(args);
+                            
+                         }
                         break;
                     }
                 default:
@@ -79,6 +81,30 @@ namespace Calendar
                     }
             }
 
+        }
+
+        private static void ExportEvents(string[] args)
+        {
+            IOFiles files = new IOFiles();
+            Events eventsList = files.LoadEventsFromFile();
+            eventsList.Sort();
+            if (args.Length==2)
+            {
+                ExportToHTMLFile(@args[1], eventsList);
+            }
+            else
+            {
+                EventsTools evTools = new EventsTools();
+                Events eventsToExport = evTools.ExtractEventsFromCalendar(eventsList, args[1].ToLower());
+                ExportToHTMLFile(@args[2], eventsToExport);
+            }
+           
+        }
+
+        private static void ExportToHTMLFile(string path, Events eventsList)
+        {
+            EventsTools evTools = new EventsTools(eventsList);
+            evTools.ExportToHTMLFile(path);
         }
 
         static void DisplayEvents(string parameter)
@@ -107,6 +133,5 @@ namespace Calendar
         {
             return (value.Replace('\n', '\a'));
         }
-
-    }
+      }
 }

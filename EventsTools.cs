@@ -72,7 +72,7 @@ namespace Calendar
                     {
                         string htmlData = "";
                         htmlData += "<p>Date: " + ev.Date+"</p>\n"  ;
-                        htmlData += "<p>Subject: " + ev.Subject + "</p>\n";
+                        htmlData += "<p>Subject: " + DecodingNewLineChar(ev.Subject) + "</p>\n";
                         htmlData += "<p>Description: " + DecodingNewLineChar(ev.Description) + "</p>\n";
                         htmlData += "<br>" + "</br>";
                         w.Write(htmlData);
@@ -80,6 +80,7 @@ namespace Calendar
                     w.Write(endTags);
                 }
             }
+            Console.WriteLine("\n{0} events were exported in '{1}' file .\n",eventsList.Length, path);
         }
 
         public void AddDataFromConsole(string date, string subject, string description)

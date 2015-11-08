@@ -8,16 +8,16 @@ using System.Xml.Linq;
 
 namespace Calendar
 {
-   public class IOFiles
+    public class IOFiles
     {
         const string calendarPath = @"C:\Users\sori\Documents\Calendar\bin\Debug\Calendar.txt";
-         
-        public  Events LoadEventsFromFile()
+
+        public Events LoadEventsFromFile()
         {
-            string[] fileContent=LoadEventsFromFileToArray();
+            string[] fileContent = LoadEventsFromFileToArray();
             Events list = new Events(fileContent);
             return list;
-         }
+        }
 
         public string[] LoadEventsFromFileToArray()
         {
@@ -34,8 +34,8 @@ namespace Calendar
                 lines = streamObj.GetLinesFromStream();
             };
             return lines;
-        }      
-               
+        }
+
         public void SaveEventsToFile(Events eventsList)
         {
             StreamWriter file = new StreamWriter(calendarPath);
@@ -74,6 +74,4 @@ namespace Calendar
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", listToDisplay.Length);
         }
     }
-
-  
-    }
+}

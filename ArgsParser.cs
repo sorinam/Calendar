@@ -10,12 +10,17 @@ namespace Calendar
    public class ArgsParser
     {
         private string[] args;
-        
+        string[] parameters = { "/add", "/list", "/export" };
+        string[] listParameters = { "all", "past", "future" };
+
         public  ArgsParser(string[] value)
         {
             args = value;
         }
-
+        public ArgsParser()
+        {
+            args = new string[0];
+        }
         public string FirstArg()
         {
             return (IsValidFirstArgs(args[0])) ? args[0].ToLower() : "";
@@ -57,16 +62,51 @@ namespace Calendar
             }
         }
 
-        public void ProcessingExportArguments()
+        public bool ProcessingExportArguments()
         {
-            if ((args.Length == 1) || ((args.Length == 2) ))
+           if ((args.Length == 2)&&IsValidFilenameAndPath(args[1]))
             {
-               //ExportEvents(args[1],args[2]);
+                return true;
+            }
+
+            if ((args.Length == 3) && IsValidFilenameAndPath(args[2]) && IsValidListParameter(args[1]))
+            {
+                return true;
             }
             else
             {
                 InvalidCommand();
+                return false; }
+        }
+
+        public bool IsValidFilenameAndPath(string fileName)
+        {
+            StreamWriter MyStream = null;
+            string MyString = "A";
+
+            try
+            {
+                MyStream = File.CreateText(fileName);
+                MyStream.Write(MyString);
             }
+            catch (IOException e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally
+            {
+                if (MyStream != null)
+                {
+                    MyStream.Close();
+                    File.Delete(fileName);
+                }
+            }
+            return true;
         }
 
         public void InvalidCommand()
@@ -76,13 +116,11 @@ namespace Calendar
 
         bool IsValidFirstArgs(string firstArg)
         {
-            string[] validValues = { "/add", "/list","/export" };
-            return IsValid(firstArg.ToLower(), validValues);
+            return IsValid(firstArg.ToLower(),parameters);
         }
 
         bool IsValidListParameter(string listOption)
         {
-            string[] listParameters = { "all","past", "future" };
             return IsValid(listOption.ToLower(), listParameters);
         }
 
@@ -95,14 +133,6 @@ namespace Calendar
             }
             return false;
         }
-
-      
-
-     
-        //private string DecodingNewLineChar(string value)
-        //{
-        //    return (value.Replace('\a', '\n'));
-        //}
-
+        
     }
 }

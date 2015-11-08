@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Calendar;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +20,8 @@ namespace UnitTestCalendar
             Assert.IsTrue(File.Exists(@"HTMLFile.html"));
               
         }
-      
+       
+        }
     }
-}
+    
+
