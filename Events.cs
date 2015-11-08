@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
@@ -34,10 +32,13 @@ namespace Calendar
         public Events(string[] lines)
         {
             eventsList = new List<Event>();
-            foreach (string line in lines)
             {
-                Event ev = new Event(line);
-                eventsList.Add(ev);
+                if (lines!=null)
+                    foreach (string line in lines)
+                    {
+                        Event ev = new Event(line);
+                        eventsList.Add(ev);
+                    }
             };
         }
 

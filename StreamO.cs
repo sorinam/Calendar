@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
@@ -32,14 +29,34 @@ namespace Calendar
         public StreamO(Events list)
         {
             string stringContent = list.ToOneString();
-            streamObj= StringToStream(stringContent);
+            streamObj = StringToStream(stringContent);
         }
 
-         static Stream StringToStream(string src)
+        public void ExportEventsInHTMLStream(Events eventsList)
+        {
+            EventsTools tools = new EventsTools();
+            string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
+            string endTags = "\n</body>\n</html> ";
+            using (StreamWriter w = new StreamWriter(streamObj, Encoding.UTF8))
+            {
+                w.Write(beginTags);
+                foreach (Event ev in eventsList)
+                {
+                    string htmlData = "";
+                    htmlData += "<p><b>Date:</b> " + ev.Date + "</p>\n";
+                    htmlData += "<p><b>Subject:</b> " + tools.DecodingNewLineCharForHTML(tools.DecodingNewLineChar(ev.Subject)) + "</p>";
+                    htmlData += "<p><b>Description:</b> " + tools.DecodingNewLineCharForHTML(tools.DecodingNewLineChar(ev.Description)) + "</p>";
+                    htmlData += "<hr>";
+                    w.Write(htmlData);
+                }
+                w.Write(endTags);
+            }
+        }
+
+        static Stream StringToStream(string src)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(src);
             return new MemoryStream(byteArray);
         }
     }
-
-}
+    }

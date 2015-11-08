@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Calendar
 {
@@ -33,15 +32,15 @@ namespace Calendar
             Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
             Console.WriteLine("       past \t list past events from calendar");
             Console.WriteLine("       future \t list future events from calendar");
-            Console.WriteLine("\n\n /export \t export all events from calendar to HTML file ");
-            Console.WriteLine("       past \t  export past events from calendar to HTML file ");
-            Console.WriteLine("       future \t  export future events from calendar to HTML file ");
+            Console.WriteLine("\n\n /export filename.html\t\t export all events from calendar to HTML file ");
+            Console.WriteLine("         past filename.html\t export past events from calendar to HTML file ");
+            Console.WriteLine("         future filename.html\t export future events from calendar to HTML file ");
         }
 
         static void SwitchCommands(string[] args)
         {
             ArgsParser uiObj = new ArgsParser(args);
-
+            EventsTools tools = new EventsTools();
             switch (uiObj.FirstArg())
             {
                 case "/add":
@@ -50,11 +49,11 @@ namespace Calendar
                         {
                             EventsTools evTools = new EventsTools();
                             string date = args[1]; ;
-                            string subject = CodingNewLineChar(args[2]);
+                            string subject = tools.CodingNewLineChar(args[2]);
                             string description = "";
                             if (args.Length == 4)
                             {
-                                description = CodingNewLineChar(args[3]);
+                                description = tools.CodingNewLineChar(args[3]);
                             }
                             evTools.AddDataFromConsole(date, subject, description);
                         }
@@ -69,11 +68,11 @@ namespace Calendar
                         break;
                     }
                 case "/export":
-                    {if( uiObj.ProcessingExportArguments())
+                    {
+                        if (uiObj.ProcessingExportArguments())
                         {
                             ExportEvents(args);
-                            
-                         }
+                        }
                         break;
                     }
                 default:
@@ -82,7 +81,6 @@ namespace Calendar
                         break;
                     }
             }
-
         }
 
         private static void ExportEvents(string[] args)
@@ -90,7 +88,7 @@ namespace Calendar
             WorkingFiles files = new WorkingFiles();
             Events eventsList = files.LoadEventsFromFile();
             eventsList.Sort();
-            if (args.Length==2)
+            if (args.Length == 2)
             {
                 ExportToHTMLFile(@args[1], eventsList);
             }
@@ -100,7 +98,7 @@ namespace Calendar
                 Events eventsToExport = evTools.ExtractEventsFromCalendar(eventsList, args[1].ToLower());
                 ExportToHTMLFile(@args[2], eventsToExport);
             }
-           
+
         }
 
         private static void ExportToHTMLFile(string path, Events eventsList)
@@ -133,9 +131,5 @@ namespace Calendar
             return (args.Length == 1) ? "all" : args[1].ToLower();
         }
 
-        static string CodingNewLineChar(string value)
-        {
-            return (value.Replace('\n', '\a'));
-        }
-      }
+    }
 }

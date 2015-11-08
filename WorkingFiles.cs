@@ -25,7 +25,7 @@ namespace Calendar
 
             if (!File.Exists(calendarPath))
             {
-                Console.WriteLine("\n\tThe file does not exist! There are no events added to calendar!");
+                Console.WriteLine("\n\tThe source file does not exist! There are no events added to calendar!");
                 return null;
             }
             using (FileStream fs = new FileStream(calendarPath, FileMode.Open))
