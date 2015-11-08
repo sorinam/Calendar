@@ -10,7 +10,7 @@ namespace Calendar
 {
     public class WorkingFiles
     {
-        const string calendarPath = @"C:\Users\sori\Documents\Calendar\bin\Debug\Calendar.txt";
+        const string calendarPath = @"Calendar.txt";
 
         public Events LoadEventsFromFile()
         {

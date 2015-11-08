@@ -92,8 +92,8 @@ namespace UnitTestCalendar
             string description1 = "Don't forget to call her...";
             newEvent.Add(date1, subject1, description1);
 
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToShortDateString() + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date).ToShortDateString() + " \nEvent:" + subject + " \nDescription:" + description;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -223,10 +223,10 @@ namespace UnitTestCalendar
             string description3 = "Don't forget to call him...";
             newEvent.Add(date3, subject3, description3);
 
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToShortDateString() + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date3).ToShortDateString() + " \nEvent:" + subject3 + " \nDescription:" + description3 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date2).ToShortDateString() + " \nEvent:" + subject2 + " \nDescription:" + description2 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date).ToShortDateString() + " \nEvent:" + subject + " \nDescription:" + description;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date3).ToString("yyyy/MM/dd") + " \nEvent:" + subject3 + " \nDescription:" + description3 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date2).ToString("yyyy/MM/dd") + " \nEvent:" + subject2 + " \nDescription:" + description2 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -256,7 +256,7 @@ namespace UnitTestCalendar
 
         private static void SetExpectedResultToConsole(string date, string subject, string description, out string expectedConsole, out StringWriter consoleOut)
         {
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date).ToShortDateString() + " \nEvent:" + subject;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject;
             if (description != "")
             {
                 expectedConsole += " \nDescription:" + description;

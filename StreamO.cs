@@ -43,7 +43,7 @@ namespace Calendar
                 foreach (Event ev in eventsList)
                 {
                     string htmlData = "";
-                    htmlData += "<p><b>Date:</b> " + ev.Date + "</p>\n";
+                    htmlData += "<p><b>Date:</b> " + ev.Date.ToString("yyyy/MM/dd") + "</p>\n";
                     htmlData += "<p><b>Subject:</b> " + tools.DecodingNewLineCharForHTML(tools.DecodingNewLineChar(ev.Subject)) + "</p>";
                     htmlData += "<p><b>Description:</b> " + tools.DecodingNewLineCharForHTML(tools.DecodingNewLineChar(ev.Description)) + "</p>";
                     htmlData += "<hr>";
