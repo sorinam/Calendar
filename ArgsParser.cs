@@ -75,7 +75,7 @@ namespace Calendar
             }
             else
             {
-                InvalidCommand();
+                //InvalidCommand();
                 return false; }
         }
 
@@ -91,7 +91,7 @@ namespace Calendar
             }
             catch (IOException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine();
                 return false;
             }
             catch (Exception e)

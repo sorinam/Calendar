@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Calendar
 {
-    public class IOFiles
+    public class WorkingFiles
     {
         const string calendarPath = @"C:\Users\sori\Documents\Calendar\bin\Debug\Calendar.txt";
 
@@ -49,29 +49,6 @@ namespace Calendar
             Console.WriteLine("\tFile saved. Calendar contains {0} events. ", eventsList.Length);
         }
 
-        public void DisplayEventsToConsole(Events listToDisplay)
-        {
-            if (listToDisplay.Length > 0)
-            {
-                DisplayToConsole(listToDisplay);
-            }
-            else
-            {
-                Console.WriteLine("\n There are no events!");
-            }
-
-        }
-
-        private static void DisplayToConsole(Events listToDisplay)
-        {
-            listToDisplay.Sort();
-            foreach (Event line in listToDisplay)
-            {
-                Console.Write("Date:{0} \tEvent:{1} ", line.Date.ToShortDateString(), line.Subject.Replace('\a', '\n'));
-                if (line.Description != "") Console.Write("\tDescription:{0}", line.Description.Replace('\a', '\n'));
-                Console.Write("\n");
-            }
-            Console.WriteLine("\n\tThe events were listed. There are {0} events. ", listToDisplay.Length);
-        }
+       
     }
 }

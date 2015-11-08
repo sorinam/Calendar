@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Calendar
 {
@@ -58,34 +59,38 @@ namespace Calendar
         }
 
         public void ExportToHTMLFile(string path)
-        {
-            if (File.Exists(path)) File.Delete(path);
-
-            string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
+        {   string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
             string endTags = "\n</body>\n</html> ";
-            using (FileStream fs = new FileStream(path, FileMode.Create))
+            try
             {
-                using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
+                using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
-                    w.Write(beginTags);
-                    foreach (Event ev in eventsList)
+                    using (StreamWriter w = new StreamWriter(fs, Encoding.UTF8))
                     {
-                        string htmlData = "";
-                        htmlData += "<p>Date: " + ev.Date+"</p>\n"  ;
-                        htmlData += "<p>Subject: " + DecodingNewLineChar(ev.Subject) + "</p>\n";
-                        htmlData += "<p>Description: " + DecodingNewLineChar(ev.Description) + "</p>\n";
-                        htmlData += "<br>" + "</br>";
-                        w.Write(htmlData);
+                        w.Write(beginTags);
+                        foreach (Event ev in eventsList)
+                        {
+                            string htmlData = "";
+                            htmlData += "<p><b>Date:</b> " + ev.Date + "</p>\n";
+                            htmlData += "<p><b>Subject:</b> " + DecodingNewLineCharForHTML(DecodingNewLineChar(ev.Subject)) + "</p>";
+                            htmlData += "<p><b>Description:</b> " + DecodingNewLineCharForHTML(DecodingNewLineChar(ev.Description)) + "</p>";
+                            htmlData += "<hr>";
+                            w.Write(htmlData);
+                        }
+                        w.Write(endTags);
                     }
-                    w.Write(endTags);
                 }
+                Console.WriteLine("\n{0} events were exported in '{1}' file .\n", eventsList.Length, path);
             }
-            Console.WriteLine("\n{0} events were exported in '{1}' file .\n",eventsList.Length, path);
-        }
+            catch (IOException e)
+            {
+                Console.WriteLine("The file path didn't find!");
+            }
+            }
 
         public void AddDataFromConsole(string date, string subject, string description)
         {
-            IOFiles file = new IOFiles();
+            WorkingFiles file = new WorkingFiles();
             eventsList = file.LoadEventsFromFile();
             eventsList.Add(date, subject, description);
             file.SaveEventsToFile(eventsList);
@@ -99,6 +104,37 @@ namespace Calendar
         private string DecodingNewLineChar(string value)
         {
             return (value.Replace('\a', '\n'));
+        }
+
+        private string DecodingNewLineCharForHTML(string value)
+        {
+            Regex regex = new Regex(@"(\r\n|\r|\n)+");
+            return regex.Replace(value, "<br />");
+        }
+
+        public void DisplayEventsToConsole()
+        {
+            if (eventsList.Length > 0)
+            {
+                DisplayToConsole();
+            }
+            else
+            {
+                Console.WriteLine("\n There are no events!");
+            }
+
+        }
+
+        private void DisplayToConsole()
+        {
+            eventsList.Sort();
+            foreach (Event line in eventsList)
+            {
+                Console.Write("\nDate:{0} \nEvent:{1} ", line.Date.ToShortDateString(), line.Subject.Replace('\a', '\n'));
+                if (line.Description != "") Console.Write("\nDescription:{0}", line.Description.Replace('\a', '\n'));
+                Console.Write("\n");
+            }
+            Console.WriteLine("\n\tThe events were listed. There are {0} events. ", eventsList.Length);
         }
 
     }

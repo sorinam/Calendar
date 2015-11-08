@@ -33,7 +33,9 @@ namespace Calendar
             Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
             Console.WriteLine("       past \t list past events from calendar");
             Console.WriteLine("       future \t list future events from calendar");
-            Console.WriteLine("\n\n /export \t export all events from calendar to HTML file; 'all' parameter is optional");
+            Console.WriteLine("\n\n /export \t export all events from calendar to HTML file ");
+            Console.WriteLine("       past \t  export past events from calendar to HTML file ");
+            Console.WriteLine("       future \t  export future events from calendar to HTML file ");
         }
 
         static void SwitchCommands(string[] args)
@@ -85,7 +87,7 @@ namespace Calendar
 
         private static void ExportEvents(string[] args)
         {
-            IOFiles files = new IOFiles();
+            WorkingFiles files = new WorkingFiles();
             Events eventsList = files.LoadEventsFromFile();
             eventsList.Sort();
             if (args.Length==2)
@@ -109,18 +111,20 @@ namespace Calendar
 
         static void DisplayEvents(string parameter)
         {
-            IOFiles files = new IOFiles();
+            WorkingFiles files = new WorkingFiles();
             Events eventsList = files.LoadEventsFromFile();
+            EventsTools tool = new EventsTools(eventsList);
 
             if (parameter == "all")
             {
-                files.DisplayEventsToConsole(eventsList);
+                tool.DisplayEventsToConsole();
             }
             else
             {
                 EventsTools toDisplay = new EventsTools();
                 Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsList, parameter);
-                files.DisplayEventsToConsole(eventsToDisplay);
+                EventsTools toolD = new EventsTools(eventsToDisplay);
+                toolD.DisplayEventsToConsole();
             }
         }
 
