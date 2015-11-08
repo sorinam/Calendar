@@ -12,14 +12,10 @@ namespace Calendar
             }
             else
             {
+
                 if (args[0] == "/?")
                 {
-                    Console.WriteLine("\n\tPossible commands:\n");
-                    Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
-                    Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
-                    Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
-                    Console.WriteLine("       past \t list past events from calendar");
-                    Console.WriteLine("       future \t list future events from calendar");
+                    DisplayHelp();
                 }
                 else
                 {
@@ -28,85 +24,112 @@ namespace Calendar
             }
         }
 
+        static void DisplayHelp()
+        {
+            Console.WriteLine("\n\tPossible commands:\n");
+            Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
+            Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
+            Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
+            Console.WriteLine("       past \t list past events from calendar");
+            Console.WriteLine("       future \t list future events from calendar");
+            Console.WriteLine("\n\n /export filename.html\t\t export all events from calendar to HTML file ");
+            Console.WriteLine("         past filename.html\t export past events from calendar to HTML file ");
+            Console.WriteLine("         future filename.html\t export future events from calendar to HTML file ");
+        }
+
         static void SwitchCommands(string[] args)
         {
-            Events newEvent = new Events();
-            switch (args[0])
+            ArgsParser uiObj = new ArgsParser(args);
+            EventsTools tools = new EventsTools();
+            switch (uiObj.FirstArg())
             {
                 case "/add":
                     {
-                        ProcessingAddArguments(args, newEvent);
+                        if (uiObj.ProcessingAddArguments())
+                        {
+                            EventsTools evTools = new EventsTools();
+                            string date = args[1]; ;
+                            string subject = tools.CodingNewLineChar(args[2]);
+                            string description = "";
+                            if (args.Length == 4)
+                            {
+                                description = tools.CodingNewLineChar(args[3]);
+                            }
+                            evTools.AddDataFromConsole(date, subject, description);
+                        }
                         break;
                     }
                 case "/list":
                     {
-                        ProcessingListArguments(args, newEvent);
+                        if (uiObj.ProcessingListArguments())
+                        {
+                            DisplayEvents(DefaultParameter(args));
+                        }
+                        break;
+                    }
+                case "/export":
+                    {
+                        if (uiObj.ProcessingExportArguments())
+                        {
+                            ExportEvents(args);
+                        }
                         break;
                     }
                 default:
-                    {   InvalidCommand();
+                    {
+                        uiObj.InvalidCommand();
                         break;
                     }
             }
         }
 
-       static void ProcessingListArguments(string[] args, Events newEvent)
+        private static void ExportEvents(string[] args)
         {
-            if ((args.Length == 1)||((args.Length == 2) && (IsValidListParameter(args[1]))))
+            WorkingFiles files = new WorkingFiles();
+            Events eventsList = files.LoadEventsFromFile();
+            eventsList.Sort();
+            if (args.Length == 2)
             {
-                string parameter;
-                if (args.Length == 1) { parameter = "all"; }
-                else
-                { parameter = args[1]; }
-                newEvent.LoadCalendar();
-                newEvent.DisplayEvents(parameter);
+                ExportToHTMLFile(@args[1], eventsList);
             }
             else
             {
-                InvalidCommand();
+                EventsTools evTools = new EventsTools();
+                Events eventsToExport = evTools.ExtractEventsFromCalendar(eventsList, args[1].ToLower());
+                ExportToHTMLFile(@args[2], eventsToExport);
             }
+
         }
 
-        private static void ProcessingAddArguments(string[] args, Events newEvent)
+        private static void ExportToHTMLFile(string path, Events eventsList)
         {
-            if ((args.Length ==3)|| (args.Length ==4))
+            EventsTools evTools = new EventsTools(eventsList);
+            evTools.ExportToHTMLFile(path);
+        }
+
+        static void DisplayEvents(string parameter)
+        {
+            WorkingFiles files = new WorkingFiles();
+            Events eventsList = files.LoadEventsFromFile();
+            EventsTools tool = new EventsTools(eventsList);
+
+            if (parameter == "all")
             {
-                string date = args[1];
-                string subject = args[2].Replace('\n','\a');
-                string description="";
-                if (args.Length == 4) { description = args[3].Replace('\n', '\a'); }
-                DateTime dateTime;
-                if (DateTime.TryParse(date, out dateTime))
-                {
-                    newEvent.LoadCalendar();
-                    newEvent.AddEvent(date, subject, description);
-                    newEvent.SaveEvents();
-                }
-                else
-                {
-                    Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
-                }
+                tool.DisplayEventsToConsole();
             }
             else
             {
-                InvalidCommand();
+                EventsTools toDisplay = new EventsTools();
+                Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsList, parameter);
+                EventsTools toolD = new EventsTools(eventsToDisplay);
+                toolD.DisplayEventsToConsole();
             }
         }
 
-        static bool IsValidListParameter(string listOption)
+        static string DefaultParameter(string[] args)
         {
-            string[] listParameters = { "all","All","ALL","Past","PAST", "past", "Future","FUTURE","future" };
-            for (int i = 0; i < listParameters.Length; i++)
-            {
-                if (listParameters[i] == listOption)
-                { return true; }
-            }
-            return false;
+            return (args.Length == 1) ? "all" : args[1].ToLower();
         }
 
-        public static void InvalidCommand()
-        {
-            Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
-        }
     }
 }
