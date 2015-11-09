@@ -103,8 +103,8 @@ namespace Calendar
 
         private static void ExportToHTMLFile(string path, Events eventsList)
         {
-            EventsTools evTools = new EventsTools(eventsList);
-            evTools.ExportToHTMLFile(path);
+            HTMLWorker exportHtml = new HTMLWorker(eventsList);
+            exportHtml.ExportToHTMLFile(path);
         }
 
         static void DisplayEvents(string parameter)

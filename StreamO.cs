@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Calendar
 {
-    public class StreamO
+    public class StreamO:IDisposable
     {
         private Stream streamObj;
-
+   
         public StreamO(Stream stream)
         {
             streamObj = stream;
@@ -18,6 +18,11 @@ namespace Calendar
             streamObj = new MemoryStream();
         }
 
+        public Stream StreamObj
+        {
+            get { return streamObj; }
+        }
+       
         public string[] GetLinesFromStream()
         {
             streamObj.Position = 0;
@@ -50,13 +55,26 @@ namespace Calendar
                     w.Write(htmlData);
                 }
                 w.Write(endTags);
-            }
+           }
         }
 
         static Stream StringToStream(string src)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(src);
             return new MemoryStream(byteArray);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (streamObj != null) streamObj.Dispose();
+            }
         }
     }
     }

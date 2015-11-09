@@ -50,6 +50,7 @@
     <Compile Include="Event.cs" />
     <Compile Include="EventsTools.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="HTMLWorker.cs" />
     <Compile Include="WorkingFiles.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
