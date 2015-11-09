@@ -39,7 +39,7 @@ namespace Calendar
 
         public void ExportEventsInHTMLStream(Events eventsList)
         {
-            EventsTools tools = new EventsTools();
+            Utils tools = new Utils();
             string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
             string endTags = "\n</body>\n</html> ";
             using (StreamWriter w = new StreamWriter(streamObj, Encoding.UTF8))

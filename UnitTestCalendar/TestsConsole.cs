@@ -8,7 +8,7 @@ using System;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TestsEventsTools
+    public class TestsConsole
     {
         [TestMethod]
         public void ShouldDisplayOneEvent()
@@ -25,7 +25,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject, description);
 
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -46,7 +46,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject, description);
 
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -66,7 +66,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject);
 
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -97,7 +97,7 @@ namespace UnitTestCalendar
 
 
             Console.SetOut(consoleOut);
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -107,7 +107,7 @@ namespace UnitTestCalendar
         public void ShouldDisplayPastEvents()
         {
             Events newEvents = new Events();
-            EventsTools toDisplay = new EventsTools();
+            ConsoleWorker toDisplay = new ConsoleWorker();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -126,9 +126,9 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(newEvents, "past");
+            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("past");
 
-            EventsTools newObj = new EventsTools(eventsToDisplay);
+            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -139,7 +139,7 @@ namespace UnitTestCalendar
         public void ShouldDisplayFutureEvents()
         {
             Events newEvents = new Events();
-            EventsTools toDisplay = new EventsTools();
+            ConsoleWorker toDisplay = new ConsoleWorker();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -158,8 +158,8 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(newEvents, "future");
-            EventsTools newObj = new EventsTools(eventsToDisplay);
+            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("future");
+            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
@@ -168,7 +168,7 @@ namespace UnitTestCalendar
         public void ShouldNotDisplayEventsForInvalidListParameter()
         {
             Events newEvents = new Events();
-            EventsTools toDisplay = new EventsTools();
+            ConsoleWorker toDisplay = new ConsoleWorker();
 
             string expectedConsole = "";
             var consoleOut = new StringWriter();
@@ -185,9 +185,9 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(newEvents, "fture");
+            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("fture");
 
-            EventsTools newObj = new EventsTools(eventsToDisplay);
+            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -230,7 +230,7 @@ namespace UnitTestCalendar
 
 
             Console.SetOut(consoleOut);
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
 
@@ -248,7 +248,7 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
 
-            EventsTools newObj = new EventsTools(newEvent);
+            ConsoleWorker newObj = new ConsoleWorker(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);

@@ -40,14 +40,14 @@ namespace Calendar
         static void SwitchCommands(string[] args)
         {
             ArgsParser uiObj = new ArgsParser(args);
-            EventsTools tools = new EventsTools();
+            Utils tools = new Utils();
             switch (uiObj.FirstArg())
             {
                 case "/add":
                     {
                         if (uiObj.ProcessingAddArguments())
                         {
-                            EventsTools evTools = new EventsTools();
+                            ConsoleWorker evTools = new ConsoleWorker();
                             string date = args[1]; ;
                             string subject = tools.CodingNewLineChar(args[2]);
                             string description = "";
@@ -94,8 +94,8 @@ namespace Calendar
             }
             else
             {
-                EventsTools evTools = new EventsTools();
-                Events eventsToExport = evTools.ExtractEventsFromCalendar(eventsList, args[1].ToLower());
+                ConsoleWorker evTools = new ConsoleWorker();
+                Events eventsToExport = eventsList.ExtractEventsFromCalendar(args[1].ToLower());
                 ExportToHTMLFile(@args[2], eventsToExport);
             }
 
@@ -111,18 +111,16 @@ namespace Calendar
         {
             WorkingFiles files = new WorkingFiles();
             Events eventsList = files.LoadEventsFromFile();
-            EventsTools tool = new EventsTools(eventsList);
+            ConsoleWorker tool = new ConsoleWorker(eventsList);
 
             if (parameter == "all")
             {
                 tool.DisplayEventsToConsole();
             }
             else
-            {
-                EventsTools toDisplay = new EventsTools();
-                Events eventsToDisplay = toDisplay.ExtractEventsFromCalendar(eventsList, parameter);
-                EventsTools toolD = new EventsTools(eventsToDisplay);
-                toolD.DisplayEventsToConsole();
+            {   Events eventsToDisplay = eventsList.ExtractEventsFromCalendar(parameter);
+                ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
+                toDisplay.DisplayEventsToConsole();
             }
         }
 

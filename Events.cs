@@ -81,6 +81,31 @@ namespace Calendar
             eventsList.Sort();
         }
 
+        public Events ExtractEventsFromCalendar(string parameter)
+        {
+            Events resultList = new Events();
+            SubList(resultList, parameter);
+            return resultList;
+        }
+
+        private void SubList(Events resultList, string parameter)
+        {
+            foreach (Event eventL in eventsList)
+            {
+                if (ShouldBeListed(eventL, parameter))
+                {
+                    resultList.Add(eventL);
+                }
+            }
+        }
+
+        private static bool ShouldBeListed(Event eventL, string parameter)
+        {
+            if ((parameter == "past") && (eventL.Older() < 0)) return true;
+            if ((parameter == "future") && (eventL.Older() >= 0)) return true;
+            return false;
+        }
+
         public IEnumerator<Event> GetEnumerator()
         {
             return eventsList.GetEnumerator();
