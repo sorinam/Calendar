@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
     public class DateFilter : Filter
     {
-        string[] criteria = { "=", "<", ">", "<=", ">=", "<>" };
+        string[] criteria = { "=","!=", "<", ">", "<=", ">=", "<>" };
         Events repo=new Events();
 
         public Events FilteredList
@@ -17,77 +13,48 @@ namespace Calendar
             set { this.repo = value; }
         }
 
-        public void ApplyFilter(Events eventsList, string criteria, string value)
-        {
-            switch (criteria)
-            {
-                case "=":
-                    {
-                        Equal(eventsList, value);
-                        break;
-                    }
-                case "<=":
-                    {
-                        EqualOrLessThan(eventsList, value);
-                        break;
-                    }
-                case "<":
-                    {
-                        LessThan(eventsList, value);
-                        break;
-                    }
-                case ">=":
-                    {
-                        EqualOrGreaterThan(eventsList, value);
-                        break;
-                    }
-            }
-           
-                    }
-
-        private void  Equal(Events sourceList, string dateValue)
+        public void ApplyFilter(Events eventsList, string criteria, string dateValue)
         {
             Event compare = new Event(dateValue, "", "");
-            foreach (Event ev in sourceList)
+            foreach (Event ev in eventsList)
             {
-                if (ev.CompareTo(compare) == 0)
+                if (IsTrueCriteria(ev,compare,criteria))
                 {
                     repo.Add(ev);
                 }
             }
          }
-        private void LessThan(Events sourceList, string dateValue)
+
+        private bool IsTrueCriteria(Event ev, Event compare, string criteria)
         {
-            Event compare = new Event(dateValue, "", "");
-            foreach (Event ev in sourceList)
+            switch (criteria)
             {
-                if (ev.CompareTo(compare) < 0)
-                {
-                    repo.Add(ev);
-                }
+                case "=":
+                    {
+                        return (ev.CompareTo(compare) == 0);
+                     }
+                case "!=":
+                    {
+                        return !(ev.CompareTo(compare) == 0);
+                    }
+                case "<=":
+                    {
+                        return (ev.CompareTo(compare) <= 0);
+                    }
+                case "<":
+                    {
+                        return (ev.CompareTo(compare) <0);
+                    }
+                case ">=":
+                    {
+                        return (ev.CompareTo(compare) >= 0);
+                    }
+                case ">":
+                    {
+                        return (ev.CompareTo(compare) > 0);
+                    }
             }
+            return false;
         }
-        private void EqualOrLessThan(Events sourceList, string dateValue)
-        {
-            Event compare = new Event(dateValue, "", "");
-            foreach (Event ev in sourceList)
-            {
-                if (ev.CompareTo(compare) <= 0)
-                {
-                    repo.Add(ev);
-                }
-            }
-        }
-        private void EqualOrGreaterThan(Events sourceList, string dateValue)
-        {
-            Event compare = new Event(dateValue, "", "");
-            foreach (Event ev in sourceList)
-            {
-                if (ev.CompareTo(compare) >= 0)
-                {
-                    repo.Add(ev);
-                }
-            }
-        }
-    }
+   }
 }
