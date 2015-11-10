@@ -81,31 +81,30 @@ namespace Calendar
             eventsList.Sort();
         }
 
-        public Events ExtractEventsFromCalendar(string parameter)
+        public Events GetFilteredEvents(string parameter)
         {
-            Events resultList = new Events();
-            SubList(resultList, parameter);
-            return resultList;
-        }
-
-        private void SubList(Events resultList, string parameter)
-        {
-            foreach (Event eventL in eventsList)
+            Events filteredList = new Events();
+            if (parameter=="past")
             {
-                if (ShouldBeListed(eventL, parameter))
-                {
-                    resultList.Add(eventL);
-                }
+                string today = DateTime.Now.ToShortDateString();
+                DateFilter eventsToDisplay = new DateFilter();
+
+                eventsToDisplay.ApplyFilter(new Events(eventsList), "<=", today);
+                 filteredList = eventsToDisplay.FilteredList;
             }
-        }
+            else
+                if (parameter == "future")
+            {
+                string today = DateTime.Now.ToShortDateString();
+                DateFilter eventsToDisplay = new DateFilter();
 
-        private static bool ShouldBeListed(Event eventL, string parameter)
-        {
-            if ((parameter == "past") && (eventL.Older() < 0)) return true;
-            if ((parameter == "future") && (eventL.Older() >= 0)) return true;
-            return false;
-        }
+                eventsToDisplay.ApplyFilter(new Events(eventsList), ">=", today);
+                filteredList = eventsToDisplay.FilteredList;
+            }
 
+            return filteredList;
+        }
+               
         public IEnumerator<Event> GetEnumerator()
         {
             return eventsList.GetEnumerator();

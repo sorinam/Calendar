@@ -34,9 +34,7 @@ namespace Calendar
                 DateTime convertedDate;
                 if (DateTime.TryParse(words[0], out convertedDate))
                 {
-                    date = convertedDate;
-                    subject = words[1];
-                    description = words[2];
+                    SetMembers(words[1], words[2], convertedDate);
                 }
                 else
                 {
@@ -50,14 +48,19 @@ namespace Calendar
             DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
             {
-                this.date = convertedDate;
-                this.subject = subject;
-                this.description = description;
+                SetMembers(subject, description, convertedDate);
             }
             else
             {
                 throw new FormatException("Bad Date/Time format or conversion not supported!");
             }
+        }
+
+        private void SetMembers(string subject, string description, DateTime date)
+        {
+            this.date = date;
+            this.subject = subject;
+            this.description = description;
         }
 
         public string StringParser ()
@@ -70,7 +73,7 @@ namespace Calendar
         {
             return this.Date.CompareTo(other.Date);
         }
-
+      
         public int Older()
         {
             DateTime thisDay = DateTime.Today;

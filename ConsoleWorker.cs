@@ -49,7 +49,7 @@ namespace Calendar
             eventsList.Sort();
             foreach (Event line in eventsList)
             {
-                Console.Write("\nDate:{0} \nEvent:{1} ", line.Date.ToString("yyyy/MM/dd"), Utils.DecodingNewLineChar(line.Subject));
+                Console.Write("\nDate:{0} \nSubject:{1} ", line.Date.ToString("yyyy/MM/dd"), Utils.DecodingNewLineChar(line.Subject));
                 if (line.Description != "") Console.Write("\nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
                 Console.Write("\n");
             }

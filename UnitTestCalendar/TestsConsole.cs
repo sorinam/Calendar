@@ -92,8 +92,8 @@ namespace UnitTestCalendar
             string description1 = "Don't forget to call her...";
             newEvent.Add(date1, subject1, description1);
 
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject + " \nDescription:" + description;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nSubject:" + subject1 + " \nDescription:" + description1 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -116,7 +116,7 @@ namespace UnitTestCalendar
             string subject = "Christmas Day!";
             string description = "Santa Claus is comming in our house....";
 
-            string date1 = "2015/10/25";
+            string date1 = "2015/11/10";
             string subject1 = "Johana's Birtday!";
             string description1 = "Don't forget to call her...";
 
@@ -126,9 +126,13 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("past");
+            DateFilter eventsToDisplay = new DateFilter();
 
-            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
+            string today= DateTime.Now.ToShortDateString();
+            eventsToDisplay.ApplyFilter(newEvents, "<=", today);
+            Events filteredList = eventsToDisplay.FilteredList;
+
+            ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -157,9 +161,45 @@ namespace UnitTestCalendar
             newEvents.EventsList.ShouldBeEmpty();
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
+            DateFilter eventsToDisplay = new DateFilter();
 
-            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("future");
-            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
+            string today = DateTime.Now.ToShortDateString();
+            eventsToDisplay.ApplyFilter(newEvents, ">=", today);
+            Events filteredList = eventsToDisplay.FilteredList;
+
+            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            newObj.DisplayEventsToConsole();
+            consoleOut.ToString().ShouldContain(expectedConsole);
+        }
+
+        [TestMethod]
+        public void ShouldDisplayEventsFromCertainDate()
+        {
+            Events newEvents = new Events();
+            ConsoleWorker toDisplay = new ConsoleWorker();
+
+            string expectedConsole;
+            var consoleOut = new StringWriter();
+
+            string date = "2019/12/25";
+            string subject = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
+
+            string date1 = "2015/10/25";
+            string subject1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
+
+            SetExpectedResultToConsole(date1, subject1, description1, out expectedConsole, out consoleOut);
+
+            newEvents.EventsList.ShouldBeEmpty();
+            newEvents.Add(date, subject, description);
+            newEvents.Add(date1, subject1, description1);
+            DateFilter eventsToDisplay = new DateFilter();
+
+            eventsToDisplay.ApplyFilter(newEvents, "=","2015/10/25");
+            Events filteredList = eventsToDisplay.FilteredList;
+
+            ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
@@ -185,7 +225,7 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = newEvents.ExtractEventsFromCalendar("fture");
+            Events eventsToDisplay = newEvents.GetFilteredEvents("fture");
 
             ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
             newObj.DisplayEventsToConsole();
@@ -223,10 +263,10 @@ namespace UnitTestCalendar
             string description3 = "Don't forget to call him...";
             newEvent.Add(date3, subject3, description3);
 
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nEvent:" + subject1 + " \nDescription:" + description1 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date3).ToString("yyyy/MM/dd") + " \nEvent:" + subject3 + " \nDescription:" + description3 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date2).ToString("yyyy/MM/dd") + " \nEvent:" + subject2 + " \nDescription:" + description2 + "\n" +
-                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject + " \nDescription:" + description;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nSubject:" + subject1 + " \nDescription:" + description1 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date3).ToString("yyyy/MM/dd") + " \nSubject:" + subject3 + " \nDescription:" + description3 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date2).ToString("yyyy/MM/dd") + " \nSubject:" + subject2 + " \nDescription:" + description2 + "\n" +
+                "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -256,7 +296,7 @@ namespace UnitTestCalendar
 
         private static void SetExpectedResultToConsole(string date, string subject, string description, out string expectedConsole, out StringWriter consoleOut)
         {
-            expectedConsole = "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nEvent:" + subject;
+            expectedConsole = "\nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject;
             if (description != "")
             {
                 expectedConsole += " \nDescription:" + description;

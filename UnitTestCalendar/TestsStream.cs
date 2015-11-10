@@ -34,7 +34,7 @@ namespace UnitTestCalendar
 <title>Events List</title>
 </head>
 <body><p><b>Date:</b> 2015/12/25</p>
-<p><b>Subject:</b> Christmas Day!</p><p><bSanta Claus</b> </p><hr>
+<p><b>Subject:</b> Christmas Day!</p><p><b>Description:</b> Santa Claus</p><hr>
 </body>
 </html> ";
             Events newEvent = new Events();
@@ -46,7 +46,7 @@ namespace UnitTestCalendar
             newEvent.Add(date, subject, description);
 
             byte[] byteArray = Encoding.UTF8.GetBytes(myFile);
-            using (MemoryStream stream = new MemoryStream(byteArray))
+            using (StreamWriter stream = new StreamWriter(myFile))
             {
                 using (StreamWorker streamObj = new StreamWorker())
                 {

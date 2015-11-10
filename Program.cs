@@ -94,7 +94,7 @@ namespace Calendar
             else
             {
                 ConsoleWorker evTools = new ConsoleWorker();
-                Events eventsToExport = eventsList.ExtractEventsFromCalendar(args[1].ToLower());
+                Events eventsToExport = eventsList.GetFilteredEvents(args[1].ToLower());
                 ExportToHTMLFile(@args[2], eventsToExport);
             }
 
@@ -117,7 +117,7 @@ namespace Calendar
                 tool.DisplayEventsToConsole();
             }
             else
-            {   Events eventsToDisplay = eventsList.ExtractEventsFromCalendar(parameter);
+            {   Events eventsToDisplay = eventsList.GetFilteredEvents(parameter);
                 ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
                 toDisplay.DisplayEventsToConsole();
             }
