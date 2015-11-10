@@ -74,10 +74,10 @@ namespace Calendar
             return this.Date.CompareTo(other.Date);
         }
       
-        public int Older()
-        {
-            DateTime thisDay = DateTime.Today;
-            return this.Date.CompareTo(thisDay);
-        }
+        //public int Older()
+        //{
+        //    DateTime thisDay = DateTime.Today;
+        //    return this.Date.CompareTo(thisDay);
+        //}
     }
 }

@@ -4,28 +4,47 @@ namespace Calendar
 {
     public class DateFilter : Filter
     {
-        string[] criteria = { "=","!=", "<", ">", "<=", ">=", "<>" };
-        Events repo=new Events();
+        string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
+        Events eventsList = new Events();
+        string criteria;
+        string dateToCompare;
 
-        public Events FilteredList
+        public DateFilter(Events sourceList,string criteria,string dateToCompare)
+            {
+            SourceList = sourceList;
+            Criteria = criteria;
+            ValueToCompare = dateToCompare;
+            }
+        public string Criteria
         {
-            get { return repo; }
-            set { this.repo = value; }
+            set { this.criteria = value; }
         }
 
-        public void ApplyFilter(Events eventsList, string criteria, string dateValue)
+        public string ValueToCompare
         {
-            Event compare = new Event(dateValue, "", "");
+            set { this.dateToCompare = value; }
+        }
+
+        public Events SourceList
+        {
+            get { return eventsList; }
+            set { this.eventsList = value; }
+        }
+        public Events ApplyFilter()
+        {
+            Events filteredList = new Events();
+            Event compare = new Event(dateToCompare, "", "");
             foreach (Event ev in eventsList)
             {
                 if (IsTrueCriteria(ev,compare,criteria))
                 {
-                    repo.Add(ev);
+                    filteredList.Add(ev);
                 }
             }
+            return filteredList;
          }
 
-        private bool IsTrueCriteria(Event ev, Event compare, string criteria)
+        public bool IsTrueCriteria(Event ev, Event compare, string criteria)
         {
             switch (criteria)
             {

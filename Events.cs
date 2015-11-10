@@ -87,19 +87,15 @@ namespace Calendar
             if (parameter=="past")
             {
                 string today = DateTime.Now.ToShortDateString();
-                DateFilter eventsToDisplay = new DateFilter();
-
-                eventsToDisplay.ApplyFilter(new Events(eventsList), "<=", today);
-                 filteredList = eventsToDisplay.FilteredList;
+                DateFilter eventsToDisplay = new DateFilter(new Events(eventsList), "<=",today);
+                filteredList = eventsToDisplay.ApplyFilter();
             }
             else
                 if (parameter == "future")
             {
                 string today = DateTime.Now.ToShortDateString();
-                DateFilter eventsToDisplay = new DateFilter();
-
-                eventsToDisplay.ApplyFilter(new Events(eventsList), ">=", today);
-                filteredList = eventsToDisplay.FilteredList;
+                DateFilter eventsToDisplay = new DateFilter(new Events(eventsList), ">=", today);
+                filteredList = eventsToDisplay.ApplyFilter();
             }
 
             return filteredList;

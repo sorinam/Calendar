@@ -126,11 +126,10 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            DateFilter eventsToDisplay = new DateFilter();
-
             string today= DateTime.Now.ToShortDateString();
-            eventsToDisplay.ApplyFilter(newEvents, "<=", today);
-            Events filteredList = eventsToDisplay.FilteredList;
+
+            DateFilter eventsToDisplay = new DateFilter(newEvents, "<=", today);
+            Events filteredList = eventsToDisplay.ApplyFilter();
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
@@ -161,11 +160,10 @@ namespace UnitTestCalendar
             newEvents.EventsList.ShouldBeEmpty();
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
-            DateFilter eventsToDisplay = new DateFilter();
-
+          
             string today = DateTime.Now.ToShortDateString();
-            eventsToDisplay.ApplyFilter(newEvents, ">=", today);
-            Events filteredList = eventsToDisplay.FilteredList;
+            DateFilter eventsToDisplay = new DateFilter(newEvents, ">=", today);
+            Events filteredList = eventsToDisplay.ApplyFilter();
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
@@ -194,10 +192,9 @@ namespace UnitTestCalendar
             newEvents.EventsList.ShouldBeEmpty();
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
-            DateFilter eventsToDisplay = new DateFilter();
 
-            eventsToDisplay.ApplyFilter(newEvents, "=","2015/10/25");
-            Events filteredList = eventsToDisplay.FilteredList;
+            DateFilter eventsToDisplay = new DateFilter(newEvents, "=", "2015/10/25");
+            Events filteredList = eventsToDisplay.ApplyFilter();
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
