@@ -9,17 +9,17 @@ namespace Calendar
 {
     public class Utils
     {
-        public string CodingNewLineChar(string value)
+        public static string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));
         }
 
-        public string DecodingNewLineChar(string value)
+        public static string DecodingNewLineChar(string value)
         {
             return (value.Replace('\a', '\n'));
         }
 
-        public string DecodingNewLineCharForHTML(string value)
+        public static string DecodingNewLineCharForHTML(string value)
         {
             Regex regex = new Regex(@"(\r\n|\r|\n)+");
             return regex.Replace(value, "<br />");

@@ -33,8 +33,7 @@ namespace UnitTestCalendar
 
             newEvent.Add(date, subject, description);
             var listofEvents = newEvent.EventsList;
-
-          
+            AssertAreEqual(listofEvents, expectedList);
         }
 
         [TestMethod]

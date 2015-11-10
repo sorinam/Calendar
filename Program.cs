@@ -40,7 +40,6 @@ namespace Calendar
         static void SwitchCommands(string[] args)
         {
             ArgsParser uiObj = new ArgsParser(args);
-            Utils tools = new Utils();
             switch (uiObj.FirstArg())
             {
                 case "/add":
@@ -49,11 +48,11 @@ namespace Calendar
                         {
                             ConsoleWorker evTools = new ConsoleWorker();
                             string date = args[1]; ;
-                            string subject = tools.CodingNewLineChar(args[2]);
+                            string subject = Utils.CodingNewLineChar(args[2]);
                             string description = "";
                             if (args.Length == 4)
                             {
-                                description = tools.CodingNewLineChar(args[3]);
+                                description = Utils.CodingNewLineChar(args[3]);
                             }
                             evTools.AddDataFromConsole(date, subject, description);
                         }

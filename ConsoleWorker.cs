@@ -45,13 +45,12 @@ namespace Calendar
         }
 
         private void DisplayToConsole()
-        {
-            Utils tools = new Utils();
+        {            
             eventsList.Sort();
             foreach (Event line in eventsList)
             {
-                Console.Write("\nDate:{0} \nEvent:{1} ", line.Date.ToString("yyyy/MM/dd"), tools.DecodingNewLineChar(line.Subject));
-                if (line.Description != "") Console.Write("\nDescription:{0}", tools.DecodingNewLineChar(line.Description));
+                Console.Write("\nDate:{0} \nEvent:{1} ", line.Date.ToString("yyyy/MM/dd"), Utils.DecodingNewLineChar(line.Subject));
+                if (line.Description != "") Console.Write("\nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
                 Console.Write("\n");
             }
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", eventsList.Length);
