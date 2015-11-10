@@ -85,7 +85,7 @@ namespace Calendar
 
         private static void ExportEvents(string[] args)
         {
-            WorkingFiles files = new WorkingFiles();
+            FileWorker files = new FileWorker();
             Events eventsList = files.LoadEventsFromFile();
             eventsList.Sort();
             if (args.Length == 2)
@@ -109,7 +109,7 @@ namespace Calendar
 
         static void DisplayEvents(string parameter)
         {
-            WorkingFiles files = new WorkingFiles();
+            FileWorker files = new FileWorker();
             Events eventsList = files.LoadEventsFromFile();
             ConsoleWorker tool = new ConsoleWorker(eventsList);
 

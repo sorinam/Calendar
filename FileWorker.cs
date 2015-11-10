@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Calendar
 {
-    public class WorkingFiles
+    public class FileWorker
     {
         const string calendarPath = @"Calendar.txt";
 
@@ -30,7 +30,7 @@ namespace Calendar
             }
             using (FileStream fs = new FileStream(calendarPath, FileMode.Open))
             {
-                StreamO streamObj = new StreamO(fs);
+                StreamWorker streamObj = new StreamWorker(fs);
                 lines = streamObj.GetLinesFromStream();
             };
             return lines;
@@ -41,7 +41,7 @@ namespace Calendar
             StreamWriter file = new StreamWriter(calendarPath);
             foreach (Event eventL in eventsList)
             {
-                file.Write(eventL.Date.ToString("yyyy-MM-dd") + "\t" + eventL.Subject + "\t" + eventL.Description);
+                file.Write(eventL.Date.ToString("yyyy/MM/dd") + "\t" + eventL.Subject + "\t" + eventL.Description);
                 file.Write(file.NewLine);
             }
             file.Close();

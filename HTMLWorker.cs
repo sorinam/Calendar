@@ -31,7 +31,7 @@ namespace Calendar
                 using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
                     Console.WriteLine("\n\tExporting file...");
-                    StreamO stremObj = new StreamO(fs);
+                    StreamWorker stremObj = new StreamWorker(fs);
                     stremObj.ExportEventsInHTMLStream(eventsList);
                 }
                 Console.WriteLine("\n{0} events were exported in '{1}' file .\n", eventsList.Length, path);

@@ -109,7 +109,7 @@ namespace UnitTestCalendar
             newEvent.Add(date1, subject1, description1);
 
             var listofEvents = newEvent.EventsList;
-            string[] expectedList = { date+"\t"+ subject +"\t"+ description ,  date1+"\t"+ subject1 +"\t"+ description1 };
+            string[] expectedList = {date+"\t"+ subject +"\t"+ description , date1+ "\t"+ subject1 +"\t"+ description1 };
 
             string[] parseEvents = newEvent.ToStringList();
 
