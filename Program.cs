@@ -40,7 +40,7 @@ namespace Calendar
         static void SwitchCommands(string[] args)
         {
             ArgsParser uiObj = new ArgsParser(args);
-            switch (uiObj.FirstArg())
+            switch (args[0].ToLower())
             {
                 case "/add":
                     {

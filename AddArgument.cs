@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    class AddArgument : IArgument
+    public class AddArgument : IArgument
     {
         const string addArg="/add";
-        const int parameters= 3;
+        const int parameters= 4;
         const int optionalParameters = 1;
         string[] inputArgs;
 
-        string[] Arguments
-        {
-            set { inputArgs = value; }
-        }
-
+        public AddArgument(string[] args)
+            {
+            inputArgs = args;
+            }
+        
         private bool IsValidFirstParameter(string arg)
         {
             return (arg.ToLower() == addArg);

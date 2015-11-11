@@ -6,31 +6,21 @@ namespace Calendar
    public class ArgsParser
     {
         private string[] args;
-        string[] parameters = { "/add", "/list", "/export","/search" };
-        string[] listParameters = { "all", "past", "future","today" };
-
+       
         public  ArgsParser(string[] value)
         {
             args = value;
         }
-        public ArgsParser()
-        {
-            args = new string[0];
-        }
-        public string FirstArg()
-        {
-            return (IsValidFirstArgs(args[0])) ? args[0].ToLower() : "";
-         }
-
+      
         public bool ProcessingAddArguments()
         {
-            
-            if ((args.Length == 3) || (args.Length == 4))
+            AddArgument addArgs = new AddArgument(args);
+            if (addArgs.IsValid())
             {
                 DateTime dateTime;
                 if (DateTime.TryParse(args[1], out dateTime))
                 {
-                    return true;                   
+                    return true;
                 }
                 else
                 {
@@ -40,14 +30,14 @@ namespace Calendar
             }
             else
             {
-                InvalidCommand();
+                InvalidCommand(); 
                 return false;
             }
-        }
-
+       }
         public bool ProcessingListArguments()
         {
-            if ((args.Length == 1) || ((args.Length == 2) && (IsValidListParameter(args[1]))))
+            ListArgument listArgs = new ListArgument(args);
+            if (listArgs.IsValid())
             {
                 return true;
             }
@@ -57,22 +47,19 @@ namespace Calendar
                 return false;
             }
         }
-
+      
         public bool ProcessingExportArguments()
         {
-           if ((args.Length == 2)&&IsValidFilenameAndPath(args[1]))
-            {
-                return true;
-            }
-
-            if ((args.Length == 3) && IsValidFilenameAndPath(args[2]) && IsValidListParameter(args[1]))
+            ExportArgument exportArgs = new ExportArgument(args);
+            if (exportArgs.IsValid())
             {
                 return true;
             }
             else
             {
-                //InvalidCommand();
-                return false; }
+               InvalidCommand();
+                return false;
+            }
         }
 
         public bool IsValidFilenameAndPath(string fileName)
@@ -109,26 +96,5 @@ namespace Calendar
         {
             Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
         }
-
-        bool IsValidFirstArgs(string firstArg)
-        {
-            return IsValid(firstArg.ToLower(),parameters);
-        }
-
-        bool IsValidListParameter(string listOption)
-        {
-            return IsValid(listOption.ToLower(), listParameters);
-        }
-
-        private bool IsValid(string arg,string[] list)
-        {
-            for (int i = 0; i < list.Length; i++)
-            {
-                if (list[i] == arg)
-                { return true; }
-            }
-            return false;
-        }
-        
     }
 }

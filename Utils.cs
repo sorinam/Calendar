@@ -11,10 +11,11 @@ namespace Calendar
     public class Utils
     {
         struct FilteringCriteriaParser
-        {   private string UIvalue;
+        {
+            private string UIvalue;
             private string internalValue;
 
-            public FilteringCriteriaParser(string v1, string v2) 
+            public FilteringCriteriaParser(string v1, string v2)
             {
                 this.UIvalue = v1;
                 this.internalValue = v2;
@@ -23,7 +24,6 @@ namespace Calendar
             public string InternalValue { get { return internalValue; } }
 
         }
-
         public static string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));
@@ -42,14 +42,15 @@ namespace Calendar
 
         public static string ParseFilteringCriteria(string UIParameter)
         {
-            FilteringCriteriaParser[] AcceptedParameters = {
+
+        FilteringCriteriaParser[] AcceptedParameters = {
                 new FilteringCriteriaParser("equal","="),
                 new FilteringCriteriaParser("past","<"),
                 new FilteringCriteriaParser("future",">"),
                 new FilteringCriteriaParser("beetwen","<>"),
                 new FilteringCriteriaParser("not equal ","!="),
                 new FilteringCriteriaParser("today","="),
-                 new FilteringCriteriaParser("contains",">"),
+                new FilteringCriteriaParser("contains",">"),
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)
