@@ -43,10 +43,11 @@ namespace Calendar
         {
             FilteringCriteriaParser[] AcceptedParameters = {
                 new FilteringCriteriaParser("equal","="),
-                new FilteringCriteriaParser("past","<="),
-                new FilteringCriteriaParser("future",">="),
+                new FilteringCriteriaParser("past","<"),
+                new FilteringCriteriaParser("future",">"),
                 new FilteringCriteriaParser("beetwen","<>"),
                 new FilteringCriteriaParser("not equal ","!="),
+                new FilteringCriteriaParser("today","="),
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)

@@ -128,8 +128,8 @@ namespace UnitTestCalendar
 
             string today= DateTime.Now.ToShortDateString();
 
-            DateFilter eventsToDisplay = new DateFilter(newEvents, "<=", today);
-            Events filteredList = eventsToDisplay.ApplyFilter();
+            DateFilter eventsToDisplay = new DateFilter("<", today);
+            Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
@@ -162,8 +162,8 @@ namespace UnitTestCalendar
             newEvents.Add(date1, subject1, description1);
           
             string today = DateTime.Now.ToShortDateString();
-            DateFilter eventsToDisplay = new DateFilter(newEvents, ">=", today);
-            Events filteredList = eventsToDisplay.ApplyFilter();
+            DateFilter eventsToDisplay = new DateFilter( ">", today);
+            Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
@@ -193,8 +193,8 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            DateFilter eventsToDisplay = new DateFilter(newEvents, "=", "2015/10/25");
-            Events filteredList = eventsToDisplay.ApplyFilter();
+            DateFilter eventsToDisplay = new DateFilter("=", "2015/10/25");
+            Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();
@@ -219,10 +219,10 @@ namespace UnitTestCalendar
             
            SetExpectedResultToConsole("2015/09/08", "six", "", out expectedConsole, out consoleOut);
            
-            DateFilter firstFilter = new DateFilter(newEvents, "<", "2015/10/25");
-            Events firstFilteredList = firstFilter.ApplyFilter();
-            DateFilter eventsToDisplay = new DateFilter(firstFilteredList, ">", "2015/02/25");
-            Events filteredList = eventsToDisplay.ApplyFilter();
+            DateFilter firstFilter = new DateFilter( "<", "2015/10/25");
+            Events firstFilteredList = firstFilter.ApplyFilter((newEvents));
+            DateFilter eventsToDisplay = new DateFilter( ">", "2015/02/25");
+            Events filteredList = eventsToDisplay.ApplyFilter(firstFilteredList);
 
             ConsoleWorker newObj = new ConsoleWorker(filteredList);
             newObj.DisplayEventsToConsole();

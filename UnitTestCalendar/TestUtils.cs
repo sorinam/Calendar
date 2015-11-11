@@ -12,7 +12,7 @@ namespace UnitTestCalendar
         public void ShouldParseValidFilteringCriteria()
         {
             string UIvalue = "past";
-            string expectedcode = "<=";
+            string expectedcode = "<";
             expectedcode.ShouldEqual(Utils.ParseFilteringCriteria(UIvalue));
         }
 

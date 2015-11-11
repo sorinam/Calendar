@@ -83,22 +83,12 @@ namespace Calendar
 
         public Events GetFilteredEvents(string parameter)
         {
-            Events filteredList = new Events();
-            if (parameter=="past")
-            {
-                string today = DateTime.Now.ToShortDateString();
-                DateFilter eventsToDisplay = new DateFilter(new Events(eventsList), "<=",today);
-                filteredList = eventsToDisplay.ApplyFilter();
-            }
-            else
-                if (parameter == "future")
-            {
-                string today = DateTime.Now.ToShortDateString();
-                DateFilter eventsToDisplay = new DateFilter(new Events(eventsList), ">=", today);
-                filteredList = eventsToDisplay.ApplyFilter();
-            }
+            string criteria = Utils.ParseFilteringCriteria(parameter);
 
-            return filteredList;
+            string today = DateTime.Now.ToShortDateString();
+            DateFilter eventsToDisplay = new DateFilter(criteria, today);
+            return eventsToDisplay.ApplyFilter(new Events(eventsList));
+         
         }
                
         public IEnumerator<Event> GetEnumerator()

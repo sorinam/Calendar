@@ -5,13 +5,12 @@ namespace Calendar
     public class DateFilter : Filter
     {
         string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
-        Events eventsList = new Events();
+
         string criteria;
         string dateToCompare;
 
-        public DateFilter(Events sourceList,string criteria,string dateToCompare)
+        public DateFilter(string criteria,string dateToCompare)
             {
-            SourceList = sourceList;
             Criteria = criteria;
             ValueToCompare = dateToCompare;
             }
@@ -25,16 +24,11 @@ namespace Calendar
             set { this.dateToCompare = value; }
         }
 
-        public Events SourceList
-        {
-            get { return eventsList; }
-            set { this.eventsList = value; }
-        }
-        public Events ApplyFilter()
+        public Events ApplyFilter(Events sourceList)
         {
             Events filteredList = new Events();
             Event compare = new Event(dateToCompare, "", "");
-            foreach (Event ev in eventsList)
+            foreach (Event ev in sourceList)
             {
                 if (IsTrueCriteria(ev,compare,criteria))
                 {
