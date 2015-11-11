@@ -6,7 +6,7 @@ namespace Calendar
    public class ArgsParser
     {
         private string[] args;
-        string[] parameters = { "/add", "/list", "/export" };
+        string[] parameters = { "/add", "/list", "/export","/search" };
         string[] listParameters = { "all", "past", "future","today" };
 
         public  ArgsParser(string[] value)

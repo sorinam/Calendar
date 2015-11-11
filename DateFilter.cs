@@ -4,7 +4,7 @@ namespace Calendar
 {
     public class DateFilter : Filter
     {
-        string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
+        //string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
 
         string criteria;
         string dateToCompare;
@@ -69,5 +69,6 @@ namespace Calendar
             }
             return false;
         }
-   }
+       
+    }
 }

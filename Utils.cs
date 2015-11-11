@@ -48,6 +48,7 @@ namespace Calendar
                 new FilteringCriteriaParser("beetwen","<>"),
                 new FilteringCriteriaParser("not equal ","!="),
                 new FilteringCriteriaParser("today","="),
+                 new FilteringCriteriaParser("contains",">"),
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)

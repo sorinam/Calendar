@@ -49,11 +49,15 @@ namespace Calendar
             eventsList.Sort();
             foreach (Event line in eventsList)
             {
-                Console.Write("\nDate:{0} \nSubject:{1} ", line.Date.ToString("yyyy/MM/dd"), Utils.DecodingNewLineChar(line.Subject));
-                if (line.Description != "") Console.Write("\nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
+                //Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(" \nDate:{0}", line.Date.ToString("yyyy/MM/dd"));
+                //Console.ResetColor();
+                Console.Write(" \nSubject:{0}", Utils.DecodingNewLineChar(line.Subject));
+                if (line.Description != "") Console.Write(" \nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
                 Console.Write("\n");
             }
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", eventsList.Length);
+           
         }
     }
 }

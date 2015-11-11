@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestsStream.cs" />
     <Compile Include="TestUtils.cs" />
+    <Compile Include="TestDateFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Calendar.csproj">
