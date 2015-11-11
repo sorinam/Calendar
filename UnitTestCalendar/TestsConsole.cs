@@ -200,6 +200,35 @@ namespace UnitTestCalendar
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
+        [TestMethod]
+        public void ShouldDisplayEventsBeetwenTwoDate()
+        {
+            ConsoleWorker toDisplay = new ConsoleWorker();
+
+            string expectedConsole;
+            var consoleOut = new StringWriter();
+
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                {new Event("2015/11/15", "two") },
+                { new Event("2015/07/01", "three") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/03/04", "five", "test2") },
+                { new Event("2015/09/08", "six") }
+        };
+            
+           SetExpectedResultToConsole("2015/09/08", "six", "", out expectedConsole, out consoleOut);
+           
+            DateFilter firstFilter = new DateFilter(newEvents, "<", "2015/10/25");
+            Events firstFilteredList = firstFilter.ApplyFilter();
+            DateFilter eventsToDisplay = new DateFilter(firstFilteredList, ">", "2015/02/25");
+            Events filteredList = eventsToDisplay.ApplyFilter();
+
+            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            newObj.DisplayEventsToConsole();
+            consoleOut.ToString().ShouldContain(expectedConsole);
+        }
+
 
         [TestMethod]
         public void ShouldNotDisplayEventsForInvalidListParameter()
