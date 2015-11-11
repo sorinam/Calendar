@@ -58,6 +58,7 @@
     <Compile Include="HTMLWorker.cs" />
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />
+    <Compile Include="SearchArgument.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="Program.cs" />

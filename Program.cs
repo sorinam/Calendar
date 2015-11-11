@@ -74,6 +74,14 @@ namespace Calendar
                         }
                         break;
                     }
+                case "/search":
+                    {
+                        if (uiObj.ProcessingSearchArguments())
+                        {
+                            SearchEvents(args);
+                        }
+                        break;
+                    }
                 default:
                     {
                         uiObj.InvalidCommand();
@@ -117,10 +125,24 @@ namespace Calendar
                 tool.DisplayEventsToConsole();
             }
             else
-            {   Events eventsToDisplay = eventsList.GetFilteredEvents(parameter);
+            {
+                Events eventsToDisplay = eventsList.GetFilteredEvents(parameter);
                 ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
                 toDisplay.DisplayEventsToConsole();
             }
+        }
+
+        static void SearchEvents(string[] parameter)
+        {
+            Console.WriteLine("Not implemented yet");
+            // FileWorker files = new FileWorker();
+            // Events eventsList = files.LoadEventsFromFile();
+            // ConsoleWorker tool = new ConsoleWorker(eventsList);
+
+            //Events eventsToDisplay = eventsList.GetFilteredEvents(parameter);
+            //ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
+            //toDisplay.DisplayEventsToConsole();
+
         }
 
         static string DefaultParameter(string[] args)

@@ -47,7 +47,21 @@ namespace Calendar
                 return false;
             }
         }
-      
+
+        public bool ProcessingSearchArguments()
+        {
+            SearchArgument searchArgs = new SearchArgument(args);
+            if (searchArgs.IsValid())
+            {
+                return true;
+            }
+            else
+            {
+                InvalidCommand();
+                return false;
+            }
+        }
+
         public bool ProcessingExportArguments()
         {
             ExportArgument exportArgs = new ExportArgument(args);
@@ -60,36 +74,6 @@ namespace Calendar
                InvalidCommand();
                 return false;
             }
-        }
-
-        public bool IsValidFilenameAndPath(string fileName)
-        {
-            StreamWriter MyStream = null;
-            string MyString = "A";
-
-            try
-            {
-                MyStream = File.CreateText(fileName);
-                MyStream.Write(MyString);
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine();
-                return false;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            finally
-            {
-                if (MyStream != null)
-                {
-                    MyStream.Close();
-                    File.Delete(fileName);
-                }
-            }
-            return true;
         }
 
         public void InvalidCommand()
