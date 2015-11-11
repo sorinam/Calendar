@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddArgument.cs" />
+    <Compile Include="Argument.cs" />
     <Compile Include="DateFilter.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="ConsoleWorker.cs" />
@@ -54,6 +56,7 @@
     <Compile Include="Filter.cs" />
     <Compile Include="HTMLWorker.cs" />
     <Compile Include="DescriptionFilter.cs" />
+    <Compile Include="ListArgument.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="FileWorker.cs" />
     <Compile Include="Program.cs" />

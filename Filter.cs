@@ -2,7 +2,7 @@
 
 namespace Calendar
 {
-    public interface Filter
+    public interface IFilter
     {
         Events ApplyFilter(Events sourceList);
     }

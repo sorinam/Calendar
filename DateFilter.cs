@@ -2,7 +2,7 @@
 
 namespace Calendar
 {
-    public class DateFilter : Filter
+    public class DateFilter : IFilter
     {
         //string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
 

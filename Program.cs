@@ -46,7 +46,7 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingAddArguments())
                         {
-                            ConsoleWorker evTools = new ConsoleWorker();
+                            ConsoleWorker newEvent = new ConsoleWorker();
                             string date = args[1]; ;
                             string subject = Utils.CodingNewLineChar(args[2]);
                             string description = "";
@@ -54,7 +54,7 @@ namespace Calendar
                             {
                                 description = Utils.CodingNewLineChar(args[3]);
                             }
-                            evTools.AddDataFromConsole(date, subject, description);
+                            newEvent.AddDataFromConsole(date, subject, description);
                         }
                         break;
                     }

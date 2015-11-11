@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    public class DescriptionFilter : Filter
+    public class DescriptionFilter : IFilter
     {
         string criteria;
         string valueToCompare;
