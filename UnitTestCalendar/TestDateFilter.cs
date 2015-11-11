@@ -26,10 +26,10 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "two") },
                 {new Event("2015/11/15", "three","test2") }
             };
-            
-            AssertAreEqual(filteredList,expectedList);
+            Utils.AssertAreEqual(filteredList, expectedList);
 
         }
+
         [TestMethod]
         public void ShouldSelectEventsFromSpecifiedPeriod()
         {
@@ -53,8 +53,105 @@ namespace UnitTestCalendar
             Events firstFilteredList = firstFilter.ApplyFilter((newEvents));
             DateFilter filteredListResult = new DateFilter(">", "2015/02/25");
             Events filteredList = filteredListResult.ApplyFilter(firstFilteredList);
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
 
-            AssertAreEqual(filteredList, expectedList);
+        [TestMethod]
+        public void ShouldSelectEventsOlderThanSpecifiedPeriod()
+        {
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                {new Event("2015/11/15", "two") },
+                { new Event("2015/07/01", "three") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/03/04", "five", "test2") },
+                { new Event("2015/09/08", "six") }
+        };
+
+            List<Event> expectedList = new List<Event>
+            {{ new Event ( "2015/01/01", "one", "test") },
+                {new Event ("2015/07/01", "three") },
+                { new Event("2015/03/04", "five", "test2")},
+                { new Event("2015/09/08", "six") }
+            };
+
+            DateFilter filteredListResult = new DateFilter("<", "2015/10/25");
+            Events filteredList = filteredListResult.ApplyFilter(newEvents);
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
+
+        [TestMethod]
+        public void ShouldSelectEventsOlderAndEqualThanSpecifiedPeriod()
+        {
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                {new Event("2015/11/15", "two") },
+                { new Event("2015/07/01", "three") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/03/04", "five", "test2") },
+                { new Event("2015/09/08", "six") },
+                { new Event("2015/10/25", "seven") }
+        };
+
+            List<Event> expectedList = new List<Event>
+            {{ new Event ( "2015/01/01", "one", "test") },
+                {new Event ("2015/07/01", "three") },
+                { new Event("2015/03/04", "five", "test2")},
+                { new Event("2015/09/08", "six") },
+                { new Event("2015/10/25", "seven") }
+            };
+
+            DateFilter filteredListResult = new DateFilter("<=", "2015/10/25");
+            Events filteredList = filteredListResult.ApplyFilter(newEvents);
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
+
+        [TestMethod]
+        public void ShouldSelectEventsNewerThanSpecifiedPeriod()
+        {
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                {new Event("2015/11/15", "two") },
+                { new Event("2015/07/01", "three") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/03/04", "five", "test2") },
+                { new Event("2015/09/08", "six") }
+        };
+
+            List<Event> expectedList = new List<Event>
+            {
+                { new Event("2015/11/15", "two") },
+                { new Event("2015/12/03", "four", "test1") },
+            };
+
+            DateFilter filteredListResult = new DateFilter(">", "2015/10/25");
+            Events filteredList = filteredListResult.ApplyFilter(newEvents);
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
+
+        [TestMethod]
+        public void ShouldSelectEventsNewerOrEqualThanSpecifiedPeriod()
+        {
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                {new Event("2015/11/15", "two") },
+                { new Event("2015/07/01", "three") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/03/04", "five", "test2") },
+                { new Event("2015/09/08", "six") },
+                { new Event("2015/10/25", "six") }
+        };
+
+            List<Event> expectedList = new List<Event>
+            {
+                { new Event("2015/11/15", "two") },
+                { new Event("2015/12/03", "four", "test1") },
+                { new Event("2015/10/25", "six") }
+            };
+
+            DateFilter filteredListResult = new DateFilter(">=", "2015/10/25");
+            Events filteredList = filteredListResult.ApplyFilter(newEvents);
+            Utils.AssertAreEqual(filteredList, expectedList);
         }
 
         [TestMethod]
@@ -79,8 +176,7 @@ namespace UnitTestCalendar
 
             DateFilter firstFilter = new DateFilter("!=", "2015/03/04");
             Events filteredList = firstFilter.ApplyFilter(newEvents);
-
-            AssertAreEqual(filteredList, expectedList);
+            Utils.AssertAreEqual(filteredList, expectedList);
         }
 
         [TestMethod]
@@ -103,18 +199,6 @@ namespace UnitTestCalendar
             filteredList.ShouldBeEmpty();
         }
 
-        private void AssertAreEqual(Events listofEvents, List <Event> expectedList)
-        {
-            listofEvents.Length.ShouldEqual(expectedList.Count);
-
-            int i = 0;
-            foreach (Event ev in listofEvents)
-            {
-                ev.Date.ShouldEqual(expectedList[i].Date);
-                ev.Subject.ShouldEqual(expectedList[i].Subject);
-                ev.Description.ShouldEqual(expectedList[i].Description);
-                i++;
-            }
-        }
+      
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Should;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,20 @@ namespace Calendar
             }
             return "";
         }
+
+        public static void AssertAreEqual(Events listofEvents, List<Event> expectedList)
+        {
+            listofEvents.Length.ShouldEqual(expectedList.Count);
+
+            int i = 0;
+            foreach (Event ev in listofEvents)
+            {
+                ev.Date.ShouldEqual(expectedList[i].Date);
+                ev.Subject.ShouldEqual(expectedList[i].Subject);
+                ev.Description.ShouldEqual(expectedList[i].Description);
+                i++;
+            }
         }
+    }
     
 }

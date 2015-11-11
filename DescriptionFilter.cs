@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    class DescriptionFilter : Filter
+    public class DescriptionFilter : Filter
     {
         string criteria;
         string valueToCompare;
@@ -16,6 +16,7 @@ namespace Calendar
             this.criteria = criteria;
             this.valueToCompare = valueToCompare;
         }
+
         public Events ApplyFilter(Events sourceList)
         {
             Events filteredList = new Events();
@@ -29,6 +30,7 @@ namespace Calendar
             }
             return filteredList;
         }
+
         public bool IsTrueCriteria(Event ev, string criteria)
         {
             switch (criteria)

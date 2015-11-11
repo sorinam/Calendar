@@ -136,7 +136,7 @@ namespace UnitTestCalendar
 
             expectedList.ShouldEqual(parseEvents);
         }
-        private void AssertAreEqual(IEnumerable<Event> listofEvents, List<Event> expectedList)
+      public static void AssertAreEqual(IEnumerable<Event> listofEvents, List<Event> expectedList)
         {
             int i = 0;
             foreach (Event ev in listofEvents)
