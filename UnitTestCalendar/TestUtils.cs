@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
 using Calendar;
+using System.IO;
 
 namespace UnitTestCalendar
 {
@@ -23,5 +24,6 @@ namespace UnitTestCalendar
             string expectedcode = "";
             expectedcode.ShouldEqual(Utils.ParseFilteringCriteria(UIvalue));
         }
+              
     }
 }

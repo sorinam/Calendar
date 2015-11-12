@@ -11,10 +11,11 @@ namespace Calendar
     public class Utils
     {
         struct FilteringCriteriaParser
-        {   private string UIvalue;
+        {
+            private string UIvalue;
             private string internalValue;
 
-            public FilteringCriteriaParser(string v1, string v2) 
+            public FilteringCriteriaParser(string v1, string v2)
             {
                 this.UIvalue = v1;
                 this.internalValue = v2;
@@ -23,7 +24,6 @@ namespace Calendar
             public string InternalValue { get { return internalValue; } }
 
         }
-
         public static string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));
@@ -42,14 +42,24 @@ namespace Calendar
 
         public static string ParseFilteringCriteria(string UIParameter)
         {
-            FilteringCriteriaParser[] AcceptedParameters = {
+
+        FilteringCriteriaParser[] AcceptedParameters = {
                 new FilteringCriteriaParser("equal","="),
+                new FilteringCriteriaParser("=","="),
                 new FilteringCriteriaParser("past","<"),
+                new FilteringCriteriaParser("<","<"),
+                new FilteringCriteriaParser("<=","<="),
+                new FilteringCriteriaParser(">=",">="),
+                new FilteringCriteriaParser(">",">"),
+                new FilteringCriteriaParser("<>","<>"),
                 new FilteringCriteriaParser("future",">"),
-                new FilteringCriteriaParser("beetwen","<>"),
-                new FilteringCriteriaParser("not equal ","!="),
+                new FilteringCriteriaParser("between","<>"),
+                new FilteringCriteriaParser("not equal","!="),
+                new FilteringCriteriaParser("!=","!="),
                 new FilteringCriteriaParser("today","="),
-                 new FilteringCriteriaParser("contains",">"),
+                new FilteringCriteriaParser("contains",">"),
+                new FilteringCriteriaParser("older","<"),
+                new FilteringCriteriaParser("newer",">"),
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)
@@ -70,6 +80,19 @@ namespace Calendar
                 ev.Subject.ShouldEqual(expectedList[i].Subject);
                 ev.Description.ShouldEqual(expectedList[i].Description);
                 i++;
+            }
+        }
+        public static bool IsValidDate(string date)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParse(date, out dateTime))
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
+                return false;
             }
         }
     }

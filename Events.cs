@@ -81,7 +81,7 @@ namespace Calendar
             eventsList.Sort();
         }
 
-        public Events GetFilteredEvents(string parameter)
+        public Events GetFilteredEventsByToday(string parameter)
         {
             string criteria = Utils.ParseFilteringCriteria(parameter);
 

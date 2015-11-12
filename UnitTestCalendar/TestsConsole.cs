@@ -251,7 +251,7 @@ namespace UnitTestCalendar
             newEvents.Add(date, subject, description);
             newEvents.Add(date1, subject1, description1);
 
-            Events eventsToDisplay = newEvents.GetFilteredEvents("fture");
+            Events eventsToDisplay = newEvents.GetFilteredEventsByToday("fture");
 
             ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
             newObj.DisplayEventsToConsole();
@@ -338,7 +338,7 @@ namespace UnitTestCalendar
             List<Event> eventsRepo = new List<Event>
             {new Event("2015-01-01","event","description"), new Event("2015-01-02","event2"),new Event("2015-03-01","event3","description3")};
 
-            HTMLWorker newObj = new HTMLWorker(eventsRepo);
+            HTMLDocument newObj = new HTMLDocument(eventsRepo);
             newObj.ExportToHTMLFile(@"HTMLFile.html");
             Assert.IsTrue(File.Exists(@"HTMLFile.html"));
           }

@@ -4,8 +4,6 @@ namespace Calendar
 {
     public class DateFilter : IFilter
     {
-        //string[] AcceptedOperators = { "=","!=", "<", ">", "<=", ">=", "<>" };
-
         string criteria;
         string dateToCompare;
 

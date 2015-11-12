@@ -37,8 +37,9 @@ namespace Calendar
 
         private bool IsValidFilenameAndPath(string fileName)
         {
-            return (!string.IsNullOrEmpty(fileName) &&
-                 fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0);
+            return true;
+            //return (!string.IsNullOrEmpty(fileName) &&
+            //     fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0);
         }
 
         public bool IsValid()

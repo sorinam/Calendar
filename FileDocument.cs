@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Calendar
 {
-    public class FileWorker
+    public class FileDocument
     {
         const string calendarPath = @"Calendar.txt";
 
@@ -38,6 +40,7 @@ namespace Calendar
 
         public void SaveEventsToFile(Events eventsList)
         {
+            
             StreamWriter file = new StreamWriter(calendarPath);
             foreach (Event eventL in eventsList)
             {

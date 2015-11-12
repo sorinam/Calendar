@@ -40,21 +40,13 @@ namespace Calendar
         static void SwitchCommands(string[] args)
         {
             ArgsParser uiObj = new ArgsParser(args);
-            switch (uiObj.FirstArg())
+            switch (args[0].ToLower())
             {
                 case "/add":
                     {
                         if (uiObj.ProcessingAddArguments())
                         {
-                            ConsoleWorker newEvent = new ConsoleWorker();
-                            string date = args[1]; ;
-                            string subject = Utils.CodingNewLineChar(args[2]);
-                            string description = "";
-                            if (args.Length == 4)
-                            {
-                                description = Utils.CodingNewLineChar(args[3]);
-                            }
-                            newEvent.AddDataFromConsole(date, subject, description);
+                            Selector.AddEvents(args);
                         }
                         break;
                     }
@@ -62,7 +54,7 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingListArguments())
                         {
-                            DisplayEvents(DefaultParameter(args));
+                            Selector.DisplayEvents(DefaultParameter(args));
                         }
                         break;
                     }
@@ -70,58 +62,28 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingExportArguments())
                         {
-                            ExportEvents(args);
+                            Selector.ExportEvents(args);
                         }
                         break;
                     }
-                default:
+                case "/search":
                     {
-                        uiObj.InvalidCommand();
-                        break;
-                    }
+                        //if (uiObj.ProcessingSearchArguments())
+                        //{
+                         Selector.SearchEvents(args);
+                        
+                    //}
+                    break;
+            }
+            default:
+                    {
+                uiObj.InvalidCommand();
+                break;
             }
         }
+    }
 
-        private static void ExportEvents(string[] args)
-        {
-            FileWorker files = new FileWorker();
-            Events eventsList = files.LoadEventsFromFile();
-            eventsList.Sort();
-            if (args.Length == 2)
-            {
-                ExportToHTMLFile(@args[1], eventsList);
-            }
-            else
-            {
-                ConsoleWorker evTools = new ConsoleWorker();
-                Events eventsToExport = eventsList.GetFilteredEvents(args[1].ToLower());
-                ExportToHTMLFile(@args[2], eventsToExport);
-            }
-
-        }
-
-        private static void ExportToHTMLFile(string path, Events eventsList)
-        {
-            HTMLWorker exportHtml = new HTMLWorker(eventsList);
-            exportHtml.ExportToHTMLFile(path);
-        }
-
-        static void DisplayEvents(string parameter)
-        {
-            FileWorker files = new FileWorker();
-            Events eventsList = files.LoadEventsFromFile();
-            ConsoleWorker tool = new ConsoleWorker(eventsList);
-
-            if (parameter == "all")
-            {
-                tool.DisplayEventsToConsole();
-            }
-            else
-            {   Events eventsToDisplay = eventsList.GetFilteredEvents(parameter);
-                ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
-                toDisplay.DisplayEventsToConsole();
-            }
-        }
+       
 
         static string DefaultParameter(string[] args)
         {
