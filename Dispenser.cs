@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    public static class Selector
+    public static class Dispenser
     {
-  
         public static void AddEvents(string[] args)
         {
             ConsoleWorker newEvent = new ConsoleWorker();
@@ -69,7 +68,13 @@ namespace Calendar
         {
             FileDocument files = new FileDocument();
             Events eventsList = files.LoadEventsFromFile();
-           
+
+            SearchAndExport(args, eventsList);
+
+        }
+
+        public static Events SearchAndExport(string[] args, Events eventsList)
+        {
             int indexExport = GetIndexOfExportParameter(args);
 
             string[] searchArgs = new string[args.Length];
@@ -93,7 +98,7 @@ namespace Calendar
             {
                 ExportToHTMLFile(args[indexExport + 1], filteredList);
             }
-
+            return filteredList;
         }
 
         private static Events FilterEvents(Events eventsList, string[] searchArgs)

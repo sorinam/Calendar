@@ -65,6 +65,7 @@
     <Compile Include="TestDescriptionFilter.cs" />
     <Compile Include="TestListArg.cs" />
     <Compile Include="TestSearchByDateFromConsole.cs" />
+    <Compile Include="TestSearchByDescriptionFromConsole.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Calendar.csproj">

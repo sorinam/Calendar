@@ -46,7 +46,7 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingAddArguments())
                         {
-                            Selector.AddEvents(args);
+                            Dispenser.AddEvents(args);
                         }
                         break;
                     }
@@ -54,7 +54,7 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingListArguments())
                         {
-                            Selector.DisplayEvents(DefaultParameter(args));
+                            Dispenser.DisplayEvents(DefaultParameter(args));
                         }
                         break;
                     }
@@ -62,7 +62,7 @@ namespace Calendar
                     {
                         if (uiObj.ProcessingExportArguments())
                         {
-                            Selector.ExportEvents(args);
+                            Dispenser.ExportEvents(args);
                         }
                         break;
                     }
@@ -70,7 +70,7 @@ namespace Calendar
                     {
                         //if (uiObj.ProcessingSearchArguments())
                         //{
-                         Selector.SearchEvents(args);
+                         Dispenser.SearchEvents(args);
                         
                     //}
                     break;

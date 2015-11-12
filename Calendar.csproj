@@ -59,7 +59,7 @@
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />
     <Compile Include="SearchArgument.cs" />
-    <Compile Include="Selector.cs" />
+    <Compile Include="Dispenser.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="FileDocument.cs" />
     <Compile Include="Program.cs" />
