@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 
 namespace Calendar
 {
@@ -27,7 +29,7 @@ namespace Calendar
         }
 
         public Event(string line)
-        {
+        {           
             string[] words = line.Split('\t');
             if (words.Length == 3)
             {
@@ -44,8 +46,7 @@ namespace Calendar
         }
 
         public Event(string date, string subject, string description="")
-        {
-            DateTime convertedDate;
+        {       DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
             {
                 SetMembers(subject, description, convertedDate);
@@ -65,7 +66,9 @@ namespace Calendar
 
         public string StringParser ()
         {
-           String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + description;
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = ci;
+            String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + description;
             return newString;
         }
 
