@@ -55,12 +55,13 @@
     <Compile Include="Events.cs" />
     <Compile Include="ExportArgument.cs" />
     <Compile Include="Filter.cs" />
-    <Compile Include="HTMLWorker.cs" />
+    <Compile Include="HTMLDocument.cs" />
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />
     <Compile Include="SearchArgument.cs" />
+    <Compile Include="Selector.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="FileWorker.cs" />
+    <Compile Include="FileDocument.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamWorker.cs" />

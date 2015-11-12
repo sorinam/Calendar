@@ -17,16 +17,7 @@ namespace Calendar
             AddArgument addArgs = new AddArgument(args);
             if (addArgs.IsValid())
             {
-                DateTime dateTime;
-                if (DateTime.TryParse(args[1], out dateTime))
-                {
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
-                    return false;
-                }
+                return (Utils.IsValidDate(args[1])) ? true: false;
             }
             else
             {
@@ -34,6 +25,9 @@ namespace Calendar
                 return false;
             }
        }
+
+      
+
         public bool ProcessingListArguments()
         {
             ListArgument listArgs = new ListArgument(args);
@@ -52,7 +46,7 @@ namespace Calendar
         {
             SearchArgument searchArgs = new SearchArgument(args);
             if (searchArgs.IsValid())
-            {
+            {               
                 return true;
             }
             else
@@ -80,5 +74,7 @@ namespace Calendar
         {
             Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
         }
+
+       
     }
 }

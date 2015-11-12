@@ -26,7 +26,7 @@ namespace Calendar
 
         public void AddDataFromConsole(string date, string subject, string description)
         {
-            FileWorker file = new FileWorker();
+            FileDocument file = new FileDocument();
             eventsList = file.LoadEventsFromFile();
             eventsList.Add(date, subject, description);
             file.SaveEventsToFile(eventsList);

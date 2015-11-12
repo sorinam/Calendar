@@ -45,14 +45,21 @@ namespace Calendar
 
         FilteringCriteriaParser[] AcceptedParameters = {
                 new FilteringCriteriaParser("equal","="),
+                new FilteringCriteriaParser("=","="),
                 new FilteringCriteriaParser("past","<"),
+                new FilteringCriteriaParser("<","<"),
+                new FilteringCriteriaParser("<=","<="),
+                new FilteringCriteriaParser(">=",">="),
+                new FilteringCriteriaParser(">",">"),
+                new FilteringCriteriaParser("<>","<>"),
                 new FilteringCriteriaParser("future",">"),
-                new FilteringCriteriaParser("beetwen","<>"),
-                new FilteringCriteriaParser("not equal ","!="),
+                new FilteringCriteriaParser("between","<>"),
+                new FilteringCriteriaParser("not equal","!="),
+                new FilteringCriteriaParser("!=","!="),
                 new FilteringCriteriaParser("today","="),
                 new FilteringCriteriaParser("contains",">"),
-                new FilteringCriteriaParser("older than","<"),
-                new FilteringCriteriaParser("newer than",">"),
+                new FilteringCriteriaParser("older","<"),
+                new FilteringCriteriaParser("newer",">"),
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)
@@ -73,6 +80,19 @@ namespace Calendar
                 ev.Subject.ShouldEqual(expectedList[i].Subject);
                 ev.Description.ShouldEqual(expectedList[i].Description);
                 i++;
+            }
+        }
+        public static bool IsValidDate(string date)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParse(date, out dateTime))
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("\n\t Bad Date/Time format or conversion not supported!");
+                return false;
             }
         }
     }

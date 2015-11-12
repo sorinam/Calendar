@@ -9,9 +9,10 @@ namespace Calendar
     class SearchArgument:IArgument
     {
         const string searchArg = "/search";
-        string[] date = { "date", "equal","=","!=", "not equal","<>", "between","<","older than",">","newer than"};
+        string[] date = { "date", "equal","=","!=", "not equal","<>", "between","<","older",">","newer"};
         string[] description = { "description", "!=", "not equal", "=", "equal", "contains" };
         const int parameters = 4;
+        const int optionalParameters = 1;
         string[] inputArgs;
 
         public SearchArgument(string[] args)
@@ -33,7 +34,7 @@ namespace Calendar
 
         public bool IsValid()
         {
-            if (inputArgs.Length >= parameters)
+            if (inputArgs.Length >= (parameters-optionalParameters))
             {
                 if (IsValidFirstParameter(inputArgs[0]))
                 {
@@ -44,11 +45,11 @@ namespace Calendar
                             case "date":
                                 {
                                     if ((IsValidDateFilterOperator(inputArgs[2].ToLower())) &&
-                                        (!(inputArgs[3].ToLower().Contains("between"))) && (inputArgs.Length == 4))
+                                        (!(inputArgs[3].ToLower().Contains("between"))) && (inputArgs.Length == 4)&&Utils.IsValidDate(inputArgs[3]))
                                     { return true; };
 
                                     if ((IsValidDateFilterOperator(inputArgs[2].ToLower())) &&
-                                         ((inputArgs[3].ToLower().Contains("between"))) && (inputArgs.Length == 5))
+                                         ((inputArgs[3].ToLower().Contains("between"))) && (inputArgs.Length == 5) && Utils.IsValidDate(inputArgs[3])&& Utils.IsValidDate(inputArgs[4]))
                                     { return true; };
                                     return false;
                                 }

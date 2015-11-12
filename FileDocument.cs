@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Calendar
 {
-    public class FileWorker
+    public class FileDocument
     {
         const string calendarPath = @"Calendar.txt";
 
