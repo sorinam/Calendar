@@ -9,11 +9,17 @@ namespace Calendar
     class SearchArgument:IArgument
     {
         const string searchArg = "/search";
-        string[] date = { "date", "equal","=","!=", "not equal","<>", "between","<","older",">","newer"};
+        string[] date = { "date", "equal","=","!=", "not equal","<>", "between","<","older",">","newer","today"};
         string[] description = { "description", "!=", "not equal", "=", "equal", "contains" };
         const int parameters = 4;
         const int optionalParameters = 1;
         string[] inputArgs;
+
+        string fieldName = "";
+        string op1 = "";
+        string op2 = "";
+        string criteria = "";
+        string value = "";
 
         public SearchArgument(string[] args)
         {
@@ -32,7 +38,7 @@ namespace Calendar
         }
 
 
-        public bool IsValid()
+        public bool IsValid1()
         {
             if (inputArgs.Length >= (parameters-optionalParameters))
             {
@@ -69,6 +75,39 @@ namespace Calendar
             }
             return false;
         }
+
+        public bool IsValid()
+        {
+            switch (inputArgs[1].ToLower())
+            {
+                case "date":
+                    {
+                      if( IsValidDateFilterParametrs(inputArgs) )return true;
+                        break;
+                    }
+                case "description":
+                    {
+                        if (IsValidDescriptionFilterParametrs(inputArgs)) return true;
+                        break;
+                    }
+                default:
+                    {
+                        return false;
+                    }
+            }
+            return false;
+        }
+
+        private bool IsValidDescriptionFilterParametrs(string[] inputArgs)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsValidDateFilterParametrs(string[] inputArgs)
+        {
+            throw new NotImplementedException(); ;
+        }
+
         private bool IsValidDateFilterOperator(string arg)
         {
             for (int i = 1; i < date.Length; i++)

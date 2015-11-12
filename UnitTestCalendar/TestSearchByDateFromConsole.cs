@@ -21,7 +21,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "date", "=", "2015/01/01)" };
 
-            Events filteredList = Selector.GetFilteredListByDate(newEvents, inputArgs);
+            Events filteredList = Selector.GetFilteredListByDate(newEvents, ref inputArgs);
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }

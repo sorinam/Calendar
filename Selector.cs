@@ -104,7 +104,7 @@ namespace Calendar
             {
                 case "date":
                     {
-                        filteredList = GetFilteredListByDate(eventsList, searchArgs);
+                        filteredList = GetFilteredListByDate(eventsList, ref searchArgs);
                         break;
                     }
                 case "description":
@@ -130,7 +130,7 @@ namespace Calendar
                 case 3:
                     {
                         string criteria = "=";
-                        filteredList = DescriptionFiltering(eventsList, criteria, parameter[2]);
+                        filteredList = DescriptionFiltering(eventsList, criteria,parameter[2]);
                         break;
                     }
                 case 4:
@@ -143,7 +143,7 @@ namespace Calendar
             return filteredList;
         }
 
-        public static Events GetFilteredListByDate(Events eventsList, string[] parameter)
+        public static Events GetFilteredListByDate(Events eventsList, ref string[] parameter)
         {
             Events filteredList = new Events();
             switch (parameter.Length)
@@ -151,6 +151,11 @@ namespace Calendar
                 case 3:
                     {
                         string criteria = "=";
+                        string date = parameter[2];
+                        if (parameter[2] == "today")
+                        {
+                            parameter[2] = DateTime.Today.ToShortDateString();
+                        }
                         filteredList = SimpleDateFiltering(eventsList, criteria, parameter[2]);
                         break;
                     }
