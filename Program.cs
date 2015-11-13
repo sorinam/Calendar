@@ -77,9 +77,12 @@ namespace Calendar
                     }
                 case "/search":
                     {
-                        Dispenser.SearchEvents(args);
-
-                        break;
+                        if (AreValidSearchArguments(args))
+                        {
+                            Dispenser.SearchEvents(args);
+                        }
+                            break;
+                        
                     }
                 default:
                     {
@@ -117,7 +120,7 @@ namespace Calendar
             }
         }
 
-        static bool ValidateSearchArguments(string[] args)
+        static bool AreValidSearchArguments(string[] args)
         {
             SearchArgument searchArgs = new SearchArgument(args);
             if (searchArgs.IsValid())
