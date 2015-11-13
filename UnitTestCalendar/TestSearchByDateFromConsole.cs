@@ -4,6 +4,7 @@ using Calendar;
 using System.Collections.Generic;
 using Should;
 using System.IO;
+using System.Globalization;
 
 namespace UnitTestCalendar
 {
@@ -132,6 +133,27 @@ namespace UnitTestCalendar
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
+
+
+        [TestMethod]
+        public void ShouldListEventsFromThisWeek()
+        {
+            Events newEvents = new Events {
+                { new Event ( "2015/01/01", "one", "test") },
+                { new Event(DateTime.Today.ToShortDateString(),"two") },
+        };
+
+            List<Event> expectedList = new List<Event>
+            {{ new Event(DateTime.Today.ToShortDateString(),"two") },
+            };
+        
+            string[] inputArgs = { "/search", "date", "this week" };
+
+            Events filteredList = Dispenser.SearchAndExport(inputArgs, newEvents);
+
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
+
     }
 }
 

@@ -160,8 +160,17 @@ namespace Calendar
                         if (parameter[2] == "today")
                         {
                             parameter[2] = DateTime.Today.ToShortDateString();
+                            filteredList = SimpleDateFiltering(eventsList, criteria, parameter[2]);
                         }
-                        filteredList = SimpleDateFiltering(eventsList, criteria, parameter[2]);
+                        else
+                        {
+                            if (parameter[2] == ("this week"))
+                            {
+                                string firstDayOfWeek, endDayOfWeek;
+                                Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstDayOfWeek, out endDayOfWeek);
+                                filteredList = DoubleDateFiltering(eventsList, firstDayOfWeek, endDayOfWeek);
+                            }
+                        }
                         break;
                     }
                 case 4:
@@ -171,20 +180,20 @@ namespace Calendar
                     }
                 case 5:
                     {
-                      filteredList = DoubleDateFiltering(eventsList, parameter);
+                      filteredList = DoubleDateFiltering(eventsList, parameter[3],parameter[4]);
                       break;
                     }
             }
             return filteredList;
         }
 
-        private static Events DoubleDateFiltering(Events eventsList, string[] parameter)
+        private static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
         {
             string firstCriteria = "<";
             string secondCriteria = ">";
            
-            Events firstFilteredList = SimpleDateFiltering(eventsList, firstCriteria, parameter[4]);
-            Events filteredList = SimpleDateFiltering(firstFilteredList, secondCriteria, parameter[3]);
+            Events firstFilteredList = SimpleDateFiltering(eventsList, firstCriteria, endDate);
+            Events filteredList = SimpleDateFiltering(firstFilteredList, secondCriteria, beginDate);
             return filteredList;
         }
 

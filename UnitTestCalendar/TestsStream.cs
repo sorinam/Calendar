@@ -46,7 +46,7 @@ namespace UnitTestCalendar
             newEvent.Add(date, subject, description);
 
             byte[] byteArray = Encoding.UTF8.GetBytes(myFile);
-            using (StreamWriter stream = new StreamWriter(myFile))
+            using (StreamReader stream = new StreamReader(myFile))
             {
                 using (StreamWorker streamObj = new StreamWorker())
                 {

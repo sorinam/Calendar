@@ -6,7 +6,7 @@ namespace Calendar
 {
     public class StreamWorker:IDisposable
     {
-        private Stream streamObj;
+        Stream  streamObj;
    
         public StreamWorker(Stream stream)
         {

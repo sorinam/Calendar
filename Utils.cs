@@ -95,6 +95,21 @@ namespace Calendar
                 return false;
             }
         }
+
+        public static void GetBeginEndDaysOfThisWeek(string date,out string beginDateofWeek, out string endDayOfWeek)
+        {
+            beginDateofWeek = "";
+            endDayOfWeek = "";
+            if (IsValidDate(date))
+            {   DateTime inputDate= DateTime.Parse(date);
+
+                DateTime firstDay =inputDate.AddDays(-(int)inputDate.DayOfWeek);
+                DateTime endDay = firstDay.AddDays(6);
+
+                beginDateofWeek = firstDay.ToString("yyyy/MM/dd");
+                endDayOfWeek = endDay.ToString("yyyy/MM/dd");
+            }
+        }
     }
     
 }
