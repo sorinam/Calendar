@@ -35,6 +35,16 @@ namespace Calendar
             Console.WriteLine("\n\n /export filename.html\t\t export all events from calendar to HTML file ");
             Console.WriteLine("         past filename.html\t export past events from calendar to HTML file ");
             Console.WriteLine("         future filename.html\t export future events from calendar to HTML file ");
+            Console.WriteLine("\n\n /search <field name> <operator> <value> [/export fine.html]");
+            Console.WriteLine("\n \t\t  <field name> can be 'date' or 'description' ");
+            Console.WriteLine("\t\t  <operator>can be 'equal '='");
+            Console.WriteLine("\t\t\t\t   'not equal '!='");
+            Console.WriteLine("\t\t\t\t   'between '<>' - only for date");
+            Console.WriteLine("\t\t\t\t   'older' '<'-only for date");
+            Console.WriteLine("\t\t\t\t   'newer' '>'-only for date");
+            Console.WriteLine("\t\t\t\t   'contains' - only for description");
+            Console.WriteLine("\t\t  <value> \t   valid values for field");
+            Console.WriteLine("\t\t\t\t   'today' -only for date");
         }
 
         static void SwitchCommands(string[] args)
