@@ -134,7 +134,6 @@ namespace UnitTestCalendar
             Utils.AssertAreEqual(filteredList, expectedList);
         }
 
-
         [TestMethod]
         public void ShouldListEventsFromThisWeek()
         {

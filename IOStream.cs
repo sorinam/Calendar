@@ -18,11 +18,6 @@ namespace Calendar
             streamObj = new MemoryStream();
         }
 
-        public Stream StreamObj
-        {
-            get { return streamObj; }
-        }
-       
         public string[] GetLinesFromStream()
         {
             streamObj.Position = 0;
@@ -40,7 +35,7 @@ namespace Calendar
         public void ExportEventsInHTMLStream(Events eventsList)
         {
             string beginTags = "<!DOCTYPE html>\n<html>\n<head>\n<title>Events List</title>\n</head>\n<body>";
-            string endTags = "\n</body>\n</html> ";
+            string endTags = "\n</body>\n</html>";
             using (StreamWriter w = new StreamWriter(streamObj, Encoding.UTF8))
             {
                 w.Write(beginTags);
@@ -54,7 +49,7 @@ namespace Calendar
                     w.Write(htmlData);
                 }
                 w.Write(endTags);
-           }
+              }
         }
 
         static Stream StringToStream(string src)

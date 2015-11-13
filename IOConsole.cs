@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Calendar
 {
@@ -49,9 +47,7 @@ namespace Calendar
             eventsList.Sort();
             foreach (Event line in eventsList)
             {
-                //Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(" \nDate:{0}", line.Date.ToString("yyyy/MM/dd"));
-                //Console.ResetColor();
                 Console.Write(" \nSubject:{0}", Utils.DecodingNewLineChar(line.Subject));
                 if (line.Description != "") Console.Write(" \nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
                 Console.Write("\n");

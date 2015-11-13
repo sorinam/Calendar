@@ -80,16 +80,6 @@ namespace Calendar
         {
             eventsList.Sort();
         }
-
-        //public Events GetFilteredEventsByToday(string parameter)
-        //{
-        //    string criteria = Utils.ParseFilteringCriteria(parameter);
-
-        //    string today = DateTime.Now.ToShortDateString();
-        //    DateFilter eventsToDisplay = new DateFilter(criteria, today);
-        //    return eventsToDisplay.ApplyFilter(new Events(eventsList));
-         
-        //}
                
         public IEnumerator<Event> GetEnumerator()
         {
