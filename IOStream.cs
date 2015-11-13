@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Calendar
 {
-    public class StreamWorker:IDisposable
+    public class IOStream:IDisposable
     {
         Stream  streamObj;
    
-        public StreamWorker(Stream stream)
+        public IOStream(Stream stream)
         {
             streamObj = stream;
         }
 
-        public StreamWorker()
+        public IOStream()
         {
             streamObj = new MemoryStream();
         }
@@ -31,7 +31,7 @@ namespace Calendar
             return result;
         }
 
-        public StreamWorker(Events list)
+        public IOStream(Events list)
         {
             string stringContent = list.ToOneString();
             streamObj = StringToStream(stringContent);

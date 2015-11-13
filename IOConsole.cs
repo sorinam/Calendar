@@ -5,28 +5,28 @@ using System.Text.RegularExpressions;
 
 namespace Calendar
 {
-    public class ConsoleWorker
+    public class IOConsole
     {
         Events eventsList;
 
-        public ConsoleWorker(List <Event> list)
+        public IOConsole(List <Event> list)
         {
          eventsList=new Events(list);
         }
 
-        public ConsoleWorker(Events list)
+        public IOConsole(Events list)
         {
             eventsList = list;
         }
 
-        public ConsoleWorker()
+        public IOConsole()
         {
             eventsList = new Events();
         }
 
         public void AddDataFromConsole(string date, string subject, string description)
         {
-            FileDocument file = new FileDocument();
+            TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
             eventsList.Add(date, subject, description);
             file.SaveEventsToFile(eventsList);

@@ -49,12 +49,11 @@ namespace Calendar
 
         static void SwitchCommands(string[] args)
         {
-            ArgsParser uiObj = new ArgsParser(args);
             switch (args[0].ToLower())
             {
                 case "/add":
                     {
-                        if (uiObj.ProcessingAddArguments())
+                        if (AreValidAddArguments(args))
                         {
                             Dispenser.AddEvents(args);
                         }
@@ -62,7 +61,7 @@ namespace Calendar
                     }
                 case "/list":
                     {
-                        if (uiObj.ProcessingListArguments())
+                        if (AreValidListArguments(args))
                         {
                             Dispenser.DisplayEvents(DefaultParameter(args));
                         }
@@ -70,7 +69,7 @@ namespace Calendar
                     }
                 case "/export":
                     {
-                        if (uiObj.ProcessingExportArguments())
+                        if (AreValidExportArguments(args))
                         {
                             Dispenser.ExportEvents(args);
                         }
@@ -78,22 +77,78 @@ namespace Calendar
                     }
                 case "/search":
                     {
-                        //if (uiObj.ProcessingSearchArguments())
-                        //{
-                         Dispenser.SearchEvents(args);
-                        
-                    //}
-                    break;
-            }
-            default:
+                        Dispenser.SearchEvents(args);
+
+                        break;
+                    }
+                default:
                     {
-                uiObj.InvalidCommand();
-                break;
+                        InvalidCommand();
+                        break;
+                    }
             }
         }
-    }
 
-       
+        static bool AreValidAddArguments(string[] args)
+        {
+            AddArgument addArgs = new AddArgument(args);
+            if (addArgs.IsValid())
+            {
+                return (Utils.IsValidDate(args[1])) ? true : false;
+            }
+            else
+            {
+                InvalidCommand();
+                return false;
+            }
+        }
+
+        static bool AreValidListArguments(string[] args)
+        {
+            ListArgument listArgs = new ListArgument(args);
+            if (listArgs.IsValid())
+            {
+                return true;
+            }
+            else
+            {
+                InvalidCommand();
+                return false;
+            }
+        }
+
+        static bool ValidateSearchArguments(string[] args)
+        {
+            SearchArgument searchArgs = new SearchArgument(args);
+            if (searchArgs.IsValid())
+            {
+                return true;
+            }
+            else
+            {
+                InvalidCommand();
+                return false;
+            }
+        }
+
+        static bool AreValidExportArguments(string[] args)
+        {
+            ExportArgument exportArgs = new ExportArgument(args);
+            if (exportArgs.IsValid())
+            {
+                return true;
+            }
+            else
+            {
+                InvalidCommand();
+                return false;
+            }
+        }
+
+        static void InvalidCommand()
+        {
+            Console.WriteLine("\n\t Invalid command.Use calendar.exe /? for more details.");
+        }
 
         static string DefaultParameter(string[] args)
         {

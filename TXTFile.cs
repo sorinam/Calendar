@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Calendar
 {
-    public class FileDocument
+    public class TXTFile
     {
         const string calendarPath = @"Calendar.txt";
 
@@ -32,7 +32,7 @@ namespace Calendar
             }
             using (FileStream fs = new FileStream(calendarPath, FileMode.Open))
             {
-                StreamWorker streamObj = new StreamWorker(fs);
+                IOStream streamObj = new IOStream(fs);
                 lines = streamObj.GetLinesFromStream();
             };
             return lines;

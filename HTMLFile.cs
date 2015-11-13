@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    public class HTMLDocument
+    public class HTMLFile
     {
         Events eventsList;
 
-        public HTMLDocument(List<Event> list)
+        public HTMLFile(List<Event> list)
         {
             eventsList = new Events(list);
         }
-        public HTMLDocument(Events list)
+        public HTMLFile(Events list)
         {
             eventsList = list;
         }
 
-        public HTMLDocument()
+        public HTMLFile()
         {
             eventsList = new Events();
         }
@@ -31,7 +31,7 @@ namespace Calendar
                 using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
                     Console.WriteLine("\n\tExporting file...");
-                    StreamWorker stremObj = new StreamWorker(fs);
+                    IOStream stremObj = new IOStream(fs);
                     stremObj.ExportEventsInHTMLStream(eventsList);
                 }
                 Console.WriteLine("\n\t{0} events were exported in '{1}' file .\n", eventsList.Length, path);

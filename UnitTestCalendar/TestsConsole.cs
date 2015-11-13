@@ -25,7 +25,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject, description);
 
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
         
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -46,7 +46,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject, description);
 
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -66,7 +66,7 @@ namespace UnitTestCalendar
             newEvent.EventsList.ShouldBeEmpty();
             newEvent.Add(date, subject);
 
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -97,7 +97,7 @@ namespace UnitTestCalendar
 
 
             Console.SetOut(consoleOut);
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -107,7 +107,7 @@ namespace UnitTestCalendar
         public void ShouldDisplayPastEvents()
         {
             Events newEvents = new Events();
-            ConsoleWorker toDisplay = new ConsoleWorker();
+            IOConsole toDisplay = new IOConsole();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -131,7 +131,7 @@ namespace UnitTestCalendar
             DateFilter eventsToDisplay = new DateFilter("<", today);
             Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
-            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            IOConsole newObj = new IOConsole(filteredList);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -142,7 +142,7 @@ namespace UnitTestCalendar
         public void ShouldDisplayFutureEvents()
         {
             Events newEvents = new Events();
-            ConsoleWorker toDisplay = new ConsoleWorker();
+            IOConsole toDisplay = new IOConsole();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -165,7 +165,7 @@ namespace UnitTestCalendar
             DateFilter eventsToDisplay = new DateFilter( ">", today);
             Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
-            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            IOConsole newObj = new IOConsole(filteredList);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
@@ -174,7 +174,7 @@ namespace UnitTestCalendar
         public void ShouldDisplayEventsFromCertainDate()
         {
             Events newEvents = new Events();
-            ConsoleWorker toDisplay = new ConsoleWorker();
+            IOConsole toDisplay = new IOConsole();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -196,14 +196,14 @@ namespace UnitTestCalendar
             DateFilter eventsToDisplay = new DateFilter("=", "2015/10/25");
             Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
 
-            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            IOConsole newObj = new IOConsole(filteredList);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
         [TestMethod]
         public void ShouldDisplayEventsBeetwenTwoDate()
         {
-            ConsoleWorker toDisplay = new ConsoleWorker();
+            IOConsole toDisplay = new IOConsole();
 
             string expectedConsole;
             var consoleOut = new StringWriter();
@@ -224,7 +224,7 @@ namespace UnitTestCalendar
             DateFilter eventsToDisplay = new DateFilter( ">", "2015/02/25");
             Events filteredList = eventsToDisplay.ApplyFilter(firstFilteredList);
 
-            ConsoleWorker newObj = new ConsoleWorker(filteredList);
+            IOConsole newObj = new IOConsole(filteredList);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
@@ -265,7 +265,7 @@ namespace UnitTestCalendar
 
 
             Console.SetOut(consoleOut);
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
 
@@ -283,7 +283,7 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
 
-            ConsoleWorker newObj = new ConsoleWorker(newEvent);
+            IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
 
             consoleOut.ToString().ShouldContain(expectedConsole);
@@ -307,7 +307,7 @@ namespace UnitTestCalendar
             List<Event> eventsRepo = new List<Event>
             {new Event("2015-01-01","event","description"), new Event("2015-01-02","event2"),new Event("2015-03-01","event3","description3")};
 
-            HTMLDocument newObj = new HTMLDocument(eventsRepo);
+            HTMLFile newObj = new HTMLFile(eventsRepo);
             newObj.ExportToHTMLFile(@"HTMLFile.html");
             Assert.IsTrue(File.Exists(@"HTMLFile.html"));
           }

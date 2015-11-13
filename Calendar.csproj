@@ -51,21 +51,20 @@
     <Compile Include="Argument.cs" />
     <Compile Include="DateFilter.cs" />
     <Compile Include="Event.cs" />
-    <Compile Include="ConsoleWorker.cs" />
+    <Compile Include="IOConsole.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="ExportArgument.cs" />
     <Compile Include="Filter.cs" />
-    <Compile Include="HTMLDocument.cs" />
+    <Compile Include="HTMLFile.cs" />
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />
     <Compile Include="SearchArgument.cs" />
     <Compile Include="Dispenser.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="FileDocument.cs" />
+    <Compile Include="TXTFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StreamWorker.cs" />
-    <Compile Include="ArgsParser.cs" />
+    <Compile Include="IOStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

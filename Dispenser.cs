@@ -10,7 +10,7 @@ namespace Calendar
     {
         public static void AddEvents(string[] args)
         {
-            ConsoleWorker newEvent = new ConsoleWorker();
+            IOConsole newEvent = new IOConsole();
             string date = args[1]; ;
             string subject = Utils.CodingNewLineChar(args[2]);
             string description = "";
@@ -24,9 +24,9 @@ namespace Calendar
 
         public static void DisplayEvents(string parameter)
         {
-            FileDocument files = new FileDocument();
+            TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            ConsoleWorker display = new ConsoleWorker(eventsList);
+            IOConsole display = new IOConsole(eventsList);
 
             if (parameter == "all")
             {
@@ -36,14 +36,14 @@ namespace Calendar
             {
                 string criteria = Utils.ParseFilteringCriteria(parameter);
                 Events eventsToDisplay = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
-                ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
+                IOConsole toDisplay = new IOConsole(eventsToDisplay);
                 toDisplay.DisplayEventsToConsole();
             }
         }
 
         public static void ExportEvents(string[] args)
         {
-            FileDocument files = new FileDocument();
+            TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
             eventsList.Sort();
             if (args.Length == 2)
@@ -52,7 +52,7 @@ namespace Calendar
             }
             else
             {
-                ConsoleWorker evTools = new ConsoleWorker();
+                IOConsole evTools = new IOConsole();
                 string criteria = Utils.ParseFilteringCriteria(args[1]);
                 Events eventsToExport = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
                 ExportToHTMLFile(@args[2], eventsToExport);
@@ -62,20 +62,20 @@ namespace Calendar
 
         public static void ExportToHTMLFile(string path, Events eventsList)
         {
-            HTMLDocument exportHtml = new HTMLDocument(eventsList);
+            HTMLFile exportHtml = new HTMLFile(eventsList);
             exportHtml.ExportToHTMLFile(path);
         }
 
         public static void SearchEvents(string[] args)
         {
-            FileDocument files = new FileDocument();
+            TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
 
-            SearchAndExport(args, eventsList);
+            SearchAndExportIfNecessary(args, eventsList);
 
         }
 
-        public static Events SearchAndExport(string[] args, Events eventsList)
+        public static Events SearchAndExportIfNecessary(string[] args, Events eventsList)
         {
             int indexExport = GetIndexOfExportParameter(args);
 
@@ -93,7 +93,7 @@ namespace Calendar
 
             Events filteredList = FilterEvents(eventsList, searchArgs);
 
-            ConsoleWorker toDisplay = new ConsoleWorker(filteredList);
+            IOConsole toDisplay = new IOConsole(filteredList);
             toDisplay.DisplayEventsToConsole();
 
             if (indexExport > 0)
@@ -137,7 +137,7 @@ namespace Calendar
                 case 3:
                     {
                         string criteria = "=";
-                        filteredList = DescriptionFiltering(eventsList, criteria,parameter[2]);
+                        filteredList = DescriptionFiltering(eventsList, criteria, parameter[2]);
                         break;
                     }
                 case 4:
@@ -145,7 +145,7 @@ namespace Calendar
                         filteredList = DescriptionFiltering(eventsList, parameter[2], parameter[3]);
                         break;
                     }
-               
+
             }
             return filteredList;
         }
@@ -167,18 +167,23 @@ namespace Calendar
                             {
                                 filteredList = GetThisWeekEvents(eventsList);
                             }
+                            else
+                                if (Utils.IsValidDate(parameter[2]))
+                            {
+                                filteredList = SimpleDateFiltering(eventsList, "=", parameter[2]);
+                            }
                         }
                         break;
                     }
                 case 4:
                     {
-                       filteredList = SimpleDateFiltering(eventsList, parameter[2],parameter[3]);
-                       break;
+                        filteredList = SimpleDateFiltering(eventsList, parameter[2], parameter[3]);
+                        break;
                     }
                 case 5:
                     {
-                      filteredList = DoubleDateFiltering(eventsList, parameter[3],parameter[4]);
-                      break;
+                        filteredList = DoubleDateFiltering(eventsList, parameter[3], parameter[4]);
+                        break;
                     }
             }
             return filteredList;
@@ -206,7 +211,7 @@ namespace Calendar
         {
             string firstCriteria = "<";
             string secondCriteria = ">";
-           
+
             Events firstFilteredList = SimpleDateFiltering(eventsList, firstCriteria, endDate);
             Events filteredList = SimpleDateFiltering(firstFilteredList, secondCriteria, beginDate);
             return filteredList;
@@ -214,9 +219,9 @@ namespace Calendar
 
         private static Events SimpleDateFiltering(Events eventsList, string criteria, string value)
         {
-            DateFilter eventsToFilter = new DateFilter(Utils.ParseFilteringCriteria(criteria),value);
+            DateFilter eventsToFilter = new DateFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
-       }
+        }
         private static Events DescriptionFiltering(Events eventsList, string criteria, string value)
         {
             DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);

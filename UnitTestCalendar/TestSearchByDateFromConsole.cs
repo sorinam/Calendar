@@ -24,7 +24,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "date", "=", "2015/01/01" };
 
-            Events filteredList = Dispenser.SearchAndExport(inputArgs, newEvents);
+            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -42,7 +42,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "date", "=", "2015/01/01", "/export","test.html"};
 
-            Events filteredList = Dispenser.SearchAndExport(inputArgs, newEvents);
+            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
 
             Utils.AssertAreEqual(filteredList, expectedList);
             File.Exists(@"test.html)");
@@ -149,7 +149,7 @@ namespace UnitTestCalendar
         
             string[] inputArgs = { "/search", "date", "this week" };
 
-            Events filteredList = Dispenser.SearchAndExport(inputArgs, newEvents);
+            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
