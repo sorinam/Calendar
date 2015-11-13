@@ -228,38 +228,7 @@ namespace UnitTestCalendar
             newObj.DisplayEventsToConsole();
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
-
-
-        [TestMethod]
-        public void ShouldNotDisplayEventsForInvalidListParameter()
-        {
-            Events newEvents = new Events();
-            ConsoleWorker toDisplay = new ConsoleWorker();
-
-            string expectedConsole = "";
-            var consoleOut = new StringWriter();
-
-            string date = "2019/12/25";
-            string subject = "Christmas Day!";
-            string description = "Santa Claus is comming in our house....";
-
-            string date1 = "2015/10/25";
-            string subject1 = "Johana's Birtday!";
-            string description1 = "Don't forget to call her...";
-
-            newEvents.EventsList.ShouldBeEmpty();
-            newEvents.Add(date, subject, description);
-            newEvents.Add(date1, subject1, description1);
-
-            Events eventsToDisplay = newEvents.GetFilteredEventsByToday("fture");
-
-            ConsoleWorker newObj = new ConsoleWorker(eventsToDisplay);
-            newObj.DisplayEventsToConsole();
-
-            consoleOut.ToString().ShouldContain(expectedConsole);
-
-        }
-
+        
         [TestMethod]
         public void ShouldDisplaySortedEvents()
         {

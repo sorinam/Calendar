@@ -34,7 +34,8 @@ namespace Calendar
             }
             else
             {
-                Events eventsToDisplay = eventsList.GetFilteredEventsByToday(parameter);
+                string criteria = Utils.ParseFilteringCriteria(parameter);
+                Events eventsToDisplay = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
                 ConsoleWorker toDisplay = new ConsoleWorker(eventsToDisplay);
                 toDisplay.DisplayEventsToConsole();
             }
@@ -52,7 +53,8 @@ namespace Calendar
             else
             {
                 ConsoleWorker evTools = new ConsoleWorker();
-                Events eventsToExport = eventsList.GetFilteredEventsByToday(args[1].ToLower());
+                string criteria = Utils.ParseFilteringCriteria(args[1]);
+                Events eventsToExport = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
                 ExportToHTMLFile(@args[2], eventsToExport);
             }
 
@@ -155,20 +157,15 @@ namespace Calendar
             {
                 case 3:
                     {
-                        string criteria = "=";
-                        string date = parameter[2];
                         if (parameter[2] == "today")
                         {
-                            parameter[2] = DateTime.Today.ToShortDateString();
-                            filteredList = SimpleDateFiltering(eventsList, criteria, parameter[2]);
+                            filteredList = GetTodayEvents(eventsList);
                         }
                         else
                         {
                             if (parameter[2] == ("this week"))
                             {
-                                string firstDayOfWeek, endDayOfWeek;
-                                Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstDayOfWeek, out endDayOfWeek);
-                                filteredList = DoubleDateFiltering(eventsList, firstDayOfWeek, endDayOfWeek);
+                                filteredList = GetThisWeekEvents(eventsList);
                             }
                         }
                         break;
@@ -184,6 +181,24 @@ namespace Calendar
                       break;
                     }
             }
+            return filteredList;
+        }
+
+        private static Events GetThisWeekEvents(Events eventsList)
+        {
+            Events filteredList;
+            string firstDayOfWeek, endDayOfWeek;
+            Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstDayOfWeek, out endDayOfWeek);
+            filteredList = DoubleDateFiltering(eventsList, firstDayOfWeek, endDayOfWeek);
+            return filteredList;
+        }
+
+        private static Events GetTodayEvents(Events eventsList)
+        {
+            Events filteredList;
+            string criteria = "=";
+            string today = DateTime.Today.ToShortDateString();
+            filteredList = SimpleDateFiltering(eventsList, criteria, today);
             return filteredList;
         }
 
@@ -207,6 +222,7 @@ namespace Calendar
             DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
         }
+
         private static int GetIndexOfExportParameter(string[] args)
         {
             int index = Array.IndexOf(args, "/export");

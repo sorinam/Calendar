@@ -15,12 +15,6 @@ namespace Calendar
         const int optionalParameters = 1;
         string[] inputArgs;
 
-        string fieldName = "";
-        string op1 = "";
-        string op2 = "";
-        string criteria = "";
-        string value = "";
-
         public SearchArgument(string[] args)
         {
             inputArgs = args;
