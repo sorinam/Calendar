@@ -22,9 +22,8 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event ( "2015/01/01", "one", "test") },
             };
-            string[] inputArgs = { "/search", "date", "=", "2015/01/01" };
 
-            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
+            Events filteredList = Dispenser.SearchEvents("date","=","2015/01/01",null, newEvents);
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -40,30 +39,14 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event ( "2015/01/01", "one", "test") },
             };
-            string[] inputArgs = { "/search", "date", "=", "2015/01/01", "/export","test.html"};
+            string[] inputArgs = { "/search", "date", "=", "2015/01/01", "/export", "test.html" };
 
-            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
+            Events filteredList = Dispenser.SearchEvents("date","=","2015/01/01","", newEvents);
 
             Utils.AssertAreEqual(filteredList, expectedList);
             File.Exists(@"test.html)");
         }
-        [TestMethod]
-        public void ShouldListEventsFromToday()
-        {
-            Events newEvents = new Events {
-                { new Event ( "2015/11/11", "one", "test") },
-                {new Event(DateTime.Now.ToShortDateString(),"today","today test") }
-        };
-
-            List<Event> expectedList = new List<Event>
-            {{new Event(DateTime.Now.ToShortDateString(),"today","today test") }
-            };
-            string[] inputArgs = { "/search", "date", "today" };
-            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ref inputArgs);
-
-            Utils.AssertAreEqual(filteredList, expectedList);
-
-        }
+        
 
         [TestMethod]
         public void ShouldListEventsFromSpecifiedPeriod()
@@ -73,11 +56,11 @@ namespace UnitTestCalendar
                 {new Event(DateTime.Now.ToShortDateString(),"today","today test") }
         };
 
-            List<Event> expectedList = new List<Event> { 
+            List<Event> expectedList = new List<Event> {
             {new Event ( "2015/10/11", "one", "test") }
             };
-            string[] inputArgs = { "/search", "date","<>","2015/09/01", "2015/10/30" };
-            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ref inputArgs);
+            
+            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, "<>", "2015/09/01", "2015/10/30");
 
             Utils.AssertAreEqual(filteredList, expectedList);
 
@@ -93,7 +76,7 @@ namespace UnitTestCalendar
 
             string[] inputArgs = { "/search", "date", "=", "2015/10/01" };
 
-            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ref inputArgs);
+            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, "=", "2015/10/01", "");
 
             filteredList.ShouldBeEmpty();
         }
@@ -109,50 +92,30 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event ( "2015/01/01", "one", "test") },
             };
-            string[] inputArgs = { "/search", "date", "older", "2015/10/01" };
-
-            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ref inputArgs);
+            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, "older", "2015/09/01", "");
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
 
-        [TestMethod]
-        public void ShouldListNewerEventsFromSpecifiedDate()
-        {
-            Events newEvents = new Events {
+    [TestMethod]
+    public void ShouldListNewerEventsFromSpecifiedDate()
+    {
+        Events newEvents = new Events {
                 { new Event ( "2015/01/01", "one", "test") },
                 {new Event("2015/11/15", "two") },
         };
 
-            List<Event> expectedList = new List<Event>
+        List<Event> expectedList = new List<Event>
             {{ new Event("2015/11/15", "two") },
             };
-            string[] inputArgs = { "/search", "date", ">", "2015/10/01" };
+        string[] inputArgs = { "/search", "date", ">", "2015/10/01" };
 
-            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ref inputArgs);
-
-            Utils.AssertAreEqual(filteredList, expectedList);
-        }
-
-        [TestMethod]
-        public void ShouldListEventsFromThisWeek()
-        {
-            Events newEvents = new Events {
-                { new Event ( "2015/01/01", "one", "test") },
-                { new Event(DateTime.Today.ToShortDateString(),"two") },
-        };
-
-            List<Event> expectedList = new List<Event>
-            {{ new Event(DateTime.Today.ToShortDateString(),"two") },
-            };
-        
-            string[] inputArgs = { "/search", "date", "this week" };
-
-            Events filteredList = Dispenser.SearchAndExportIfNecessary(inputArgs, newEvents);
+            Events filteredList = Dispenser.GetFilteredListByDate(newEvents, ">", "2015/10/01", "");
 
             Utils.AssertAreEqual(filteredList, expectedList);
-        }
+    }
 
+    
     }
 }
 

@@ -14,9 +14,12 @@ namespace Calendar
         string[] descriptionOperator = { "!=", "not equal", "=", "equal", "contains" };
 
         string[] inputArgs;
+        string field;
         string criteria;
         string firstValue;
         string secondValue;
+        public string Field
+        { get { return field; } }
         public string Criteria
         { get { return criteria; } }
         public string Value
@@ -50,11 +53,13 @@ namespace Calendar
             {
                 case "date":
                     {
+                        field = "date";
                         if (IsValidDateFilterParametrs(inputArgs)) return true;
                         break;
                     }
                 case "description":
                     {
+                        field = "description";
                         if (IsValidDescriptionFilterParametrs(inputArgs)) return true;
                         break;
                     }
@@ -148,7 +153,16 @@ namespace Calendar
                 }
             }
             else
-            { return Utils.IsValidDate(inputArgs[2]) ? true : false; }
+            {
+                if (Utils.IsValidDate(inputArgs[2]))
+                {
+                    criteria = "=";
+                    firstValue = inputArgs[2];
+                    return true;
+                }
+                else
+                { return false; }
+            }
         }
 
         private bool IsValidDateFilterParametrs(string[] inputArgs)
