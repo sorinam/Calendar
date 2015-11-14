@@ -70,15 +70,15 @@ namespace Calendar
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            Events filteredList = SearchEvents(field, op, val1, val2, eventsList);
+            Events filteredList = SearchEvents( eventsList,field, op, val1, val2);
             if (path != "")
             {
                 ExportToHTMLFile(path, filteredList);
             }
         }
 
-        public static Events SearchEvents(string field, string op, string val1,string val2, Events eventsList)
-        {
+        public static Events SearchEvents(Events eventsList,string field, string op, string val1,string val2) 
+            {
             Events filteredList = FilterEvents(eventsList,field, op, val1, val2);
 
             IOConsole toDisplay = new IOConsole(filteredList);
@@ -129,29 +129,11 @@ namespace Calendar
 
             return filteredList;
         }
-
-        ////////////private static Events GetThisWeekEvents(Events eventsList)
-        ////////////{
-        ////////////    Events filteredList;
-        ////////////    string firstDayOfWeek, endDayOfWeek;
-        ////////////    Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstDayOfWeek, out endDayOfWeek);
-        ////////////    filteredList = DoubleDateFiltering(eventsList, firstDayOfWeek, endDayOfWeek);
-        ////////////    return filteredList;
-        ////////////}
-
-        ////////////private static Events GetTodayEvents(Events eventsList)
-        ////////////{
-        ////////////    Events filteredList;
-        ////////////    string criteria = "=";
-        ////////////    string today = DateTime.Today.ToShortDateString();
-        ////////////    filteredList = SimpleDateFiltering(eventsList, criteria, today);
-        ////////////    return filteredList;
-        ////////////}
-
+                
         private static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
         {
-            string firstCriteria = "<";
-            string secondCriteria = ">";
+            string firstCriteria = "<=";
+            string secondCriteria = ">=";
 
             Events firstFilteredList = SimpleDateFiltering(eventsList, firstCriteria, endDate);
             Events filteredList = SimpleDateFiltering(firstFilteredList, secondCriteria, beginDate);

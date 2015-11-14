@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Calendar
 {
-    class SearchArgument : IArgument
+    public class SearchArgument : IArgument
     {
         string[] dateOneValueOperator = { "equal", "=", "!=", "not equal", "<", "older", ">", "newer" };
         string[] dateTwoValueOperator = { "between", "<>" };
@@ -145,7 +145,7 @@ namespace Calendar
                         }
                     case "this week":
                         {
-                            criteria = "=";
+                            criteria = "<>";
                             Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstValue, out secondValue);
                             return true;
                         }
