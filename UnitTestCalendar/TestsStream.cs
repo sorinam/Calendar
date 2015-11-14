@@ -38,7 +38,7 @@ namespace UnitTestCalendar
                     streamObj.ExportEventsInHTMLStream(newEvent);
                     var htmlContent = Encoding.UTF8.GetString(ms.ToArray());
                     // htmlContent.ShouldContain(expectedFile);
-                    Assert.AreEqual(htmlContent, expectedFile);
+                    htmlContent.ShouldBeSameAs(expectedFile);
                 }
             }
         }

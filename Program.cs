@@ -77,19 +77,13 @@ namespace Calendar
                     }
                 case "/search":
                     {
-                        string field,op, val1, val2;
-                        string path = "";
-                        int indexExport = Array.IndexOf(args, "/export");
-                        if (indexExport > -1)
-                        {
-                            path = args[indexExport + 1];
-                            Array.Resize(ref args, indexExport);
-                        }
+                        string field, op, val1, val2;
+                        string path = ExportToHtmlFile(ref args);
 
                         if (AreValidSearchArguments(args, out field, out op, out val1, out val2))
                         {
-                           
-                            Dispenser.SearchAndExportEvents(field,op,val1,val2,path);
+
+                            Dispenser.SearchAndExportEvents(field, op, val1, val2, path);
                         }
                         break;
 
@@ -100,6 +94,19 @@ namespace Calendar
                         break;
                     }
             }
+        }
+
+        private static string ExportToHtmlFile(ref string[] args)
+        {
+            string path = "";
+            int indexExport = Array.IndexOf(args, "/export");
+            if (indexExport > -1)
+            {
+                path = args[indexExport + 1];
+                Array.Resize(ref args, indexExport);
+            }
+
+            return path;
         }
 
         static bool AreValidAddArguments(string[] args)

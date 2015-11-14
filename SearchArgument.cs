@@ -37,7 +37,7 @@ namespace Calendar
             return dateOneValueOperator.Contains(arg.ToLower()) ? true : false;
         }
 
-        private bool IsValidAnotherDateOperator(string arg)
+        private bool IsValidOperatorForTwoDate(string arg)
         {
             return dateTwoValueOperator.Contains(arg.ToLower()) ? true : false;
         }
@@ -49,24 +49,27 @@ namespace Calendar
 
         public bool IsValid()
         {
-            switch (inputArgs[1].ToLower())
+            if (inputArgs.Length > 1)
             {
-                case "date":
-                    {
-                        field = "date";
-                        if (IsValidDateFilterParametrs(inputArgs)) return true;
-                        break;
-                    }
-                case "description":
-                    {
-                        field = "description";
-                        if (IsValidDescriptionFilterParametrs(inputArgs)) return true;
-                        break;
-                    }
-                default:
-                    {
-                        return false;
-                    }
+                switch (inputArgs[1].ToLower())
+                {
+                    case "date":
+                        {
+                            field = "date";
+                            if (IsValidDateFilterParametrs(inputArgs)) return true;
+                            break;
+                        }
+                    case "description":
+                        {
+                            field = "description";
+                            if (IsValidDescriptionFilterParametrs(inputArgs)) return true;
+                            break;
+                        }
+                    default:
+                        {
+                            return false;
+                        }
+                }
             }
             return false;
         }
@@ -99,7 +102,7 @@ namespace Calendar
             return false;
         }
 
-        private bool IsValidRegularOption(string[] inputArgs)
+        private bool IsValidRegularForm(string[] inputArgs)
         {
             if ((dateOneValueOperator.Contains(inputArgs[2].ToLower())) &&
                     Utils.IsValidDate(inputArgs[3]))
@@ -119,7 +122,8 @@ namespace Calendar
             return false;
 
         }
-        private bool IsValidLargeOption(string[] inputArgs)
+
+        private bool IsValidBeetwenDateForm(string[] inputArgs)
         {
             if ((dateTwoValueOperator.Contains(inputArgs[2].ToLower())) && (Utils.IsValidDate(inputArgs[3]))
                     && (Utils.IsValidDate(inputArgs[4])))
@@ -131,7 +135,8 @@ namespace Calendar
             }
             return false;
         }
-        private bool IsValidShortOption(string[] inputArgs)
+
+        private bool IsValidShortForm(string[] inputArgs)
         {
             if (dateSortcut.Contains(inputArgs[2].ToLower()))
             {
@@ -146,7 +151,7 @@ namespace Calendar
                     case "this week":
                         {
                             criteria = "<>";
-                            Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstValue, out secondValue);
+                            Utils.GetBeginEndDaysOfWeek(DateTime.Today.ToShortDateString(), out firstValue, out secondValue);
                             return true;
                         }
                     default: return false;
@@ -171,15 +176,15 @@ namespace Calendar
             {
                 case 3:
                     {
-                        return IsValidShortOption(inputArgs) ? true : false;
+                        return IsValidShortForm(inputArgs) ? true : false;
                     }
                 case 4:
                     {
-                        return IsValidRegularOption(inputArgs) ? true : false;
+                        return IsValidRegularForm(inputArgs) ? true : false;
                     }
                 case 5:
                     {
-                        return IsValidLargeOption(inputArgs) ? true : false;
+                        return IsValidBeetwenDateForm(inputArgs) ? true : false;
                     }
                 default:
                     { return false; }
