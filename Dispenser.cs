@@ -66,57 +66,40 @@ namespace Calendar
             exportHtml.ExportToHTMLFile(path);
         }
 
-        public static void SearchEvents(string[] args)
+        public static void SearchAndExportEvents(string field,string op,string val1,string val2,string path)
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-
-            SearchAndExportIfNecessary(args, eventsList);
-
+            Events filteredList = SearchEvents( eventsList,field, op, val1, val2);
+            if (path != "")
+            {
+                ExportToHTMLFile(path, filteredList);
+            }
         }
 
-        public static Events SearchAndExportIfNecessary(string[] args, Events eventsList)
-        {
-            int indexExport = GetIndexOfExportParameter(args);
-
-            string[] searchArgs = new string[args.Length];
-
-            if (indexExport > 0)
+        public static Events SearchEvents(Events eventsList,string field, string op, string val1,string val2) 
             {
-                Array.Resize(ref searchArgs, indexExport);
-                Array.Copy(args, searchArgs, indexExport);
-            }
-            else
-            {
-                searchArgs = args;
-            }
-
-            Events filteredList = FilterEvents(eventsList, searchArgs);
+            Events filteredList = FilterEvents(eventsList,field, op, val1, val2);
 
             IOConsole toDisplay = new IOConsole(filteredList);
             toDisplay.DisplayEventsToConsole();
-
-            if (indexExport > 0)
-            {
-                ExportToHTMLFile(args[indexExport + 1], filteredList);
-            }
             return filteredList;
         }
 
-        private static Events FilterEvents(Events eventsList, string[] searchArgs)
+        private static Events FilterEvents(Events eventsList, string field, string criteria, string firstValue, string secondValue)
         {
             Events filteredList = new Events();
 
-            switch (searchArgs[1])
+            switch (field)
             {
                 case "date":
                     {
-                        filteredList = GetFilteredListByDate(eventsList, ref searchArgs);
+                        filteredList = GetFilteredListByDate(eventsList, criteria,firstValue,secondValue);
                         break;
                     }
                 case "description":
                     {
-                        filteredList = GetFilteredListByDescription(eventsList, searchArgs);
+                        filteredList = GetFilteredListByDescription(eventsList, criteria, firstValue);
                         break;
                     }
                 default:
@@ -129,88 +112,28 @@ namespace Calendar
             return filteredList;
         }
 
-        public static Events GetFilteredListByDescription(Events eventsList, string[] parameter)
+        public static Events GetFilteredListByDescription(Events eventsList, string criteria, string value)
+        {
+            DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);
+            return eventsToFilter.ApplyFilter(eventsList);
+        }
+
+        public static Events GetFilteredListByDate(Events eventsList, string op, string val1,string val2)
         {
             Events filteredList = new Events();
-            switch (parameter.Length)
-            {
-                case 3:
-                    {
-                        string criteria = "=";
-                        filteredList = DescriptionFiltering(eventsList, criteria, parameter[2]);
-                        break;
-                    }
-                case 4:
-                    {
-                        filteredList = DescriptionFiltering(eventsList, parameter[2], parameter[3]);
-                        break;
-                    }
 
-            }
+            if (Utils.ParseFilteringCriteria(op) == "<>")
+                filteredList = DoubleDateFiltering(eventsList, val1, val2);
+            else
+                filteredList = SimpleDateFiltering(eventsList, op, val1);
+
             return filteredList;
         }
-
-        public static Events GetFilteredListByDate(Events eventsList, ref string[] parameter)
-        {
-            Events filteredList = new Events();
-            switch (parameter.Length)
-            {
-                case 3:
-                    {
-                        if (parameter[2] == "today")
-                        {
-                            filteredList = GetTodayEvents(eventsList);
-                        }
-                        else
-                        {
-                            if (parameter[2] == ("this week"))
-                            {
-                                filteredList = GetThisWeekEvents(eventsList);
-                            }
-                            else
-                                if (Utils.IsValidDate(parameter[2]))
-                            {
-                                filteredList = SimpleDateFiltering(eventsList, "=", parameter[2]);
-                            }
-                        }
-                        break;
-                    }
-                case 4:
-                    {
-                        filteredList = SimpleDateFiltering(eventsList, parameter[2], parameter[3]);
-                        break;
-                    }
-                case 5:
-                    {
-                        filteredList = DoubleDateFiltering(eventsList, parameter[3], parameter[4]);
-                        break;
-                    }
-            }
-            return filteredList;
-        }
-
-        private static Events GetThisWeekEvents(Events eventsList)
-        {
-            Events filteredList;
-            string firstDayOfWeek, endDayOfWeek;
-            Utils.GetBeginEndDaysOfThisWeek(DateTime.Today.ToShortDateString(), out firstDayOfWeek, out endDayOfWeek);
-            filteredList = DoubleDateFiltering(eventsList, firstDayOfWeek, endDayOfWeek);
-            return filteredList;
-        }
-
-        private static Events GetTodayEvents(Events eventsList)
-        {
-            Events filteredList;
-            string criteria = "=";
-            string today = DateTime.Today.ToShortDateString();
-            filteredList = SimpleDateFiltering(eventsList, criteria, today);
-            return filteredList;
-        }
-
+                
         private static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
         {
-            string firstCriteria = "<";
-            string secondCriteria = ">";
+            string firstCriteria = "<=";
+            string secondCriteria = ">=";
 
             Events firstFilteredList = SimpleDateFiltering(eventsList, firstCriteria, endDate);
             Events filteredList = SimpleDateFiltering(firstFilteredList, secondCriteria, beginDate);
@@ -221,17 +144,6 @@ namespace Calendar
         {
             DateFilter eventsToFilter = new DateFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
-        }
-        private static Events DescriptionFiltering(Events eventsList, string criteria, string value)
-        {
-            DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);
-            return eventsToFilter.ApplyFilter(eventsList);
-        }
-
-        private static int GetIndexOfExportParameter(string[] args)
-        {
-            int index = Array.IndexOf(args, "/export");
-            return index;
         }
     }
 }

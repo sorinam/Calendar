@@ -93,7 +93,7 @@ namespace Calendar
             }
         }
 
-        public static void GetBeginEndDaysOfThisWeek(string date,out string beginDateofWeek, out string endDayOfWeek)
+        public static void GetBeginEndDaysOfWeek(string date,out string beginDateofWeek, out string endDayOfWeek)
         {
             beginDateofWeek = "";
             endDayOfWeek = "";

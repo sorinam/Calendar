@@ -77,9 +77,16 @@ namespace Calendar
                     }
                 case "/search":
                     {
-                        Dispenser.SearchEvents(args);
+                        string field, op, val1, val2;
+                        string path = ExportToHtmlFile(ref args);
 
+                        if (AreValidSearchArguments(args, out field, out op, out val1, out val2))
+                        {
+
+                            Dispenser.SearchAndExportEvents(field, op, val1, val2, path);
+                        }
                         break;
+
                     }
                 default:
                     {
@@ -87,6 +94,19 @@ namespace Calendar
                         break;
                     }
             }
+        }
+
+        private static string ExportToHtmlFile(ref string[] args)
+        {
+            string path = "";
+            int indexExport = Array.IndexOf(args, "/export");
+            if (indexExport > -1)
+            {
+                path = args[indexExport + 1];
+                Array.Resize(ref args, indexExport);
+            }
+
+            return path;
         }
 
         static bool AreValidAddArguments(string[] args)
@@ -117,18 +137,25 @@ namespace Calendar
             }
         }
 
-        static bool ValidateSearchArguments(string[] args)
+        static bool AreValidSearchArguments(string[] args, out string field,out string op, out string val1, out string val2)
         {
+
             SearchArgument searchArgs = new SearchArgument(args);
             if (searchArgs.IsValid())
             {
+                field = searchArgs.Field;
+                op = searchArgs.Criteria;
+                val1 = searchArgs.Value;
+                val2 = searchArgs.AnotherValue;
                 return true;
             }
             else
             {
+               field= op = val1 = val2 = "";
                 InvalidCommand();
                 return false;
             }
+
         }
 
         static bool AreValidExportArguments(string[] args)
