@@ -29,18 +29,9 @@
         {
             switch (criteria)
             {
-                case "=":
-                    {
-                        return (ev.Title == valueToCompare);
-                    }
-                case "!=":
-                    {
-                        return (ev.Title != valueToCompare);
-                    }
-                case ">":
-                    {
-                        return (ev.Title.Contains(valueToCompare));
-                    }
+                case "=": return (ev.Title == valueToCompare);
+                case "!=": return (ev.Title != valueToCompare);
+                case ">": return (ev.Title.Contains(valueToCompare));
             }
             return false;
         }

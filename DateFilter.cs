@@ -7,11 +7,12 @@ namespace Calendar
         string criteria;
         string dateToCompare;
 
-        public DateFilter(string criteria,string dateToCompare)
-            {
+        public DateFilter(string criteria, string dateToCompare)
+        {
             Criteria = criteria;
             ValueToCompare = dateToCompare;
-            }
+        }
+
         public string Criteria
         {
             set { this.criteria = value; }
@@ -28,45 +29,27 @@ namespace Calendar
             Event compare = new Event(dateToCompare, "", "");
             foreach (Event ev in sourceList)
             {
-                if (IsTrueCriteria(ev,compare,criteria))
+                if (IsTrueCriteria(ev, compare, criteria))
                 {
                     filteredList.Add(ev);
                 }
             }
             return filteredList;
-         }
+        }
 
         public bool IsTrueCriteria(Event ev, Event compare, string criteria)
         {
             switch (criteria)
             {
-                case "=":
-                    {
-                        return (ev.CompareTo(compare) == 0);
-                     }
-                case "!=":
-                    {
-                        return !(ev.CompareTo(compare) == 0);
-                    }
-                case "<=":
-                    {
-                        return (ev.CompareTo(compare) <= 0);
-                    }
-                case "<":
-                    {
-                        return (ev.CompareTo(compare) <0);
-                    }
-                case ">=":
-                    {
-                        return (ev.CompareTo(compare) >= 0);
-                    }
-                case ">":
-                    {
-                        return (ev.CompareTo(compare) > 0);
-                    }
+                case "=": return (ev.CompareTo(compare) == 0);
+                case "!=": return !(ev.CompareTo(compare) == 0);
+                case "<=": return (ev.CompareTo(compare) <= 0);
+                case "<": return (ev.CompareTo(compare) < 0);
+                case ">=": return (ev.CompareTo(compare) >= 0);
+                case ">": return (ev.CompareTo(compare) > 0);
             }
             return false;
         }
-       
+
     }
 }

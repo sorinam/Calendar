@@ -116,21 +116,10 @@ namespace Calendar
         private bool IsValidDateFilterParametrs(string[] inputArgs)
         {
             switch (inputArgs.Length)
-            {
-                case 3:
-                    {
-                        return IsValidShortForm(inputArgs) ? true : false;
-                    }
-                case 4:
-                    {
-                        return IsValidRegularForm(inputArgs) ? true : false;
-                    }
-                case 5:
-                    {
-                        return IsValidBeetwenDateForm(inputArgs) ? true : false;
-                    }
-                default:
-                    { return false; }
+            {   case 3:return IsValidShortForm(inputArgs) ? true : false;
+                case 4:return IsValidRegularForm(inputArgs) ? true : false;
+                case 5:return IsValidBeetwenDateForm(inputArgs) ? true : false;
+              default:return false; 
             }
         }
 
