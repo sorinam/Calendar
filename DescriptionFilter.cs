@@ -1,11 +1,11 @@
 ﻿namespace Calendar
 {
-    public class DescriptionFilter : IFilter
+    public class titleFilter : IFilter
     {
         string criteria;
         string valueToCompare;
 
-        public DescriptionFilter(string criteria, string valueToCompare)
+        public titleFilter(string criteria, string valueToCompare)
         {
             this.criteria = criteria;
             this.valueToCompare = valueToCompare;
@@ -31,15 +31,15 @@
             {
                 case "=":
                     {
-                        return (ev.Description == valueToCompare);
+                        return (ev.Title == valueToCompare);
                     }
                 case "!=":
                     {
-                        return (ev.Description != valueToCompare);
+                        return (ev.Title != valueToCompare);
                     }
                 case ">":
                     {
-                        return (ev.Description.Contains(valueToCompare));
+                        return (ev.Title.Contains(valueToCompare));
                     }
             }
             return false;

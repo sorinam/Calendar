@@ -11,7 +11,7 @@ namespace Calendar
         string[] dateOneValueOperator = { "equal", "=", "!=", "not equal", "<", "older", ">", "newer" };
         string[] dateTwoValueOperator = { "between", "<>" };
         string[] dateSortcut = { "today", "this week" };
-        string[] descriptionOperator = { "!=", "not equal", "=", "equal", "contains" };
+        string[] titleOperator = { "!=", "not equal", "=", "equal", "contains" };
 
         string[] inputArgs;
         string field;
@@ -41,9 +41,9 @@ namespace Calendar
         {
             return dateTwoValueOperator.Contains(arg.ToLower()) ? true : false;
         }
-        private bool IsValidDescriptionOperator(string arg)
+        private bool IsValidtitleOperator(string arg)
         {
-            return descriptionOperator.Contains(arg.ToLower()) ? true : false;
+            return titleOperator.Contains(arg.ToLower()) ? true : false;
         }
 
 
@@ -59,10 +59,10 @@ namespace Calendar
                             if (IsValidDateFilterParametrs(inputArgs)) return true;
                             break;
                         }
-                    case "description":
+                    case "title":
                         {
-                            field = "description";
-                            if (IsValidDescriptionFilterParametrs(inputArgs)) return true;
+                            field = "title";
+                            if (IsValidtitleFilterParametrs(inputArgs)) return true;
                             break;
                         }
                     default:
@@ -74,13 +74,13 @@ namespace Calendar
             return false;
         }
 
-        private bool IsValidDescriptionFilterParametrs(string[] inputArgs)
+        private bool IsValidtitleFilterParametrs(string[] inputArgs)
         {
             switch (inputArgs.Length)
             {
                 case 3:
                     {
-                        if (!descriptionOperator.Contains(inputArgs[2]))
+                        if (!titleOperator.Contains(inputArgs[2]))
                         {
                             criteria = "=";
                             firstValue = inputArgs[2];
@@ -90,7 +90,7 @@ namespace Calendar
                     }
                 case 4:
                     {
-                        if (descriptionOperator.Contains(inputArgs[2]))
+                        if (titleOperator.Contains(inputArgs[2]))
                         {
                             criteria = Utils.ParseFilteringCriteria(inputArgs[2]);
                             firstValue = inputArgs[3];

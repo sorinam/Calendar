@@ -7,10 +7,10 @@ using Should;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TestDescriptionFilter
+    public class TesttitleFilter
     {
         [TestMethod]
-        public void ShouldSelectEventsWithASpecifiedDescription()
+        public void ShouldSelectEventsWithASpecifiedtitle()
         {
             Events newEvents = new Events
             {
@@ -19,7 +19,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "test2");
+            titleFilter eventsToFilter = new titleFilter("=", "test2");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -30,7 +30,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldSelectEventsWithAnotherDescription()
+        public void ShouldSelectEventsWithAnothertitle()
         {
             Events newEvents = new Events
             {
@@ -39,7 +39,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            DescriptionFilter eventsToFilter = new DescriptionFilter("!=", "another");
+            titleFilter eventsToFilter = new titleFilter("!=", "another");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -51,7 +51,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldSelectEventsContainingSpecifiedDescription()
+        public void ShouldSelectEventsContainingSpecifiedtitle()
         {
             Events newEvents = new Events
             {
@@ -60,7 +60,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            DescriptionFilter eventsToFilter = new DescriptionFilter(">", "test");
+            titleFilter eventsToFilter = new titleFilter(">", "test");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -72,7 +72,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldSelectEventsWithSpecifiedDescriptionWhenThereAreAlmostEqual()
+        public void ShouldSelectEventsWithSpecifiedtitleWhenThereAreAlmostEqual()
         {
             Events newEvents = new Events
             {
@@ -81,7 +81,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "test1");
+            titleFilter eventsToFilter = new titleFilter("=", "test1");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -92,7 +92,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldSelectNothingWhenSpecifiedDescriptionIsNotMatching()
+        public void ShouldSelectNothingWhenSpecifiedtitleIsNotMatching()
         {
             Events newEvents = new Events
             {
@@ -101,7 +101,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "testul");
+            titleFilter eventsToFilter = new titleFilter("=", "testul");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             filteredList.ShouldBeEmpty();
         }

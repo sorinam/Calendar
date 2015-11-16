@@ -75,7 +75,7 @@ namespace Calendar
             {
                 ev.Date.ShouldEqual(expectedList[i].Date);
                 ev.Subject.ShouldEqual(expectedList[i].Subject);
-                ev.Description.ShouldEqual(expectedList[i].Description);
+                ev.Title.ShouldEqual(expectedList[i].Title);
                 i++;
             }
         }

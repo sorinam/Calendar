@@ -22,11 +22,11 @@ namespace Calendar
             eventsList = new Events();
         }
 
-        public void AddDataFromConsole(string date, string subject, string description)
+        public void AddDataFromConsole(string date, string subject, string title)
         {
             TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
-            eventsList.Add(date, subject, description);
+            eventsList.Add(date, subject, title);
             file.SaveEventsToFile(eventsList);
         }
                
@@ -49,7 +49,7 @@ namespace Calendar
             {
                 Console.Write(" \nDate:{0}", line.Date.ToString("yyyy/MM/dd"));
                 Console.Write(" \nSubject:{0}", Utils.DecodingNewLineChar(line.Subject));
-                if (line.Description != "") Console.Write(" \nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
+                if (line.Title != "") Console.Write(" \nTitle:{0}", Utils.DecodingNewLineChar(line.Title));
                 Console.Write("\n");
             }
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", eventsList.Length);

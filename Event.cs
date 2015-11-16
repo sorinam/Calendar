@@ -8,7 +8,7 @@ namespace Calendar
     {
         private DateTime date;
         private string subject;
-        private string description;
+        private string title;
 
         public string Subject
         {
@@ -16,10 +16,10 @@ namespace Calendar
             get { return subject; }
         }
 
-        public string Description
+        public string Title
         {
-            set { description = value; }
-            get { return description; }
+            set { title = value; }
+            get { return title; }
         }
 
         public DateTime Date
@@ -45,11 +45,11 @@ namespace Calendar
             }
         }
 
-        public Event(string date, string subject, string description="")
+        public Event(string date, string subject, string title="")
         {       DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
             {
-                SetMembers(subject, description, convertedDate);
+                SetMembers(subject, title, convertedDate);
             }
             else
             {
@@ -57,18 +57,18 @@ namespace Calendar
             }
         }
 
-        private void SetMembers(string subject, string description, DateTime date)
+        private void SetMembers(string subject, string title, DateTime date)
         {
             this.date = date;
             this.subject = subject;
-            this.description = description;
+            this.title = title;
         }
 
         public string StringParser ()
         {
             CultureInfo ci = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = ci;
-            String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + description;
+            String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + title;
             return newString;
         }
 

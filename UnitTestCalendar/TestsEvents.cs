@@ -16,9 +16,9 @@ namespace UnitTestCalendar
         {
             string date = "2015/15/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...";
+            string title = "It will be a nice day...";
             Events newEvent = new Events();
-            newEvent.Add(date, subject, description);
+            newEvent.Add(date, subject, title);
         }
 
         [TestMethod]
@@ -26,12 +26,12 @@ namespace UnitTestCalendar
         {
             string date = "2015/11/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...";
+            string title = "It will be a nice day...";
             Events newEvent = new Events();
             List<Event> expectedList = new List<Event>
-            { new Event(date, subject, description) };
+            { new Event(date, subject, title) };
 
-            newEvent.Add(date, subject, description);
+            newEvent.Add(date, subject, title);
             var listofEvents = newEvent.EventsList;
             AssertAreEqual(listofEvents, expectedList);
         }
@@ -43,25 +43,25 @@ namespace UnitTestCalendar
 
             string date = "2015/11/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...";
+            string title = "It will be a nice day...";
 
-            newEvent.Add(date, subject, description);
+            newEvent.Add(date, subject, title);
 
             string date1 = "2015/10/25";
             string subject1 = "Johana's Birtday!";
-            string description1 = "Don't forget to call her...";
-            newEvent.Add(date1, subject1, description1);
+            string title1 = "Don't forget to call her...";
+            newEvent.Add(date1, subject1, title1);
 
             var listofEvents = newEvent.EventsList;
 
             List<Event> expectedList = new List<Event>
-            { new Event(date, subject, description),new Event(date1, subject1, description1) };
+            { new Event(date, subject, title),new Event(date1, subject1, title1) };
 
             AssertAreEqual(listofEvents, expectedList);
         }
 
         [TestMethod]
-        public void ShouldAddEventWithoutDescription()
+        public void ShouldAddEventWithouttitle()
         {
             string date = "2015/11/20";
             string subject = "My birthday";
@@ -81,13 +81,13 @@ namespace UnitTestCalendar
         {
             string date = "2015/11/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...\n Nice party....\n....";
+            string title = "It will be a nice day...\n Nice party....\n....";
             Events newEvent = new Events();
             List<Event> expectedList = new List<Event>
-            { new Event(date, subject, description) };
+            { new Event(date, subject, title) };
 
 
-            newEvent.Add(date, subject, description);
+            newEvent.Add(date, subject, title);
             var listofEvents = newEvent.EventsList;
 
             AssertAreEqual(listofEvents, expectedList);
@@ -99,16 +99,16 @@ namespace UnitTestCalendar
 
             string date = "2015/11/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...";
-            newEvent.Add(date, subject, description);
+            string title = "It will be a nice day...";
+            newEvent.Add(date, subject, title);
 
             string date1 = "2015/10/20";
             string subject1 = "Johana's Birtday!";
-            string description1 = "Don't forget to call her...";
-            newEvent.Add(date1, subject1, description1);
+            string title1 = "Don't forget to call her...";
+            newEvent.Add(date1, subject1, title1);
 
             var listofEvents = newEvent.EventsList;
-            string[] expectedList = {date+"\t"+ subject +"\t"+ description , date1+ "\t"+ subject1 +"\t"+ description1 };
+            string[] expectedList = {date+"\t"+ subject +"\t"+ title , date1+ "\t"+ subject1 +"\t"+ title1 };
 
             string[] parseEvents = newEvent.ToStringList();
 
@@ -116,21 +116,21 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldParseEventWithoutDescription()
+        public void ShouldParseEventWithouttitle()
         {
             Events newEvent = new Events();
 
             string date = "2015/11/20";
             string subject = "My birthday";
-            string description = "It will be a nice day...";
-            newEvent.Add(date, subject, description);
+            string title = "It will be a nice day...";
+            newEvent.Add(date, subject, title);
 
             string date1 = "2015/10/20";
             string subject1 = "Johana's Birtday!";
             newEvent.Add(date1, subject1);
 
             var listofEvents = newEvent.EventsList;
-            string[] expectedList = { date + "\t" + subject + "\t" + description, date1 + "\t" + subject1+"\t" };
+            string[] expectedList = { date + "\t" + subject + "\t" + title, date1 + "\t" + subject1+"\t" };
 
             string[] parseEvents = newEvent.ToStringList();
 
@@ -143,7 +143,7 @@ namespace UnitTestCalendar
             {
                 ev.Date.ShouldEqual(expectedList[i].Date);
                 ev.Subject.ShouldEqual(expectedList[i].Subject);
-                ev.Description.ShouldEqual(expectedList[i].Description);
+                ev.Title.ShouldEqual(expectedList[i].Title);
                 i++;
             }
         }

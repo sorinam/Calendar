@@ -19,17 +19,17 @@ namespace UnitTestCalendar
 <title>Events List</title>
 </head>
 <body><p><b>Date:</b> 2015.12.25</p>
-<p><b>Subject:</b> Christmas Day!</p><p><b>Description:</b> Santa Claus</p><hr>
+<p><b>Subject:</b> Christmas Day!</p><p><b>title:</b> Santa Claus</p><hr>
 </body>
 </html>";
-            expectedFile.Trim(new Char[] { '\r' });
+           expectedFile= expectedFile.Trim(new Char[] { '\r' });
             Events newEvent = new Events();
 
-            string date = "2015 /12/25";
+            string date = "2015/12/25";
             string subject = "Christmas Day!";
-            string description = "Santa Claus";
+            string title = "Santa Claus";
 
-            newEvent.Add(date, subject, description);
+            newEvent.Add(date, subject, title);
 
             using (MemoryStream ms = new MemoryStream())
             {
@@ -48,8 +48,8 @@ namespace UnitTestCalendar
         {
             var myFile = @"12/12/2015 12:00:00 AM	subject
 
-01/11/2015 12:00:00 AM	subject description";
-            string[] expectedList = { @"12/12/2015 12:00:00 AM	subject", @"01/11/2015 12:00:00 AM	subject description" };
+01/11/2015 12:00:00 AM	subject title";
+            string[] expectedList = { @"12/12/2015 12:00:00 AM	subject", @"01/11/2015 12:00:00 AM	subject title" };
             var stream = new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(myFile));
             IOStream news = new IOStream(stream);
 

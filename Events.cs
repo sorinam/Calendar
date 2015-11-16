@@ -47,9 +47,9 @@ namespace Calendar
             eventsList.Add(newEvent);
         }
 
-        public void Add(string date, string subject, string description = "")
+        public void Add(string date, string subject, string title = "")
         {
-            Event newEvent = new Event(date, subject, description);
+            Event newEvent = new Event(date, subject, title);
             eventsList.Add(newEvent);
         }
 

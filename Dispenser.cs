@@ -13,12 +13,12 @@ namespace Calendar
             IOConsole newEvent = new IOConsole();
             string date = args[1]; ;
             string subject = Utils.CodingNewLineChar(args[2]);
-            string description = "";
+            string title = "";
             if (args.Length == 4)
             {
-                description = Utils.CodingNewLineChar(args[3]);
+                title = Utils.CodingNewLineChar(args[3]);
             }
-            newEvent.AddDataFromConsole(date, subject, description);
+            newEvent.AddDataFromConsole(date, subject, title);
 
         }
 
@@ -97,9 +97,9 @@ namespace Calendar
                         filteredList = GetFilteredListByDate(eventsList, criteria,firstValue,secondValue);
                         break;
                     }
-                case "description":
+                case "title":
                     {
-                        filteredList = GetFilteredListByDescription(eventsList, criteria, firstValue);
+                        filteredList = GetFilteredListBytitle(eventsList, criteria, firstValue);
                         break;
                     }
                 default:
@@ -112,9 +112,9 @@ namespace Calendar
             return filteredList;
         }
 
-        public static Events GetFilteredListByDescription(Events eventsList, string criteria, string value)
+        public static Events GetFilteredListBytitle(Events eventsList, string criteria, string value)
         {
-            DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);
+            titleFilter eventsToFilter = new titleFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
         }
 

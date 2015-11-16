@@ -27,7 +27,7 @@ namespace Calendar
         static void DisplayHelp()
         {
             Console.WriteLine("\n\tPossible commands:\n");
-            Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's Description> ");
+            Console.WriteLine(" /add \t <Event's Date> <Event's Subject> <Event's title> ");
             Console.WriteLine("\t Use the yyyy/mm/dd format for Date ");
             Console.WriteLine("\n\n /list all \t list all events from calendar; 'all' parameter is optional");
             Console.WriteLine("       past \t list past events from calendar");
@@ -36,13 +36,13 @@ namespace Calendar
             Console.WriteLine("         past filename.html\t export past events from calendar to HTML file ");
             Console.WriteLine("         future filename.html\t export future events from calendar to HTML file ");
             Console.WriteLine("\n\n /search <field name> <operator> <value> [/export fine.html]");
-            Console.WriteLine("\n \t\t  <field name> can be 'date' or 'description' ");
+            Console.WriteLine("\n \t\t  <field name> can be 'date' or 'title' ");
             Console.WriteLine("\t\t  <operator>can be 'equal '='");
             Console.WriteLine("\t\t\t\t   'not equal '!='");
             Console.WriteLine("\t\t\t\t   'between '<>' - only for date");
             Console.WriteLine("\t\t\t\t   'older' '<'-only for date");
             Console.WriteLine("\t\t\t\t   'newer' '>'-only for date");
-            Console.WriteLine("\t\t\t\t   'contains' - only for description");
+            Console.WriteLine("\t\t\t\t   'contains' - only for title");
             Console.WriteLine("\t\t  <value> \t   valid values for field");
             Console.WriteLine("\t\t\t\t   'today' -only for date");
         }

@@ -7,10 +7,10 @@ using Should;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TestSearchByDescriptionFromConsole
+    public class TestSearchBytitleFromConsole
     {
         [TestMethod]
-        public void ShouldListOnlyEventsWithSomeDescription()
+        public void ShouldListOnlyEventsWithSometitle()
         {
             Events newEvents = new Events {
                 { new Event ( "2015/01/01", "one", "test") },
@@ -20,7 +20,7 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event ( "2015/01/01", "one", "test") },
             };
-            string[] inputArgs = { "/search", "description", "=", "test" };
+            string[] inputArgs = { "/search", "title", "=", "test" };
             SearchArgument searchArgs = new SearchArgument(inputArgs);
             string field = "";
             string op = "";
@@ -38,7 +38,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldListOnlyEventsWithDescriptionContainingText()
+        public void ShouldListOnlyEventsWithtitleContainingText()
         {
             Events newEvents = new Events {
                 { new Event ( "2015/01/01", "one", "test") },
@@ -48,7 +48,7 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event("2015/11/15","two", "two cats") },
             };
-            string[] inputArgs = { "/search", "description", "contains", "two" };
+            string[] inputArgs = { "/search", "title", "contains", "two" };
 
             SearchArgument searchArgs = new SearchArgument(inputArgs);
             string field = "";
@@ -66,14 +66,14 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldNotListEventsWithSomeDescription()
+        public void ShouldNotListEventsWithSometitle()
         {
             Events newEvents = new Events {
                         { new Event ( "2015/01/01", "one", "test") },
                         {new Event("2015/11/15", "two cats") },
                 };
 
-            string[] inputArgs = { "/search", "description", "contains", "pair" };
+            string[] inputArgs = { "/search", "title", "contains", "pair" };
             SearchArgument searchArgs = new SearchArgument(inputArgs);
             string field = "";
             string op = "";
@@ -91,7 +91,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldListEventsWithEmptyDescription()
+        public void ShouldListEventsWithEmptytitle()
         {
             Events newEvents = new Events {
                         { new Event ( "2015/01/01", "one", "test") },
@@ -101,7 +101,7 @@ namespace UnitTestCalendar
             {{ new Event("2015/11/15","two") },
             };
 
-            string[] inputArgs = { "/search", "description", "" };
+            string[] inputArgs = { "/search", "title", "" };
             SearchArgument searchArgs = new SearchArgument(inputArgs);
             string field = "";
             string op = "";
