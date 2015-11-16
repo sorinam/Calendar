@@ -26,12 +26,13 @@ namespace UnitTestCalendar
         {
             string date = "2015/11/20";
             string subject = "My birthday";
-            string title = "It will be a nice day...";
+            string title = "Party";
+            string description = "in the evenening go to party";
             Events newEvent = new Events();
             List<Event> expectedList = new List<Event>
-            { new Event(date, subject, title) };
+            { new Event(date, subject, title,description) };
 
-            newEvent.Add(date, subject, title);
+            newEvent.Add(date, subject, title,description);
             var listofEvents = newEvent.EventsList;
             AssertAreEqual(listofEvents, expectedList);
         }

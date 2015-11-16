@@ -9,6 +9,7 @@ namespace Calendar
         private DateTime date;
         private string subject;
         private string title;
+        private string description;
 
         public string Subject
         {
@@ -28,15 +29,20 @@ namespace Calendar
             get { return date; }
         }
 
+        public string Description
+        {
+            set { description = value; }
+            get { return description; }
+        }
         public Event(string line)
         {           
             string[] words = line.Split('\t');
-            if (words.Length == 3)
+            if (words.Length == 4)
             {
                 DateTime convertedDate;
                 if (DateTime.TryParse(words[0], out convertedDate))
                 {
-                    SetMembers(words[1], words[2], convertedDate);
+                    SetMembers(words[1], words[2],words[3], convertedDate);
                 }
                 else
                 {
@@ -45,11 +51,11 @@ namespace Calendar
             }
         }
 
-        public Event(string date, string subject, string title="")
+        public Event(string date, string subject, string title="",string description="")
         {       DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
             {
-                SetMembers(subject, title, convertedDate);
+                SetMembers(subject, title,description, convertedDate);
             }
             else
             {
@@ -57,11 +63,12 @@ namespace Calendar
             }
         }
 
-        private void SetMembers(string subject, string title, DateTime date)
+        private void SetMembers(string subject, string title,string description, DateTime date)
         {
             this.date = date;
             this.subject = subject;
             this.title = title;
+            this.description = description;
         }
 
         public string StringParser ()

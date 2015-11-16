@@ -19,11 +19,12 @@ namespace UnitTestCalendar
 
             string date = "2015/12/25";
             string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
-            SetExpectedResultToConsole(date, subject, title, out expectedConsole, out consoleOut);
+            string title = "Santa Claus";
+            string description = "Santa Claus is comming in our house....";
+            SetExpectedResultToConsole(date, subject, title,out expectedConsole, out consoleOut,description);
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject, title);
+            newEvent.Add(date, subject, title,description);
 
             IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
@@ -289,13 +290,18 @@ namespace UnitTestCalendar
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
 
-        private static void SetExpectedResultToConsole(string date, string subject, string title, out string expectedConsole, out StringWriter consoleOut)
+        private static void SetExpectedResultToConsole(string date, string subject, string title, out string expectedConsole, out StringWriter consoleOut, string description = "")
         {
             expectedConsole = " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject;
             if (title != "")
             {
                 expectedConsole += " \nTitle:" + title;
             }
+            if (description != "")
+            {
+                expectedConsole += " \nDescription:" + description;
+            }
+           
             consoleOut = new StringWriter();
             Console.SetOut(consoleOut);
         }

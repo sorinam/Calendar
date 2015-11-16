@@ -9,8 +9,8 @@ namespace Calendar
     public class AddArgument : IArgument
     {
         const string addArg="/add";
-        const int parameters= 4;
-        const int optionalParameters = 1;
+        const int parameters= 5;
+        const int optionalParameters = 2;
         string[] inputArgs;
 
         public AddArgument(string[] args)
@@ -27,7 +27,7 @@ namespace Calendar
         {
             if (IsValidFirstParameter(inputArgs[0]))
             {
-                if ((inputArgs.Length == parameters) || (inputArgs.Length == parameters - optionalParameters)) return true;
+                if ((inputArgs.Length == parameters) || (inputArgs.Length >= parameters - optionalParameters)) return true;
             }
             return false; 
         }

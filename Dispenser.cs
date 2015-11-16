@@ -14,11 +14,16 @@ namespace Calendar
             string date = args[1]; ;
             string subject = Utils.CodingNewLineChar(args[2]);
             string title = "";
-            if (args.Length == 4)
+            string description = "";
+            if (args.Length >= 4)
             {
                 title = Utils.CodingNewLineChar(args[3]);
             }
-            newEvent.AddDataFromConsole(date, subject, title);
+            if (args.Length == 5)
+            {
+                description = Utils.CodingNewLineChar(args[4]);
+            }
+            newEvent.AddDataFromConsole(date, subject, title,description);
 
         }
 
