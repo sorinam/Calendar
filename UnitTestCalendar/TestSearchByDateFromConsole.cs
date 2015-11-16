@@ -128,7 +128,7 @@ namespace UnitTestCalendar
             };
 
             string[] args = { "/search", "date", "this week" };
-            SearchArgument searchArgs = new SearchArgument(args);
+            SearchDateArgument searchArgs = new SearchDateArgument(args);
             string field = "";
             string op = "";
             string val1 = "";
@@ -136,8 +136,8 @@ namespace UnitTestCalendar
             searchArgs.IsValid();
             field = searchArgs.Field;
             op = searchArgs.Criteria;
-            val1 = searchArgs.Value;
-            val2 = searchArgs.AnotherValue;
+            val1 = searchArgs.Date;
+            val2 = searchArgs.AnotherDate;
 
             Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
             Utils.AssertAreEqual(filteredList, expectedList);

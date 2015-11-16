@@ -10,7 +10,7 @@ namespace UnitTestCalendar
     public class TestSearchBytitleFromConsole
     {
         [TestMethod]
-        public void ShouldListOnlyEventsWithSometitle()
+        public void ShouldListOnlyEventsWithSomeTitle()
         {
             Events newEvents = new Events {
                 { new Event ( "2015/01/01", "one", "test") },
@@ -21,7 +21,7 @@ namespace UnitTestCalendar
             {{ new Event ( "2015/01/01", "one", "test") },
             };
             string[] inputArgs = { "/search", "title", "=", "test" };
-            SearchArgument searchArgs = new SearchArgument(inputArgs);
+            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -30,15 +30,14 @@ namespace UnitTestCalendar
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
-            val2 = searchArgs.AnotherValue;
-
+            
             Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
 
         [TestMethod]
-        public void ShouldListOnlyEventsWithtitleContainingText()
+        public void ShouldListOnlyEventsWithTitleContainingText()
         {
             Events newEvents = new Events {
                 { new Event ( "2015/01/01", "one", "test") },
@@ -50,7 +49,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "title", "contains", "two" };
 
-            SearchArgument searchArgs = new SearchArgument(inputArgs);
+            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -59,8 +58,7 @@ namespace UnitTestCalendar
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
-            val2 = searchArgs.AnotherValue;
-
+           
             Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -74,7 +72,7 @@ namespace UnitTestCalendar
                 };
 
             string[] inputArgs = { "/search", "title", "contains", "pair" };
-            SearchArgument searchArgs = new SearchArgument(inputArgs);
+            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -83,15 +81,14 @@ namespace UnitTestCalendar
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
-            val2 = searchArgs.AnotherValue;
-
+         
             Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
 
             filteredList.ShouldBeEmpty();
         }
 
         [TestMethod]
-        public void ShouldListEventsWithEmptytitle()
+        public void ShouldListEventsWithEmptyTitle()
         {
             Events newEvents = new Events {
                         { new Event ( "2015/01/01", "one", "test") },
@@ -102,7 +99,7 @@ namespace UnitTestCalendar
             };
 
             string[] inputArgs = { "/search", "title", "" };
-            SearchArgument searchArgs = new SearchArgument(inputArgs);
+            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -111,8 +108,7 @@ namespace UnitTestCalendar
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
-            val2 = searchArgs.AnotherValue;
-
+          
             Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
 
             Utils.AssertAreEqual(filteredList, expectedList);

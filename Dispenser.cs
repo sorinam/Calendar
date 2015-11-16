@@ -104,7 +104,7 @@ namespace Calendar
                     }
                 case "title":
                     {
-                        filteredList = GetFilteredListBytitle(eventsList, criteria, firstValue);
+                        filteredList = GetFilteredListByTitle(eventsList, criteria, firstValue);
                         break;
                     }
                 default:
@@ -117,7 +117,7 @@ namespace Calendar
             return filteredList;
         }
 
-        public static Events GetFilteredListBytitle(Events eventsList, string criteria, string value)
+        public static Events GetFilteredListByTitle(Events eventsList, string criteria, string value)
         {
             titleFilter eventsToFilter = new titleFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);

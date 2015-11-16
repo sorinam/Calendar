@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
-    public class SearchArgument : IArgument
+    public class SearchDateArgument
     {
         string[] dateOneValueOperator = { "equal", "=", "!=", "not equal", "<", "older", ">", "newer" };
         string[] dateTwoValueOperator = { "between", "<>" };
         string[] dateSortcut = { "today", "this week" };
-        string[] stringOperator = { "!=", "not equal", "=", "equal", "contains" };
-
+    
         string[] inputArgs;
         string field;
         string criteria;
-        string firstValue;
-        string secondValue;
+        string date;
+        string anotherDate;
         public string Field
         { get { return field; } }
         public string Criteria
         { get { return criteria; } }
-        public string Value
-        { get { return firstValue; } }
-        public string AnotherValue
-        { get { return secondValue; } }
+        public string Date
+        { get { return date; } }
+        public string AnotherDate
+        { get { return anotherDate; } }
 
-        public SearchArgument(string[] args)
+        public SearchDateArgument(string[] args)
         {
             inputArgs = args;
         }
@@ -41,74 +37,21 @@ namespace Calendar
         {
             return dateTwoValueOperator.Contains(arg.ToLower()) ? true : false;
         }
-        private bool IsValidStringOperator(string arg)
-        {
-            return stringOperator.Contains(arg.ToLower()) ? true : false;
-        }
-
-
+   
         public bool IsValid()
         {
-            if (inputArgs.Length > 1)
-            {
-                switch (inputArgs[1].ToLower())
-                {
-                    case "date":
-                        {
-                            field = "date";
-                            if (IsValidDateFilterParametrs(inputArgs)) return true;
-                            break;
-                        }
-                    case "title":
-                        {
-                            field = "title";
-                            if (IsValidTitleFilterParametrs(inputArgs)) return true;
-                            break;
-                        }
-                    default:
-                        {
-                            return false;
-                        }
-                }
-            }
-            return false;
+            field = "date";
+
+            return IsValidDateFilterParametrs(inputArgs)? true: false;
         }
 
-        private bool IsValidTitleFilterParametrs(string[] inputArgs)
-        {
-            switch (inputArgs.Length)
-            {
-                case 3:
-                    {
-                        if (!stringOperator.Contains(inputArgs[2]))
-                        {
-                            criteria = "=";
-                            firstValue = inputArgs[2];
-                            return true;
-                        }
-                        return false;
-                    }
-                case 4:
-                    {
-                        if (stringOperator.Contains(inputArgs[2]))
-                        {
-                            criteria = Utils.ParseFilteringCriteria(inputArgs[2]);
-                            firstValue = inputArgs[3];
-                            return true;
-                        };
-                        return false;
-                    }
-           }
-            return false;
-        }
-
-        private bool IsValidRegularForm(string[] inputArgs)
+         private bool IsValidRegularForm(string[] inputArgs)
         {
             if ((dateOneValueOperator.Contains(inputArgs[2].ToLower())) &&
                     Utils.IsValidDate(inputArgs[3]))
             {
                 criteria = Utils.ParseFilteringCriteria(inputArgs[2]);
-                firstValue = inputArgs[3];
+                date = inputArgs[3];
                 return true;
             }
 
@@ -116,7 +59,7 @@ namespace Calendar
                    (inputArgs[3].ToLower() == "today"))
             {
                 criteria = Utils.ParseFilteringCriteria(inputArgs[2]);
-                firstValue = DateTime.Today.ToShortDateString();
+                date = DateTime.Today.ToShortDateString();
                 return true;
             }
             return false;
@@ -129,8 +72,8 @@ namespace Calendar
                     && (Utils.IsValidDate(inputArgs[4])))
             {
                 criteria = Utils.ParseFilteringCriteria(inputArgs[2]);
-                firstValue = inputArgs[3];
-                secondValue = inputArgs[4];
+                date = inputArgs[3];
+                anotherDate = inputArgs[4];
                 return true;
             }
             return false;
@@ -145,13 +88,13 @@ namespace Calendar
                     case "today":
                         {
                             criteria = "=";
-                            firstValue = DateTime.Today.ToShortDateString();
+                            date = DateTime.Today.ToShortDateString();
                             return true;
                         }
                     case "this week":
                         {
                             criteria = "<>";
-                            Utils.GetBeginEndDaysOfWeek(DateTime.Today.ToShortDateString(), out firstValue, out secondValue);
+                            Utils.GetBeginEndDaysOfWeek(DateTime.Today.ToShortDateString(), out date, out anotherDate);
                             return true;
                         }
                     default: return false;
@@ -162,7 +105,7 @@ namespace Calendar
                 if (Utils.IsValidDate(inputArgs[2]))
                 {
                     criteria = "=";
-                    firstValue = inputArgs[2];
+                    date = inputArgs[2];
                     return true;
                 }
                 else
@@ -193,3 +136,4 @@ namespace Calendar
 
     }
 }
+

@@ -139,23 +139,43 @@ namespace Calendar
 
         static bool AreValidSearchArguments(string[] args, out string field,out string op, out string val1, out string val2)
         {
+            field = op = val1 = val2 = "";
 
-            SearchArgument searchArgs = new SearchArgument(args);
-            if (searchArgs.IsValid())
+            switch (args[1].ToLower())
             {
-                field = searchArgs.Field;
-                op = searchArgs.Criteria;
-                val1 = searchArgs.Value;
-                val2 = searchArgs.AnotherValue;
-                return true;
+                case "date":
+                    {
+                        SearchDateArgument searchArgs = new SearchDateArgument(args);
+                        if (searchArgs.IsValid())
+                        {
+                            field = searchArgs.Field;
+                            op = searchArgs.Criteria;
+                            val1 = searchArgs.Date;
+                            val2 = searchArgs.AnotherDate;
+                            return true;
+                        }
+                        break;
+                    }
+                case "title":
+                    {
+                        SearchTitleArgument searchArgs = new SearchTitleArgument(args);
+                        if (searchArgs.IsValid())
+                        {
+                            field = searchArgs.Field;
+                            op = searchArgs.Criteria;
+                            val1 = searchArgs.Value;
+                            return true;
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        field = op = val1 = val2 = "";
+                        InvalidCommand();
+                        return false;
+                    }
             }
-            else
-            {
-               field= op = val1 = val2 = "";
-                InvalidCommand();
-                return false;
-            }
-
+            return false;
         }
 
         static bool AreValidExportArguments(string[] args)

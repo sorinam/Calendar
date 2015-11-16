@@ -58,8 +58,9 @@
     <Compile Include="HTMLFile.cs" />
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />
-    <Compile Include="SearchArgument.cs" />
+    <Compile Include="SearchTitleArgument.cs" />
     <Compile Include="Dispenser.cs" />
+    <Compile Include="SearchDateArgument.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="TXTFile.cs" />
     <Compile Include="Program.cs" />
