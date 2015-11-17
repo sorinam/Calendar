@@ -110,6 +110,21 @@ namespace UnitTestCalendar
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
+        [TestMethod]
+        public void Test()
+        {
+            string value1 = "#day si @another bla #bla @day fdfd";
+            var arr1 = value1.Split(' ');
+            var results = Array.FindAll(arr1, s => s.StartsWith("#") || s.StartsWith("@"));
+            //Array.ForEach(results, elem => elem.Remove(0,1));
+
+            for (int i=0;i<results.Length;i++)
+            {
+                results[i] = results[i].Remove(0, 1);
+            }
+            var final=results.Distinct().ToArray();
+
+        }
     }
 }
 

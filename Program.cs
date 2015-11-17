@@ -36,7 +36,7 @@ namespace Calendar
             Console.WriteLine("         past filename.html\t export past events from calendar to HTML file ");
             Console.WriteLine("         future filename.html\t export future events from calendar to HTML file ");
             Console.WriteLine("\n\n /search <field name> <operator> <value> [/export fine.html]");
-            Console.WriteLine("\n \t\t  <field name> can be 'date' or 'title' ");
+            Console.WriteLine("\n \t\t  <field name> can be 'date','title'or 'tag' ");
             Console.WriteLine("\t\t  <operator>can be 'equal '='");
             Console.WriteLine("\t\t\t\t   'not equal '!='");
             Console.WriteLine("\t\t\t\t   'between '<>' - only for date");
@@ -63,7 +63,19 @@ namespace Calendar
                     {
                         if (AreValidListArguments(args))
                         {
-                            Dispenser.DisplayEvents(DefaultParameter(args));
+                            switch (args[1])
+                            {
+                                case "tags":
+                                    {
+                                        Dispenser.ListAllTags();
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        Dispenser.DisplayEvents(DefaultParameter(args));
+                                        break;
+                                    }
+                            }
                         }
                         break;
                     }
@@ -185,7 +197,6 @@ namespace Calendar
                     }
                 default:
                     {
-                       // field = op = "";
                         InvalidCommand();
                         return false;
                     }

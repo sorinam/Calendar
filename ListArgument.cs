@@ -3,7 +3,7 @@
     public class ListArgument : IArgument
     {
         const string listArg = "/list";
-        string [] parameters = { "all","past","future","today"};
+        string [] parameters = { "all","past","future","today","tags"};
         const int optionalParameters = 1;
         string[] inputArgs;
 

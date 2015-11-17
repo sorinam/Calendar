@@ -31,17 +31,7 @@ namespace Calendar
 
             return filteredList;
         }
-
-        //public bool IsTrueCriteria(Event ev,string criteria)
-        //{
-        //    switch (criteria)
-        //        { case "=":
-        //            return ContainsTag(ev,valueToCompare);
-        //        case "!=":
-        //            return !ContainsTag(ev,valueToCompare);
-        //        default: return false; }
-
-        //    }
+       
         public bool IsTrueCriteria(Event ev, string criteria)
         {
             switch (criteria)

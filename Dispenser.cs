@@ -23,7 +23,7 @@ namespace Calendar
             {
                 description = Utils.CodingNewLineChar(args[4]);
             }
-            newEvent.AddDataFromConsole(date, subject, title,description);
+            newEvent.AddDataFromConsole(date, subject, title, description);
 
         }
 
@@ -71,32 +71,64 @@ namespace Calendar
             exportHtml.ExportToHTMLFile(path);
         }
 
-       public static void SearchAndExportEvents(string field, string op, string[] val, string path)
-            //public static void SearchAndExportEvents(string field, string op, string val1, string val2, string path)
-        {       
+        public static void SearchAndExportEvents(string field, string op, string[] val, string path)
+        {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            //Events filteredList = SearchEvents( eventsList,field, op, val1, val2);
             Events filteredList = SearchEvents(eventsList, field, op, val);
-         
+
             if (path != "")
             {
                 ExportToHTMLFile(path, filteredList);
             }
         }
 
-        // public static Events SearchEvents(Events eventsList,string field, string op, string val1,string val2) 
-        public static Events SearchEvents(Events eventsList, string field, string op, string[] values)
+       public static Events SearchEvents(Events eventsList, string field, string op, string[] values)
         {
-            Events filteredList = FilterEvents(eventsList,field, op, values);
-            //Events filteredList = FilterEvents(eventsList,field, op, val1, val2);
-
+            Events filteredList = FilterEvents(eventsList, field, op, values);
+         
             IOConsole toDisplay = new IOConsole(filteredList);
             toDisplay.DisplayEventsToConsole();
             return filteredList;
         }
 
-        //private static Events FilterEvents(Events eventsList, string field, string criteria, string firstValue, string secondValue)
+       public static void ListAllTags()
+        {
+            TXTFile files = new TXTFile();
+            Events eventsList = files.LoadEventsFromFile();
+            string[] tagValues = GetTags(eventsList);
+            for (int i = 0; i < tagValues.Length; i++)
+            {
+                Console.WriteLine("tag: {0}",tagValues[i]);
+            }
+        }
+
+        private static string[] GetTags(Events eventsList)
+        {
+            string[] tags = { };
+            string[] el_tags = { };
+            foreach (Event ev in eventsList)
+            {
+                el_tags = GetEventTags(ev);
+                tags = tags.Union(el_tags).ToArray();
+            };
+            return tags;
+        }
+
+        private static string[] GetEventTags(Event ev)
+        {
+            string value = ev.Title + " " + ev.Description;
+            var allTags = value.Split(' ');
+            var evTags = Array.FindAll(allTags, s => s.StartsWith("#") || s.StartsWith("@"));
+            
+            for (int i = 0; i < evTags.Length; i++)
+            {
+                evTags[i] = evTags[i].Remove(0, 1);
+            }
+
+            return evTags.Distinct().ToArray();
+        }
+
         private static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
             Events filteredList = new Events();
@@ -107,7 +139,7 @@ namespace Calendar
                     {
                         string firstValue = values[0];
                         string secondValue = values[1];
-                        filteredList = GetFilteredListByDate(eventsList, criteria,firstValue,secondValue);
+                        filteredList = GetFilteredListByDate(eventsList, criteria, firstValue, secondValue);
                         break;
                     }
                 case "title":
@@ -144,7 +176,7 @@ namespace Calendar
             return eventsToFilter.ApplyFilter(eventsList);
         }
 
-        public static Events GetFilteredListByDate(Events eventsList, string op, string val1,string val2)
+        public static Events GetFilteredListByDate(Events eventsList, string op, string val1, string val2)
         {
             Events filteredList = new Events();
 
@@ -155,7 +187,7 @@ namespace Calendar
 
             return filteredList;
         }
-                
+
         private static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
         {
             string firstCriteria = "<=";
