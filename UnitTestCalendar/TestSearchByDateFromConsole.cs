@@ -23,7 +23,7 @@ namespace UnitTestCalendar
             {{ new Event ( "2015/01/01", "one", "test") },
             };
 
-            Events filteredList = Dispenser.SearchEvents(newEvents, "date", "=", "2015/01/01", null);
+            Events filteredList = Dispenser.SearchEvents(newEvents, "date", "=", new String[]{ "2015/01/01", null});
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -41,7 +41,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "date", "=", "2015/01/01", "/export", "test.html" };
 
-            Events filteredList = Dispenser.SearchEvents(newEvents,"date", "=", "2015/01/01", "");
+            Events filteredList = Dispenser.SearchEvents(newEvents,"date", "=", new String[] { "2015/01/01", "" });
 
             Utils.AssertAreEqual(filteredList, expectedList);
             File.Exists(@"test.html)");
@@ -138,8 +138,9 @@ namespace UnitTestCalendar
             op = searchArgs.Criteria;
             val1 = searchArgs.Date;
             val2 = searchArgs.AnotherDate;
+            string[] values = { val1, val2 };
 
-            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
+            Events filteredList = Dispenser.SearchEvents(newEvents,field, op,  values);
             Utils.AssertAreEqual(filteredList, expectedList);
 
         }

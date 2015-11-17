@@ -77,13 +77,14 @@ namespace Calendar
                     }
                 case "/search":
                     {
-                        string field, op, val1, val2;
+                        string field, op;
+                        string[] val;
                         string path = ExportToHtmlFile(ref args);
 
-                        if (AreValidSearchArguments(args, out field, out op, out val1, out val2))
+                        if (AreValidSearchArguments(args, out field, out op, out val))
                         {
 
-                            Dispenser.SearchAndExportEvents(field, op, val1, val2, path);
+                            Dispenser.SearchAndExportEvents(field, op, val, path);
                         }
                         break;
 
@@ -137,10 +138,10 @@ namespace Calendar
             }
         }
 
-        static bool AreValidSearchArguments(string[] args, out string field,out string op, out string val1, out string val2)
+        static bool AreValidSearchArguments(string[] args, out string field,out string op, out string[] val)
         {
-            field = op = val1 = val2 = "";
-
+            field = op ="";
+            val = new string[10];
             switch (args[1].ToLower())
             {
                 case "date":
@@ -150,8 +151,9 @@ namespace Calendar
                         {
                             field = searchArgs.Field;
                             op = searchArgs.Criteria;
-                            val1 = searchArgs.Date;
-                            val2 = searchArgs.AnotherDate;
+                            val[0] = searchArgs.Date;
+                            val[1] = searchArgs.AnotherDate;
+                            Array.Resize(ref val, 2);
                             return true;
                         }
                         break;
@@ -163,14 +165,27 @@ namespace Calendar
                         {
                             field = searchArgs.Field;
                             op = searchArgs.Criteria;
-                            val1 = searchArgs.Value;
+                            val[0] = searchArgs.Value;
+                            Array.Resize(ref val, 1);
+                            return true;
+                        }
+                        break;
+                    }
+                case "tag":
+                    {
+                        SearchTagArgument searchArgs = new SearchTagArgument(args);
+                        if (searchArgs.IsValid())
+                        {
+                            field = searchArgs.Field;
+                            op = searchArgs.Criteria;
+                            val = searchArgs.Values;
                             return true;
                         }
                         break;
                     }
                 default:
                     {
-                        field = op = val1 = val2 = "";
+                       // field = op = "";
                         InvalidCommand();
                         return false;
                     }

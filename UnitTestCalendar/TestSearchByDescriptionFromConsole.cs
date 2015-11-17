@@ -25,13 +25,12 @@ namespace UnitTestCalendar
             string field = "";
             string op = "";
             string val1 = "";
-            string val2 = "";
             searchArgs.IsValid();
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
             
-            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
+            Events filteredList = Dispenser.SearchEvents(newEvents,field, op,new string[] { val1});
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -53,13 +52,13 @@ namespace UnitTestCalendar
             string field = "";
             string op = "";
             string val1 = "";
-            string val2 = "";
+          
             searchArgs.IsValid();
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
            
-            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
+            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, new String[] { val1 });
             Utils.AssertAreEqual(filteredList, expectedList);
         }
 
@@ -76,13 +75,13 @@ namespace UnitTestCalendar
             string field = "";
             string op = "";
             string val1 = "";
-            string val2 = "";
+           
             searchArgs.IsValid();
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
          
-            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
+            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, new String[] { val1 });
 
             filteredList.ShouldBeEmpty();
         }
@@ -103,13 +102,13 @@ namespace UnitTestCalendar
             string field = "";
             string op = "";
             string val1 = "";
-            string val2 = "";
+           
             searchArgs.IsValid();
             field = searchArgs.Field;
             op = searchArgs.Criteria;
             val1 = searchArgs.Value;
           
-            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, val1, val2);
+            Events filteredList = Dispenser.SearchEvents(newEvents,field, op, new String[] { val1 });
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }

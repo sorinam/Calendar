@@ -10,7 +10,7 @@ namespace UnitTestCalendar
     public class TesttitleFilter
     {
         [TestMethod]
-        public void ShouldSelectEventsWithASpecifiedtitle()
+        public void ShouldSelectEventsWithASpecifiedTitle()
         {
             Events newEvents = new Events
             {
@@ -19,7 +19,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            titleFilter eventsToFilter = new titleFilter("=", "test2");
+            TitleFilter eventsToFilter = new TitleFilter("=", "test2");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -39,7 +39,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            titleFilter eventsToFilter = new titleFilter("!=", "another");
+            TitleFilter eventsToFilter = new TitleFilter("!=", "another");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -60,7 +60,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            titleFilter eventsToFilter = new titleFilter(">", "test");
+            TitleFilter eventsToFilter = new TitleFilter(">", "test");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -81,7 +81,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            titleFilter eventsToFilter = new titleFilter("=", "test1");
+            TitleFilter eventsToFilter = new TitleFilter("=", "test1");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -101,7 +101,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            titleFilter eventsToFilter = new titleFilter("=", "testul");
+            TitleFilter eventsToFilter = new TitleFilter("=", "testul");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             filteredList.ShouldBeEmpty();
         }

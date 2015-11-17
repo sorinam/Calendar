@@ -56,6 +56,8 @@
     <Compile Include="ExportArgument.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="HTMLFile.cs" />
+    <Compile Include="SearchTagArgument.cs" />
+    <Compile Include="TagFilter.cs" />
     <Compile Include="TitleFilter.cs" />
     <Compile Include="ListArgument.cs" />
     <Compile Include="SearchTitleArgument.cs" />

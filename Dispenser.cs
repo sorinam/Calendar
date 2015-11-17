@@ -71,27 +71,33 @@ namespace Calendar
             exportHtml.ExportToHTMLFile(path);
         }
 
-        public static void SearchAndExportEvents(string field,string op,string val1,string val2,string path)
-        {
+       public static void SearchAndExportEvents(string field, string op, string[] val, string path)
+            //public static void SearchAndExportEvents(string field, string op, string val1, string val2, string path)
+        {       
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            Events filteredList = SearchEvents( eventsList,field, op, val1, val2);
+            //Events filteredList = SearchEvents( eventsList,field, op, val1, val2);
+            Events filteredList = SearchEvents(eventsList, field, op, val);
+         
             if (path != "")
             {
                 ExportToHTMLFile(path, filteredList);
             }
         }
 
-        public static Events SearchEvents(Events eventsList,string field, string op, string val1,string val2) 
-            {
-            Events filteredList = FilterEvents(eventsList,field, op, val1, val2);
+        // public static Events SearchEvents(Events eventsList,string field, string op, string val1,string val2) 
+        public static Events SearchEvents(Events eventsList, string field, string op, string[] values)
+        {
+            Events filteredList = FilterEvents(eventsList,field, op, values);
+            //Events filteredList = FilterEvents(eventsList,field, op, val1, val2);
 
             IOConsole toDisplay = new IOConsole(filteredList);
             toDisplay.DisplayEventsToConsole();
             return filteredList;
         }
 
-        private static Events FilterEvents(Events eventsList, string field, string criteria, string firstValue, string secondValue)
+        //private static Events FilterEvents(Events eventsList, string field, string criteria, string firstValue, string secondValue)
+        private static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
             Events filteredList = new Events();
 
@@ -99,12 +105,21 @@ namespace Calendar
             {
                 case "date":
                     {
+                        string firstValue = values[0];
+                        string secondValue = values[1];
                         filteredList = GetFilteredListByDate(eventsList, criteria,firstValue,secondValue);
                         break;
                     }
                 case "title":
                     {
+                        string firstValue = values[0];
                         filteredList = GetFilteredListByTitle(eventsList, criteria, firstValue);
+                        break;
+                    }
+                case "tag":
+                    {
+                        string firstValue = values[0];
+                        filteredList = GetFilteredListByTag(eventsList, criteria, values);
                         break;
                     }
                 default:
@@ -117,9 +132,15 @@ namespace Calendar
             return filteredList;
         }
 
+        private static Events GetFilteredListByTag(Events eventsList, string criteria, string[] values)
+        {
+            TagFilter eventsToFilter = new TagFilter(Utils.ParseFilteringCriteria(criteria), values);
+            return eventsToFilter.ApplyFilter(eventsList);
+        }
+
         public static Events GetFilteredListByTitle(Events eventsList, string criteria, string value)
         {
-            titleFilter eventsToFilter = new titleFilter(Utils.ParseFilteringCriteria(criteria), value);
+            TitleFilter eventsToFilter = new TitleFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
         }
 

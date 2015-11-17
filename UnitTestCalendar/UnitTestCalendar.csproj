@@ -62,10 +62,11 @@
     <Compile Include="TestsStream.cs" />
     <Compile Include="TestUtils.cs" />
     <Compile Include="TestDateFilter.cs" />
-    <Compile Include="TestDescriptionFilter.cs" />
+    <Compile Include="TestTitleFilter.cs" />
     <Compile Include="TestListArg.cs" />
     <Compile Include="TestSearchByDateFromConsole.cs" />
     <Compile Include="TestSearchByDescriptionFromConsole.cs" />
+    <Compile Include="TestTagFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Calendar.csproj">
