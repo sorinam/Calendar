@@ -97,9 +97,15 @@ namespace Calendar
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
             string[] tagValues = GetTags(eventsList);
-            for (int i = 0; i < tagValues.Length; i++)
+            if (tagValues.Length == 0)
+            { Console.WriteLine("\n There are not defined tags. "); }
+            else
             {
-                Console.WriteLine("tag: {0}",tagValues[i]);
+                Console.WriteLine("\nThere are {0} defined tags : ",tagValues.Length);
+                for (int i = 0; i < tagValues.Length; i++)
+                {
+                    Console.WriteLine(" {0}", tagValues[i]);
+                }
             }
         }
 
