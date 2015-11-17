@@ -63,18 +63,13 @@ namespace Calendar
                     {
                         if (AreValidListArguments(args))
                         {
-                            switch (args[1])
+                            if ((args.Length > 1) && (args[1].ToLower() == "tags"))
                             {
-                                case "tags":
-                                    {
-                                        Dispenser.ListAllTags();
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        Dispenser.DisplayEvents(DefaultParameter(args));
-                                        break;
-                                    }
+                                Dispenser.ListAllTags();
+                            }
+                            else
+                            {
+                                Dispenser.DisplayEvents(DefaultParameter(args));
                             }
                         }
                         break;
@@ -150,57 +145,61 @@ namespace Calendar
             }
         }
 
-        static bool AreValidSearchArguments(string[] args, out string field,out string op, out string[] val)
+        static bool AreValidSearchArguments(string[] args, out string field, out string op, out string[] val)
         {
-            field = op ="";
+            field = op = "";
             val = new string[10];
-            switch (args[1].ToLower())
+            if (args.Length > 1)
             {
-                case "date":
-                    {
-                        SearchDateArgument searchArgs = new SearchDateArgument(args);
-                        if (searchArgs.IsValid())
+                switch (args[1].ToLower())
+                {
+                    case "date":
                         {
-                            field = searchArgs.Field;
-                            op = searchArgs.Criteria;
-                            val[0] = searchArgs.Date;
-                            val[1] = searchArgs.AnotherDate;
-                            Array.Resize(ref val, 2);
-                            return true;
+                            SearchDateArgument searchArgs = new SearchDateArgument(args);
+                            if (searchArgs.IsValid())
+                            {
+                                field = searchArgs.Field;
+                                op = searchArgs.Criteria;
+                                val[0] = searchArgs.Date;
+                                val[1] = searchArgs.AnotherDate;
+                                Array.Resize(ref val, 2);
+                                return true;
+                            }
+                            break;
                         }
-                        break;
-                    }
-                case "title":
-                    {
-                        SearchTitleArgument searchArgs = new SearchTitleArgument(args);
-                        if (searchArgs.IsValid())
+                    case "title":
                         {
-                            field = searchArgs.Field;
-                            op = searchArgs.Criteria;
-                            val[0] = searchArgs.Value;
-                            Array.Resize(ref val, 1);
-                            return true;
+                            SearchTitleArgument searchArgs = new SearchTitleArgument(args);
+                            if (searchArgs.IsValid())
+                            {
+                                field = searchArgs.Field;
+                                op = searchArgs.Criteria;
+                                val[0] = searchArgs.Value;
+                                Array.Resize(ref val, 1);
+                                return true;
+                            }
+                            break;
                         }
-                        break;
-                    }
-                case "tag":
-                    {
-                        SearchTagArgument searchArgs = new SearchTagArgument(args);
-                        if (searchArgs.IsValid())
+                    case "tag":
                         {
-                            field = searchArgs.Field;
-                            op = searchArgs.Criteria;
-                            val = searchArgs.Values;
-                            return true;
+                            SearchTagArgument searchArgs = new SearchTagArgument(args);
+                            if (searchArgs.IsValid())
+                            {
+                                field = searchArgs.Field;
+                                op = searchArgs.Criteria;
+                                val = searchArgs.Values;
+                                return true;
+                            }
+                            break;
                         }
-                        break;
-                    }
-                default:
-                    {
-                        InvalidCommand();
-                        return false;
-                    }
+                    default:
+                        {
+                            InvalidCommand();
+                            return false;
+                        }
+                }
             }
+            InvalidCommand();
             return false;
         }
 
