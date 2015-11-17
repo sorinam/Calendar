@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 namespace Calendar
@@ -10,6 +11,7 @@ namespace Calendar
         private string subject;
         private string title;
         private string description;
+        string[] tags;
 
         public string Subject
         {
@@ -23,6 +25,13 @@ namespace Calendar
             get { return title; }
         }
 
+        public string[] Tags
+        {
+           get {
+                return tags = GetTags();
+               
+                    }
+        }
         public DateTime Date
         {
             set { date = value; }
@@ -77,6 +86,20 @@ namespace Calendar
             Thread.CurrentThread.CurrentCulture = ci;
             String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + title;
             return newString;
+        }
+
+        public string[] GetTags()
+        {
+            string value =title + " " + description;
+            var allTags = value.Split(' ');
+            var tags = Array.FindAll(allTags, s => s.StartsWith("#") || s.StartsWith("@"));
+
+            for (int i = 0; i < tags.Length; i++)
+            {
+                tags[i] = tags[i].Remove(0, 1);
+            }
+
+            return tags.Distinct().ToArray();
         }
 
         public int CompareTo(Event other)

@@ -111,20 +111,28 @@ namespace UnitTestCalendar
             Utils.AssertAreEqual(filteredList, expectedList);
         }
         [TestMethod]
-        public void Test()
+        public void SouldListEventsContainingAllTagsFromPredicate()
         {
-            string value1 = "#day si @another bla #bla @day fdfd";
-            var arr1 = value1.Split(' ');
-            var results = Array.FindAll(arr1, s => s.StartsWith("#") || s.StartsWith("@"));
-            //Array.ForEach(results, elem => elem.Remove(0,1));
-
-            for (int i=0;i<results.Length;i++)
+            Events newEvents = new Events
             {
-                results[i] = results[i].Remove(0, 1);
-            }
-            var final=results.Distinct().ToArray();
+                {new Event ( "2015/01/01", "subj", "#tag title","description") },
+                {new Event("2015/11/15", "subj","title","@desc") },
+                {new Event("2015/11/15", "subj","tag") },
+                {new Event("2015/11/15", "subj","#tag","#desc tag test" ) }
+            };
 
+            TagFilter eventsToFilter = new TagFilter("!=", new string[] { "ta", "des" });
+            List<Event> expectedList = new List<Event>
+            {
+                {new Event("2015/11/15", "subj","#tag","#desc tag test" ) }
+            };
+
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+
+            Utils.AssertAreEqual(filteredList, expectedList);
         }
+
+
     }
 }
 

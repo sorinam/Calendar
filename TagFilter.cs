@@ -39,21 +39,23 @@ namespace Calendar
                 case "=":
                     return ContainsAnyTag(ev, valueToCompare);
                 case "!=":
-                    return !ContainsAnyTag(ev, valueToCompare);
+                    return ContainsAllTags(ev, valueToCompare);
                 default: return false;
             }
 
         }
         private bool ContainsAnyTag(Event ev, string[] tagValues)
         {
-            return tagValues.Any(tag => ContainsTag(ev,tag)) ;
+            //foreach (string tag in tagValues)
+            //{
+            //    if (ev.Tags.Contains(tag)) return true;
+            //}
+            //return false;
+            return tagValues.Any(elem => ev.Tags.Contains(elem));
         }
-
-        private bool ContainsTag(Event ev,string value)
+        private bool ContainsAllTags(Event ev, string[] tagValues)
         {
-            string[] tag = new string[] { "#" + value, "@" + value };
-          
-            return tag.Any(c => ev.Title.Contains(c)) || (tag.Any(c => ev.Description.Contains(c)));
+            return tagValues.All(elem => ev.Tags.Contains(elem));
         }
     }
 }

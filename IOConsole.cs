@@ -56,5 +56,21 @@ namespace Calendar
             Console.WriteLine("\n\tThe events were listed. There are {0} events. ", eventsList.Length);
            
         }
+
+        public void DisplayTagsToConsole()
+        {
+            string[] tagValues = eventsList.GetTags();
+            Array.Sort(tagValues);
+            if (tagValues.Length == 0)
+            { Console.WriteLine("\n There are not defined tags. "); }
+            else
+            {
+                Console.WriteLine("\nThere are {0} defined tags : ", tagValues.Length);
+                for (int i = 0; i < tagValues.Length; i++)
+                {
+                    Console.WriteLine(" {0}", tagValues[i]);
+                }
+            }
+        }
     }
 }

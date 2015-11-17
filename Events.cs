@@ -76,6 +76,17 @@ namespace Calendar
             return stringContent;
         }
 
+        public string[] GetTags()
+        {
+            string[] tags = { };
+            string[] el_tags = { };
+            foreach (Event ev in eventsList)
+            {
+                el_tags = ev.Tags;
+                tags = tags.Union(el_tags).ToArray();
+            };
+            return tags;
+        }
         public void Sort()
         {
             eventsList.Sort();
