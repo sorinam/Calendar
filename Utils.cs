@@ -57,6 +57,12 @@ namespace Calendar
                 new FilteringCriteriaParser("contains",">"),
                 new FilteringCriteriaParser("older","<"),
                 new FilteringCriteriaParser("newer",">"),
+                new FilteringCriteriaParser("any","||"),
+                new FilteringCriteriaParser("all","&&"),
+                new FilteringCriteriaParser("||","||"),
+                new FilteringCriteriaParser("&&","&&"),
+
+
             };
 
             for (int i = 0; i < AcceptedParameters.Length;i++)

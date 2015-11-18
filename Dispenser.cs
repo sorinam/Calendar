@@ -96,45 +96,11 @@ namespace Calendar
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            string[] tagValues = GetTags(eventsList);
-            if (tagValues.Length == 0)
-            { Console.WriteLine("\n There are not defined tags. "); }
-            else
-            {
-                Console.WriteLine("\nThere are {0} defined tags : ",tagValues.Length);
-                for (int i = 0; i < tagValues.Length; i++)
-                {
-                    Console.WriteLine(" {0}", tagValues[i]);
-                }
-            }
+            IOConsole toDisplay = new IOConsole(eventsList);
+            toDisplay.DisplayTagsToConsole();
         }
 
-        private static string[] GetTags(Events eventsList)
-        {
-            string[] tags = { };
-            string[] el_tags = { };
-            foreach (Event ev in eventsList)
-            {
-                el_tags = GetEventTags(ev);
-                tags = tags.Union(el_tags).ToArray();
-            };
-            return tags;
-        }
-
-        private static string[] GetEventTags(Event ev)
-        {
-            string value = ev.Title + " " + ev.Description;
-            var allTags = value.Split(' ');
-            var evTags = Array.FindAll(allTags, s => s.StartsWith("#") || s.StartsWith("@"));
-            
-            for (int i = 0; i < evTags.Length; i++)
-            {
-                evTags[i] = evTags[i].Remove(0, 1);
-            }
-
-            return evTags.Distinct().ToArray();
-        }
-
+       
         private static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
             Events filteredList = new Events();
@@ -155,8 +121,7 @@ namespace Calendar
                         break;
                     }
                 case "tag":
-                    {
-                        string firstValue = values[0];
+                    {                       
                         filteredList = GetFilteredListByTag(eventsList, criteria, values);
                         break;
                     }

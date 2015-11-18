@@ -20,14 +20,16 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "day","tag") }
             };
 
-                TagFilter eventsToFilter = new TagFilter("=",new string[] { "tag" });
-                Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+                TagFilter eventsToFilter = new TagFilter("||",new string[] { "tag" });
+            
                 List<Event> expectedList = new List<Event>
             {
                 {new Event(  "2015/01/01", "one", "#tag Title","Description") }
             };
+          
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
 
-                Utils.AssertAreEqual(filteredList, expectedList);
+            Utils.AssertAreEqual(filteredList, expectedList);
             }
 
         [TestMethod]
@@ -40,48 +42,11 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "day","tag") }
             };
 
-            TagFilter eventsToFilter = new TagFilter("=", new string[] { "tag" });
+            TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag" });
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
                 {new Event("2015/01/01", "one", "Title","@tag Description") }
-            };
-
-            Utils.AssertAreEqual(filteredList, expectedList);
-        }
-
-        [TestMethod]
-        public void SouldNotListEventsNotContainingTag()
-        {
-            Events newEvents = new Events
-            {
-                {new Event ( "2015/01/01", "one", "@day Title","#tag Description") },
-                {new Event("2015/11/15", "two","title","Description") },
-                {new Event("2015/11/15", "day","tag") }
-            };
-
-            TagFilter eventsToFilter = new TagFilter("=", new string[] { "days" });
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
-
-            filteredList.ShouldBeEmpty();
-        }
-        [TestMethod]
-        public void SouldListEventsNotContainingTag()
-        {
-            Events newEvents = new Events
-            {
-                {new Event ( "2015/01/01", "one", "#day Title","#tag Description") },
-                {new Event("2015/11/15", "two","title","Description") },
-                {new Event("2015/11/15", "day","tag Title","#day Test") }
-            };
-
-            TagFilter eventsToFilter = new TagFilter("!=", new string[] { "tag" });
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
-
-            List<Event> expectedList = new List<Event>
-            {
-                { new Event("2015/11/15", "two","title","Description") },
-                {new Event("2015/11/15", "day","tag Title","#day Test") }
             };
 
             Utils.AssertAreEqual(filteredList, expectedList);
@@ -98,7 +63,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "subj","#tag","#desc tag test" ) }
             };
 
-            TagFilter eventsToFilter = new TagFilter("=", new string[] { "tag","desc" });
+            TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag","desc" });
             List<Event> expectedList = new List<Event>
             {
                 {new Event ( "2015/01/01", "subj", "#tag title","description") },
@@ -111,20 +76,50 @@ namespace UnitTestCalendar
             Utils.AssertAreEqual(filteredList, expectedList);
         }
         [TestMethod]
-        public void Test()
+        public void SouldListEventsContainingAllTagsFromPredicate()
         {
-            string value1 = "#day si @another bla #bla @day fdfd";
-            var arr1 = value1.Split(' ');
-            var results = Array.FindAll(arr1, s => s.StartsWith("#") || s.StartsWith("@"));
-            //Array.ForEach(results, elem => elem.Remove(0,1));
-
-            for (int i=0;i<results.Length;i++)
+            Events newEvents = new Events
             {
-                results[i] = results[i].Remove(0, 1);
-            }
-            var final=results.Distinct().ToArray();
+                {new Event ( "2015/01/01", "subj", "#tag title","description") },
+                {new Event("2015/11/15", "subj","title","@desc") },
+                {new Event("2015/11/15", "subj","tag","@Ioana") },
+                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+            };
 
+            TagFilter eventsToFilter = new TagFilter("&&", new string[] { "tag", "Ioana" });
+            List<Event> expectedList = new List<Event>
+            {
+                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+            };
+
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+
+            Utils.AssertAreEqual(filteredList, expectedList);
         }
+
+        [TestMethod]
+        public void SouldLParseTags()
+        {
+            Events newEvents = new Events
+            {
+                {new Event ( "2015/01/01", "subj", "#tag title","description") },
+                {new Event("2015/11/15", "subj","title","@desc") },
+                {new Event("2015/11/15", "subj","tag","@Ioana") },
+                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+            };
+            
+            TagFilter eventsToFilter = new TagFilter("&&", new string[] { "tag", "Ioana" });
+            List<Event> expectedList = new List<Event>
+            {
+                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+            };
+
+            Dispenser.SearchAndExportEvents("tag", "||", new string[] { "tag", "Ioana" }, "testc.html");
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+
+            Utils.AssertAreEqual(filteredList, expectedList);
+        }
+
     }
 }
 

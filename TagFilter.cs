@@ -11,10 +11,10 @@ namespace Calendar
         string[] valueToCompare;
         string criteria;
 
-        public TagFilter( string criteria,string[] valueToCompare)
+        public TagFilter(string criteria, string[] valueToCompare)
         {
             this.valueToCompare = valueToCompare;
-            this.criteria=criteria;
+            this.criteria = criteria;
         }
 
         public Events ApplyFilter(Events sourceList)
@@ -23,7 +23,7 @@ namespace Calendar
 
             foreach (Event ev in sourceList)
             {
-                if (IsTrueCriteria(ev,criteria))
+                if (IsTrueCriteria(ev, criteria))
                 {
                     filteredList.Add(ev);
                 }
@@ -31,29 +31,26 @@ namespace Calendar
 
             return filteredList;
         }
-       
-        public bool IsTrueCriteria(Event ev, string criteria)
+
+        bool IsTrueCriteria(Event ev, string criteria)
         {
             switch (criteria)
             {
-                case "=":
+                case "||":
                     return ContainsAnyTag(ev, valueToCompare);
-                case "!=":
-                    return !ContainsAnyTag(ev, valueToCompare);
+                case "&&":
+                    return ContainsAllTags(ev, valueToCompare);
                 default: return false;
             }
 
         }
-        private bool ContainsAnyTag(Event ev, string[] tagValues)
+        bool ContainsAnyTag(Event ev, string[] tagValues)
         {
-            return tagValues.Any(tag => ContainsTag(ev,tag)) ;
+            return tagValues.Any(elem => ev.Tags.Contains('#' + elem) || ev.Tags.Contains('@' + elem));
         }
-
-        private bool ContainsTag(Event ev,string value)
+        bool ContainsAllTags(Event ev, string[] tagValues)
         {
-            string[] tag = new string[] { "#" + value, "@" + value };
-          
-            return tag.Any(c => ev.Title.Contains(c)) || (tag.Any(c => ev.Description.Contains(c)));
+            return tagValues.All(elem => ev.Tags.Contains('#' + elem) || ev.Tags.Contains('@' + elem));
         }
     }
 }

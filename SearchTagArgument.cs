@@ -8,7 +8,7 @@ namespace Calendar
 {
     class SearchTagArgument : IArgument
     {
-        string[] stringOperator = { "!=", "not equal", "=", "equal"};
+        string[] stringOperator = {"||","any","&&","all"};
 
         string[] inputArgs;
         string field;
@@ -45,7 +45,7 @@ namespace Calendar
             if (!stringOperator.Contains(inputArgs[2]))
             {
                 Array.Resize(ref values, inputArgs.Length - 2);
-                criteria = "=";
+                criteria = "||";
                 Array.Copy(inputArgs, 2, values, 0, inputArgs.Length - 2);
                 return true;
             }
