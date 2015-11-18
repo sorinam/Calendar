@@ -97,29 +97,6 @@ namespace UnitTestCalendar
             Utils.AssertAreEqual(filteredList, expectedList);
         }
 
-        [TestMethod]
-        public void SouldLParseTags()
-        {
-            Events newEvents = new Events
-            {
-                {new Event ( "2015/01/01", "subj", "#tag title","description") },
-                {new Event("2015/11/15", "subj","title","@desc") },
-                {new Event("2015/11/15", "subj","tag","@Ioana") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
-            };
-            
-            TagFilter eventsToFilter = new TagFilter("&&", new string[] { "tag", "Ioana" });
-            List<Event> expectedList = new List<Event>
-            {
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
-            };
-
-            Dispenser.SearchAndExportEvents("tag", "||", new string[] { "tag", "Ioana" }, "testc.html");
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
-
-            Utils.AssertAreEqual(filteredList, expectedList);
-        }
-
     }
 }
 
