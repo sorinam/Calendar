@@ -93,12 +93,6 @@ namespace Calendar
             string value =title + " " + description;
             var allTags = value.Split(' ');
             var tags = Array.FindAll(allTags, s => s.StartsWith("#") || s.StartsWith("@"));
-
-            for (int i = 0; i < tags.Length; i++)
-            {
-                tags[i] = tags[i].Remove(0, 1);
-            }
-
             return tags.Distinct().ToArray();
         }
 

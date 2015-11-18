@@ -121,8 +121,7 @@ namespace Calendar
                         break;
                     }
                 case "tag":
-                    {
-                        string firstValue = values[0];
+                    {                       
                         filteredList = GetFilteredListByTag(eventsList, criteria, values);
                         break;
                     }
