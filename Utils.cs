@@ -21,6 +21,7 @@ namespace Calendar
             public string InternalValue { get { return internalValue; } }
 
         }
+        
         public static string CodingNewLineChar(string value)
         {
             return (value.Replace('\n', '\a'));
