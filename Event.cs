@@ -101,7 +101,7 @@ namespace Calendar
             Tag[] evTagList = new Tag[tags.Length];
             for (int i = 0; i < tags.Length; i++)
             {
-                evTagList[i]= new Tag(tags[i], 1); ;
+                evTagList[i]= new Tag(tags[i], 0); ;
             }
             return evTagList;
 

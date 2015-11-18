@@ -8,7 +8,7 @@ using System.Linq;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TestTags
+    public class TestTagFilter
     {
         [TestMethod]
         public void SouldListEventsContainingTagInTitle()

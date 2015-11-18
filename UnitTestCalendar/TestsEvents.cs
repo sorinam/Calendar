@@ -149,45 +149,6 @@ namespace UnitTestCalendar
             }
         }
 
-        [TestMethod]
-        public void ShouldListAllTags()
-        {
-            Events newEvents = new Events
-            {
-                {new Event ( "2015/01/01", "subj", "tag","description") },
-                {new Event("2015/11/15", "subj","title","#desc") },
-                {new Event("2015/11/15", "subj","tag","@Ioana") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
-            };
-            string[] expectedTagList = { "#desc", "#tag", "@Ioana", };
-           
-            string[] tags = newEvents.GetTags();
-            Array.Sort(tags);
-            expectedTagList.ShouldEqual(tags);
-        }
-
-        [TestMethod]
-        public void ShouldListAllTagsWithNumbers()
-        {
-            Events newEvents = new Events
-            {
-                {new Event ( "2015/01/01", "subj", "tag","description") },
-                {new Event("2015/11/15", "subj","title","#desc") },
-                {new Event("2015/11/15", "subj","tag","@Ioana") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
-            };
-            Tag[] expectedTagList = {
-                new Tag("#desc",2),
-                new Tag("#tag",1),
-                new Tag("@Ioana",2) };
-            Tag[] a = { new Tag("#tag", 1), new Tag("#tag1", 1) } ;
-            Tag[] b = { new Tag("#tag", 1) };
-            var c = a.Union(b).ToArray();
-            var result = a.Equals(b);
-            var tagList= newEvents.GetTagsWithNumbers();
-            expectedTagList.ShouldEqual(tagList);
-
-           
-        }
+       
     }
 }
