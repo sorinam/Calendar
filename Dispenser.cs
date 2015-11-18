@@ -96,8 +96,9 @@ namespace Calendar
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            IOConsole toDisplay = new IOConsole(eventsList);
-            toDisplay.DisplayTagsToConsole();
+            TagsCounter tags= new TagsCounter(eventsList);
+            Tag[] listTodispaly = tags.TagList.ToArray();
+            new IOConsole().DisplayTagsWithCountersToConsole(listTodispaly);
         }
 
        

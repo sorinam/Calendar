@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Calendar
 {
-    public class Tag
+    public class Tag:IComparable<Tag>
     {
         string name;
         int count;
@@ -29,6 +29,10 @@ namespace Calendar
             name = tagName;
             count = number;
         }
+        public int CompareTo(Tag other)
+        {
+            return count.CompareTo(other.Count);
+        }
     }
     public class TagsComparer : IEqualityComparer<Tag>
     {
@@ -47,26 +51,36 @@ namespace Calendar
       }
     public class TagsCounter
     {
-        Events eventsList;
+        Tag[] tagList;
+
         public TagsCounter(Events list)
+            {
+            tagList = GetTagsAndCounts(list);
+
+            }
+
+        public IEnumerable<Tag> TagList
         {
-            eventsList = list;
+            get { return tagList; }
         }
 
-        public Tag[] GetTagsWithCounts()
+        public int Length
+        {
+            get { return tagList.Count(); }
+        }
+
+        public Tag[] GetTagsAndCounts(Events eventsList)
         {
             Tag[] tags = { };
             Tag[] el_tags = { };
             foreach (Event ev in eventsList)
             {
-                el_tags = ev.GetTagsWithNumber();
+                el_tags = ev.GetTagsAndCount();
                 var union = tags.Union(el_tags, new TagsComparer()).ToArray();
-                {
-                    IncreaseCounter(el_tags, union);
-                }
+                IncreaseCounter(el_tags, union);
                 tags = union;
             };
-            return tags;
+        return tags;
         }
 
         private static void IncreaseCounter(Tag[] el_tags, Tag[] union)
