@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TestTags
+    public class TestTagFilter
     {
         [TestMethod]
         public void SouldListEventsContainingTagInTitle()

@@ -1,45 +1,81 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calendar
 {
-    public class Tag:IEquatable <Tag>
+    public class Tag
     {
         string name;
-        int appearnce;
+        int count;
         public string Name
         {
             set { name = value; }
             get { return name; }
         }
-        public int Appearence
+        public int Count
         {
-            set { this.appearnce = value; }
-            get { return appearnce; }
+            set { this.count= value; }
+            get { return count; }
         }
 
         public Tag()
         {
             name = "";
-            appearnce = 0;
+            count = 0;
         }
         public Tag(string tagName, int number)
         {
             name = tagName;
-            appearnce = number;
+            count = number;
+        }
+    }
+    public class TagsComparer : IEqualityComparer<Tag>
+    {
+        public bool Equals(Tag x, Tag y)
+        {
+            return x != null && y != null && x.Name.Equals(y.Name);
+
         }
 
-        public bool Equals(Tag other)
+        public int GetHashCode(Tag obj)
         {
-            if (other == null) return false;
-            return (name.Equals(other.name));
+                int hashName = obj.Name == null ? 0 : obj.Name.GetHashCode();
+                return hashName;
+            }
+           
+      }
+    public class TagsCounter
+    {
+        Events eventsList;
+        public TagsCounter(Events list)
+        {
+            eventsList = list;
         }
-        public override int GetHashCode()
+
+        public Tag[] GetTagsWithCounts()
         {
-            return name;
+            Tag[] tags = { };
+            Tag[] el_tags = { };
+            foreach (Event ev in eventsList)
+            {
+                el_tags = ev.GetTagsWithNumber();
+                var union = tags.Union(el_tags, new TagsComparer()).ToArray();
+                {
+                    IncreaseCounter(el_tags, union);
+                }
+                tags = union;
+            };
+            return tags;
+        }
+
+        private static void IncreaseCounter(Tag[] el_tags, Tag[] union)
+        {
+            foreach (Tag elem in el_tags)
+            {
+                int index = Array.FindIndex(union, e => e.Name == elem.Name);
+                union[index].Count += 1;
+            }
         }
     }
 }
