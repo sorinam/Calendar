@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
 using Calendar;
-using System.Collections.Generic;
 
 namespace UnitTestCalendar
 {

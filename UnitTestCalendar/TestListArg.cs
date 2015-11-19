@@ -50,15 +50,38 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldNotAccepttInvalidListParameter()
         {
-            string[] args = { "/list","pas" };
+            string[] args = { "/list","tags" ,"new"};
             ListArgument listArg = new ListArgument(args);
             listArg.IsValid().ShouldBeFalse();
         }
 
         [TestMethod]
+        public void ShouldAccepttListTagsByNameParameter()
+        {
+            string[] args = { "/list", "tags", "byName"};
+            ListArgument listArg = new ListArgument(args);
+            listArg.IsValid().ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldAccepttListTagsWithoutParameter()
+        {
+            string[] args = { "/list", "tags"};
+            ListArgument listArg = new ListArgument(args);
+            listArg.IsValid().ShouldBeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldAccepttListTagsByCountParameter()
+        {
+            string[] args = { "/list", "tags", "byCount" };
+            ListArgument listArg = new ListArgument(args);
+            listArg.IsValid().ShouldBeTrue();
+        }
+        [TestMethod]
         public void ShouldNotAccepttInvalidFirstParameter()
         {
-            string[] args = { "/lis", "past" };
+            string[] args = { "/lis", "tags","new" };
             ListArgument listArg = new ListArgument(args);
             listArg.IsValid().ShouldBeFalse();
         }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Calendar
 {
-    public class Tag:IComparable<Tag>
+    public class Tag : IComparable<Tag>
     {
         string name;
         int count;
@@ -16,7 +16,7 @@ namespace Calendar
         }
         public int Count
         {
-            set { this.count= value; }
+            set { this.count = value; }
             get { return count; }
         }
 
@@ -45,20 +45,20 @@ namespace Calendar
 
         public int GetHashCode(Tag obj)
         {
-                int hashName = obj.Name == null ? 0 : obj.Name.GetHashCode();
-                return hashName;
-            }
-           
-      }
+            int hashName = obj.Name == null ? 0 : obj.Name.GetHashCode();
+            return hashName;
+        }
+
+    }
     public class TagsCounter
     {
         Tag[] tagList;
 
         public TagsCounter(Events list)
-            {
+        {
             tagList = GetTagsAndCounts(list);
 
-            }
+        }
 
         public Tag[] TagList
         {
@@ -81,7 +81,7 @@ namespace Calendar
                 IncreaseCounter(el_tags, union);
                 tags = union;
             };
-         return tags;
+            return tags;
         }
 
         public void SortTagsDescByCount()
@@ -104,21 +104,20 @@ namespace Calendar
             }
         }
     }
-     class sortTagAscendingByName : IComparer <Tag>
+    class sortTagAscendingByName : IComparer<Tag>
     {
         public int Compare(Tag x, Tag y)
         {
             return x.Name.CompareTo(y.Name);
-        }     
+        }
     }
-
     class sortTagDescendingByCount : IComparer<Tag>
     {
         public int Compare(Tag x, Tag y)
         {
-            if (x.Count < y.Count) return 1; 
+            if (x.Count < y.Count) return 1;
             else
-            if (x.Count>y.Count) return -1;
+            if (x.Count > y.Count) return -1;
             else return 0;
 
         }
