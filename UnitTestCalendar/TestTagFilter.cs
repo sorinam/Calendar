@@ -12,16 +12,16 @@ namespace UnitTestCalendar
         {            
                 Events newEvents = new Events
             {
-                {new Event ( "2015/01/01", "one", "#tag Title","Description") },
-                {new Event("2015/11/15", "two","title","desc") },
-                {new Event("2015/11/15", "day","tag") }
+                {new Event ( "2015/01/01", "#tag Title","Description") },
+                {new Event("2015/11/15", "title","desc") },
+                {new Event("2015/11/15","tag") }
             };
 
                 TagFilter eventsToFilter = new TagFilter("||",new string[] { "tag" });
             
                 List<Event> expectedList = new List<Event>
             {
-                {new Event(  "2015/01/01", "one", "#tag Title","Description") }
+                {new Event(  "2015/01/01", "#tag Title","Description") }
             };
           
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
@@ -34,16 +34,16 @@ namespace UnitTestCalendar
         {
             Events newEvents = new Events
             {
-                {new Event ( "2015/01/01", "one", "Title","@tag Description") },
-                {new Event("2015/11/15", "two","title","Description") },
-                {new Event("2015/11/15", "day","tag") }
+                {new Event ( "2015/01/01","Title","@tag Description") },
+                {new Event("2015/11/15", "title","Description") },
+                {new Event("2015/11/15", "tag") }
             };
 
             TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag" });
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
-                {new Event("2015/01/01", "one", "Title","@tag Description") }
+                {new Event("2015/01/01", "Title","@tag Description") }
             };
 
             Utils.AssertAreEqual(filteredList, expectedList);
@@ -54,18 +54,18 @@ namespace UnitTestCalendar
         {
             Events newEvents = new Events
             {
-                {new Event ( "2015/01/01", "subj", "#tag title","description") },
-                {new Event("2015/11/15", "subj","title","@desc") },
-                {new Event("2015/11/15", "subj","tag") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag test" ) }
+                {new Event ( "2015/01/01", "#tag title","description") },
+                {new Event("2015/11/15", "title","@desc") },
+                {new Event("2015/11/15","tag") },
+                {new Event("2015/11/15", "#tag","#desc tag test" ) }
             };
 
             TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag","desc" });
             List<Event> expectedList = new List<Event>
             {
-                {new Event ( "2015/01/01", "subj", "#tag title","description") },
-                {new Event("2015/11/15", "subj","title","@desc") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag test" ) }
+                {new Event ( "2015/01/01", "#tag title","description") },
+                {new Event("2015/11/15", "title","@desc") },
+                {new Event("2015/11/15","#tag","#desc tag test" ) }
             };
 
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
@@ -77,16 +77,16 @@ namespace UnitTestCalendar
         {
             Events newEvents = new Events
             {
-                {new Event ( "2015/01/01", "subj", "#tag title","description") },
-                {new Event("2015/11/15", "subj","title","@desc") },
-                {new Event("2015/11/15", "subj","tag","@Ioana") },
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+                {new Event ( "2015/01/01", "#tag title","description") },
+                {new Event("2015/11/15", "title","@desc") },
+                {new Event("2015/11/15","tag","@Ioana") },
+                {new Event("2015/11/15", "#tag","#desc tag @Ioana test" ) }
             };
 
             TagFilter eventsToFilter = new TagFilter("&&", new string[] { "tag", "Ioana" });
             List<Event> expectedList = new List<Event>
             {
-                {new Event("2015/11/15", "subj","#tag","#desc tag @Ioana test" ) }
+                {new Event("2015/11/15", "#tag","#desc tag @Ioana test" ) }
             };
 
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);

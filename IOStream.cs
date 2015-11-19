@@ -43,7 +43,6 @@ namespace Calendar
                 {
                     string htmlData = "";
                     htmlData += "<p><b>Date:</b> " + ev.Date.ToString("yyyy/MM/dd") + "</p>\n";
-                    htmlData += "<p><b>Subject:</b> " + Utils.DecodingNewLineCharForHTML(Utils.DecodingNewLineChar(ev.Subject)) + "</p>";
                     htmlData += "<p><b>Title:</b> " + Utils.DecodingNewLineCharForHTML(Utils.DecodingNewLineChar(ev.Title)) + "</p>";
                     htmlData += "<p><b>Description:</b> " + Utils.DecodingNewLineCharForHTML(Utils.DecodingNewLineChar(ev.Description)) + "</p>";
                     htmlData += "<hr>";

@@ -18,13 +18,12 @@ namespace UnitTestCalendar
             StringWriter consoleOut;
 
             string date = "2015/12/25";
-            string subject = "Christmas Day!";
             string title = "Santa Claus";
             string description = "Santa Claus is comming in our house....";
-            SetExpectedResultToConsole(date, subject, title,out expectedConsole, out consoleOut,description);
+            SetExpectedResultToConsole(date, title,out expectedConsole, out consoleOut,description);
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject, title,description);
+            newEvent.Add(date, title,description);
 
             IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
@@ -40,12 +39,12 @@ namespace UnitTestCalendar
             StringWriter consoleOut;
 
             string date = "2015/12/25";
-            string subject = "Christmas \n Day!";
-            string title = "Santa Claus is comming in our house....\n";
-            SetExpectedResultToConsole(date, subject, title, out expectedConsole, out consoleOut);
+            string title = "Christmas \n Day!";
+            string description = "Santa Claus is comming in our house....\n";
+            SetExpectedResultToConsole(date, title,out expectedConsole, out consoleOut, description);
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject, title);
+            newEvent.Add(date, title, description);
 
             IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
@@ -54,18 +53,18 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldDisplayOneEventWithouttitle()
+        public void ShouldDisplayOneEventWithoutDescription()
         {
             Events newEvent = new Events();
             string expectedConsole;
             StringWriter consoleOut;
 
             string date = "2015/12/25";
-            string subject = "Christmas Day!";
-            SetExpectedResultToConsole(date, subject, "", out expectedConsole, out consoleOut);
+            string title = "Christmas Day!";
+            SetExpectedResultToConsole(date, title, out expectedConsole, out consoleOut);
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject);
+            newEvent.Add(date, title);
 
             IOConsole newObj = new IOConsole(newEvent);
             newObj.DisplayEventsToConsole();
@@ -82,19 +81,19 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
 
             string date = "2015/12/25";
-            string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
+            string title = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject, title);
+            newEvent.Add(date, title, description);
 
             string date1 = "2015/10/25";
-            string subject1 = "Johana's Birtday!";
-            string title1 = "Don't forget to call her...";
-            newEvent.Add(date1, subject1, title1);
+            string title1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
+            newEvent.Add(date1, title1, description1);
 
-            expectedConsole = " \nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nSubject:" + subject1 + " \nTitle:" + title1 + "\n" +
-                " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject + " \nTitle:" + title;
+            expectedConsole = " \nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nTitle:" + title1 + " \nDescription:" + description1 + "\n" +
+                " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nTitle:" + title + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -114,18 +113,18 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
 
             string date = "2015/12/25";
-            string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
+            string title = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
 
             string date1 = "2015/11/10";
-            string subject1 = "Johana's Birtday!";
-            string title1 = "Don't forget to call her...";
+            string title1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
 
-            SetExpectedResultToConsole(date1, subject1, title1, out expectedConsole, out consoleOut);
+            SetExpectedResultToConsole(date1, title1, out expectedConsole, out consoleOut, description1);
 
             newEvents.EventsList.ShouldBeEmpty();
-            newEvents.Add(date, subject, title);
-            newEvents.Add(date1, subject1, title1);
+            newEvents.Add(date, title, description);
+            newEvents.Add(date1, title1, description1);
 
             string today= DateTime.Now.ToShortDateString();
 
@@ -149,18 +148,18 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
 
             string date = "2019/12/25";
-            string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
+            string title = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
 
             string date1 = "2015/10/25";
-            string subject1 = "Johana's Birtday!";
-            string title1 = "Don't forget to call her...";
+            string title1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
 
-            SetExpectedResultToConsole(date, subject, title, out expectedConsole, out consoleOut);
+            SetExpectedResultToConsole(date, title, out expectedConsole, out consoleOut, description);
 
             newEvents.EventsList.ShouldBeEmpty();
-            newEvents.Add(date, subject, title);
-            newEvents.Add(date1, subject1, title1);
+            newEvents.Add(date, title, description);
+            newEvents.Add(date1, title1, description1);
           
             string today = DateTime.Now.ToShortDateString();
             DateFilter eventsToDisplay = new DateFilter( ">", today);
@@ -181,18 +180,18 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
 
             string date = "2019/12/25";
-            string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
+            string title = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
 
             string date1 = "2015/10/25";
-            string subject1 = "Johana's Birtday!";
-            string title1 = "Don't forget to call her...";
+            string title1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
 
-            SetExpectedResultToConsole(date1, subject1, title1, out expectedConsole, out consoleOut);
+            SetExpectedResultToConsole(date1, title1,out expectedConsole, out consoleOut, description1);
 
             newEvents.EventsList.ShouldBeEmpty();
-            newEvents.Add(date, subject, title);
-            newEvents.Add(date1, subject1, title1);
+            newEvents.Add(date, title, description);
+            newEvents.Add(date1, title1, description1);
 
             DateFilter eventsToDisplay = new DateFilter("=", "2015/10/25");
             Events filteredList = eventsToDisplay.ApplyFilter(newEvents);
@@ -218,7 +217,7 @@ namespace UnitTestCalendar
                 { new Event("2015/09/08", "six") }
         };
             
-           SetExpectedResultToConsole("2015/09/08", "six", "", out expectedConsole, out consoleOut);
+           SetExpectedResultToConsole("2015/09/08", "six", out expectedConsole, out consoleOut);
            
             DateFilter firstFilter = new DateFilter( "<", "2015/10/25");
             Events firstFilteredList = firstFilter.ApplyFilter((newEvents));
@@ -238,31 +237,31 @@ namespace UnitTestCalendar
             var consoleOut = new StringWriter();
 
             string date = "2015/12/25";
-            string subject = "Christmas Day!";
-            string title = "Santa Claus is comming in our house....";
+            string title = "Christmas Day!";
+            string description = "Santa Claus is comming in our house....";
 
             newEvent.EventsList.ShouldBeEmpty();
-            newEvent.Add(date, subject, title);
+            newEvent.Add(date, title, description);
 
             string date1 = "2015/10/25";
-            string subject1 = "Johana's Birtday!";
-            string title1 = "Don't forget to call her...";
-            newEvent.Add(date1, subject1, title1);
+            string title1 = "Johana's Birtday!";
+            string description1 = "Don't forget to call her...";
+            newEvent.Add(date1, title1, description1);
 
             string date2 = "2015/11/25";
-            string subject2 = "John's Birtday!";
-            string title2 = "Don't forget to call him...";
-            newEvent.Add(date2, subject2, title2);
+            string title2 = "John's Birtday!";
+            string description2 = "Don't forget to call him...";
+            newEvent.Add(date2, title2, description2);
 
             string date3 = "2015/10/25";
-            string subject3 = "Tim's Birtday!";
-            string title3 = "Don't forget to call him...";
-            newEvent.Add(date3, subject3, title3);
+            string title3 = "Tim's Birtday!";
+            string description3 = "Don't forget to call him...";
+            newEvent.Add(date3, title3, description3);
 
-            expectedConsole = " \nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nSubject:" + subject1 + " \nTitle:" + title1 + "\n" +
-                " \nDate:" + Convert.ToDateTime(date3).ToString("yyyy/MM/dd") + " \nSubject:" + subject3 + " \nTitle:" + title3 + "\n" +
-                " \nDate:" + Convert.ToDateTime(date2).ToString("yyyy/MM/dd") + " \nSubject:" + subject2 + " \nTitle:" + title2 + "\n" +
-                " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject + " \nTitle:" + title;
+            expectedConsole = " \nDate:" + Convert.ToDateTime(date1).ToString("yyyy/MM/dd") + " \nTitle:" + title1 + " \nDescription:" + description1 + "\n" +
+                " \nDate:" + Convert.ToDateTime(date3).ToString("yyyy/MM/dd") + " \nTitle:" + title3 + " \nDescription:" + description3 + "\n" +
+                " \nDate:" + Convert.ToDateTime(date2).ToString("yyyy/MM/dd") + " \nTitle:" + title2 + " \nDescription:" + description2 + "\n" +
+                " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nTitle:" + title + " \nDescription:" + description;
 
 
             Console.SetOut(consoleOut);
@@ -290,13 +289,10 @@ namespace UnitTestCalendar
             consoleOut.ToString().ShouldContain(expectedConsole);
         }
 
-        private static void SetExpectedResultToConsole(string date, string subject, string title, out string expectedConsole, out StringWriter consoleOut, string description = "")
+        private static void SetExpectedResultToConsole(string date, string title, out string expectedConsole, out StringWriter consoleOut, string description = "")
         {
-            expectedConsole = " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") + " \nSubject:" + subject;
-            if (title != "")
-            {
-                expectedConsole += " \nTitle:" + title;
-            }
+            expectedConsole = " \nDate:" + Convert.ToDateTime(date).ToString("yyyy/MM/dd") ;
+            expectedConsole += " \nTitle:" + title;
             if (description != "")
             {
                 expectedConsole += " \nDescription:" + description;
@@ -311,7 +307,7 @@ namespace UnitTestCalendar
         {
            
             List<Event> eventsRepo = new List<Event>
-            {new Event("2015-01-01","event","title"), new Event("2015-01-02","event2"),new Event("2015-03-01","event3","title3")};
+            {new Event("2015-01-01","event","description"), new Event("2015-01-02","event2"),new Event("2015-03-01","event3","description3")};
 
             HTMLFile newObj = new HTMLFile(eventsRepo);
             newObj.ExportToHTMLFile(@"HTMLFile.html");

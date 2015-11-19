@@ -27,10 +27,9 @@ namespace UnitTestCalendar
             Events newEvent = new Events();
 
             string date = "2015/12/25";
-            string subject = "Christmas!";
             string title = "Christams";
             string description = "Santa Claus";
-            newEvent.Add(date, subject, title,description);
+            newEvent.Add(date, title,description);
 
             using (MemoryStream ms = new MemoryStream())
             {
@@ -39,7 +38,6 @@ namespace UnitTestCalendar
                     streamObj.ExportEventsInHTMLStream(newEvent);
                     var htmlContent = Encoding.UTF8.GetString(ms.ToArray());
                     htmlContent.ShouldContain(expectedFile);
-                   // htmlContent.ShouldBeSameAs(expectedFile);
                 }
             }
         }

@@ -47,9 +47,9 @@ namespace Calendar
             eventsList.Add(newEvent);
         }
 
-        public void Add(string date, string subject, string title = "",string description="")
+        public void Add(string date, string title ,string description="")
         {
-            Event newEvent = new Event(date, subject, title,description);
+            Event newEvent = new Event(date, title,description);
             eventsList.Add(newEvent);
         }
 
@@ -75,20 +75,7 @@ namespace Calendar
             }
             return stringContent;
         }
-
-        //public string[] GetTags()
-        //{       
-        //    string[] tags = { };
-        //    string[] el_tags = { };
-        //    foreach (Event ev in eventsList)
-        //    {
-        //        el_tags = ev.Tags;
-        //        tags = tags.Union(el_tags).ToArray();
-        //    };
-        //    return tags;
-        //}
-       
-
+             
         public void Sort()
         {
             eventsList.Sort();

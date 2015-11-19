@@ -172,9 +172,9 @@ namespace Calendar
                             }
                             break;
                         }
-                    case "title":
+                    case "description":
                         {
-                            SearchTitleArgument searchArgs = new SearchTitleArgument(args);
+                            SearchDescriptionArgument searchArgs = new SearchDescriptionArgument(args);
                             if (searchArgs.IsValid())
                             {
                                 field = searchArgs.Field;

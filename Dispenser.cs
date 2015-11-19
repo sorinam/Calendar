@@ -12,18 +12,13 @@ namespace Calendar
         {
             IOConsole newEvent = new IOConsole();
             string date = args[1]; ;
-            string subject = Utils.CodingNewLineChar(args[2]);
-            string title = "";
+            string title = Utils.CodingNewLineChar(args[2]);
             string description = "";
-            if (args.Length >= 4)
+            if (args.Length == 4)
             {
-                title = Utils.CodingNewLineChar(args[3]);
+                description = Utils.CodingNewLineChar(args[3]);
             }
-            if (args.Length == 5)
-            {
-                description = Utils.CodingNewLineChar(args[4]);
-            }
-            newEvent.AddDataFromConsole(date, subject, title, description);
+            newEvent.AddDataFromConsole(date, title, description);
 
         }
 
@@ -128,10 +123,10 @@ namespace Calendar
                         filteredList = GetFilteredListByDate(eventsList, criteria, firstValue, secondValue);
                         break;
                     }
-                case "title":
+                case "description":
                     {
                         string firstValue = values[0];
-                        filteredList = GetFilteredListByTitle(eventsList, criteria, firstValue);
+                        filteredList = GetFilteredListByDescription(eventsList, criteria, firstValue);
                         break;
                     }
                 case "tag":
@@ -155,9 +150,9 @@ namespace Calendar
             return eventsToFilter.ApplyFilter(eventsList);
         }
 
-        public static Events GetFilteredListByTitle(Events eventsList, string criteria, string value)
+        public static Events GetFilteredListByDescription(Events eventsList, string criteria, string value)
         {
-            TitleFilter eventsToFilter = new TitleFilter(Utils.ParseFilteringCriteria(criteria), value);
+            DescriptionFilter eventsToFilter = new DescriptionFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
         }
 

@@ -37,7 +37,7 @@ namespace Calendar
             StreamWriter file = new StreamWriter(calendarPath);
             foreach (Event eventL in eventsList)
             {
-                file.Write(eventL.Date.ToString("yyyy/MM/dd") + "\t" + eventL.Subject + "\t" + eventL.Title+ "\t" + eventL.Description);
+                file.Write(eventL.Date.ToString("yyyy/MM/dd") + "\t" + eventL.Title+ "\t" + eventL.Description);
                 file.Write(file.NewLine);
             }
             file.Close();

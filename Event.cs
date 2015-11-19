@@ -8,17 +8,10 @@ namespace Calendar
     public class Event : IComparable<Event>
     {
         private DateTime date;
-        private string subject;
         private string title;
         private string description;
         string[] tags;
-
-        public string Subject
-        {
-            set { subject = value; }
-            get { return subject; }
-        }
-
+              
         public string Title
         {
             set { title = value; }
@@ -46,12 +39,12 @@ namespace Calendar
         public Event(string line)
         {           
             string[] words = line.Split('\t');
-            if (words.Length == 4)
+            if (words.Length == 3)
             {
                 DateTime convertedDate;
                 if (DateTime.TryParse(words[0], out convertedDate))
                 {
-                    SetMembers(words[1], words[2],words[3], convertedDate);
+                    SetMembers(words[1], words[2], convertedDate);
                 }
                 else
                 {
@@ -60,11 +53,11 @@ namespace Calendar
             }
         }
 
-        public Event(string date, string subject, string title="",string description="")
+        public Event(string date, string title,string description="")
         {       DateTime convertedDate;
             if (DateTime.TryParse(date, out convertedDate))
             {
-                SetMembers(subject, title,description, convertedDate);
+                SetMembers(title,description, convertedDate);
             }
             else
             {
@@ -72,10 +65,9 @@ namespace Calendar
             }
         }
 
-        private void SetMembers(string subject, string title,string description, DateTime date)
+        private void SetMembers (string title,string description, DateTime date)
         {
             this.date = date;
-            this.subject = subject;
             this.title = title;
             this.description = description;
         }
@@ -84,7 +76,7 @@ namespace Calendar
         {
             CultureInfo ci = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = ci;
-            String newString = date.ToString("yyyy/MM/dd") + "\t" + subject + "\t" + title;
+            String newString = date.ToString("yyyy/MM/dd") + "\t" + title + "\t" + description;
             return newString;
         }
 
