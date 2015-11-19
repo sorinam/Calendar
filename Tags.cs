@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,7 +60,7 @@ namespace Calendar
 
             }
 
-        public IEnumerable<Tag> TagList
+        public Tag[] TagList
         {
             get { return tagList; }
         }
@@ -80,9 +81,20 @@ namespace Calendar
                 IncreaseCounter(el_tags, union);
                 tags = union;
             };
-        return tags;
+         return tags;
         }
 
+        public void SortTagsDescByCount()
+        {
+            var sorted = new sortTagDescendingByCount();
+            Array.Sort(tagList, sorted);
+        }
+
+        public void SortTagsAscByName()
+        {
+            var sorted = new sortTagAscendingByName();
+            Array.Sort(tagList, sorted);
+        }
         private static void IncreaseCounter(Tag[] el_tags, Tag[] union)
         {
             foreach (Tag elem in el_tags)
@@ -90,6 +102,25 @@ namespace Calendar
                 int index = Array.FindIndex(union, e => e.Name == elem.Name);
                 union[index].Count += 1;
             }
+        }
+    }
+     class sortTagAscendingByName : IComparer <Tag>
+    {
+        public int Compare(Tag x, Tag y)
+        {
+            return x.Name.CompareTo(y.Name);
+        }     
+    }
+
+    class sortTagDescendingByCount : IComparer<Tag>
+    {
+        public int Compare(Tag x, Tag y)
+        {
+            if (x.Count < y.Count) return 1; 
+            else
+            if (x.Count>y.Count) return -1;
+            else return 0;
+
         }
     }
 }
