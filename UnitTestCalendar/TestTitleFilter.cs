@@ -19,7 +19,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            TitleFilter eventsToFilter = new TitleFilter("=", "test2");
+            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "test2");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -39,7 +39,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            TitleFilter eventsToFilter = new TitleFilter("!=", "another");
+            DescriptionFilter eventsToFilter = new DescriptionFilter("!=", "another");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -60,7 +60,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            TitleFilter eventsToFilter = new TitleFilter(">", "test");
+            DescriptionFilter eventsToFilter = new DescriptionFilter(">", "test");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -81,7 +81,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            TitleFilter eventsToFilter = new TitleFilter("=", "test1");
+            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "test1");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             List<Event> expectedList = new List<Event>
             {
@@ -101,7 +101,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "three","test2") }
             };
 
-            TitleFilter eventsToFilter = new TitleFilter("=", "testul");
+            DescriptionFilter eventsToFilter = new DescriptionFilter("=", "testul");
             Events filteredList = eventsToFilter.ApplyFilter(newEvents);
             filteredList.ShouldBeEmpty();
         }

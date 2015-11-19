@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Calendar
 {
-    public class SearchTitleArgument : IArgument
+    public class SearchDescriptionArgument : IArgument
     {
         string[] stringOperator = { "!=", "not equal", "=", "equal", "contains" };
 
@@ -19,7 +19,7 @@ namespace Calendar
         public string Value
         { get { return value; } }
 
-        public SearchTitleArgument(string[] args)
+        public SearchDescriptionArgument(string[] args)
         {
             inputArgs = args;
         }
@@ -31,7 +31,7 @@ namespace Calendar
 
         public bool IsValid()
         {
-            field = "title";
+            field = "description";
             return IsValidTitleFilterParametrs(inputArgs) ? true : false;
         }
 

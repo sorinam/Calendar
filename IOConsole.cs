@@ -22,11 +22,11 @@ namespace Calendar
             eventsList = new Events();
         }
 
-        public void AddDataFromConsole(string date, string subject, string title,string description)
+        public void AddDataFromConsole(string date, string title,string description)
         {
             TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
-            eventsList.Add(date, subject, title,description);
+            eventsList.Add(date,title,description);
             file.SaveEventsToFile(eventsList);
         }
                
@@ -48,8 +48,7 @@ namespace Calendar
             foreach (Event line in eventsList)
             {
                 Console.Write(" \nDate:{0}", line.Date.ToString("yyyy/MM/dd"));
-                Console.Write(" \nSubject:{0}", Utils.DecodingNewLineChar(line.Subject));
-                if (line.Title != "") Console.Write(" \nTitle:{0}", Utils.DecodingNewLineChar(line.Title));
+                Console.Write(" \nTitle:{0}", Utils.DecodingNewLineChar(line.Title));
                 if (line.Description != "") Console.Write(" \nDescription:{0}", Utils.DecodingNewLineChar(line.Description));
                 Console.Write("\n");
             }

@@ -20,8 +20,8 @@ namespace UnitTestCalendar
             List<Event> expectedList = new List<Event>
             {{ new Event ( "2015/01/01", "one", "test") },
             };
-            string[] inputArgs = { "/search", "title", "=", "test" };
-            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
+            string[] inputArgs = { "/search", "description", "=", "test" };
+            SearchDescriptionArgument searchArgs = new SearchDescriptionArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -48,7 +48,7 @@ namespace UnitTestCalendar
             };
             string[] inputArgs = { "/search", "title", "contains", "two" };
 
-            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
+            SearchDescriptionArgument searchArgs = new SearchDescriptionArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -71,7 +71,7 @@ namespace UnitTestCalendar
                 };
 
             string[] inputArgs = { "/search", "title", "contains", "pair" };
-            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
+            SearchDescriptionArgument searchArgs = new SearchDescriptionArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
@@ -87,7 +87,7 @@ namespace UnitTestCalendar
         }
 
         [TestMethod]
-        public void ShouldListEventsWithEmptyTitle()
+        public void ShouldListEventsWithEmptyDescription()
         {
             Events newEvents = new Events {
                         { new Event ( "2015/01/01", "one", "test") },
@@ -98,7 +98,7 @@ namespace UnitTestCalendar
             };
 
             string[] inputArgs = { "/search", "title", "" };
-            SearchTitleArgument searchArgs = new SearchTitleArgument(inputArgs);
+            SearchDescriptionArgument searchArgs = new SearchDescriptionArgument(inputArgs);
             string field = "";
             string op = "";
             string val1 = "";
