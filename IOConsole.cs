@@ -57,33 +57,17 @@ namespace Calendar
            
         }
 
-        ////public void DisplayTagsToConsole()
-        ////{
-        ////    string[] tagValues = eventsList.GetTags();
-        ////    Array.Sort(tagValues);
-        ////    if (tagValues.Length == 0)
-        ////    { Console.WriteLine("\n There are not defined tags. "); }
-        ////    else
-        ////    {
-        ////        Console.WriteLine("\nThere are {0} defined tags : ", tagValues.Length);
-        ////        for (int i = 0; i < tagValues.Length; i++)
-        ////        {
-        ////            Console.WriteLine(" {0}", tagValues[i]);
-        ////        }
-        ////    }
-        ////}
-
-        public void DisplayTagsWithCountersToConsole(Tag[] tagValues)
+        public void DisplayTagsAndCountersToConsole(Tag[] tagValues)
         {
            
             if (tagValues.Length == 0)
             { Console.WriteLine("\n There are not defined tags. "); }
             else
             {
-                Console.WriteLine("\nThere are {0} defined tags : ", tagValues.Length);
+                Console.WriteLine("\nThere are {0} defined tags :\n ", tagValues.Length);
                 for (int i = 0; i < tagValues.Length; i++)
                 {
-                    Console.WriteLine(" {0} : {1} events", tagValues[i].Name, tagValues[i].Count);
+                    Console.WriteLine(" {0}\t:{1} event(s)", tagValues[i].Name, tagValues[i].Count);
                 }
             }
         }
