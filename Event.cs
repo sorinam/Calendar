@@ -88,14 +88,24 @@ namespace Calendar
             return newString;
         }
 
-        public string[] GetTags()
+        string[] GetTags()
         {
             string value =title + " " + description;
             var allTags = value.Split(' ');
             var tags = Array.FindAll(allTags, s => s.StartsWith("#") || s.StartsWith("@"));
             return tags.Distinct().ToArray();
         }
+        public Tag[] GetTagsAndCount()
+        {
+            string[] tags = GetTags();
+            Tag[] evTagList = new Tag[tags.Length];
+            for (int i = 0; i < tags.Length; i++)
+            {
+                evTagList[i]= new Tag(tags[i], 0); ;
+            }
+            return evTagList;
 
+        }
         public int CompareTo(Event other)
         {
             return this.Date.CompareTo(other.Date);

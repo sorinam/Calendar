@@ -65,7 +65,7 @@ namespace Calendar
                         {
                             if ((args.Length > 1) && (args[1].ToLower() == "tags"))
                             {
-                                Dispenser.ListAllTags();
+                                Dispenser.ListAllTags(SortParameter(args));
                             }
                             else
                             {
@@ -102,6 +102,11 @@ namespace Calendar
                         break;
                     }
             }
+        }
+
+        private static string SortParameter(string[] args)
+        {
+            return (args.Length == 2) ? "byName" : args[2];
         }
 
         private static string ExportToHtmlFile(ref string[] args)

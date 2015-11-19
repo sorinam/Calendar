@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Calendar;
 using System.Collections.Generic;
 using Should;
-
+using System.Linq;
 
 namespace UnitTestCalendar
 {
@@ -149,6 +149,6 @@ namespace UnitTestCalendar
             }
         }
 
-
+       
     }
 }

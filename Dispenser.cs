@@ -92,12 +92,26 @@ namespace Calendar
             return filteredList;
         }
 
-       public static void ListAllTags()
+       public static void ListAllTags(string sort)
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            IOConsole toDisplay = new IOConsole(eventsList);
-            toDisplay.DisplayTagsToConsole();
+            TagsCounter tags= new TagsCounter(eventsList);
+            switch (sort)
+            {
+                case "byCount":
+                    {
+                        tags.SortTagsDescByCount();
+                        break;
+                    }
+                case "byName":
+                    {
+                        tags.SortTagsAscByName();
+                        break;
+                    }
+            }
+            Tag[] listTodispaly = tags.TagList.ToArray();
+            new IOConsole().DisplayTagsAndCountersToConsole(listTodispaly);
         }
 
        
