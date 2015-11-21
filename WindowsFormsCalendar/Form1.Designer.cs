@@ -30,166 +30,126 @@ namespace WindowsFormsCalendar
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.components = new System.ComponentModel.Container();
             this.button_Add = new System.Windows.Forms.Button();
-            this.subject_label = new System.Windows.Forms.Label();
-            this.descritption_label = new System.Windows.Forms.Label();
-            this.richTextBox_Description = new System.Windows.Forms.RichTextBox();
-            this.textbox_Subject = new System.Windows.Forms.TextBox();
-            this.select_label = new System.Windows.Forms.Label();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.button_List = new System.Windows.Forms.Button();
+            this.button_Search = new System.Windows.Forms.Button();
+            this.label_Today = new System.Windows.Forms.Label();
+            this.textBox_Today = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label_Saving = new System.Windows.Forms.Label();
-            this.button_Save = new System.Windows.Forms.Button();
-            this.button_Cancel = new System.Windows.Forms.Button();
-            this.panel2.SuspendLayout();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.eventsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(38, 46);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
             // 
             // button_Add
             // 
             this.button_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.button_Add.Location = new System.Drawing.Point(435, 46);
+            this.button_Add.Location = new System.Drawing.Point(435, 136);
             this.button_Add.Name = "button_Add";
             this.button_Add.Size = new System.Drawing.Size(184, 47);
             this.button_Add.TabIndex = 1;
-            this.button_Add.Text = "New appointment";
+            this.button_Add.Text = "New Appointment";
             this.button_Add.UseVisualStyleBackColor = true;
             this.button_Add.Click += new System.EventHandler(this.New_Click);
             // 
-            // subject_label
+            // button_List
             // 
-            this.subject_label.AutoSize = true;
-            this.subject_label.Location = new System.Drawing.Point(298, 31);
-            this.subject_label.Name = "subject_label";
-            this.subject_label.Size = new System.Drawing.Size(63, 20);
-            this.subject_label.TabIndex = 2;
-            this.subject_label.Text = "Subject";
-            this.subject_label.Click += new System.EventHandler(this.label1_Click);
+            this.button_List.Location = new System.Drawing.Point(435, 245);
+            this.button_List.Name = "button_List";
+            this.button_List.Size = new System.Drawing.Size(184, 44);
+            this.button_List.TabIndex = 2;
+            this.button_List.Text = "List Appointments";
+            this.button_List.UseVisualStyleBackColor = true;
             // 
-            // descritption_label
+            // button_Search
             // 
-            this.descritption_label.AutoSize = true;
-            this.descritption_label.Location = new System.Drawing.Point(298, 129);
-            this.descritption_label.Name = "descritption_label";
-            this.descritption_label.Size = new System.Drawing.Size(89, 20);
-            this.descritption_label.TabIndex = 3;
-            this.descritption_label.Text = "Description";
-            this.descritption_label.Click += new System.EventHandler(this.label2_Click);
+            this.button_Search.Location = new System.Drawing.Point(435, 41);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(184, 40);
+            this.button_Search.TabIndex = 3;
+            this.button_Search.Text = "Search";
+            this.button_Search.UseVisualStyleBackColor = true;
             // 
-            // richTextBox_Description
+            // label_Today
             // 
-            this.richTextBox_Description.Location = new System.Drawing.Point(288, 168);
-            this.richTextBox_Description.Name = "richTextBox_Description";
-            this.richTextBox_Description.Size = new System.Drawing.Size(224, 136);
-            this.richTextBox_Description.TabIndex = 4;
-            this.richTextBox_Description.Text = "";
-            this.richTextBox_Description.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            this.label_Today.AutoSize = true;
+            this.label_Today.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Today.Location = new System.Drawing.Point(13, 35);
+            this.label_Today.Name = "label_Today";
+            this.label_Today.Size = new System.Drawing.Size(78, 22);
+            this.label_Today.TabIndex = 4;
+            this.label_Today.Text = "Today :";
+            this.label_Today.Click += new System.EventHandler(this.label_Today_Click);
             // 
-            // textbox_Subject
+            // textBox_Today
             // 
-            this.textbox_Subject.Location = new System.Drawing.Point(288, 77);
-            this.textbox_Subject.Name = "textbox_Subject";
-            this.textbox_Subject.Size = new System.Drawing.Size(184, 26);
-            this.textbox_Subject.TabIndex = 5;
-            this.textbox_Subject.TextChanged += new System.EventHandler(this.title_textBox_TextChanged);
+            this.textBox_Today.BackColor = System.Drawing.SystemColors.Info;
+            this.textBox_Today.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Today.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.textBox_Today.Location = new System.Drawing.Point(97, 31);
+            this.textBox_Today.Name = "textBox_Today";
+            this.textBox_Today.ReadOnly = true;
+            this.textBox_Today.Size = new System.Drawing.Size(112, 26);
+            this.textBox_Today.TabIndex = 5;
+            this.textBox_Today.TabStop = false;
+            this.textBox_Today.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // select_label
+            // label1
             // 
-            this.select_label.AutoSize = true;
-            this.select_label.Location = new System.Drawing.Point(11, 31);
-            this.select_label.Name = "select_label";
-            this.select_label.Size = new System.Drawing.Size(130, 20);
-            this.select_label.TabIndex = 6;
-            this.select_label.Text = "Plese select date";
-            // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.Location = new System.Drawing.Point(15, 75);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(253, 26);
-            this.dateTimePicker.TabIndex = 7;
-            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.dateTimePicker);
-            this.panel2.Controls.Add(this.label_Saving);
-            this.panel2.Controls.Add(this.richTextBox_Description);
-            this.panel2.Controls.Add(this.descritption_label);
-            this.panel2.Controls.Add(this.textbox_Subject);
-            this.panel2.Controls.Add(this.select_label);
-            this.panel2.Controls.Add(this.subject_label);
-            this.panel2.Location = new System.Drawing.Point(62, 115);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(539, 320);
-            this.panel2.TabIndex = 9;
-            this.panel2.Visible = false;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 83);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(146, 20);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Your Appointments";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 278);
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventsBindingSource, "EventsList", true));
+            this.textBox1.Location = new System.Drawing.Point(12, 125);
+            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(15, 26);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Visible = false;
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(155, 26);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // label_Saving
+            // textBox2
             // 
-            this.label_Saving.AutoSize = true;
-            this.label_Saving.Location = new System.Drawing.Point(11, 284);
-            this.label_Saving.Name = "label_Saving";
-            this.label_Saving.Size = new System.Drawing.Size(69, 20);
-            this.label_Saving.TabIndex = 12;
-            this.label_Saving.Text = "Saving...";
+            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventsBindingSource, "EventsList", true));
+            this.textBox2.Location = new System.Drawing.Point(187, 125);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(207, 26);
+            this.textBox2.TabIndex = 9;
             // 
-            // button_Save
+            // eventsBindingSource
             // 
-            this.button_Save.Location = new System.Drawing.Point(178, 474);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(124, 39);
-            this.button_Save.TabIndex = 10;
-            this.button_Save.Text = "Save";
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Visible = false;
-            this.button_Save.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // button_Cancel
-            // 
-            this.button_Cancel.Location = new System.Drawing.Point(381, 474);
-            this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(155, 39);
-            this.button_Cancel.TabIndex = 11;
-            this.button_Cancel.Text = "Cancel";
-            this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Visible = false;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
+            this.eventsBindingSource.DataSource = typeof(Calendar.Events);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 569);
-            this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.button_Save);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox_Today);
+            this.Controls.Add(this.label_Today);
+            this.Controls.Add(this.button_Search);
+            this.Controls.Add(this.button_List);
             this.Controls.Add(this.button_Add);
-            this.Controls.Add(this.monthCalendar1);
             this.Name = "Form1";
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -218,20 +178,15 @@ namespace WindowsFormsCalendar
         }
 
         #endregion
-
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button button_Add;
-        private System.Windows.Forms.Label subject_label;
-        private System.Windows.Forms.Label descritption_label;
-        private System.Windows.Forms.RichTextBox richTextBox_Description;
-        private System.Windows.Forms.TextBox textbox_Subject;
-        private System.Windows.Forms.Label select_label;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button_Save;
-        private System.Windows.Forms.Button button_Cancel;
-        private System.Windows.Forms.Label label_Saving;
+        private System.Windows.Forms.Button button_List;
+        private System.Windows.Forms.Button button_Search;
+        private System.Windows.Forms.Label label_Today;
+        private System.Windows.Forms.TextBox textBox_Today;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.BindingSource eventsBindingSource;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

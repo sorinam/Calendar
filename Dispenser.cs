@@ -168,7 +168,7 @@ namespace Calendar
             return filteredList;
         }
 
-        private static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
+        public static Events DoubleDateFiltering(Events eventsList, string beginDate, string endDate)
         {
             string firstCriteria = "<=";
             string secondCriteria = ">=";
@@ -178,7 +178,7 @@ namespace Calendar
             return filteredList;
         }
 
-        private static Events SimpleDateFiltering(Events eventsList, string criteria, string value)
+        public static Events SimpleDateFiltering(Events eventsList, string criteria, string value)
         {
             DateFilter eventsToFilter = new DateFilter(Utils.ParseFilteringCriteria(criteria), value);
             return eventsToFilter.ApplyFilter(eventsList);
