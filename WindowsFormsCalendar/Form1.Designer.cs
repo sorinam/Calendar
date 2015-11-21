@@ -40,7 +40,9 @@ namespace WindowsFormsCalendar
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.eventsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.eventsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Add
@@ -108,7 +110,6 @@ namespace WindowsFormsCalendar
             // 
             // textBox1
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventsBindingSource, "EventsList", true));
             this.textBox1.Location = new System.Drawing.Point(12, 125);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -119,7 +120,6 @@ namespace WindowsFormsCalendar
             // 
             // textBox2
             // 
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.eventsBindingSource, "EventsList", true));
             this.textBox2.Location = new System.Drawing.Point(187, 125);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
@@ -129,7 +129,11 @@ namespace WindowsFormsCalendar
             // 
             // eventsBindingSource
             // 
-            this.eventsBindingSource.DataSource = typeof(Calendar.Events);
+            this.eventsBindingSource.DataSource = typeof(Calendar.Event);
+            // 
+            // eventsBindingSource1
+            // 
+            this.eventsBindingSource1.DataSource = typeof(Calendar.Events);
             // 
             // Form1
             // 
@@ -148,6 +152,7 @@ namespace WindowsFormsCalendar
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventsBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,6 +192,7 @@ namespace WindowsFormsCalendar
         private System.Windows.Forms.BindingSource eventsBindingSource;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.BindingSource eventsBindingSource1;
     }
 }
 
