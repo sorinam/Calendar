@@ -36,13 +36,12 @@ namespace WindowsFormsCalendar
             
             Events eventsToExport =Dispenser. SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
             Dispenser.ExportToHTMLFile(@"today.html", eventsToExport);
-
+         
             foreach (Event ev in eventsToExport)
-            { textBox1.Text = ev.Title;
-              textBox2.Text = ev.Description;
-              
-            }  
-
+            { 
+              bindingSource1.Add(ev);
+            }
+            dataGridView1.DataSource = bindingSource1;
         }
 
         private void label_Today_Click(object sender, EventArgs e)
