@@ -129,8 +129,8 @@ namespace WindowsFormsCalendar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 403);
             this.ControlBox = false;
-            this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.label_Saving);
+            this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.richTextBox_Description);
             this.Controls.Add(this.descritption_label);
             this.Controls.Add(this.textbox_Subject);
@@ -154,18 +154,18 @@ namespace WindowsFormsCalendar
             if (IsValidTitleFiled())
             {
                 label_Saving.Visible = true;
+                Thread.Sleep(1000);
+
                 string date = dateTimePicker.Value.ToString("yyyy-MM-dd");
                 string title = textbox_Subject.Text;
                 string description = richTextBox_Description.Text;
 
                 IOConsole newEvent = new IOConsole();
                 newEvent.AddDataFromConsole(date, title, description);
-                                
-                Thread.Sleep(3000);
+               
                 this.Close();
             }
-
-        }
+          }
         private bool IsValidTitleFiled()
         {
             if (string.IsNullOrWhiteSpace(textbox_Subject.Text))

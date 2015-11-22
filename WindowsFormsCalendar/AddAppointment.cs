@@ -21,22 +21,13 @@ namespace WindowsFormsCalendar
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-           
+            label_Saving.Visible = true;
         }
         
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_Cancel_Click(object sender, EventArgs e)
-        {
-          
-        }
-
         private void button_Cancel_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
-    }
+
+       }
 }

@@ -26,32 +26,18 @@ namespace WindowsFormsCalendar
             newform.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            string today = DateTime.Today.ToShortDateString();
-            textBox_Today.Text = today;
-            string parameter = "today";
-            Events eventsToDisplay = GetEventsToList(parameter);
-
-            foreach (Event ev in eventsToDisplay)
-            {
-                bindingSource1.Add(ev);
-            }
-            dataGridView1.DataSource = bindingSource1;
-        }
-
-       private static Events GetEventsToList(string parameter)
+        public static Events GetEventsToList(string parameter)
         {
             TXTFile files = new TXTFile();
             Events eventsList = files.LoadEventsFromFile();
-            string criteria = Utils.ParseFilteringCriteria(parameter);
-            Events eventsToDisplay = new Calendar.Events();
-            if (criteria == "all")
+            Events eventsToDisplay = new Events();
+            if (parameter == "all")
             {
                 eventsToDisplay = eventsList;
             }
             else
             {
+                string criteria = Utils.ParseFilteringCriteria(parameter);
                 eventsToDisplay = Dispenser.SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
             }
           
@@ -64,6 +50,41 @@ namespace WindowsFormsCalendar
             newform.Show();
         }
 
-        
+        //private void MainForm_Activated(object sender, EventArgs e)
+        //{
+        //   // dataGridView1.DataSource = null;
+        //   //dataGridView1.Update();
+        //    //dataGridView1.Refresh();
+        //    string today = DateTime.Today.ToShortDateString();
+        //    textBox_Today.Text = today;
+        //    string parameter = "today";
+        //    Events eventsToDisplay = GetEventsToList(parameter);
+
+        //    foreach (Event ev in eventsToDisplay)
+        //    {
+        //        bindingSource1.Add(ev);
+        //    }
+        //    dataGridView1.DataSource = bindingSource1;
+        //}
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            dataGridView1.Focus();
+            dataGridView1.Refresh();
+         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            string today = DateTime.Today.ToShortDateString();
+            textBox_Today.Text = today;
+            string parameter = "today";
+            Events eventsToDisplay = GetEventsToList(parameter);
+
+            foreach (Event ev in eventsToDisplay)
+            {
+                bindingSource1.Add(ev);
+            }
+            dataGridView1.DataSource = bindingSource1;
+        }
     }
 }
