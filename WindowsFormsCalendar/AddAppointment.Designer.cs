@@ -46,78 +46,91 @@ namespace WindowsFormsCalendar
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(16, 64);
+            this.dateTimePicker.Location = new System.Drawing.Point(11, 42);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(253, 26);
+            this.dateTimePicker.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker.TabIndex = 19;
             // 
             // label_Saving
             // 
             this.label_Saving.AutoSize = true;
-            this.label_Saving.Location = new System.Drawing.Point(12, 273);
+            this.label_Saving.Location = new System.Drawing.Point(11, 199);
+            this.label_Saving.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_Saving.Name = "label_Saving";
-            this.label_Saving.Size = new System.Drawing.Size(69, 20);
+            this.label_Saving.Size = new System.Drawing.Size(49, 13);
             this.label_Saving.TabIndex = 22;
             this.label_Saving.Text = "Saving...";
             this.label_Saving.Visible = false;
             // 
             // richTextBox_Description
             // 
-            this.richTextBox_Description.Location = new System.Drawing.Point(289, 157);
+            this.richTextBox_Description.Location = new System.Drawing.Point(193, 102);
+            this.richTextBox_Description.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox_Description.Name = "richTextBox_Description";
-            this.richTextBox_Description.Size = new System.Drawing.Size(224, 136);
+            this.richTextBox_Description.Size = new System.Drawing.Size(151, 90);
             this.richTextBox_Description.TabIndex = 16;
             this.richTextBox_Description.Text = "";
             // 
             // descritption_label
             // 
             this.descritption_label.AutoSize = true;
-            this.descritption_label.Location = new System.Drawing.Point(299, 118);
+            this.descritption_label.Location = new System.Drawing.Point(199, 77);
+            this.descritption_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.descritption_label.Name = "descritption_label";
-            this.descritption_label.Size = new System.Drawing.Size(89, 20);
+            this.descritption_label.Size = new System.Drawing.Size(60, 13);
             this.descritption_label.TabIndex = 15;
             this.descritption_label.Text = "Description";
             // 
             // textbox_Subject
             // 
-            this.textbox_Subject.Location = new System.Drawing.Point(289, 66);
+            this.textbox_Subject.Location = new System.Drawing.Point(193, 43);
+            this.textbox_Subject.Margin = new System.Windows.Forms.Padding(2);
             this.textbox_Subject.Name = "textbox_Subject";
-            this.textbox_Subject.Size = new System.Drawing.Size(184, 26);
+            this.textbox_Subject.Size = new System.Drawing.Size(124, 20);
             this.textbox_Subject.TabIndex = 17;
             // 
             // select_label
             // 
             this.select_label.AutoSize = true;
-            this.select_label.Location = new System.Drawing.Point(12, 20);
+            this.select_label.Location = new System.Drawing.Point(8, 13);
+            this.select_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.select_label.Name = "select_label";
-            this.select_label.Size = new System.Drawing.Size(130, 20);
+            this.select_label.Size = new System.Drawing.Size(88, 13);
             this.select_label.TabIndex = 18;
             this.select_label.Text = "Plese select date";
             // 
             // subject_label
             // 
             this.subject_label.AutoSize = true;
-            this.subject_label.Location = new System.Drawing.Point(299, 20);
+            this.subject_label.Location = new System.Drawing.Point(199, 13);
+            this.subject_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.subject_label.Name = "subject_label";
-            this.subject_label.Size = new System.Drawing.Size(63, 20);
+            this.subject_label.Size = new System.Drawing.Size(43, 13);
             this.subject_label.TabIndex = 14;
             this.subject_label.Text = "Subject";
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(337, 332);
+            this.button_Cancel.CausesValidation = false;
+            this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_Cancel.Location = new System.Drawing.Point(229, 216);
+            this.button_Cancel.Margin = new System.Windows.Forms.Padding(2);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(155, 39);
+            this.button_Cancel.Size = new System.Drawing.Size(103, 25);
             this.button_Cancel.TabIndex = 21;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click_1);
+            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
             // 
             // button_Save
             // 
-            this.button_Save.Location = new System.Drawing.Point(134, 332);
+            this.button_Save.CausesValidation = false;
+            this.button_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button_Save.Location = new System.Drawing.Point(98, 216);
+            this.button_Save.Margin = new System.Windows.Forms.Padding(2);
             this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(124, 39);
+            this.button_Save.Size = new System.Drawing.Size(83, 25);
             this.button_Save.TabIndex = 20;
             this.button_Save.Text = "Save";
             this.button_Save.UseVisualStyleBackColor = true;
@@ -125,9 +138,12 @@ namespace WindowsFormsCalendar
             // 
             // AddAppointment
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AcceptButton = this.button_Save;
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Dialog;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 403);
+            this.CancelButton = this.button_Cancel;
+            this.ClientSize = new System.Drawing.Size(355, 262);
             this.ControlBox = false;
             this.Controls.Add(this.label_Saving);
             this.Controls.Add(this.dateTimePicker);
@@ -138,44 +154,17 @@ namespace WindowsFormsCalendar
             this.Controls.Add(this.subject_label);
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Save);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddAppointment";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add New Appointment";
+            this.Load += new System.EventHandler(this.AddAppointment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void button_Save_Click(object sender, EventArgs e)
-        {
-            if (IsValidTitleFiled())
-            {
-                label_Saving.Visible = true;
-                Thread.Sleep(1000);
-
-                string date = dateTimePicker.Value.ToString("yyyy-MM-dd");
-                string title = textbox_Subject.Text;
-                string description = richTextBox_Description.Text;
-
-                IOConsole newEvent = new IOConsole();
-                newEvent.AddDataFromConsole(date, title, description);
-               
-                this.Close();
-            }
-          }
-        private bool IsValidTitleFiled()
-        {
-            if (string.IsNullOrWhiteSpace(textbox_Subject.Text))
-            {
-                textbox_Subject.Focus();
-                var fieldName = textbox_Subject.Name.Substring(8);
-                MessageBox.Show(string.Format("Field '{0}' cannot be empty.", fieldName), "Validation error", MessageBoxButtons.OK);
-                return false;
-            }
-            return true;
         }
 
         #endregion

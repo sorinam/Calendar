@@ -30,172 +30,96 @@ namespace WindowsFormsCalendar
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.button_Add = new System.Windows.Forms.Button();
-            this.button_List = new System.Windows.Forms.Button();
             this.button_Search = new System.Windows.Forms.Button();
-            this.label_Today = new System.Windows.Forms.Label();
-            this.textBox_Today = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button_Add
             // 
             this.button_Add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_Add.Location = new System.Drawing.Point(461, 150);
+            this.button_Add.Location = new System.Drawing.Point(320, 11);
+            this.button_Add.Margin = new System.Windows.Forms.Padding(2);
             this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(184, 47);
+            this.button_Add.Size = new System.Drawing.Size(107, 31);
             this.button_Add.TabIndex = 1;
             this.button_Add.Text = "New Appointment";
             this.button_Add.UseVisualStyleBackColor = true;
             this.button_Add.Click += new System.EventHandler(this.New_Click);
             // 
-            // button_List
-            // 
-            this.button_List.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_List.Location = new System.Drawing.Point(461, 295);
-            this.button_List.Name = "button_List";
-            this.button_List.Size = new System.Drawing.Size(184, 44);
-            this.button_List.TabIndex = 2;
-            this.button_List.Text = "List Appointments";
-            this.button_List.UseVisualStyleBackColor = true;
-            this.button_List.Click += new System.EventHandler(this.button_List_Click);
-            // 
             // button_Search
             // 
             this.button_Search.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button_Search.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_Search.Location = new System.Drawing.Point(558, 27);
+            this.button_Search.Location = new System.Drawing.Point(369, 62);
+            this.button_Search.Margin = new System.Windows.Forms.Padding(2);
             this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(87, 30);
+            this.button_Search.Size = new System.Drawing.Size(58, 19);
             this.button_Search.TabIndex = 3;
             this.button_Search.Text = "Search";
             this.button_Search.UseVisualStyleBackColor = false;
             // 
-            // label_Today
-            // 
-            this.label_Today.AutoSize = true;
-            this.label_Today.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Today.Location = new System.Drawing.Point(13, 35);
-            this.label_Today.Name = "label_Today";
-            this.label_Today.Size = new System.Drawing.Size(78, 22);
-            this.label_Today.TabIndex = 4;
-            this.label_Today.Text = "Today :";
-            // 
-            // textBox_Today
-            // 
-            this.textBox_Today.BackColor = System.Drawing.SystemColors.Info;
-            this.textBox_Today.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Today.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBox_Today.Location = new System.Drawing.Point(97, 31);
-            this.textBox_Today.Name = "textBox_Today";
-            this.textBox_Today.ReadOnly = true;
-            this.textBox_Today.Size = new System.Drawing.Size(112, 26);
-            this.textBox_Today.TabIndex = 5;
-            this.textBox_Today.TabStop = false;
-            this.textBox_Today.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 111);
+            this.label1.Location = new System.Drawing.Point(11, 68);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 20);
+            this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Your Appointments";
             // 
-            // dataGridView1
+            // listView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Info;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.titleDataGridViewTextBoxColumn,
-            this.descriptionDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.bindingSource1;
-            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 150);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(410, 216);
-            this.dataGridView1.TabIndex = 10;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Date,
+            this.Title,
+            this.Description});
+            listViewItem1.Tag = "Date";
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
+            this.listView1.Location = new System.Drawing.Point(14, 96);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(413, 173);
+            this.listView1.TabIndex = 0;
+            this.listView1.Text = "Date";
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // linkLabel1
+            // Title
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(361, 111);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(66, 20);
-            this.linkLabel1.TabIndex = 11;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Refresh";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.Title.Text = "Title";
+            this.Title.Width = 100;
             // 
-            // titleDataGridViewTextBoxColumn
+            // Description
             // 
-            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Subject";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.Description.Text = "Description";
+            this.Description.Width = 100;
             // 
-            // descriptionDataGridViewTextBoxColumn
+            // Date
             // 
-            this.descriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.AllowNew = true;
-            this.bindingSource1.DataSource = typeof(Calendar.Event);
+            this.Date.Text = "Date";
+            this.Date.Width = 100;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(668, 432);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(445, 281);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox_Today);
-            this.Controls.Add(this.label_Today);
             this.Controls.Add(this.button_Search);
-            this.Controls.Add(this.button_List);
             this.Controls.Add(this.button_Add);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,16 +127,12 @@ namespace WindowsFormsCalendar
 
         #endregion
         private System.Windows.Forms.Button button_Add;
-        private System.Windows.Forms.Button button_List;
         private System.Windows.Forms.Button button_Search;
-        private System.Windows.Forms.Label label_Today;
-        private System.Windows.Forms.TextBox textBox_Today;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader Date;
+        private System.Windows.Forms.ColumnHeader Title;
+        private System.Windows.Forms.ColumnHeader Description;
     }
 }
 

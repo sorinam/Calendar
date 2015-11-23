@@ -30,15 +30,15 @@ namespace WindowsFormsCalendar
             dataGridView2.Update();
             dataGridView2.Refresh();
 
-            string parameter = comboBox1.SelectedItem.ToString();
-            Events eventsToDisplay =MainForm. GetEventsToList(parameter);
-            eventsToDisplay.Sort();
-            foreach (Event ev in eventsToDisplay)
-            {
-                bindingSource_List.Add(ev);
-            }
+            //string parameter = comboBox1.SelectedItem.ToString();
+            //Events eventsToDisplay =MainForm. GetEventsToList(parameter);
+            //eventsToDisplay.Sort();
+            //foreach (Event ev in eventsToDisplay)
+            //{
+            //    bindingSource_List.Add(ev);
+            //}
 
-            textBox_Total.Text = eventsToDisplay.Length.ToString();
+            //textBox_Total.Text = eventsToDisplay.Length.ToString();
 
             dataGridView2.DataSource = bindingSource_List;
             dataGridView2.Visible = true;
