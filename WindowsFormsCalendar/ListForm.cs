@@ -38,16 +38,16 @@ namespace WindowsFormsCalendar
                 bindingSource_List.Add(ev);
             }
 
+            textBox_Total.Text = eventsToDisplay.Length.ToString();
+
             dataGridView2.DataSource = bindingSource_List;
             dataGridView2.Visible = true;
+            label_Total.Visible = true;
+            textBox_Total.Visible = true;
             dataGridView2.Update();
             dataGridView2.Refresh();
             dataGridView2.Parent.Refresh();
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

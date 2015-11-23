@@ -32,10 +32,12 @@
             this.label_selectList = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.bindingSource_List = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox_Total = new System.Windows.Forms.TextBox();
+            this.label_Total = new System.Windows.Forms.Label();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource_List = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_List)).BeginInit();
             this.SuspendLayout();
@@ -43,9 +45,10 @@
             // label_selectList
             // 
             this.label_selectList.AutoSize = true;
-            this.label_selectList.Location = new System.Drawing.Point(95, 24);
+            this.label_selectList.Location = new System.Drawing.Point(63, 16);
+            this.label_selectList.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_selectList.Name = "label_selectList";
-            this.label_selectList.Size = new System.Drawing.Size(102, 20);
+            this.label_selectList.Size = new System.Drawing.Size(69, 13);
             this.label_selectList.TabIndex = 5;
             this.label_selectList.Text = "Select period";
             // 
@@ -57,9 +60,10 @@
             "future",
             "all",
             "today"});
-            this.comboBox1.Location = new System.Drawing.Point(95, 50);
+            this.comboBox1.Location = new System.Drawing.Point(63, 32);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
+            this.comboBox1.Size = new System.Drawing.Size(82, 21);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -76,18 +80,33 @@
             this.titleDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
             this.dataGridView2.DataSource = this.bindingSource_List;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 129);
+            this.dataGridView2.Location = new System.Drawing.Point(8, 84);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridView2.RowTemplate.Height = 28;
-            this.dataGridView2.Size = new System.Drawing.Size(618, 296);
+            this.dataGridView2.Size = new System.Drawing.Size(412, 192);
             this.dataGridView2.TabIndex = 3;
-            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
-            // bindingSource_List
+            // textBox_Total
             // 
-            this.bindingSource_List.DataSource = typeof(Calendar.Event);
+            this.textBox_Total.Location = new System.Drawing.Point(363, 282);
+            this.textBox_Total.Name = "textBox_Total";
+            this.textBox_Total.ReadOnly = true;
+            this.textBox_Total.Size = new System.Drawing.Size(18, 20);
+            this.textBox_Total.TabIndex = 6;
+            this.textBox_Total.Visible = false;
+            // 
+            // label_Total
+            // 
+            this.label_Total.AutoSize = true;
+            this.label_Total.Location = new System.Drawing.Point(389, 285);
+            this.label_Total.Name = "label_Total";
+            this.label_Total.Size = new System.Drawing.Size(31, 13);
+            this.label_Total.TabIndex = 7;
+            this.label_Total.Text = "items";
+            this.label_Total.Visible = false;
             // 
             // dateDataGridViewTextBoxColumn
             // 
@@ -103,7 +122,7 @@
             this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
             this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
             this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 74;
+            this.titleDataGridViewTextBoxColumn.Width = 52;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -112,16 +131,23 @@
             this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
             this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descriptionDataGridViewTextBoxColumn.Width = 125;
+            this.descriptionDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // bindingSource_List
+            // 
+            this.bindingSource_List.DataSource = typeof(Calendar.Event);
             // 
             // ListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 501);
+            this.ClientSize = new System.Drawing.Size(449, 326);
+            this.Controls.Add(this.label_Total);
+            this.Controls.Add(this.textBox_Total);
             this.Controls.Add(this.label_selectList);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ListForm";
@@ -143,5 +169,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox textBox_Total;
+        private System.Windows.Forms.Label label_Total;
     }
 }

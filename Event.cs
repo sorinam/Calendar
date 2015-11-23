@@ -20,10 +20,7 @@ namespace Calendar
 
         public string[] Tags
         {
-           get {
-                return tags = GetTags();
-               
-                    }
+           get {return tags = GetTags(); }
         }
         public DateTime Date
         {
