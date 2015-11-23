@@ -39,17 +39,18 @@ namespace WindowsFormsCalendar
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ListViewItem lvi = new ListViewItem();
-           
-           
+            string[] arr = new string[3];
+            ListViewItem itm;
+            eventsList.Sort();
+
             foreach (Event ev in eventsList)
             {
-                listView1.Items.Add(ev.Date.ToShortDateString());
-                listView1.Items.Add(ev.Title);
-                listView1.Items.Add(ev.Description);
+                arr[0] = ev.Date.ToShortDateString();
+                arr[1] = ev.Title;
+                arr[2] = ev.Description;
+                itm = new ListViewItem(arr);
+                listView1.Items.Add(itm);
             }
         }
-
-        
-    }
+   }
 }
