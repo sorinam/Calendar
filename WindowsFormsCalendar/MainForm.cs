@@ -29,19 +29,20 @@ namespace WindowsFormsCalendar
         {
             AddAppointment newform = new AddAppointment();
             newform.ShowDialog();
-            var status = newform.DialogResult;
 
-            if (status.ToString() == "OK")
+            var status = newform.ActiveControl.Text;
+
+            if (status == "Save")
             {
-                var newapp = newform.Appointment;
-                SaveNewAppointment(newapp);
-                AddNewAppointementToListView(newapp);
+                var newAppointment = newform.Appointment;
+                SaveNewAppointment(newAppointment);
+                AddAppointmentToListView(newAppointment);
                 listView1.Refresh();
             }
 
         }
 
-        private void AddNewAppointementToListView(Event newapp)
+        private void AddAppointmentToListView(Event newapp)
         {
             string[] arr = new string[3];
             arr[0] = newapp.Date.ToShortDateString();
@@ -59,20 +60,27 @@ namespace WindowsFormsCalendar
         }
             
         private void MainForm_Load(object sender, EventArgs e)
-        {   string[] arr = new string[3];
+        {
             if (eventsList.Length > 0)
             {
-                ListViewItem items;
                 eventsList.Sort();
                 foreach (Event ev in eventsList)
                 {
-                    arr[0] = ev.Date.ToShortDateString();
-                    arr[1] = ev.Title;
-                    arr[2] = ev.Description;
-                    items = new ListViewItem(arr);
-                    listView1.Items.Add(items);
+                    AddAppointmentToListView(ev);
                 }
             }
+        }
+
+        private void linkLabel_ExportToHTML_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string path = "";
+
+            if (saveFileDialogHTML.ShowDialog() == DialogResult.OK)
+            {
+              path = saveFileDialogHTML.FileName;
+              Dispenser.ExportToHTMLFile(path, eventsList);
+            }
+
         }
     }
 }

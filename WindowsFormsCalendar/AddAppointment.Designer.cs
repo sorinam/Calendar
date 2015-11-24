@@ -34,7 +34,6 @@ namespace WindowsFormsCalendar
         private void InitializeComponent()
         {
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label_Saving = new System.Windows.Forms.Label();
             this.descritption_label = new System.Windows.Forms.Label();
             this.select_label = new System.Windows.Forms.Label();
             this.subject_label = new System.Windows.Forms.Label();
@@ -50,16 +49,6 @@ namespace WindowsFormsCalendar
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(253, 26);
             this.dateTimePicker.TabIndex = 19;
-            // 
-            // label_Saving
-            // 
-            this.label_Saving.AutoSize = true;
-            this.label_Saving.Location = new System.Drawing.Point(16, 306);
-            this.label_Saving.Name = "label_Saving";
-            this.label_Saving.Size = new System.Drawing.Size(69, 20);
-            this.label_Saving.TabIndex = 22;
-            this.label_Saving.Text = "Saving...";
-            this.label_Saving.Visible = false;
             // 
             // descritption_label
             // 
@@ -101,7 +90,6 @@ namespace WindowsFormsCalendar
             // 
             // button_Save
             // 
-            this.button_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button_Save.Location = new System.Drawing.Point(91, 332);
             this.button_Save.Name = "button_Save";
             this.button_Save.Size = new System.Drawing.Size(124, 38);
@@ -140,7 +128,6 @@ namespace WindowsFormsCalendar
             this.ControlBox = false;
             this.Controls.Add(this.richTextBox_Description);
             this.Controls.Add(this.textBox_Subject);
-            this.Controls.Add(this.label_Saving);
             this.Controls.Add(this.dateTimePicker);
             this.Controls.Add(this.descritption_label);
             this.Controls.Add(this.select_label);
@@ -161,7 +148,6 @@ namespace WindowsFormsCalendar
 
         #endregion
         private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.Label label_Saving;
         private System.Windows.Forms.Label descritption_label;
         private System.Windows.Forms.Label select_label;
         private System.Windows.Forms.Label subject_label;
