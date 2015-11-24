@@ -35,7 +35,20 @@ namespace WindowsFormsCalendar
             {
                 var newapp = newform.Appointment;
                 SaveNewAppointment(newapp);
+                AddNewAppointementToListView(newapp);
+                listView1.Refresh();
             }
+
+        }
+
+        private void AddNewAppointementToListView(Event newapp)
+        {
+            string[] arr = new string[3];
+            arr[0] = newapp.Date.ToShortDateString();
+            arr[1] = newapp.Title;
+            arr[2] = newapp.Description;
+            var items = new ListViewItem(arr);
+            listView1.Items.Add(items);
         }
 
         private void SaveNewAppointment(Event newAppointment)

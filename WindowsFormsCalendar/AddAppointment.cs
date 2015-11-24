@@ -29,14 +29,14 @@ namespace WindowsFormsCalendar
             if (IsValidTitleFiled())
             {
                 label_Saving.Visible = true;
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
 
                 string date = dateTimePicker.Value.ToString("yyyy-MM-dd");
                 string title = textBox_Subject.Text;
                 string description = richTextBox_Description.Text;
 
                 appointment = new Event(date, title, description);
-                this.Close();
+               // this.Close();
             }
            
         }
@@ -55,6 +55,11 @@ namespace WindowsFormsCalendar
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+
+        }
+
+        private void AddAppointment_Load(object sender, EventArgs e)
+        {
 
         }
     }
