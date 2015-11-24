@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsCalendar
 {
-    
+
     public partial class MainForm : Form
     {
         Events eventsList;
@@ -22,35 +22,44 @@ namespace WindowsFormsCalendar
             InitializeComponent();
             TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
-            //eventsList.Add(date, title, description);
-            //file.SaveEventsToFile(eventsList);
+
         }
-            private void New_Click(object sender, EventArgs e)
+
+        private void New_Click(object sender, EventArgs e)
         {
             AddAppointment newform = new AddAppointment();
-            newform.Show();
-        }
-          
-        private void button_List_Click(object sender, EventArgs e)
-        {
-            ListForm newform = new ListForm();
-            newform.Show();
-        }
+            newform.ShowDialog();
+            var status = newform.DialogResult;
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            string[] arr = new string[3];
-            ListViewItem itm;
-            eventsList.Sort();
-
-            foreach (Event ev in eventsList)
+            if (status.ToString() == "OK")
             {
-                arr[0] = ev.Date.ToShortDateString();
-                arr[1] = ev.Title;
-                arr[2] = ev.Description;
-                itm = new ListViewItem(arr);
-                listView1.Items.Add(itm);
+                var newapp = newform.Appointment;
+                SaveNewAppointment(newapp);
             }
         }
-   }
+
+        private void SaveNewAppointment(Event newAppointment)
+        {
+            eventsList.Add(newAppointment);
+            TXTFile file = new TXTFile();
+            file.SaveEventsToFile(eventsList);
+        }
+            
+        private void MainForm_Load(object sender, EventArgs e)
+        {   string[] arr = new string[3];
+            if (eventsList.Length > 0)
+            {
+                ListViewItem items;
+                eventsList.Sort();
+                foreach (Event ev in eventsList)
+                {
+                    arr[0] = ev.Date.ToShortDateString();
+                    arr[1] = ev.Title;
+                    arr[2] = ev.Description;
+                    items = new ListViewItem(arr);
+                    listView1.Items.Add(items);
+                }
+            }
+        }
+    }
 }
