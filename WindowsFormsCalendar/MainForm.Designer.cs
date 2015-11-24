@@ -58,15 +58,16 @@ namespace WindowsFormsCalendar
             this.button_Search.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button_Search.Location = new System.Drawing.Point(20, 27);
             this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(87, 29);
+            this.button_Search.Size = new System.Drawing.Size(87, 38);
             this.button_Search.TabIndex = 3;
             this.button_Search.Text = "Search";
             this.button_Search.UseVisualStyleBackColor = false;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 119);
+            this.label1.Location = new System.Drawing.Point(25, 108);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 20);
             this.label1.TabIndex = 7;
@@ -81,10 +82,10 @@ namespace WindowsFormsCalendar
             this.Title,
             this.Description});
             this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(20, 154);
+            this.listView1.Location = new System.Drawing.Point(29, 144);
             this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(618, 264);
+            this.listView1.Size = new System.Drawing.Size(609, 262);
             this.listView1.TabIndex = 0;
             this.listView1.Text = "Date";
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -111,7 +112,7 @@ namespace WindowsFormsCalendar
             // linkLabel_ExportToHTML
             // 
             this.linkLabel_ExportToHTML.AutoSize = true;
-            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(496, 119);
+            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(496, 108);
             this.linkLabel_ExportToHTML.Name = "linkLabel_ExportToHTML";
             this.linkLabel_ExportToHTML.Size = new System.Drawing.Size(142, 20);
             this.linkLabel_ExportToHTML.TabIndex = 8;

@@ -82,5 +82,11 @@ namespace WindowsFormsCalendar
             }
 
         }
+
+        private void button_Search_Click(object sender, EventArgs e)
+        {
+            SearchForm newform = new SearchForm();
+            newform.ShowDialog();
+        }
     }
 }
