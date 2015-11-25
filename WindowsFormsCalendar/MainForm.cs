@@ -102,7 +102,13 @@ namespace WindowsFormsCalendar
                     {
                         AddAppointmentToListView(ev);
                     }
+                    labelFiltered.Visible = true;
+                    linkLabel_Clear.Visible = true;
                     listView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("No records matching the current criteria were found!"), "No records found", MessageBoxButtons.OK);
                 }
             }
 
@@ -114,6 +120,19 @@ namespace WindowsFormsCalendar
             var operators = newform.Operators;
             var values = newform.Values;
             return Dispenser.FilterEvents(eventsList, field, operators, values);
+        }
+
+        private void linkLabel_Clear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            listView1.Items.Clear();
+            eventsList.Sort();
+            foreach (Event ev in eventsList)
+            {
+                AddAppointmentToListView(ev);
+            }
+            labelFiltered.Visible =false;
+            linkLabel_Clear.Visible = false;
+            listView1.Refresh();
         }
     }
 }

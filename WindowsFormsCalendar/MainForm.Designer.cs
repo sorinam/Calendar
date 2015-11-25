@@ -39,6 +39,8 @@ namespace WindowsFormsCalendar
             this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.linkLabel_ExportToHTML = new System.Windows.Forms.LinkLabel();
             this.saveFileDialogHTML = new System.Windows.Forms.SaveFileDialog();
+            this.labelFiltered = new System.Windows.Forms.Label();
+            this.linkLabel_Clear = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // button_Add
@@ -47,7 +49,7 @@ namespace WindowsFormsCalendar
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button_Add.Location = new System.Drawing.Point(320, 11);
-            this.button_Add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Add.Margin = new System.Windows.Forms.Padding(2);
             this.button_Add.Name = "button_Add";
             this.button_Add.Size = new System.Drawing.Size(107, 31);
             this.button_Add.TabIndex = 1;
@@ -60,7 +62,7 @@ namespace WindowsFormsCalendar
             this.button_Search.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button_Search.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button_Search.Location = new System.Drawing.Point(32, 17);
-            this.button_Search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_Search.Margin = new System.Windows.Forms.Padding(2);
             this.button_Search.Name = "button_Search";
             this.button_Search.Size = new System.Drawing.Size(58, 25);
             this.button_Search.TabIndex = 3;
@@ -71,7 +73,7 @@ namespace WindowsFormsCalendar
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 70);
+            this.label1.Location = new System.Drawing.Point(16, 60);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
@@ -92,7 +94,7 @@ namespace WindowsFormsCalendar
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(19, 94);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(407, 194);
+            this.listView1.Size = new System.Drawing.Size(407, 292);
             this.listView1.TabIndex = 0;
             this.listView1.Text = "Date";
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -121,7 +123,7 @@ namespace WindowsFormsCalendar
             this.linkLabel_ExportToHTML.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel_ExportToHTML.AutoSize = true;
-            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(331, 70);
+            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(329, 60);
             this.linkLabel_ExportToHTML.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel_ExportToHTML.Name = "linkLabel_ExportToHTML";
             this.linkLabel_ExportToHTML.Size = new System.Drawing.Size(97, 13);
@@ -130,6 +132,30 @@ namespace WindowsFormsCalendar
             this.linkLabel_ExportToHTML.Text = "export to HTML file";
             this.linkLabel_ExportToHTML.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_ExportToHTML_LinkClicked);
             // 
+            // labelFiltered
+            // 
+            this.labelFiltered.AutoSize = true;
+            this.labelFiltered.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFiltered.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.labelFiltered.Location = new System.Drawing.Point(16, 78);
+            this.labelFiltered.Name = "labelFiltered";
+            this.labelFiltered.Size = new System.Drawing.Size(53, 13);
+            this.labelFiltered.TabIndex = 9;
+            this.labelFiltered.Text = "filtered list";
+            this.labelFiltered.Visible = false;
+            // 
+            // linkLabel_Clear
+            // 
+            this.linkLabel_Clear.AutoSize = true;
+            this.linkLabel_Clear.Location = new System.Drawing.Point(110, 77);
+            this.linkLabel_Clear.Name = "linkLabel_Clear";
+            this.linkLabel_Clear.Size = new System.Drawing.Size(67, 13);
+            this.linkLabel_Clear.TabIndex = 10;
+            this.linkLabel_Clear.TabStop = true;
+            this.linkLabel_Clear.Text = "clear Search";
+            this.linkLabel_Clear.Visible = false;
+            this.linkLabel_Clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Clear_LinkClicked);
+            // 
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Application;
@@ -137,14 +163,17 @@ namespace WindowsFormsCalendar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(445, 303);
+            this.ClientSize = new System.Drawing.Size(445, 438);
+            this.Controls.Add(this.linkLabel_Clear);
+            this.Controls.Add(this.labelFiltered);
             this.Controls.Add(this.linkLabel_ExportToHTML);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_Search);
             this.Controls.Add(this.button_Add);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
@@ -162,6 +191,8 @@ namespace WindowsFormsCalendar
         private System.Windows.Forms.ColumnHeader Description;
         private System.Windows.Forms.LinkLabel linkLabel_ExportToHTML;
         private System.Windows.Forms.SaveFileDialog saveFileDialogHTML;
+        private System.Windows.Forms.Label labelFiltered;
+        private System.Windows.Forms.LinkLabel linkLabel_Clear;
     }
 }
 
