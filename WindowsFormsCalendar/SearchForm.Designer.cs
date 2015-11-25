@@ -64,6 +64,7 @@
             this.buttonOK.Text = "OK";
             this.buttonOK.UseMnemonic = false;
             this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // listBoxValue
             // 

@@ -87,6 +87,32 @@ namespace WindowsFormsCalendar
         {
             SearchForm newform = new SearchForm();
             newform.ShowDialog();
+
+            var status = newform.ActiveControl.Text;
+
+            if (status == "OK")
+            {
+                var filteredList= FilterAppointmentsList(newform);
+                if (filteredList.Length > 0)
+                {
+                    listView1.Items.Clear();
+                    filteredList.Sort();
+                    foreach (Event ev in filteredList)
+                    {
+                        AddAppointmentToListView(ev);
+                    }
+                    listView1.Refresh();
+                }
+            }
+
+        }
+
+        private Events FilterAppointmentsList(SearchForm newform)
+        {
+            var field = newform.Field;
+            var operators = newform.Operators;
+            var values = newform.Values;
+            return Dispenser.FilterEvents(eventsList, field, operators, values);
         }
     }
 }

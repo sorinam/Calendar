@@ -110,7 +110,7 @@ namespace Calendar
         }
 
        
-        private static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
+       public static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
             Events filteredList = new Events();
 

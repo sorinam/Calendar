@@ -12,10 +12,17 @@ namespace WindowsFormsCalendar
 {
     public partial class SearchForm : Form
     {
+        string field;
+        string operators;
+        string[] values;
         public SearchForm()
         {
             InitializeComponent();
         }
+
+        public string Field { get { return field; } }
+        public string Operators { get { return operators; } }
+        public string[] Values { get { return values; } }
 
         private void comboBoxField_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -95,6 +102,13 @@ namespace WindowsFormsCalendar
             }
 
             }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            field = comboBoxField.Text.ToLower();
+            operators = comboBoxConditions.Text.ToLower();
+            values =new string[] {dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"), };
         }
+    }
     }
 
