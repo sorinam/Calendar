@@ -107,24 +107,35 @@ namespace WindowsFormsCalendar
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            field = comboBoxField.Text.ToLower();
-            switch (field)
+            if (comboBoxField.SelectedItem != null)
             {
-                case "date": { SetParameterToFilteringByDate(); break; }
-                case "description": { SetParameterToFilteringByDescription(); break; }
-                case "tag": { SetParameterToSearchTags(); break; }
+                field = comboBoxField.Text.ToLower();
+                switch (field)
+                {
+                    case "date": { SetParameterToFilteringByDate(); break; }
+                    case "description": { SetParameterToFilteringByDescription(); break; }
+                    case "tag": { SetParameterToSearchTags(); break; }
+                }
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Filter Property should be selected !"), "Validation error", MessageBoxButtons.OK);
             }
        }
 
         private void SetParameterToSearchTags()
         {
-            throw new NotImplementedException();
+            operators = comboBoxConditions.Text.ToLower();
+            var allTags = textBoxValue.Text.Split(' ');
+            values = allTags.Distinct().ToArray();
+          
         }
 
         private void SetParameterToFilteringByDescription()
         {
             operators = comboBoxConditions.Text.ToLower();
-            values =new string[] { textBoxValue.Text};
+            values = new string[] { textBoxValue.Text };
         }
 
         private void SetParameterToFilteringByDate()
