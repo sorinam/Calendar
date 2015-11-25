@@ -17,12 +17,13 @@ namespace WindowsFormsCalendar
     public partial class MainForm : Form
     {
         Events eventsList;
+        Events displayedList;
         public MainForm()
         {
             InitializeComponent();
             TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
-
+            displayedList = new Calendar.Events();
         }
 
         private void New_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace WindowsFormsCalendar
             if (saveFileDialogHTML.ShowDialog() == DialogResult.OK)
             {
               path = saveFileDialogHTML.FileName;
-              Dispenser.ExportToHTMLFile(path, eventsList);
+              Dispenser.ExportToHTMLFile(path, displayedList);
             }
 
         }
@@ -92,12 +93,12 @@ namespace WindowsFormsCalendar
 
             if (status == "OK")
             {
-                var filteredList= FilterAppointmentsList(newform);
-                if (filteredList.Length > 0)
+                this.displayedList = FilterAppointmentsList(newform);
+                if (this.displayedList.Length > 0)
                 {
                     listView1.Items.Clear();
-                    filteredList.Sort();
-                    foreach (Event ev in filteredList)
+                    this.displayedList.Sort();
+                    foreach (Event ev in this.displayedList)
                     {
                         AddAppointmentToListView(ev);
                     }
