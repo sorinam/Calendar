@@ -45,44 +45,49 @@ namespace WindowsFormsCalendar
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(16, 45);
+            this.dateTimePicker.Location = new System.Drawing.Point(11, 29);
+            this.dateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(253, 26);
+            this.dateTimePicker.Size = new System.Drawing.Size(170, 20);
             this.dateTimePicker.TabIndex = 19;
             // 
             // descritption_label
             // 
             this.descritption_label.AutoSize = true;
-            this.descritption_label.Location = new System.Drawing.Point(298, 98);
+            this.descritption_label.Location = new System.Drawing.Point(199, 64);
+            this.descritption_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.descritption_label.Name = "descritption_label";
-            this.descritption_label.Size = new System.Drawing.Size(89, 20);
+            this.descritption_label.Size = new System.Drawing.Size(60, 13);
             this.descritption_label.TabIndex = 15;
             this.descritption_label.Text = "Description";
             // 
             // select_label
             // 
             this.select_label.AutoSize = true;
-            this.select_label.Location = new System.Drawing.Point(12, 20);
+            this.select_label.Location = new System.Drawing.Point(8, 13);
+            this.select_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.select_label.Name = "select_label";
-            this.select_label.Size = new System.Drawing.Size(130, 20);
+            this.select_label.Size = new System.Drawing.Size(88, 13);
             this.select_label.TabIndex = 18;
             this.select_label.Text = "Plese select date";
             // 
             // subject_label
             // 
             this.subject_label.AutoSize = true;
-            this.subject_label.Location = new System.Drawing.Point(298, 20);
+            this.subject_label.Location = new System.Drawing.Point(199, 13);
+            this.subject_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.subject_label.Name = "subject_label";
-            this.subject_label.Size = new System.Drawing.Size(63, 20);
+            this.subject_label.Size = new System.Drawing.Size(43, 13);
             this.subject_label.TabIndex = 14;
             this.subject_label.Text = "Subject";
             // 
             // button_Cancel
             // 
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(344, 332);
+            this.button_Cancel.Location = new System.Drawing.Point(229, 216);
+            this.button_Cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(154, 38);
+            this.button_Cancel.Size = new System.Drawing.Size(103, 25);
             this.button_Cancel.TabIndex = 21;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
@@ -90,9 +95,10 @@ namespace WindowsFormsCalendar
             // 
             // button_Save
             // 
-            this.button_Save.Location = new System.Drawing.Point(91, 332);
+            this.button_Save.Location = new System.Drawing.Point(61, 216);
+            this.button_Save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(124, 38);
+            this.button_Save.Size = new System.Drawing.Size(83, 25);
             this.button_Save.TabIndex = 20;
             this.button_Save.Text = "Save";
             this.button_Save.UseVisualStyleBackColor = true;
@@ -100,19 +106,17 @@ namespace WindowsFormsCalendar
             // 
             // textBox_Subject
             // 
-            this.textBox_Subject.Location = new System.Drawing.Point(303, 45);
-            this.textBox_Subject.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox_Subject.Location = new System.Drawing.Point(202, 29);
             this.textBox_Subject.Name = "textBox_Subject";
-            this.textBox_Subject.Size = new System.Drawing.Size(210, 26);
+            this.textBox_Subject.Size = new System.Drawing.Size(141, 20);
             this.textBox_Subject.TabIndex = 23;
             // 
             // richTextBox_Description
             // 
             this.richTextBox_Description.AcceptsTab = true;
-            this.richTextBox_Description.Location = new System.Drawing.Point(303, 123);
-            this.richTextBox_Description.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.richTextBox_Description.Location = new System.Drawing.Point(202, 80);
             this.richTextBox_Description.Name = "richTextBox_Description";
-            this.richTextBox_Description.Size = new System.Drawing.Size(210, 199);
+            this.richTextBox_Description.Size = new System.Drawing.Size(141, 131);
             this.richTextBox_Description.TabIndex = 24;
             this.richTextBox_Description.Text = "";
             // 
@@ -120,11 +124,11 @@ namespace WindowsFormsCalendar
             // 
             this.AcceptButton = this.button_Save;
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Dialog;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(532, 403);
+            this.ClientSize = new System.Drawing.Size(355, 262);
             this.ControlBox = false;
             this.Controls.Add(this.richTextBox_Description);
             this.Controls.Add(this.textBox_Subject);
@@ -134,6 +138,7 @@ namespace WindowsFormsCalendar
             this.Controls.Add(this.subject_label);
             this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Save);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddAppointment";
