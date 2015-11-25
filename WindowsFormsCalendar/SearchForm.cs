@@ -107,7 +107,18 @@ namespace WindowsFormsCalendar
         {
             field = comboBoxField.Text.ToLower();
             operators = comboBoxConditions.Text.ToLower();
-            values =new string[] {dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd"), };
+            if (operators == "this week")
+            {
+                operators = "<>";
+                string Today = DateTime.Today.ToShortDateString();
+                string beginDate, endDate;
+                Calendar.Utils.GetBeginEndDaysOfWeek(Today, out beginDate, out endDate);
+                values = new string[] { beginDate, endDate };
+            }
+            else
+            {
+                values = new string[] { dateTimePicker1.Value.ToString("yyyy/MM/dd"), dateTimePicker2.Value.ToString("yyyy/MM/dd") };
+            };
         }
     }
     }
