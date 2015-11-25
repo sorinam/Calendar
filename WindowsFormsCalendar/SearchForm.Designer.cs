@@ -97,6 +97,7 @@
             this.comboBoxConditions.Name = "comboBoxConditions";
             this.comboBoxConditions.Size = new System.Drawing.Size(82, 21);
             this.comboBoxConditions.TabIndex = 11;
+            this.comboBoxConditions.SelectedIndexChanged += new System.EventHandler(this.comboBoxConditions_SelectedIndexChanged);
             // 
             // labelOperaor
             // 

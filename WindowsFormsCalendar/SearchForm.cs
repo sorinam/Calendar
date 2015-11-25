@@ -28,7 +28,7 @@ namespace WindowsFormsCalendar
             "Equal",
             "Not Equal",
             "Today",
-            "This week",
+            "This Week",
             "Older",
             "Newer",
             "Between"};
@@ -44,14 +44,12 @@ namespace WindowsFormsCalendar
             switch (field)
             {
                 case "Date":
-                    {
-                        comboBoxConditions.Items.Clear();
+                    {   comboBoxConditions.Items.Clear();
                         comboBoxConditions.Items.AddRange(date);
                         comboBoxConditions.SelectedIndex = 0;
                         dateTimePicker1.Visible = true;
                         dateTimePicker2.Visible = true;
-                        dateTimePicker2.Enabled = false;
-                        break;
+                       break;
                     }
                 case "Description":
                     {
@@ -75,5 +73,28 @@ namespace WindowsFormsCalendar
                     }
             }
         }
+
+        private void comboBoxConditions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((comboBoxField.Text == "Date") && (comboBoxConditions.Text == "Between"))
+            {
+                dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
+            }
+            else
+            if ((comboBoxField.Text == "Date") &&( (comboBoxConditions.Text == "Today")|| (comboBoxConditions.Text == "This Week")))
+                {
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
+                }
+            else
+            {
+                dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = false;
+
+            }
+
+            }
+        }
     }
-}
+
