@@ -51,7 +51,9 @@ namespace WindowsFormsCalendar
             switch (field)
             {
                 case "Date":
-                    {   comboBoxConditions.Items.Clear();
+                    {
+                        textBoxValue.Visible = false;
+                        comboBoxConditions.Items.Clear();
                         comboBoxConditions.Items.AddRange(date);
                         comboBoxConditions.SelectedIndex = 0;
                         dateTimePicker1.Visible = true;
@@ -65,7 +67,7 @@ namespace WindowsFormsCalendar
                         comboBoxConditions.SelectedIndex = 0;
                         dateTimePicker1.Visible = false;
                         dateTimePicker2.Visible =false;
-                        listBoxValue.Visible = true;
+                        textBoxValue.Visible = true;
                         break;
                     }
                 case "Tag":
@@ -75,7 +77,7 @@ namespace WindowsFormsCalendar
                         comboBoxConditions.SelectedIndex = 0;
                         dateTimePicker1.Visible = false;
                         dateTimePicker2.Visible = false;
-                        listBoxValue.Visible = true;
+                        textBoxValue.Visible = true;
                         break;
                     }
             }
@@ -106,6 +108,27 @@ namespace WindowsFormsCalendar
         private void buttonOK_Click(object sender, EventArgs e)
         {
             field = comboBoxField.Text.ToLower();
+            switch (field)
+            {
+                case "date": { SetParameterToFilteringByDate(); break; }
+                case "description": { SetParameterToFilteringByDescription(); break; }
+                case "tag": { SetParameterToSearchTags(); break; }
+            }
+       }
+
+        private void SetParameterToSearchTags()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetParameterToFilteringByDescription()
+        {
+            operators = comboBoxConditions.Text.ToLower();
+            values =new string[] { textBoxValue.Text};
+        }
+
+        private void SetParameterToFilteringByDate()
+        {
             operators = comboBoxConditions.Text.ToLower();
             if (operators == "this week")
             {
