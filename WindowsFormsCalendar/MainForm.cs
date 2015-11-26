@@ -18,13 +18,19 @@ namespace WindowsFormsCalendar
     {
         Events eventsList;
         Events displayedList;
+        string[] tagsList;
+
         public MainForm()
         {
             InitializeComponent();
+
             TXTFile file = new TXTFile();
             eventsList = file.LoadEventsFromFile();
             displayedList = new Calendar.Events();
+            tagsList = GetTagList();
         }
+        public string[] Tags
+        { get { return tagsList; } }
 
         private void New_Click(object sender, EventArgs e)
         {
@@ -122,6 +128,12 @@ namespace WindowsFormsCalendar
             return Dispenser.FilterEvents(eventsList, field, operators, values);
         }
 
+        private string[] GetTagList()
+        {
+            TagsNameList tagList = new TagsNameList(eventsList);
+            return tagList.TagList;
+        }
+
         private void linkLabel_Clear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             listView1.Items.Clear();
@@ -135,16 +147,5 @@ namespace WindowsFormsCalendar
             listView1.Refresh();
         }
 
-        public string[] ExistingTags()
-        {           
-            TagsCounter tags= new TagsCounter(eventsList);
-            Tag[] allTags= tags.TagList.ToArray();
-            string[] onlyTagsName = new string[tags.Length];
-            for (int i = 0; i < tags.Length; i++)
-            {
-                onlyTagsName[i] = allTags[i].Name; 
-            }
-        return onlyTagsName;
-        }
     }
 }

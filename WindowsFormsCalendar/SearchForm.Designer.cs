@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.labelValue = new System.Windows.Forms.Label();
@@ -39,13 +40,15 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.textBoxValue = new System.Windows.Forms.TextBox();
             this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
+            this.tagsNameListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.tagsNameListBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonCancel.Location = new System.Drawing.Point(246, 255);
+            this.buttonCancel.Location = new System.Drawing.Point(244, 318);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 35);
             this.buttonCancel.TabIndex = 15;
@@ -55,7 +58,7 @@
             // buttonOK
             // 
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.buttonOK.Location = new System.Drawing.Point(126, 255);
+            this.buttonOK.Location = new System.Drawing.Point(124, 318);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 35);
             this.buttonOK.TabIndex = 14;
@@ -152,11 +155,13 @@
             // 
             // checkedListBoxTags
             // 
+            this.checkedListBoxTags.CheckOnClick = true;
             this.checkedListBoxTags.FormattingEnabled = true;
-            this.checkedListBoxTags.Location = new System.Drawing.Point(27, 187);
+            this.checkedListBoxTags.Location = new System.Drawing.Point(198, 143);
             this.checkedListBoxTags.Name = "checkedListBoxTags";
-            this.checkedListBoxTags.Size = new System.Drawing.Size(162, 88);
+            this.checkedListBoxTags.Size = new System.Drawing.Size(170, 151);
             this.checkedListBoxTags.TabIndex = 19;
+            this.checkedListBoxTags.Visible = false;
             // 
             // SearchForm
             // 
@@ -164,7 +169,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(432, 345);
+            this.ClientSize = new System.Drawing.Size(432, 437);
             this.ControlBox = false;
             this.Controls.Add(this.checkedListBoxTags);
             this.Controls.Add(this.textBoxValue);
@@ -185,6 +190,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search Appointments";
+            ((System.ComponentModel.ISupportInitialize)(this.tagsNameListBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +209,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.TextBox textBoxValue;
         private System.Windows.Forms.CheckedListBox checkedListBoxTags;
+        private System.Windows.Forms.BindingSource tagsNameListBindingSource;
     }
 }

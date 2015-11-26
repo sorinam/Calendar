@@ -101,6 +101,7 @@
     </EmbeddedResource>
     <None Include="Properties\DataSources\Calendar.Event.datasource" />
     <None Include="Properties\DataSources\Calendar.Events.datasource" />
+    <None Include="Properties\DataSources\Calendar.TagsNameList.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

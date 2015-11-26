@@ -114,15 +114,16 @@ namespace Calendar
 
         private string[] GetTagsNameList(Events eventsList)
         {   Tag[] el_tags;
-            string[] el_TagsNameList= { };
+            string[] TagsNameList= { };
             foreach (Event ev in eventsList)
             {
                 el_tags = ev.GetTagsAndCount();
-                el_TagsNameList = GetTagsNameForAnEvent(el_tags);
-                var union = el_TagsNameList.Union(el_TagsNameList);
-                el_TagsNameList = union.ToArray();
+                var el_TagsNameList = GetTagsNameForAnEvent(el_tags);
+                var union = TagsNameList.Union(el_TagsNameList);
+                TagsNameList = union.ToArray();
             }
-            return el_TagsNameList;
+            Array.Sort(TagsNameList);
+            return TagsNameList;
         }
 
         private string[] GetTagsNameForAnEvent(Tag[] el_tagList)

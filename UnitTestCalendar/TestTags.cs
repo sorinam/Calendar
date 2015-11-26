@@ -64,7 +64,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "new tag","@Ioana") },
                 {new Event("2015/11/15", "#tag","#desc @Ioana test" ) }
             };
-            string[] expectedTagList = { "#tag", "@Ioana", "#desc" };
+            string[] expectedTagList = { "#desc","#tag", "@Ioana" };
 
             var tagList = new TagsNameList(newEvents);
 

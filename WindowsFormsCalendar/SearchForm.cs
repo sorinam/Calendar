@@ -77,10 +77,19 @@ namespace WindowsFormsCalendar
                         comboBoxConditions.SelectedIndex = 0;
                         dateTimePicker1.Visible = false;
                         dateTimePicker2.Visible = false;
-                        textBoxValue.Visible = true;
+                        textBoxValue.Visible = false;
+                        checkedListBoxTags.Visible = true;
+                        AddItemsToCheckedList(checkedListBoxTags);
                         break;
                     }
             }
+        }
+
+        private void AddItemsToCheckedList(CheckedListBox checkedListBox)
+        {
+            MainForm form = new MainForm();
+            string[] tagsNameList = form.Tags;
+            checkedListBox.Items.AddRange(tagsNameList);
         }
 
         private void comboBoxConditions_SelectedIndexChanged(object sender, EventArgs e)
@@ -127,12 +136,15 @@ namespace WindowsFormsCalendar
         private void SetParameterToSearchTags()
         {
             operators = comboBoxConditions.Text.ToLower();
-           
-            //var allTags = textBoxValue.Text.Split(' ');
-            //values = allTags.Distinct().ToArray();
+            values = new string[checkedListBoxTags.SelectedItems.Count];
+            checkedListBoxTags.SelectedItems.CopyTo(values, 0);
+            RemoveTagSymbol(values);
+        }
 
-            //checkedListBoxTags new
-          
+        private void RemoveTagSymbol(string[] items)
+        {
+            for (int i=0; i<items.Length; i++)
+            { items[i]= items[i].Substring(1); }
         }
 
         private void SetParameterToFilteringByDescription()
