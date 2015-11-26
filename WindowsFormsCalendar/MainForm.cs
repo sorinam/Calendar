@@ -134,5 +134,17 @@ namespace WindowsFormsCalendar
             linkLabel_Clear.Visible = false;
             listView1.Refresh();
         }
+
+        public string[] ExistingTags()
+        {           
+            TagsCounter tags= new TagsCounter(eventsList);
+            Tag[] allTags= tags.TagList.ToArray();
+            string[] onlyTagsName = new string[tags.Length];
+            for (int i = 0; i < tags.Length; i++)
+            {
+                onlyTagsName[i] = allTags[i].Name; 
+            }
+        return onlyTagsName;
+        }
     }
 }

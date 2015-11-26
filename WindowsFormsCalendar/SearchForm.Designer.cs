@@ -38,6 +38,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.textBoxValue = new System.Windows.Forms.TextBox();
+            this.checkedListBoxTags = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -149,6 +150,14 @@
             this.textBoxValue.Size = new System.Drawing.Size(170, 26);
             this.textBoxValue.TabIndex = 18;
             // 
+            // checkedListBoxTags
+            // 
+            this.checkedListBoxTags.FormattingEnabled = true;
+            this.checkedListBoxTags.Location = new System.Drawing.Point(27, 187);
+            this.checkedListBoxTags.Name = "checkedListBoxTags";
+            this.checkedListBoxTags.Size = new System.Drawing.Size(162, 88);
+            this.checkedListBoxTags.TabIndex = 19;
+            // 
             // SearchForm
             // 
             this.AcceptButton = this.buttonOK;
@@ -157,6 +166,7 @@
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(432, 345);
             this.ControlBox = false;
+            this.Controls.Add(this.checkedListBoxTags);
             this.Controls.Add(this.textBoxValue);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -192,5 +202,6 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.TextBox textBoxValue;
+        private System.Windows.Forms.CheckedListBox checkedListBoxTags;
     }
 }

@@ -127,8 +127,11 @@ namespace WindowsFormsCalendar
         private void SetParameterToSearchTags()
         {
             operators = comboBoxConditions.Text.ToLower();
-            var allTags = textBoxValue.Text.Split(' ');
-            values = allTags.Distinct().ToArray();
+           
+            //var allTags = textBoxValue.Text.Split(' ');
+            //values = allTags.Distinct().ToArray();
+
+            //checkedListBoxTags new
           
         }
 

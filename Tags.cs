@@ -104,6 +104,50 @@ namespace Calendar
             }
         }
     }
+    public class TagsNameList
+    {
+        string[] tagList;
+        public TagsNameList(Events eventsList)
+        {
+            tagList = GetTagsNameList(eventsList);
+        }
+
+        private string[] GetTagsNameList(Events eventsList)
+        {   Tag[] el_tags;
+            string[] el_TagsNameList= { };
+            foreach (Event ev in eventsList)
+            {
+                el_tags = ev.GetTagsAndCount();
+                el_TagsNameList = GetTagsNameForAnEvent(el_tags);
+                var union = el_TagsNameList.Union(el_TagsNameList);
+                el_TagsNameList = union.ToArray();
+            }
+            return el_TagsNameList;
+        }
+
+        private string[] GetTagsNameForAnEvent(Tag[] el_tagList)
+        {
+           string[] tagList=new string [el_tagList.Count()];
+            for (int i=0;i< el_tagList.Count();i++)
+            {
+                tagList[i] = el_tagList[i].Name;
+            }
+            return tagList;
+
+        }
+
+        public string[] TagList
+        {
+            get { return tagList; }
+        }
+
+        public int Length
+        {
+            get { return tagList.Count(); }
+        }
+
+
+    }
     class sortTagAscendingByName : IComparer<Tag>
     {
         public int Compare(Tag x, Tag y)

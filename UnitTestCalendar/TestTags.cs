@@ -54,6 +54,25 @@ namespace UnitTestCalendar
             AreEquals(tags, expectedTagList);
         }
 
+        [TestMethod]
+        public void ShouldListOnlyTagsName()
+        {
+            Events newEvents = new Events
+            {
+                {new Event ("2015/01/01",  "#tag","description") },
+                {new Event("2015/11/15", "title @Ioana","#desc") },
+                {new Event("2015/11/15", "new tag","@Ioana") },
+                {new Event("2015/11/15", "#tag","#desc @Ioana test" ) }
+            };
+            string[] expectedTagList = { "#tag", "@Ioana", "#desc" };
+
+            var tagList = new TagsNameList(newEvents);
+
+            tagList.ShouldEqual(tagList);
+
+           
+        }
+
         private void AreEquals(Tag[] List,Tag[] ListToCompare)
         {
             List.Length.ShouldEqual(ListToCompare.Length);
