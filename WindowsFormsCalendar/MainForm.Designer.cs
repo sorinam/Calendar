@@ -41,6 +41,9 @@ namespace WindowsFormsCalendar
             this.saveFileDialogHTML = new System.Windows.Forms.SaveFileDialog();
             this.labelFiltered = new System.Windows.Forms.Label();
             this.linkLabel_Clear = new System.Windows.Forms.LinkLabel();
+            this.richTextBoxSearch = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Add
@@ -64,10 +67,12 @@ namespace WindowsFormsCalendar
             this.button_Search.Location = new System.Drawing.Point(32, 17);
             this.button_Search.Margin = new System.Windows.Forms.Padding(2);
             this.button_Search.Name = "button_Search";
+            this.button_Search.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.button_Search.Size = new System.Drawing.Size(58, 25);
             this.button_Search.TabIndex = 3;
             this.button_Search.Text = "Search";
             this.button_Search.UseVisualStyleBackColor = false;
+            this.button_Search.Visible = false;
             this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
             // label1
@@ -156,6 +161,24 @@ namespace WindowsFormsCalendar
             this.linkLabel_Clear.Visible = false;
             this.linkLabel_Clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Clear_LinkClicked);
             // 
+            // richTextBoxSearch
+            // 
+            this.richTextBoxSearch.Location = new System.Drawing.Point(32, 17);
+            this.richTextBoxSearch.Name = "richTextBoxSearch";
+            this.richTextBoxSearch.Size = new System.Drawing.Size(136, 19);
+            this.richTextBoxSearch.TabIndex = 11;
+            this.richTextBoxSearch.Text = "";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WindowsFormsCalendar.Properties.Resources.Search_icon;
+            this.pictureBox1.Location = new System.Drawing.Point(174, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 19);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Application;
@@ -164,6 +187,8 @@ namespace WindowsFormsCalendar
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(445, 438);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.richTextBoxSearch);
             this.Controls.Add(this.linkLabel_Clear);
             this.Controls.Add(this.labelFiltered);
             this.Controls.Add(this.linkLabel_ExportToHTML);
@@ -176,6 +201,7 @@ namespace WindowsFormsCalendar
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendar";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,6 +219,8 @@ namespace WindowsFormsCalendar
         private System.Windows.Forms.SaveFileDialog saveFileDialogHTML;
         private System.Windows.Forms.Label labelFiltered;
         private System.Windows.Forms.LinkLabel linkLabel_Clear;
+        private System.Windows.Forms.RichTextBox richTextBoxSearch;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
