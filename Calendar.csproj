@@ -57,7 +57,7 @@
     <Compile Include="Filter.cs" />
     <Compile Include="HTMLFile.cs" />
     <Compile Include="SearchTagArgument.cs" />
-    <Compile Include="StringFilter.cs" />
+    <Compile Include="TagFilter.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="DescriptionFilter.cs" />
     <Compile Include="ListArgument.cs" />

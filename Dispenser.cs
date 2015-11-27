@@ -146,8 +146,8 @@ namespace Calendar
 
         private static Events GetFilteredListByTag(Events eventsList, string criteria, string[] values)
         {
-            StringFilter eventsToFilter = new StringFilter(Utils.ParseFilteringCriteria(criteria), values);
-            return eventsToFilter.ApplyFilter(eventsList,"tag");
+            TagFilter eventsToFilter = new TagFilter(Utils.ParseFilteringCriteria(criteria), values);
+            return eventsToFilter.ApplyFilter(eventsList);
         }
 
         public static Events GetFilteredListByDescription(Events eventsList, string criteria, string value)

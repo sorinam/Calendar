@@ -147,29 +147,5 @@ namespace WindowsFormsCalendar
             listView1.Refresh();
         }
 
-        private void richTextBoxSearch_TextChanged(object sender, EventArgs e)
-        {
-            var field ="description";
-            var operators ="contains";
-            var values = richTextBoxSearch.Text.Split(' ');
-          
-            this.displayedList = Dispenser.FilterEvents(eventsList, field, operators, values);
-            if (this.displayedList.Length > 0)
-            {
-                listView1.Items.Clear();
-                this.displayedList.Sort();
-                foreach (Event ev in this.displayedList)
-                {
-                    AddAppointmentToListView(ev);
-                }
-                labelFiltered.Visible = true;
-                linkLabel_Clear.Visible = true;
-                listView1.Refresh();
-            }
-            else
-            {
-                MessageBox.Show(string.Format("No records matching the current criteria were found!"), "No records found", MessageBoxButtons.OK);
-            }
-        }
     }
 }
