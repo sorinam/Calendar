@@ -2,24 +2,24 @@
 
 namespace Calendar
 {
-    public class TagFilter
+    public class StringFilter
     {
         string[] valueToCompare;
         string criteria;
 
-        public TagFilter(string criteria, string[] valueToCompare)
+        public StringFilter(string criteria, string[] valueToCompare)
         {
             this.valueToCompare = valueToCompare;
             this.criteria = criteria;
         }
 
-        public Events ApplyFilter(Events sourceList)
+        public Events ApplyFilter(Events sourceList,string type)
         {
             Events filteredList = new Events();
 
             foreach (Event ev in sourceList)
             {
-                if (IsTrueCriteria(ev, criteria))
+                if (IsTrueCriteria(ev, criteria,type))
                 {
                     filteredList.Add(ev);
                 }
@@ -28,14 +28,19 @@ namespace Calendar
             return filteredList;
         }
 
-        bool IsTrueCriteria(Event ev, string criteria)
+        bool IsTrueCriteria(Event ev, string criteria,string type)
         {
             switch (criteria)
             {
                 case "||":
-                    return ContainsAnyTag(ev, valueToCompare);
+                    if (type == "tag") return ContainsAnyTag(ev, valueToCompare);
+                    else
+                        return ContainsAnyValue(ev, valueToCompare)
+               ;
                 case "&&":
-                    return ContainsAllTags(ev, valueToCompare);
+                    if (type == "tag") return ContainsAllTags(ev, valueToCompare);
+                    else
+                        return ContainsAllValues(ev, valueToCompare);
                 default: return false;
             }
 
@@ -47,6 +52,15 @@ namespace Calendar
         bool ContainsAllTags(Event ev, string[] tagValues)
         {
             return tagValues.All(elem => ev.Tags.Contains('#' + elem) || ev.Tags.Contains('@' + elem));
+        }
+
+        bool ContainsAnyValue(Event ev, string[] tagValues)
+        {
+            return tagValues.Any(elem => ev.Tags.Contains(elem) || ev.Tags.Contains(elem));
+        }
+        bool ContainsAllValues(Event ev, string[] tagValues)
+        {
+            return tagValues.All(elem => ev.Tags.Contains(elem) || ev.Tags.Contains(elem));
         }
     }
 }

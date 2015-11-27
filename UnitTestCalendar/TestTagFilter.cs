@@ -17,14 +17,14 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15","tag") }
             };
 
-                TagFilter eventsToFilter = new TagFilter("||",new string[] { "tag" });
+                StringFilter eventsToFilter = new StringFilter("||",new string[] { "tag" });
             
                 List<Event> expectedList = new List<Event>
             {
                 {new Event(  "2015/01/01", "#tag Title","Description") }
             };
           
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents, "tag");
 
             Utils.AssertAreEqual(filteredList, expectedList);
             }
@@ -39,8 +39,8 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "tag") }
             };
 
-            TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag" });
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+            StringFilter eventsToFilter = new StringFilter("||", new string[] { "tag" });
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents, "tag");
             List<Event> expectedList = new List<Event>
             {
                 {new Event("2015/01/01", "Title","@tag Description") }
@@ -60,7 +60,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "#tag","#desc tag test" ) }
             };
 
-            TagFilter eventsToFilter = new TagFilter("||", new string[] { "tag","desc" });
+            StringFilter eventsToFilter = new StringFilter("||", new string[] { "tag","desc" });
             List<Event> expectedList = new List<Event>
             {
                 {new Event ( "2015/01/01", "#tag title","description") },
@@ -68,7 +68,7 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15","#tag","#desc tag test" ) }
             };
 
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents, "tag");
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
@@ -83,13 +83,13 @@ namespace UnitTestCalendar
                 {new Event("2015/11/15", "#tag","#desc tag @Ioana test" ) }
             };
 
-            TagFilter eventsToFilter = new TagFilter("&&", new string[] { "tag", "Ioana" });
+            StringFilter eventsToFilter = new StringFilter("&&", new string[] { "tag", "Ioana" });
             List<Event> expectedList = new List<Event>
             {
                 {new Event("2015/11/15", "#tag","#desc tag @Ioana test" ) }
             };
 
-            Events filteredList = eventsToFilter.ApplyFilter(newEvents);
+            Events filteredList = eventsToFilter.ApplyFilter(newEvents, "tag");
 
             Utils.AssertAreEqual(filteredList, expectedList);
         }
