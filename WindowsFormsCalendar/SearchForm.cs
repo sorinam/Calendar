@@ -136,8 +136,8 @@ namespace WindowsFormsCalendar
         private void SetParameterToSearchTags()
         {
             operators = comboBoxConditions.Text.ToLower();
-            values = new string[checkedListBoxTags.SelectedItems.Count];
-            checkedListBoxTags.SelectedItems.CopyTo(values, 0);
+            values = new string[checkedListBoxTags.CheckedItems.Count];
+            checkedListBoxTags.CheckedItems.CopyTo(values, 0);
             RemoveTagSymbol(values);
         }
 
