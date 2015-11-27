@@ -7,7 +7,7 @@ using Should;
 namespace UnitTestCalendar
 {
     [TestClass]
-    public class TesttitleFilter
+    public class TestTitleFilter
     {
         [TestMethod]
         public void ShouldSelectEventsWithASpecifiedTitle()

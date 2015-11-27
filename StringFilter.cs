@@ -9,9 +9,9 @@ namespace Calendar
     public class StringFilter
     {
         string criteria;
-        string valueToCompare;
+        string[] valueToCompare;
 
-        public StringFilter(string criteria, string valueToCompare)
+        public StringFilter(string criteria, string[] valueToCompare)
         {
             this.criteria = criteria;
             this.valueToCompare = valueToCompare;
@@ -32,15 +32,25 @@ namespace Calendar
             return filteredList;
         }
 
-        public bool IsTrueCriteria(Event ev, string criteria)
+        bool IsTrueCriteria(Event ev, string criteria)
         {
             switch (criteria)
             {
-                case "=": return ((ev.Description == valueToCompare)||(ev.Title == valueToCompare));
-                case "!=": return ((ev.Description != valueToCompare) || (ev.Title != valueToCompare));
-                case ">": return ((ev.Description.Contains(valueToCompare)) || (ev.Title.Contains(valueToCompare)));
+                case "||":
+                    return ContainsAnyString(ev, valueToCompare);
+                case "&&":
+                    return ContainsAllStrings(ev, valueToCompare);
+                default: return false;
             }
-            return false;
+
+        }
+        bool ContainsAnyString(Event ev, string[] stringValues)
+        {
+            return stringValues.Any(elem => ev.Title.Contains(elem) || ev.Description.Contains(elem));
+        }
+        bool ContainsAllStrings(Event ev, string[] stringValues)
+        {
+            return stringValues.All(elem => ev.Title.Contains(elem) || ev.Description.Contains(elem));
         }
     }
 }

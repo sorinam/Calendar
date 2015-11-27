@@ -65,7 +65,7 @@ namespace WindowsFormsCalendar
             TXTFile file = new TXTFile();
             file.SaveEventsToFile(eventsList);
         }
-            
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             if (eventsList.Length > 0)
@@ -84,8 +84,8 @@ namespace WindowsFormsCalendar
 
             if (saveFileDialogHTML.ShowDialog() == DialogResult.OK)
             {
-              path = saveFileDialogHTML.FileName;
-              Dispenser.ExportToHTMLFile(path, displayedList);
+                path = saveFileDialogHTML.FileName;
+                Dispenser.ExportToHTMLFile(path, displayedList);
             }
 
         }
@@ -99,7 +99,7 @@ namespace WindowsFormsCalendar
 
             if (status == "OK")
             {
-                this.displayedList = FilterAppointmentsList(newform);
+                //this.displayedList = FilterAppointmentsList(newform);
                 if (this.displayedList.Length > 0)
                 {
                     listView1.Items.Clear();
@@ -120,13 +120,13 @@ namespace WindowsFormsCalendar
 
         }
 
-        private Events FilterAppointmentsList(SearchForm newform)
-        {
-            var field = newform.Field;
-            var operators = newform.Operators;
-            var values = newform.Values;
-            return Dispenser.FilterEvents(eventsList, field, operators, values);
-        }
+        //private Events FilterAppointmentsList()
+        //{
+        //    var field = newform.Field;
+        //    var operators = newform.Operators;
+        //    var values = newform.Values;
+        //    return Dispenser.FilterEvents(eventsList, field, operators, values);
+        //}
 
         private string[] GetTagList()
         {
@@ -142,10 +142,48 @@ namespace WindowsFormsCalendar
             {
                 AddAppointmentToListView(ev);
             }
-            labelFiltered.Visible =false;
+            labelFiltered.Visible = false;
             linkLabel_Clear.Visible = false;
             listView1.Refresh();
         }
 
+        private void textBoxSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                StartSearching();
+            }
+        }
+
+        private void StartSearching()
+        {
+            {
+                var values = textBoxSearch.Text.Split(' ');
+                StringFilter filteredList = new StringFilter("||", values);
+                this.displayedList = filteredList.ApplyFilter(eventsList);
+                if (this.displayedList.Length > 0)
+                {
+                    listView1.Items.Clear();
+                    this.displayedList.Sort();
+                    foreach (Event ev in this.displayedList)
+                    {
+                        AddAppointmentToListView(ev);
+                    }
+                    labelFiltered.Visible = true;
+                    linkLabel_Clear.Visible = true;
+                    listView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("No records matching the current criteria were found!"), "No records found", MessageBoxButtons.OK);
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            StartSearching();
+        }
     }
 }
+
