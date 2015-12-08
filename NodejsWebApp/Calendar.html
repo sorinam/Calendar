@@ -3,16 +3,49 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Your Appointments</title>
+    <title>Example</title>
 </head>
 <body>
     <p>My First HTML App </p><BR>
-	<p>
-	<form method="post">
+    <p id="demo">JavaScript can change HTML content.</p>
+    <button type="button"
+                onclick="document.getElementById('demo').innerHTML = 'Hello JavaScript!'">
+          Surprise!
+        </button>
+
+    <h1>JavaScript Can Validate Input</h1>
+
+    <p>Please input a number between 1 and 10:</p>
+
+    <input id="numb" type="number">
+
+    <button type="button" onclick="myFunction()">Submit</button>
+
+    <p id="demo"></p>
+
+    <script>
+function myFunction() {
+    var x, text;
+
+    // Get the value of the input field with id="numb"
+    x = document.getElementById("numb").value;
+
+    // If x is Not a Number or less than one or greater than 10
+    if (isNaN(x) || x < 1 || x > 10) {
+        text = "Input not valid";
+    } else {
+        text = "Input OK";
+    }
+    document.getElementById("demo").innerHTML = text;
+}
+    </script>
+
+
+   	<form method="post">
 	Name: <input name="name"><br><br>
 	Age: <input name="age"><br><br>
 	<input type="submit"><br>
 	</form>
-	</p>
+	
 </body>
 </html>
