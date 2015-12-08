@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsCalendar", "WindowsFormsCalendar\WindowsFormsCalendar.csproj", "{88DFA866-2B42-40C6-8A15-316E8B5C08C6}"
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodejsWebApp", "..\NodejsWebApp\NodejsWebApp.njsproj", "{6CF2931C-EE6E-402B-AF76-694CCDC454A4}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "NodejsWebApp", "NodejsWebApp\NodejsWebApp.njsproj", "{6CF2931C-EE6E-402B-AF76-694CCDC454A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
