@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace Calendar
 {
     public class XMLUtils
     {
-        const string fileName=@"ncalendar.xml";
+        const string calendarXMLFile = @"calendar.xml";
         public static string GetValueOfXmlElementAtXpath_XmlFromFile(string xpath)
         {
             string result = "";
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(calendarXMLFile);
                 XmlNode element = xmlDocument.SelectSingleNode(xpath);
                 if (element != null)
                 {
-                  result = element.InnerText;
+                    result = element.InnerText;
                 }
             }
             catch (Exception e)
@@ -28,11 +28,11 @@ namespace Calendar
 
         public static List<string> GetValuesOfXmlElementAtXpath_XmlFromFile(string xpath)
         {
-            List<string> result = new List<string>(); 
+            List<string> result = new List<string>();
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(calendarXMLFile);
                 XmlNodeList nodeList = xmlDocument.SelectNodes(xpath);
                 if (nodeList != null)
                 {
@@ -53,13 +53,13 @@ namespace Calendar
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(calendarXMLFile);
                 XmlNode element = xmlDocument.SelectSingleNode(xpath);
                 if (element != null)
                 {
                     element.InnerText = newValue;
                     result = true;
-                    xmlDocument.Save(fileName);
+                    xmlDocument.Save(calendarXMLFile);
                 }
             }
             catch (Exception)
@@ -67,56 +67,60 @@ namespace Calendar
             return result;
         }
 
-        public static bool AddNewAppointmentElementToXMLFile(string ID,string data, string title, string description="")
+        public static bool AddNewAppointmentElementToXMLFile(string ID, string data, string title, string description = "")
         {
-            bool result=false ;
+            bool result = false;
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(calendarXMLFile);
                 result = true;
-                XmlElement appointmentElement = xmlDocument.CreateElement("appointment");
-                appointmentElement.SetAttribute("ID", ID);
+                AddNewAppoimnetElement(ID, data, title, description);
 
-                XmlElement dataElement = xmlDocument.CreateElement("data");
-                dataElement.InnerText = data;
-                appointmentElement.AppendChild(dataElement);
-
-                XmlElement titleElement = xmlDocument.CreateElement("title");
-                titleElement.InnerText = title;
-                appointmentElement.AppendChild(titleElement);
-                if (description != "")
-                {
-                    XmlElement descriptionElement = xmlDocument.CreateElement("description");
-                    descriptionElement.InnerText = description;
-                    appointmentElement.AppendChild(descriptionElement);
-                }
-
-                xmlDocument.DocumentElement.AppendChild(appointmentElement);
-                xmlDocument.Save(fileName);
             }
-            catch (Exception e )
+            catch (Exception e)
             {
-                CreateEmptyXMLFile();
+                if (e.GetType().Name == "FileNotFoundException")
+                {
+                    result = true;
+                    CreateEmptyXMLFile();
+                    AddNewAppoimnetElement(ID, data, title, description);
+                }
             }
             return result;
+        }
+
+        private static void AddNewAppoimnetElement(string ID, string data, string title, string description)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(calendarXMLFile);
+            XmlElement appointmentElement = xmlDocument.CreateElement("appointment");
+            appointmentElement.SetAttribute("ID", ID);
+
+            XmlElement dataElement = xmlDocument.CreateElement("data");
+            dataElement.InnerText = data;
+            appointmentElement.AppendChild(dataElement);
+
+            XmlElement titleElement = xmlDocument.CreateElement("title");
+            titleElement.InnerText = title;
+            appointmentElement.AppendChild(titleElement);
+            if (description != "")
+            {
+                XmlElement descriptionElement = xmlDocument.CreateElement("description");
+                descriptionElement.InnerText = description;
+                appointmentElement.AppendChild(descriptionElement);
+            }
+
+            xmlDocument.DocumentElement.AppendChild(appointmentElement);
+            xmlDocument.Save(calendarXMLFile);
         }
 
         private static void CreateEmptyXMLFile()
         {
             XmlDocument doc = new XmlDocument();
-            XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
-            doc.AppendChild(docNode);
-
             XmlNode productsNode = doc.CreateElement("calendar");
             doc.AppendChild(productsNode);
-
-            //XDocument doc = new XDocument(
-            //    new XDeclaration("1.0", "utf-8", "yes"),
-            //    new XComment("XML File for storing appointments"));
-            //doc.Add(new XElement("root",new XElement("kkk")));
-            doc.Save(fileName);
-
+            doc.Save(calendarXMLFile);
         }
 
         public static string GetValueOfIDFromXMLFile(string xpath)
@@ -125,7 +129,7 @@ namespace Calendar
             try
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(fileName);
+                xmlDocument.Load(calendarXMLFile);
                 XmlNode element = xmlDocument.SelectSingleNode(xpath);
                 if (element != null)
                 {
@@ -135,6 +139,55 @@ namespace Calendar
             catch (Exception e)
             { }
             return result;
+        }
+
+        public static Events LoadEventsFromXMLFile()
+        {
+            if (!File.Exists(calendarXMLFile))
+            {
+                Console.WriteLine("\n\tThe source file does not exist! There are no events added to calendar!");
+                return null;
+            }
+            else
+            {
+                return GetEventsList(); ;
+            }
+
+        }
+
+        private static Events GetEventsList()
+        {
+            Events list = new Events();
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(calendarXMLFile);
+
+            var xpath = "calendar/appointment";
+            XmlNodeList nodeList = xmlDocument.SelectNodes(xpath);
+
+            if (nodeList != null)
+            {
+                foreach (XmlNode node in nodeList)
+                {
+                    string data, title, description;
+                    GetAllValuesOfNodeChilds(node, out data, out title, out description);
+                    list.Add(new Event(data, title, description));
+                }
+            }
+
+            return list;
+        }
+
+        private static void GetAllValuesOfNodeChilds(XmlNode node, out string data, out string title, out string description)
+        {
+            var id = node.Attributes["ID"].Value;
+            data = node["data"].InnerText;
+            title = node["title"].InnerText;
+            if (node.ChildNodes.Count == 3)
+            {
+                description = node["description"].InnerText;
+            }
+            else
+            { description = ""; }
         }
     }
 }
