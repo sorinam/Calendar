@@ -75,8 +75,8 @@ namespace Calendar
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(calendarXMLFile);
                 result = true;
-                AddNewAppoimnetElement(ID, data, title, description);
-
+                AddNewAppoinmetElement(ID, data, title, description);
+                //xmlDocument.Save(calendarXMLFile);
             }
             catch (Exception e)
             {
@@ -84,16 +84,26 @@ namespace Calendar
                 {
                     result = true;
                     CreateEmptyXMLFile();
-                    AddNewAppoimnetElement(ID, data, title, description);
-                }
+                    AddNewAppoinmetElement(ID, data, title, description);
+                                  }
             }
             return result;
         }
 
-        private static void AddNewAppoimnetElement(string ID, string data, string title, string description)
+        private static void AddNewAppoinmetElement(string ID, string data, string title, string description)
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(calendarXMLFile);
+
+            XmlElement appointmentElement = CreateNewXMLAppointment(ID, data, title, description);
+            xmlDocument.DocumentElement.AppendChild(appointmentElement);
+            xmlDocument.Save(calendarXMLFile);
+
+        }
+
+        private static XmlElement CreateNewXMLAppointment(string ID, string data, string title, string description)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
             XmlElement appointmentElement = xmlDocument.CreateElement("appointment");
             appointmentElement.SetAttribute("ID", ID);
 
@@ -111,8 +121,7 @@ namespace Calendar
                 appointmentElement.AppendChild(descriptionElement);
             }
 
-            xmlDocument.DocumentElement.AppendChild(appointmentElement);
-            xmlDocument.Save(calendarXMLFile);
+            return appointmentElement;
         }
 
         private static void CreateEmptyXMLFile()
@@ -175,6 +184,33 @@ namespace Calendar
             }
 
             return list;
+        }
+
+        public static void SaveEventsToXMLFile(Events eventsList)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            xmlDocument.Load(calendarXMLFile);
+
+            string lastID = GetLastIDFromXMLFile();
+            var ID=Int32.Parse(lastID);
+
+            foreach (Event eventL in eventsList)
+            {
+                ID++;
+                XmlElement appointmentElement = CreateNewXMLAppointment(ID.ToString(), eventL.Date.ToString("yyyy/MM/dd").ToString(), eventL.Title, eventL.Description);
+                XmlNode importNode = xmlDocument.ImportNode(appointmentElement, true);
+                xmlDocument.DocumentElement.AppendChild(importNode);
+            }
+            xmlDocument.Save(calendarXMLFile);
+
+            Console.WriteLine("\tFile saved. Calendar contains {0} events. ", eventsList.Length);
+        }
+
+        public static string GetLastIDFromXMLFile()
+        {
+            string xpath = "(calendar/appointment)[last()]";
+            var ID=GetValueOfIDFromXMLFile(xpath);
+            return (ID == "") ? "0" : ID;
         }
 
         private static void GetAllValuesOfNodeChilds(XmlNode node, out string data, out string title, out string description)

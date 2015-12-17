@@ -54,15 +54,15 @@ namespace UnitTestCalendar
             string title = "@Rares #bday";
             string description = "don't forget to #call him";
             var result = XMLUtils.AddNewAppointmentElementToXMLFile(ID, data, title, description);
-
             result.ShouldBeTrue();
         }
 
         [TestMethod]
         public void ShouldListLastIDValueFromXML()
         {
-            string xpath = "(calendar/appointment)[last()]";
-            var resultString = XMLUtils.GetValueOfIDFromXMLFile(xpath);
+            //string xpath = "(calendar/appointment)[last()]";
+            //var resultString = XMLUtils.GetValueOfIDFromXMLFile(xpath);
+            var resultString = XMLUtils.GetLastIDFromXMLFile();
             var expectedString = "3";
             resultString.ShouldEqual(expectedString);
         }
@@ -77,6 +77,17 @@ namespace UnitTestCalendar
         };
 
             Utils.AssertAreEqual(XMLUtils.LoadEventsFromXMLFile(),expectedEventsList);
+        }
+
+        [TestMethod]
+        public void ShouldAddAppointmentsToXMLFile()
+        {
+            List<Event> eventsList = new List<Event>{
+            new Event("2015/12/27","One","One test"),
+            new Event("2015/11/25", "Two") };
+            Events newAppoinments = new Events(eventsList);
+            XMLUtils.SaveEventsToXMLFile(newAppoinments);
+           
         }
     }
 }
