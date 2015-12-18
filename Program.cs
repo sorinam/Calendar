@@ -43,8 +43,11 @@ namespace Calendar
             Console.WriteLine("\t\t\t\t   'older' '<'-only for date");
             Console.WriteLine("\t\t\t\t   'newer' '>'-only for date");
             Console.WriteLine("\t\t\t\t   'contains' - only for title");
+            Console.WriteLine("\t\t\t\t   'all '||' -only for tag");
+            Console.WriteLine("\t\t\t\t   'any '&&' -only for tag");
             Console.WriteLine("\t\t  <value> \t   valid values for field");
             Console.WriteLine("\t\t\t\t   'today' -only for date");
+          
         }
 
         static void SwitchCommands(string[] args)
