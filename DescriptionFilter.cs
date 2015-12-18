@@ -30,10 +30,11 @@
         {
             switch (criteria)
             {
-                case "=": return (ev.Description== valueToCompare);
-                case "!=": return (ev.Description != valueToCompare);
-                case ">": return (ev.Description.Contains(valueToCompare));
+                case "=": return ev.Description == valueToCompare;
+                case "!=": return ev.Description != valueToCompare;
+                case ">": return ev.Description.Contains(valueToCompare);
             }
+
             return false;
         }
     }

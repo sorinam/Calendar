@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace Calendar
+﻿namespace Calendar
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
     public class HTMLFile
     {
         Events eventsList;
@@ -12,6 +12,7 @@ namespace Calendar
         {
             eventsList = new Events(list);
         }
+
         public HTMLFile(Events list)
         {
             eventsList = list;
@@ -21,6 +22,7 @@ namespace Calendar
         {
             eventsList = new Events();
         }
+
         private void ExportEvents(string path)
         {
             try

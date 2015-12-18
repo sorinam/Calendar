@@ -1,35 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calendar
+﻿namespace Calendar
 {
     public class AddArgument : IArgument
     {
-        const string addArg="/add";
-        const int parameters= 5;
-        const int optionalParameters = 2;
+        const string AddArg = "/add";
+        const int Parameters = 5;
+        const int OptionalParameters = 2;
         string[] inputArgs;
 
         public AddArgument(string[] args)
-            {
-            inputArgs = args;
-            }
-        
-        private bool IsValidFirstParameter(string arg)
         {
-            return (arg.ToLower() == addArg);
+            inputArgs = args;
         }
 
         public bool IsValid()
         {
             if (IsValidFirstParameter(inputArgs[0]))
             {
-                if ((inputArgs.Length == parameters) || (inputArgs.Length >= parameters - optionalParameters)) return true;
+                if ((inputArgs.Length == Parameters) || (inputArgs.Length >= Parameters - OptionalParameters))
+                {
+                    return true;
+                }
             }
-            return false; 
+
+            return false;
+        }
+
+        private bool IsValidFirstParameter(string arg)
+        {
+            return arg.ToLower() == AddArg;
         }
     }
 }

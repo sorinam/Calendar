@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Calendar
+﻿namespace Calendar
 {
     public interface IFilter
     {

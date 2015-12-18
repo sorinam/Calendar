@@ -1,13 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Text;
-
-namespace Calendar
+﻿namespace Calendar
 {
-    public class IOStream:IDisposable
+    using System;
+    using System.IO;
+    using System.Text;
+
+    public class IOStream : IDisposable
     {
-        Stream  streamObj;
-   
+        Stream streamObj;
+
         public IOStream(Stream stream)
         {
             streamObj = stream;
@@ -17,6 +17,12 @@ namespace Calendar
         {
             streamObj = new MemoryStream();
         }
+         
+        public IOStream(Events list)
+        {
+            string stringContent = list.ToOneString();
+            streamObj = StringToStream(stringContent);
+        }
 
         public string[] GetLinesFromStream()
         {
@@ -24,12 +30,6 @@ namespace Calendar
             StreamReader reader = new StreamReader(streamObj);
             string[] result = reader.ReadToEnd().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             return result;
-        }
-
-        public IOStream(Events list)
-        {
-            string stringContent = list.ToOneString();
-            streamObj = StringToStream(stringContent);
         }
 
         public void ExportEventsInHTMLStream(Events eventsList)
@@ -41,7 +41,7 @@ namespace Calendar
                 w.Write(beginTags);
                 foreach (Event ev in eventsList)
                 {
-                    string htmlData = "";
+                    string htmlData = string.Empty;
                     htmlData += "<p><b>Date:</b> " + ev.Date.ToString("yyyy/MM/dd") + "</p>\n";
                     htmlData += "<p><b>Title:</b> " + Utils.DecodingNewLineCharForHTML(Utils.DecodingNewLineChar(ev.Title)) + "</p>";
                     htmlData += "<p><b>Description:</b> " + Utils.DecodingNewLineCharForHTML(Utils.DecodingNewLineChar(ev.Description)) + "</p>";
@@ -49,7 +49,7 @@ namespace Calendar
                     w.Write(htmlData);
                 }
                 w.Write(endTags);
-              }
+            }
         }
 
         static Stream StringToStream(string src)
@@ -67,8 +67,11 @@ namespace Calendar
         {
             if (disposing)
             {
-                if (streamObj != null) streamObj.Dispose();
+                if (streamObj != null)
+                {
+                    streamObj.Dispose();
+                }
             }
         }
     }
-    }
+}

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Calendar
+﻿namespace Calendar
 {
     public class DateFilter : IFilter
     {
@@ -26,14 +24,15 @@ namespace Calendar
         public Events ApplyFilter(Events sourceList)
         {
             Events filteredList = new Events();
-            Event compare = new Event(dateToCompare, "", "");
+            Event compare = new Event(dateToCompare, string.Empty, string.Empty);
             foreach (Event ev in sourceList)
             {
                 if (IsTrueCriteria(ev, compare, criteria))
                 {
                     filteredList.Add(ev);
                 }
-            }
+             }
+
             return filteredList;
         }
 
@@ -41,15 +40,15 @@ namespace Calendar
         {
             switch (criteria)
             {
-                case "=": return (ev.CompareTo(compare) == 0);
+                case "=": return ev.CompareTo(compare) == 0;
                 case "!=": return !(ev.CompareTo(compare) == 0);
-                case "<=": return (ev.CompareTo(compare) <= 0);
-                case "<": return (ev.CompareTo(compare) < 0);
-                case ">=": return (ev.CompareTo(compare) >= 0);
-                case ">": return (ev.CompareTo(compare) > 0);
+                case "<=": return ev.CompareTo(compare) <= 0;
+                case "<": return ev.CompareTo(compare) < 0;
+                case ">=": return ev.CompareTo(compare) >= 0;
+                case ">": return ev.CompareTo(compare) > 0;
             }
+
             return false;
         }
-
     }
 }

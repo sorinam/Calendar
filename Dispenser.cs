@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Calendar
+﻿namespace Calendar
 {
+    using System;
+    using System.Linq;
+
     public static class Dispenser
     {
         public static void AddEvents(string[] args)
         {
             IOConsole newEvent = new IOConsole();
-            string date = args[1]; ;
+            string date = args[1];
             string title = Utils.CodingNewLineChar(args[2]);
-            string description = "";
+            string description = string.Empty;
             if (args.Length == 4)
             {
                 description = Utils.CodingNewLineChar(args[3]);
             }
-            newEvent.AddDataFromConsole(date, title, description);
 
+            newEvent.AddDataFromConsole(date, title, description);
         }
 
         public static void DisplayEvents(string parameter)
@@ -75,7 +72,6 @@ namespace Calendar
             {
                 Console.WriteLine("\n\tThere are no events to export!");
             }
-
         }
 
         public static void ExportToHTMLFile(string path, Events eventsList)
@@ -94,7 +90,7 @@ namespace Calendar
             {
                 Events filteredList = SearchEvents(eventsList, field, op, val);
 
-                if (path != "")
+                if (path != string.Empty)
                 {
                     ExportToHTMLFile(path, filteredList);
                 }
@@ -130,12 +126,14 @@ namespace Calendar
                             tags.SortTagsDescByCount();
                             break;
                         }
+
                     case "byName":
                         {
                             tags.SortTagsAscByName();
                             break;
                         }
                 }
+
                 Tag[] listTodispaly = tags.TagList.ToArray();
                 new IOConsole().DisplayTagsAndCountersToConsole(listTodispaly);
             }
@@ -144,7 +142,6 @@ namespace Calendar
                 Console.WriteLine("\n\tThere are no events !");
             }
         }
-
 
         public static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
@@ -159,17 +156,20 @@ namespace Calendar
                         filteredList = GetFilteredListByDate(eventsList, criteria, firstValue, secondValue);
                         break;
                     }
+
                 case "description":
                     {
                         string firstValue = values[0];
                         filteredList = GetFilteredListByDescription(eventsList, criteria, firstValue);
                         break;
                     }
+
                 case "tag":
                     {
                         filteredList = GetFilteredListByTag(eventsList, criteria, values);
                         break;
                     }
+
                 default:
                     {
                         Console.WriteLine("Invalid parameter!");
@@ -178,12 +178,6 @@ namespace Calendar
             }
 
             return filteredList;
-        }
-
-        private static Events GetFilteredListByTag(Events eventsList, string criteria, string[] values)
-        {
-            TagFilter eventsToFilter = new TagFilter(Utils.ParseFilteringCriteria(criteria), values);
-            return eventsToFilter.ApplyFilter(eventsList);
         }
 
         public static Events GetFilteredListByDescription(Events eventsList, string criteria, string value)
@@ -197,9 +191,13 @@ namespace Calendar
             Events filteredList = new Events();
 
             if (Utils.ParseFilteringCriteria(op) == "<>")
+            {
                 filteredList = DoubleDateFiltering(eventsList, val1, val2);
+            }
             else
+            {
                 filteredList = SimpleDateFiltering(eventsList, op, val1);
+            }
 
             return filteredList;
         }
@@ -217,6 +215,12 @@ namespace Calendar
         public static Events SimpleDateFiltering(Events eventsList, string criteria, string value)
         {
             DateFilter eventsToFilter = new DateFilter(Utils.ParseFilteringCriteria(criteria), value);
+            return eventsToFilter.ApplyFilter(eventsList);
+        }
+
+        private static Events GetFilteredListByTag(Events eventsList, string criteria, string[] values)
+        {
+            TagFilter eventsToFilter = new TagFilter(Utils.ParseFilteringCriteria(criteria), values);
             return eventsToFilter.ApplyFilter(eventsList);
         }
     }
