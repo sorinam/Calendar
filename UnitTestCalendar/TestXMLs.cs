@@ -14,9 +14,13 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldListAllNodesFromXML()
         {
-            XmlDocument doc = InitialiazeXMLDocument();
-            string xpath = "//calendar/appointment";
-            List<string> expectedString = new List<string> { "2015/12/20First itemThis is my first XML test", "2015/12/25Second itemThis is my second XML test" };
+            var doc = InitialiazeXMLDocument();
+            var xpath = "//calendar/appointment";
+            var expectedString = new List<string>
+            {
+                "2015/12/20First itemThis is my first XML test",
+                "2015/12/25Second itemThis is my second XML test"
+            };
 
             var resultString = XMLUtils.GetValuesOfAllXmlElements(xpath, doc);
           
@@ -26,8 +30,8 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldListOneNodeFromXMLFindAnAttribute()
         {
-            XmlDocument doc = InitialiazeXMLDocument();
-            string xpath = "calendar/appointment[@ID='2']";
+            var doc = InitialiazeXMLDocument();
+            var xpath = "calendar/appointment[@ID='2']";
             var expectedString = "2015/12/25Second itemThis is my second XML test";
 
             var resultString = XMLUtils.GetValueOfXmlElement(xpath, doc);
@@ -38,8 +42,8 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldListOneValueOfNodeFromXML()
         {
-            XmlDocument doc = InitialiazeXMLDocument();
-            string xpath = "calendar/appointment[@ID='2']/description";
+            var doc = InitialiazeXMLDocument();
+            var xpath = "calendar/appointment[@ID='2']/description";
             var expectedString = "This is my second XML test";
 
             var resultString = XMLUtils.GetValueOfXmlElement(xpath, doc);
@@ -50,7 +54,7 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldSetValueOfNodeToXML()
         {
-            XmlDocument doc = InitialiazeXMLDocument();
+            var doc = InitialiazeXMLDocument();
             string xpath = "calendar/appointment[@ID='2']/description";
             string newValue = "This is my modified second XML test";
 

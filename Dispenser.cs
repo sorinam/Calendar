@@ -24,20 +24,29 @@ namespace Calendar
 
         public static void DisplayEvents(string parameter)
         {
-            TXTFile files = new TXTFile();
-            Events eventsList = files.LoadEventsFromFile();
-            IOConsole display = new IOConsole(eventsList);
+            //TXTFile files = new TXTFile();
+            //Events eventsList = files.LoadEventsFromFile();
+            Events eventsList = XMLUtils.LoadEventsFromXMLFile();
 
-            if (parameter == "all")
+            if (eventsList != null)
             {
-                display.DisplayEventsToConsole();
+                IOConsole display = new IOConsole(eventsList);
+
+                if (parameter == "all")
+                {
+                    display.DisplayEventsToConsole();
+                }
+                else
+                {
+                    string criteria = Utils.ParseFilteringCriteria(parameter);
+                    Events eventsToDisplay = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
+                    IOConsole toDisplay = new IOConsole(eventsToDisplay);
+                    toDisplay.DisplayEventsToConsole();
+                }
             }
             else
             {
-                string criteria = Utils.ParseFilteringCriteria(parameter);
-                Events eventsToDisplay = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
-                IOConsole toDisplay = new IOConsole(eventsToDisplay);
-                toDisplay.DisplayEventsToConsole();
+                Console.WriteLine("\n\tThere are no events to list!");
             }
         }
 

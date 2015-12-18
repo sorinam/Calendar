@@ -24,10 +24,13 @@ namespace Calendar
 
         public void AddDataFromConsole(string date, string title,string description)
         {
-            TXTFile file = new TXTFile();
-            eventsList = file.LoadEventsFromFile();
-            eventsList.Add(date,title,description);
-            file.SaveEventsToFile(eventsList);
+            //TXTFile file = new TXTFile();
+            //eventsList = file.LoadEventsFromFile();
+            //eventsList = XMLUtils.LoadEventsFromXMLFile();
+                      
+            string lastID = XMLUtils.GetLastIDFromXMLFile();
+            var ID = Int32.Parse(lastID)+1;
+            XMLUtils.AddNewEventToXMLFile(ID.ToString(), date, title, description);
         }
                
         public void DisplayEventsToConsole()

@@ -104,6 +104,7 @@ namespace Calendar
                 result = true;
                 AddNewNodeToXmlDocument(ID, data, title, description, ref xmlDocument);
                 xmlDocument.Save(calendarXMLFile);
+                Console.WriteLine("\tFile saved. Calendar contains {0} events. ", ID);
             }
             catch (Exception e)
             {
@@ -165,7 +166,7 @@ namespace Calendar
                 xmlDocument.Load(calendarXMLFile);
                 xmlDocument = AddEventsToXmlDocument(eventsList, xmlDocument);
                 xmlDocument.Save(calendarXMLFile);
-                Console.WriteLine("\tFile saved. Calendar contains {0} events. ", eventsList.Length);
+                Console.WriteLine("\tFile saved. Calendar contains {0} events. ", GetLastIDFromXMLFile());
             }
             catch (Exception e)
             {
