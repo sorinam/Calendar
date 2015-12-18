@@ -78,12 +78,15 @@ namespace UnitTestCalendar
         {
             XmlDocument doc = InitialiazeXMLDocument();
             List<Event> eventsList = new List<Event>{
-            new Event("2015/12/27","One","One test"),
-            new Event("2015/11/25", "Two") };
+            new Event("2015/12/29","One","One test"),
+            new Event("2015/11/29", "Two") };
             Events newAppoinments = new Events(eventsList);
 
-            //XMLUtils.AddNewEventsToXMLFile(newAppoinments);
+            string expectedXmlData = @"<calendar><appointment ID=""1""><data>2015/12/20</data><title>First item</title><description>This is my first XML test</description></appointment><appointment ID=""2""><data>2015/12/25</data><title>Second item</title><description>This is my second XML test</description></appointment><appointment ID=""3""><data>2015/12/29</data><title>One</title><description>One test</description></appointment><appointment ID=""4""><data>2015/11/29</data><title>Two</title></appointment></calendar>";
 
+            doc = XMLUtils.AddEventsToXmlDocument(newAppoinments, doc);
+
+            expectedXmlData.ShouldEqual(doc.OuterXml);
         }
 
         [TestMethod]
@@ -101,13 +104,14 @@ namespace UnitTestCalendar
         [TestMethod]
         public void ShouldGetListOfAppointmentsFromXMLFile()
         {
+            XmlDocument doc = InitialiazeXMLDocument();
+
             List<Event> expectedEventsList = new List<Event> {
             new Event("2015/12/20","First item","This is my first XML test"),
-            new Event("2015/12/25", "Second item", "This is my modified second XML test"),
-            new Event("2015/12/18", "@Rares #bday")
+            new Event("2015/12/25", "Second item", "This is my second XML test")          
         };
 
-            Utils.AssertAreEqual(XMLUtils.LoadEventsFromXMLFile(),expectedEventsList);
+            Utils.AssertAreEqual(XMLUtils.GetEventsListFromXmlDocument(doc),expectedEventsList);
         }
 
         private static XmlDocument InitialiazeXMLDocument()

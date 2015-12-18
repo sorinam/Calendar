@@ -33,7 +33,7 @@ namespace Calendar
                 }
                 Console.WriteLine("\n\t{0} events were exported in '{1}' file .\n", eventsList.Length, path);
             }
-            catch (IOException e)
+            catch 
             {
                 Console.WriteLine("The file path didn't find!");
             }
