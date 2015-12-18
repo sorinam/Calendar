@@ -52,19 +52,28 @@ namespace Calendar
 
         public static void ExportEvents(string[] args)
         {
-            TXTFile files = new TXTFile();
-            Events eventsList = files.LoadEventsFromFile();
-            eventsList.Sort();
-            if (args.Length == 2)
+            //TXTFile files = new TXTFile();
+            //Events eventsList = files.LoadEventsFromFile();
+
+            Events eventsList = XMLUtils.LoadEventsFromXMLFile();
+            if (eventsList != null)
             {
-                ExportToHTMLFile(@args[1], eventsList);
+                eventsList.Sort();
+                if (args.Length == 2)
+                {
+                    ExportToHTMLFile(@args[1], eventsList);
+                }
+                else
+                {
+                    IOConsole evTools = new IOConsole();
+                    string criteria = Utils.ParseFilteringCriteria(args[1]);
+                    Events eventsToExport = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
+                    ExportToHTMLFile(@args[2], eventsToExport);
+                }
             }
             else
             {
-                IOConsole evTools = new IOConsole();
-                string criteria = Utils.ParseFilteringCriteria(args[1]);
-                Events eventsToExport = SimpleDateFiltering(eventsList, criteria, DateTime.Today.ToShortDateString());
-                ExportToHTMLFile(@args[2], eventsToExport);
+                Console.WriteLine("\n\tThere are no events to export!");
             }
 
         }
@@ -77,49 +86,67 @@ namespace Calendar
 
         public static void SearchAndExportEvents(string field, string op, string[] val, string path)
         {
-            TXTFile files = new TXTFile();
-            Events eventsList = files.LoadEventsFromFile();
-            Events filteredList = SearchEvents(eventsList, field, op, val);
+            //TXTFile files = new TXTFile();
+            //Events eventsList = files.LoadEventsFromFile();
 
-            if (path != "")
+            Events eventsList = XMLUtils.LoadEventsFromXMLFile();
+            if (eventsList != null)
             {
-                ExportToHTMLFile(path, filteredList);
+                Events filteredList = SearchEvents(eventsList, field, op, val);
+
+                if (path != "")
+                {
+                    ExportToHTMLFile(path, filteredList);
+                }
+            }
+            else
+            {
+                Console.WriteLine("\n\tThere are no events !");
             }
         }
 
-       public static Events SearchEvents(Events eventsList, string field, string op, string[] values)
+        public static Events SearchEvents(Events eventsList, string field, string op, string[] values)
         {
             Events filteredList = FilterEvents(eventsList, field, op, values);
-         
+
             IOConsole toDisplay = new IOConsole(filteredList);
             toDisplay.DisplayEventsToConsole();
             return filteredList;
         }
 
-       public static void ListAllTags(string sort)
+        public static void ListAllTags(string sort)
         {
-            TXTFile files = new TXTFile();
-            Events eventsList = files.LoadEventsFromFile();
-            TagsCounter tags= new TagsCounter(eventsList);
-            switch (sort)
+            //TXTFile files = new TXTFile();
+            //Events eventsList = files.LoadEventsFromFile();
+
+            Events eventsList = XMLUtils.LoadEventsFromXMLFile();
+            if (eventsList != null)
             {
-                case "byCount":
-                    {
-                        tags.SortTagsDescByCount();
-                        break;
-                    }
-                case "byName":
-                    {
-                        tags.SortTagsAscByName();
-                        break;
-                    }
+                TagsCounter tags = new TagsCounter(eventsList);
+                switch (sort)
+                {
+                    case "byCount":
+                        {
+                            tags.SortTagsDescByCount();
+                            break;
+                        }
+                    case "byName":
+                        {
+                            tags.SortTagsAscByName();
+                            break;
+                        }
+                }
+                Tag[] listTodispaly = tags.TagList.ToArray();
+                new IOConsole().DisplayTagsAndCountersToConsole(listTodispaly);
             }
-            Tag[] listTodispaly = tags.TagList.ToArray();
-            new IOConsole().DisplayTagsAndCountersToConsole(listTodispaly);
+            else
+            {
+                Console.WriteLine("\n\tThere are no events !");
+            }
         }
 
-       
-       public static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
+
+        public static Events FilterEvents(Events eventsList, string field, string criteria, string[] values)
         {
             Events filteredList = new Events();
 
@@ -139,7 +166,7 @@ namespace Calendar
                         break;
                     }
                 case "tag":
-                    {                       
+                    {
                         filteredList = GetFilteredListByTag(eventsList, criteria, values);
                         break;
                     }
