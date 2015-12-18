@@ -51,9 +51,10 @@ namespace WindowsFormsCalendar
             this.button_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Add.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_Add.Location = new System.Drawing.Point(480, 17);
+            this.button_Add.Location = new System.Drawing.Point(320, 11);
+            this.button_Add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(160, 48);
+            this.button_Add.Size = new System.Drawing.Size(107, 31);
             this.button_Add.TabIndex = 1;
             this.button_Add.Text = "New Appointment";
             this.button_Add.UseVisualStyleBackColor = true;
@@ -63,10 +64,11 @@ namespace WindowsFormsCalendar
             // 
             this.button_Search.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button_Search.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button_Search.Location = new System.Drawing.Point(48, 26);
+            this.button_Search.Location = new System.Drawing.Point(32, 17);
+            this.button_Search.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Search.Name = "button_Search";
             this.button_Search.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button_Search.Size = new System.Drawing.Size(87, 38);
+            this.button_Search.Size = new System.Drawing.Size(58, 25);
             this.button_Search.TabIndex = 3;
             this.button_Search.Text = "Search";
             this.button_Search.UseVisualStyleBackColor = false;
@@ -76,9 +78,10 @@ namespace WindowsFormsCalendar
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 92);
+            this.label1.Location = new System.Drawing.Point(16, 60);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 20);
+            this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Your Appointments";
             // 
@@ -94,10 +97,9 @@ namespace WindowsFormsCalendar
             this.Title,
             this.Description});
             this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(28, 145);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listView1.Location = new System.Drawing.Point(19, 94);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(608, 447);
+            this.listView1.Size = new System.Drawing.Size(407, 292);
             this.listView1.TabIndex = 0;
             this.listView1.Text = "Date";
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -126,9 +128,10 @@ namespace WindowsFormsCalendar
             this.linkLabel_ExportToHTML.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel_ExportToHTML.AutoSize = true;
-            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(494, 92);
+            this.linkLabel_ExportToHTML.Location = new System.Drawing.Point(329, 60);
+            this.linkLabel_ExportToHTML.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel_ExportToHTML.Name = "linkLabel_ExportToHTML";
-            this.linkLabel_ExportToHTML.Size = new System.Drawing.Size(142, 20);
+            this.linkLabel_ExportToHTML.Size = new System.Drawing.Size(97, 13);
             this.linkLabel_ExportToHTML.TabIndex = 8;
             this.linkLabel_ExportToHTML.TabStop = true;
             this.linkLabel_ExportToHTML.Text = "export to HTML file";
@@ -139,10 +142,9 @@ namespace WindowsFormsCalendar
             this.labelFiltered.AutoSize = true;
             this.labelFiltered.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFiltered.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.labelFiltered.Location = new System.Drawing.Point(24, 120);
-            this.labelFiltered.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelFiltered.Location = new System.Drawing.Point(16, 78);
             this.labelFiltered.Name = "labelFiltered";
-            this.labelFiltered.Size = new System.Drawing.Size(87, 20);
+            this.labelFiltered.Size = new System.Drawing.Size(53, 13);
             this.labelFiltered.TabIndex = 9;
             this.labelFiltered.Text = "filtered list";
             this.labelFiltered.Visible = false;
@@ -150,10 +152,9 @@ namespace WindowsFormsCalendar
             // linkLabel_Clear
             // 
             this.linkLabel_Clear.AutoSize = true;
-            this.linkLabel_Clear.Location = new System.Drawing.Point(165, 118);
-            this.linkLabel_Clear.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabel_Clear.Location = new System.Drawing.Point(110, 77);
             this.linkLabel_Clear.Name = "linkLabel_Clear";
-            this.linkLabel_Clear.Size = new System.Drawing.Size(98, 20);
+            this.linkLabel_Clear.Size = new System.Drawing.Size(67, 13);
             this.linkLabel_Clear.TabIndex = 10;
             this.linkLabel_Clear.TabStop = true;
             this.linkLabel_Clear.Text = "clear Search";
@@ -163,10 +164,9 @@ namespace WindowsFormsCalendar
             // pictureBox1
             // 
             this.pictureBox1.Image = global::WindowsFormsCalendar.Properties.Resources.Search_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(261, 26);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(174, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(38, 29);
+            this.pictureBox1.Size = new System.Drawing.Size(25, 19);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
@@ -174,20 +174,22 @@ namespace WindowsFormsCalendar
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(48, 29);
+            this.textBoxSearch.Location = new System.Drawing.Point(32, 19);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(206, 26);
+            this.textBoxSearch.Size = new System.Drawing.Size(139, 20);
             this.textBoxSearch.TabIndex = 13;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             this.textBoxSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxSearch_KeyUp);
             // 
             // MainForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Application;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(668, 674);
+            this.ClientSize = new System.Drawing.Size(445, 438);
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.linkLabel_Clear);
@@ -197,6 +199,7 @@ namespace WindowsFormsCalendar
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_Search);
             this.Controls.Add(this.button_Add);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendar";

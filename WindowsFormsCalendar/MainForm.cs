@@ -1,14 +1,5 @@
 ﻿using Calendar;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsCalendar
@@ -24,10 +15,15 @@ namespace WindowsFormsCalendar
         {
             InitializeComponent();
 
-            TXTFile file = new TXTFile();
-            eventsList = file.LoadEventsFromFile();
-            displayedList = new Calendar.Events();
-            tagsList = GetTagList();
+            //TXTFile file = new TXTFile();
+            //eventsList = file.LoadEventsFromFile();
+
+            eventsList = XMLUtils.LoadEventsFromXMLFile();
+            if (eventsList != null)
+            {
+                displayedList = new Calendar.Events();
+                // tagsList = GetTagList();
+            }
         }
         public string[] Tags
         { get { return tagsList; } }
@@ -61,14 +57,23 @@ namespace WindowsFormsCalendar
 
         private void SaveNewAppointment(Event newAppointment)
         {
+            if (eventsList == null)
+            {
+                eventsList = new Events();
+            }
             eventsList.Add(newAppointment);
-            TXTFile file = new TXTFile();
-            file.SaveEventsToFile(eventsList);
+            //TXTFile file = new TXTFile();
+            //file.SaveEventsToFile(eventsList);
+
+            string lastID = XMLUtils.GetLastIDFromXMLFile();
+            var ID = Int32.Parse(lastID) + 1;
+            XMLUtils.AddNewEventToXMLFile(ID.ToString(), newAppointment.Date.ToShortDateString(), newAppointment.Title, newAppointment.Description);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (eventsList.Length > 0)
+            //if (eventsList.Length > 0)
+            if (eventsList!=null)
             {
                 eventsList.Sort();
                 foreach (Event ev in eventsList)
@@ -183,6 +188,11 @@ namespace WindowsFormsCalendar
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             StartSearching();
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
